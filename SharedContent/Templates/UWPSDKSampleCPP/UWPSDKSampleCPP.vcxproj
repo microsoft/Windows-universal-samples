@@ -133,21 +133,15 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DependentUpon>pch.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+      <DependentUpon>Project.idl</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
-    </Midl>
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
       <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="Scenario1_ShortName.idl">
-      <DependentUpon>Scenario1_ShortName.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario2_ShortName.idl">
-      <DependentUpon>Scenario2_ShortName.xaml</DependentUpon>
-    </Midl>
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

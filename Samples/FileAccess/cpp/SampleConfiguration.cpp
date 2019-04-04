@@ -8,7 +8,9 @@ using namespace SDKTemplate;
 
 using namespace concurrency;
 using namespace Platform;
+using namespace Windows::Security::Cryptography;
 using namespace Windows::Storage;
+using namespace Windows::Storage::Streams;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
@@ -24,13 +26,6 @@ Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Sc
     { "Deleting a file",                                      "SDKTemplate.Scenario10" },
     { "Attempting to get a file with no error on failure",    "SDKTemplate.Scenario11" },
 };
-
-void MainPage::Initialize()
-{
-    sampleFile = nullptr;
-    mruToken = nullptr;
-    falToken = nullptr;
-}
 
 void MainPage::ValidateFile()
 {
@@ -60,8 +55,31 @@ void MainPage::HandleIoException(Platform::COMException^ e, Platform::String^ de
     {
         NotifyUserFileNotExist();
     }
+    else if (e->HResult == HRESULT_FROM_WIN32(ERROR_NO_UNICODE_TRANSLATION))
+    {
+        NotifyUser("File is not UTF-8 encoded.", NotifyType::ErrorMessage);
+    }
     else
     {
         NotifyUser(description + ": " + e->Message, NotifyType::ErrorMessage);
     }
+}
+
+IBuffer^ MainPage::GetBufferFromString(String^ string)
+{
+    if (string->IsEmpty())
+    {
+        return ref new Buffer(0);
+    }
+    else
+    {
+        return CryptographicBuffer::ConvertStringToBinary(string, BinaryStringEncoding::Utf8);
+    }
+}
+
+String^ MainPage::GetStringFromBuffer(IBuffer^ buffer)
+{
+    // Throws HRESULT_FROM_WIN32(ERROR_NO_UNICODE_TRANSLATION)
+    // if the buffer is not properly encoded.
+    return CryptographicBuffer::ConvertBinaryToString(BinaryStringEncoding::Utf8, buffer);
 }

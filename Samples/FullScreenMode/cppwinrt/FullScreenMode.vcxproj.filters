@@ -15,6 +15,7 @@
   <ItemGroup>
     <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -22,12 +23,16 @@
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="..\..\..\SharedContent\cppwinrt\App.cpp" />
     <ClCompile Include="..\..\..\SharedContent\cppwinrt\MainPage.cpp" />
+    <ClCompile Include="Scenario1_Basic.cpp" />
+    <ClCompile Include="Scenario2_Launch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="..\..\..\SharedContent\cppwinrt\App.h" />
     <ClInclude Include="..\..\..\SharedContent\cppwinrt\MainPage.h" />
+    <ClInclude Include="Scenario1_Basic.h" />
+    <ClInclude Include="Scenario2_Launch.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />

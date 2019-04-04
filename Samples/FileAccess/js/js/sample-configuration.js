@@ -4,10 +4,7 @@
     "use strict";
 
     var sampleTitle = "File access JS sample";
-    var sampleFile = null;
-    var mruToken = null;
-    var falToken = null;
-
+    
     var scenarios = [
         { url: "/html/scenario1_CreateAFileInThePicturesLibrary.html",             title: "Creating a file" },
         { url: "/html/scenario2_GetTheParentFolderOfAFile.html",                   title: "Getting a file's parent folder" },
@@ -32,14 +29,31 @@
                 WinJS.log && WinJS.log("The file 'sample.dat' does not exist. Use scenario one to create this file.", "sample", "error");
             }
         });
-    };
+    }
+
+    var CryptographicBuffer = Windows.Security.Cryptography.CryptographicBuffer;
+    var BinaryStringEncoding = Windows.Security.Cryptography.BinaryStringEncoding;
+
+    function getBufferFromString(s) {
+        if (s) {
+            return CryptographicBuffer.convertStringToBinary(s, BinaryStringEncoding.utf8);
+        } else {
+            return new Windows.Storage.Streams.Buffer(0);
+        }
+    }
+
+    function getStringFromBuffer(buffer) {
+    // Throws E_NO_UNICODE_TRANSLATION if the buffer is not properly encoded.
+        return CryptographicBuffer.convertBinaryToString(BinaryStringEncoding.utf8, buffer);
+    }
 
     WinJS.Namespace.define("SdkSample", {
         sampleTitle: sampleTitle,
         scenarios: new WinJS.Binding.List(scenarios),
         validateFileExistence: validateFileExistence,
-        sampleFile: sampleFile,
-        mruToken: mruToken,
-        falToken: falToken
+        getBufferFromString: getBufferFromString,
+        getStringFromBuffer: getStringFromBuffer,
+        E_NO_UNICODE_TRANSLATION: 0x80070459|0,
+        sampleFile: null
     });
 })();

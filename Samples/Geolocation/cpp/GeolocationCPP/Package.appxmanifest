@@ -38,7 +38,7 @@
       Description="GeolocationCPP"
       BackgroundColor="#00B2F0">
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-        <uap:LockScreen Notification="badge" BadgeLogo="Assets\smalltile-sdk.png" />
+        <uap:LockScreen Notification="badge" BadgeLogo="Assets\badge-logo.png" />
       </uap:VisualElements>
 
       <Extensions>

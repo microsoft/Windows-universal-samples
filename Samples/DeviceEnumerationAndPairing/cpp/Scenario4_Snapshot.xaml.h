@@ -18,14 +18,13 @@ namespace SDKTemplate
     public:
         Scenario4();
 
-        property Windows::Foundation::Collections::IObservableVector<DeviceInformationDisplay^>^ ResultCollection;
-
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
         void FindButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
-        SDKTemplate::MainPage^ rootPage;
+        MainPage^ rootPage = MainPage::Current;
+        Windows::Foundation::Collections::IObservableVector<DeviceInformationDisplay^>^ resultCollection = ref new Platform::Collections::Vector<DeviceInformationDisplay^>();
     };
 }

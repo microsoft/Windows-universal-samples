@@ -13,8 +13,7 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="Scenario1_Basic.idl" />
-    <Midl Include="Scenario2_Launch.idl" />
+    <Midl Include="Project.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
   </ItemGroup>

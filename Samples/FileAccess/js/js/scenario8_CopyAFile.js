@@ -11,7 +11,7 @@
     });
 
     function copy() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
                 return SdkSample.sampleFile.copyAsync(picturesLibrary, "sample - Copy.dat", Windows.Storage.NameCollisionOption.replaceExisting);
             }).done(function (sampleFileCopy) {

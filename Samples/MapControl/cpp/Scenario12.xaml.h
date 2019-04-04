@@ -29,6 +29,7 @@ namespace SDKTemplate
 
         void MyMapLoaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void AddAnimatedTilesClick(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void ClearMapClick(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void HttpMapTileDataSourceUriRequested(Windows::UI::Xaml::Controls::Maps::HttpMapTileDataSource^ sender, Windows::UI::Xaml::Controls::Maps::MapTileUriRequestedEventArgs^ e);
         void PlayAnimationTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);
         void PauseAnimationTapped(Platform::Object^ sender, Windows::UI::Xaml::Input::TappedRoutedEventArgs^ e);

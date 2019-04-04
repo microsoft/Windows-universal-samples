@@ -1,0 +1,44 @@
+﻿/*
+Copyright (c) Microsoft Corporation. All rights reserved
+*/
+
+.hidden {
+    display: none;
+}
+
+.unhidden {
+    visibility: visible;
+}
+
+#quickLinkError {
+    color: red;
+}
+
+.package-logo {
+    width: 40px;
+    height: 40px;
+    display: flex;
+}
+
+.thumbnail img {
+    max-height: 48px;
+    max-width: 48px;
+}
+
+.package-bitmap img {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.error {
+    color: red;
+}
+
+#contentWrapper {
+    padding: 10px 42px 10px 42px;
+    overflow-y: auto;
+}
+
+#scenarioPane {
+    flex-grow: 1;
+}

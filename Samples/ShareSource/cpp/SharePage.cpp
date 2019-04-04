@@ -60,9 +60,6 @@ void SharePage::OnDataRequested(DataTransferManager^ sender, DataRequestedEventA
         {
             e->Request->FailWithDisplayText(MainPage::MissingTitleError);
         }
-
-        // Populate the datapackage properties with the content source application link for this scenario
-        e->Request->Data->Properties->ContentSourceApplicationLink = GetApplicationLink(GetType()->FullName);
     }
 }
 

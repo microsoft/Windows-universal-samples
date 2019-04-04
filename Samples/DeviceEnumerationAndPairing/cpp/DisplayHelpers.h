@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
 
 #pragma once
-#include "mainpage.xaml.h"
-#include "Objbase.h"
 
 namespace SDKTemplate
 {
@@ -127,6 +125,11 @@ namespace SDKTemplate
         }
 
         static property DeviceSelectorInfo^ Upnp
+        {
+            DeviceSelectorInfo^ get();
+        }
+
+        static property DeviceSelectorInfo^ NetworkCamera
         {
             DeviceSelectorInfo^ get();
         }

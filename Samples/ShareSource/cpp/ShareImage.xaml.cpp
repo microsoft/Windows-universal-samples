@@ -42,13 +42,8 @@ bool ShareImage::GetShareContent(DataRequest^ request)
     {
         auto requestData = request->Data;
         requestData->Properties->Title = TitleInputBox->Text;
-
-        // The description is optional.
-        auto dataPackageDescription = DescriptionInputBox->Text;
-        if (dataPackageDescription != nullptr)
-        {
-            requestData->Properties->Description = dataPackageDescription;
-        }
+        requestData->Properties->Description = DescriptionInputBox->Text; // The description is optional.
+        requestData->Properties->ContentSourceApplicationLink = ApplicationLink;
 
         // It's recommended to use both SetBitmap and SetStorageItems for sharing a single image
         // since the target app may only support one or the other.

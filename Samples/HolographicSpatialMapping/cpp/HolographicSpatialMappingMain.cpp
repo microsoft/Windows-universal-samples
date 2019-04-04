@@ -21,11 +21,13 @@ using namespace HolographicSpatialMapping;
 using namespace WindowsHolographicCodeSamples;
 
 using namespace concurrency;
+using namespace Microsoft::WRL;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Foundation::Numerics;
 using namespace Windows::Graphics::DirectX;
+using namespace Windows::Graphics::DirectX::Direct3D11;
 using namespace Windows::Graphics::Holographic;
 using namespace Windows::Perception::Spatial;
 using namespace Windows::Perception::Spatial::Surfaces;
@@ -393,6 +395,30 @@ bool HolographicSpatialMappingMain::Render(
             {
                 // Draw the sample hologram.
                 m_meshRenderer->Render(pCameraResources->IsRenderingStereoscopic(), m_drawWireframe);
+
+                // On versions of the platform that support the CommitDirect3D11DepthBuffer API, we can 
+                // provide the depth buffer to the system, and it will use depth information to stabilize 
+                // the image at a per-pixel level.
+                static const bool canCommitDirect3D11DepthBuffer =
+                    Windows::Foundation::Metadata::ApiInformation::IsMethodPresent("Windows.Graphics.Holographic.HolographicCameraRenderingParameters", "CommitDirect3D11DepthBuffer");
+
+                if (canCommitDirect3D11DepthBuffer)
+                {
+                    HolographicCameraRenderingParameters^ renderingParameters = holographicFrame->GetRenderingParameters(cameraPose);
+                    ComPtr<ID3D11Texture2D> spDepthStencil = pCameraResources->GetDepthStencilTexture2D();
+
+                    // Direct3D interop APIs are used to provide the buffer to the WinRT API.
+                    ComPtr<IDXGIResource1> depthStencilResource;
+                    DX::ThrowIfFailed(spDepthStencil.As(&depthStencilResource));
+                    ComPtr<IDXGISurface2> depthDxgiSurface;
+                    DX::ThrowIfFailed(depthStencilResource->CreateSubresourceSurface(0, &depthDxgiSurface));
+                    IDirect3DSurface^ depthD3DSurface = CreateDirect3DSurface(depthDxgiSurface.Get());
+
+                    // Calling CommitDirect3D11DepthBuffer causes the system to queue Direct3D commands to 
+                    // read the depth buffer. It will then use that information to stabilize the image as
+                    // the HolographicFrame is presented.
+                    renderingParameters->CommitDirect3D11DepthBuffer(depthD3DSurface);
+                }
             }
 #endif
             atLeastOneCameraRendered = true;

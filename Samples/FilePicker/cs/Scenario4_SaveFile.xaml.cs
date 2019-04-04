@@ -30,7 +30,6 @@ namespace SDKTemplate
         public Scenario4()
         {
             this.InitializeComponent();
-            SaveFileButton.Click += new RoutedEventHandler(SaveFileButton_Click);
         }
 
         private async void SaveFileButton_Click(object sender, RoutedEventArgs e)

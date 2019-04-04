@@ -13,10 +13,8 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="Scenario1_ShortName.idl" />
-    <Midl Include="Scenario2_ShortName.idl" />
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

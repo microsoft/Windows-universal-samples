@@ -81,14 +81,14 @@ namespace SDKTemplate
 
         private async void CreateTestFile()
         {
-            StorageFolder folder = KnownFolders.PicturesLibrary;
+            StorageFolder folder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
             await folder.CreateFileAsync("Test " + Extension + " file." + Extension, CreationCollisionOption.ReplaceExisting);
             await Windows.System.Launcher.LaunchFolderAsync(folder);
         }
 
         private async void RemoveTestFile()
         {
-            StorageFolder folder = KnownFolders.PicturesLibrary;
+            StorageFolder folder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
             try
             {
                 StorageFile file = await folder.GetFileAsync("Test " + Extension + " file." + Extension);

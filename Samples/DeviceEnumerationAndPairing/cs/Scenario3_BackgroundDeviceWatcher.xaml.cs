@@ -1,26 +1,24 @@
 // Copyright (c) Microsoft. All rights reserved.
 
 using System;
+using Windows.ApplicationModel.Background;
 using Windows.Devices.Enumeration;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
-// Needed for the DeviceWatcherTrigger
-using Windows.ApplicationModel.Background;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DeviceEnumeration
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Scenario3 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
         private string backgroundTaskName = "DeviceEnumerationCs_BackgroundTaskName";
         private IBackgroundTaskRegistration backgroundTaskRegistration = null;
@@ -32,12 +30,8 @@ namespace DeviceEnumeration
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-
             selectorComboBox.ItemsSource = DeviceSelectorChoices.BackgroundDeviceWatcherSelectors;
             selectorComboBox.SelectedIndex = 0;
-
-            DataContext = this;
 
             // Determine if the background task is already active
             foreach (var task in BackgroundTaskRegistration.AllTasks)
@@ -49,6 +43,15 @@ namespace DeviceEnumeration
                     stopWatcherButton.IsEnabled = true;
                     break;
                 }
+            }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            if (backgroundTaskRegistration != null)
+            {
+                backgroundTaskRegistration.Completed -= OnTaskCompleted;
+                backgroundTaskRegistration = null;
             }
         }
 
@@ -102,7 +105,7 @@ namespace DeviceEnumeration
 
             // Register this trigger for our background task
             RegisterBackgroundTask(deviceWatcherTrigger);
-            
+
             stopWatcherButton.IsEnabled = true;
             rootPage.NotifyUser("Watcher started...", NotifyType.StatusMessage);
         }
@@ -128,7 +131,7 @@ namespace DeviceEnumeration
             taskBuilder.SetTrigger(deviceWatcherTrigger);
 
             backgroundTaskRegistration = taskBuilder.Register();
-            backgroundTaskRegistration.Completed += new BackgroundTaskCompletedEventHandler(OnTaskCompleted);
+            backgroundTaskRegistration.Completed += OnTaskCompleted;
         }
 
         private async void OnTaskCompleted(BackgroundTaskRegistration task, BackgroundTaskCompletedEventArgs args)

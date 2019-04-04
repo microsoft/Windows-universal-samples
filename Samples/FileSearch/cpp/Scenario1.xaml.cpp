@@ -31,7 +31,6 @@ using namespace Windows::UI::Xaml::Navigation;
 Scenario1::Scenario1()
 {
     InitializeComponent();
-    SearchButton->Click += ref new RoutedEventHandler(this, &Scenario1::SearchButton_Click);
 }
 
 void Scenario1::SearchButton_Click(Object^ sender, RoutedEventArgs^ e)

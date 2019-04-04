@@ -6,10 +6,6 @@
 #include "MainPage.xaml.h"
 #include "DisplayHelpers.h"
 
-// Needed for the DeviceWatcherTrigger
-using namespace Windows::ApplicationModel::Background;
-using namespace Windows::Storage;
-
 namespace SDKTemplate
 {
     /// <summary>
@@ -23,6 +19,7 @@ namespace SDKTemplate
 
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
+        virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
 
     private:
         void StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
@@ -31,11 +28,12 @@ namespace SDKTemplate
         void StartWatcher();
         void StopWatcher();
 
-        void RegisterBackgroundTask(DeviceWatcherTrigger^ deviceWatcherTrigger);
-        void UnregisterBackgroundTask(IBackgroundTaskRegistration^ taskReg);
+        void RegisterBackgroundTask(Windows::ApplicationModel::Background::DeviceWatcherTrigger^ deviceWatcherTrigger);
+        void UnregisterBackgroundTask(Windows::ApplicationModel::Background::IBackgroundTaskRegistration^ taskReg);
 
-        SDKTemplate::MainPage^ rootPage;
-        IBackgroundTaskRegistration^ backgroundTaskRegistration;
+        MainPage^ rootPage = MainPage::Current;
+        Windows::ApplicationModel::Background::IBackgroundTaskRegistration^ backgroundTaskRegistration;
+        Windows::Foundation::EventRegistrationToken backgroundTaskCompletedToken{};
         Platform::String^ backgroundTaskName = "DeviceEnumerationCpp_BackgroundTaskName";
     };
 }

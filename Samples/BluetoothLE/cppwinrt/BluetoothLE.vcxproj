@@ -3,7 +3,7 @@
   <Import Project="packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{6BA13EC4-5ACC-4B1A-99B4-6FC4D67C7849}</ProjectGuid>
+    <ProjectGuid>{FEF35222-DE47-5791-817E-DE7B1DE60289}</ProjectGuid>
     <ProjectName>BluetoothLE</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -148,25 +148,15 @@
     <ClCompile Include="Scenario3_ServerForeground.cpp">
       <DependentUpon>..\shared\Scenario3_ServerForeground.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+      <DependentUpon>Project.idl</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
-    </Midl>
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
       <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="DisplayHelpers.idl" />
-    <Midl Include="Scenario1_Discovery.idl">
-      <DependentUpon>..\shared\Scenario1_Discovery.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario2_Client.idl">
-      <DependentUpon>..\shared\Scenario2_Client.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario3_ServerForeground.idl">
-      <DependentUpon>..\shared\Scenario3_ServerForeground.xaml</DependentUpon>
-    </Midl>
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

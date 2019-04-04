@@ -1,0 +1,39 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_Colors : Windows.UI.Xaml.Controls.Page, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        Scenario1_Colors();
+
+        Windows.UI.ViewManagement.ApplicationViewTitleBar TitleBar{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_Extend : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Extend();
+    }
+
+    [default_interface]
+    runtimeclass CustomTitleBar : Windows.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        CustomTitleBar();
+
+        Windows.UI.Xaml.UIElement SetPageContent(Windows.UI.Xaml.UIElement newContent);
+        void EnableControlsInTitleBar(Boolean enable);
+
+        Windows.UI.Xaml.Thickness CoreTitleBarPadding{ get; };
+        Double CoreTitleBarHeight{ get; };
+    }
+}

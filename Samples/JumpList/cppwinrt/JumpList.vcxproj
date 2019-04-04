@@ -3,7 +3,7 @@
   <Import Project="packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{2c5c8051-bad9-44f8-b175-ada78be7aed6}</ProjectGuid>
+    <ProjectGuid>{72f0e42a-b921-57c2-b220-db49b76360de}</ProjectGuid>
     <ProjectName>JumpList</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -153,30 +153,15 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DependentUpon>pch.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+      <DependentUpon>Project.idl</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
-    </Midl>
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
       <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="Scenario1_Launched.idl">
-      <DependentUpon>..\shared\Scenario1_Launched.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario2_Remove.idl">
-      <DependentUpon>..\shared\Scenario2_Remove.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario3_CustomItems.idl">
-      <DependentUpon>..\shared\Scenario3_CustomItems.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario4_ChangeSystemGroup.idl">
-      <DependentUpon>..\shared\Scenario4_ChangeSystemGroup.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario5_IsSupported.idl">
-      <DependentUpon>..\shared\Scenario5_IsSupported.xaml</DependentUpon>
-    </Midl>
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

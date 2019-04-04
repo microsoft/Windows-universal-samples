@@ -67,7 +67,8 @@ Namespace Global.BackgroundTransfer
         End Sub
 
         Private Async Function CreateResultFileAsync(id As Integer) As Task(Of IStorageFile)
-            Dim resultFile As IStorageFile = Await KnownFolders.PicturesLibrary.CreateFileAsync(String.Format(CultureInfo.InvariantCulture, "picture{0}.png", id), CreationCollisionOption.GenerateUniqueName)
+            Dim picturesLibrary As StorageFolder = Await KnownFolders.GetFolderForUserAsync(Nothing, KnownFolderId.PicturesLibrary) ' Nothing = current user
+            Dim resultFile As IStorageFile = Await picturesLibrary.CreateFileAsync(String.Format(CultureInfo.InvariantCulture, "picture{0}.png", id), CreationCollisionOption.GenerateUniqueName)
             Return resultFile
         End Function
 

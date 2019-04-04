@@ -32,7 +32,6 @@ Scenario4::Scenario4()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
-    SaveFileButton->Click += ref new RoutedEventHandler(this, &Scenario4::SaveFileButton_Click);
 }
 
 void Scenario4::SaveFileButton_Click(Object^ sender, RoutedEventArgs^ e)

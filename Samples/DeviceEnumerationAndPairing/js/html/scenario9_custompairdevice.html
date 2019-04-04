@@ -48,6 +48,8 @@ Copyright (c) Microsoft Corporation. All rights reserved
                     <label for="providePinOption">ProvidePin</label>
                 <input id="confirmPinMatchOption" type="checkbox" class="win-checkbox" checked />
                     <label for="confirmPinMatchOption">ConfirmPinMatch</label>
+                <input id="passwordCredentialOption" type="checkbox" class="win-checkbox" checked />
+                    <label for="passwordCredentialOption">Credential</label>
             </p>
             <p>
                 Choose a protection level:
@@ -70,6 +72,9 @@ Copyright (c) Microsoft Corporation. All rights reserved
                 <button id="okButton" class="win-button">OK</button>
                 <button id="yesButton" class="win-button">Yes</button>
                 <button id="noButton" class="win-button">No</button>
+                <input type="text" id="usernameEntryTextBox" class="win-textbox">
+                <input type="text" id="passwordEntryTextBox" class="win-textbox">
+                <button id="verifyButton" class="win-button">Verify</button>
             </div>
         </div>
         <div id="resultsListView" style="border:2px solid white;" data-win-control="WinJS.UI.ListView" data-win-options="{

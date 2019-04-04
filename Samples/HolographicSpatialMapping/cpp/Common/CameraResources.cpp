@@ -108,29 +108,29 @@ void DX::CameraResources::CreateResourcesForBackBuffer(
     {
         // Create a depth stencil view for use with 3D rendering if needed.
         CD3D11_TEXTURE2D_DESC depthStencilDesc(
-            DXGI_FORMAT_D16_UNORM,
+            DXGI_FORMAT_R16_TYPELESS,
             static_cast<UINT>(m_d3dRenderTargetSize.Width),
             static_cast<UINT>(m_d3dRenderTargetSize.Height),
             m_isStereo ? 2 : 1, // Create two textures when rendering in stereo.
             1, // Use a single mipmap level.
-            D3D11_BIND_DEPTH_STENCIL
+            D3D11_BIND_DEPTH_STENCIL | D3D11_BIND_SHADER_RESOURCE
             );
 
-        ComPtr<ID3D11Texture2D> depthStencil;
         DX::ThrowIfFailed(
             device->CreateTexture2D(
                 &depthStencilDesc,
                 nullptr,
-                &depthStencil
+                &m_d3dDepthStencil
                 )
             );
 
         CD3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc(
-            m_isStereo ? D3D11_DSV_DIMENSION_TEXTURE2DARRAY : D3D11_DSV_DIMENSION_TEXTURE2D
+            m_isStereo ? D3D11_DSV_DIMENSION_TEXTURE2DARRAY : D3D11_DSV_DIMENSION_TEXTURE2D,
+            DXGI_FORMAT_D16_UNORM
             );
         DX::ThrowIfFailed(
             device->CreateDepthStencilView(
-                depthStencil.Get(),
+                m_d3dDepthStencil.Get(),
                 &depthStencilViewDesc,
                 &m_d3dDepthStencilView
                 )
@@ -159,6 +159,7 @@ void DX::CameraResources::ReleaseResourcesForBackBuffer(DX::DeviceResources* pDe
 
     // Release camera-specific resources.
     m_d3dBackBuffer.Reset();
+    m_d3dDepthStencil.Reset();
     m_d3dRenderTargetView.Reset();
     m_d3dDepthStencilView.Reset();
     m_viewProjectionConstantBuffer.Reset();

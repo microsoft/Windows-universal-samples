@@ -7,25 +7,20 @@ using Windows.Devices.Enumeration;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DeviceEnumeration
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Scenario5 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
         private DeviceInformationKind deviceInformationKind;
 
-        public ObservableCollection<DeviceInformationDisplay> ResultCollection
-        {
-            get;
-            private set;
-        }
+        private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
         public Scenario5()
         {
@@ -34,10 +29,7 @@ namespace DeviceEnumeration
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-            ResultCollection = new ObservableCollection<DeviceInformationDisplay>();
-
-            DataContext = this;
+            resultsListView.ItemsSource = resultCollection;
         }
 
         private async void InterfaceIdTextBox_Loaded(object sender, RoutedEventArgs e)
@@ -61,8 +53,8 @@ namespace DeviceEnumeration
 
             interfaceIdTextBox.IsEnabled = false;
             getButton.IsEnabled = false;
-            ResultCollection.Clear();
-            
+            resultCollection.Clear();
+
             rootPage.NotifyUser("CreateFromIdAsync operation started...", NotifyType.StatusMessage);
 
             try
@@ -73,7 +65,7 @@ namespace DeviceEnumeration
 
                 rootPage.NotifyUser("CreateFromIdAsync operation completed.", NotifyType.StatusMessage);
 
-                ResultCollection.Add(new DeviceInformationDisplay(deviceInfo));
+                resultCollection.Add(new DeviceInformationDisplay(deviceInfo));
             }
             catch (FileNotFoundException)
             {
@@ -81,7 +73,7 @@ namespace DeviceEnumeration
             }
 
             getButton.IsEnabled = true;
-            getButton.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+            getButton.Focus(FocusState.Keyboard);
             interfaceIdTextBox.IsEnabled = true;
         }
     }

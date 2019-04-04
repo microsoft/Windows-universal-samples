@@ -12,29 +12,29 @@
     });
 
     function writeText() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             var textArea = document.getElementById("textarea");
             var userContent = textArea.value;
-            if (userContent !== "") {
-                Windows.Storage.FileIO.writeTextAsync(SdkSample.sampleFile, userContent).done(function () {
-                    WinJS.log && WinJS.log("The following text was written to '" + SdkSample.sampleFile.name + "':\n" + userContent, "sample", "status");
-                },
-                function (error) {
-                    WinJS.log && WinJS.log(error, "sample", "error");
-                });
-            } else {
-                WinJS.log && WinJS.log("The text box is empty, please write something and then click 'Write' again.", "sample", "error");
-            }
+            Windows.Storage.FileIO.writeTextAsync(SdkSample.sampleFile, userContent).done(function () {
+                WinJS.log && WinJS.log("The following text was written to '" + SdkSample.sampleFile.name + "':\n" + userContent, "sample", "status");
+            },
+            function (error) {
+                WinJS.log && WinJS.log(error, "sample", "error");
+            });
         }
     }
 
     function readText() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             Windows.Storage.FileIO.readTextAsync(SdkSample.sampleFile).done(function (fileContent) {
                 WinJS.log && WinJS.log("The following text was read from '" + SdkSample.sampleFile.name + "':\n" + fileContent, "sample", "status");
             },
             function (error) {
-                WinJS.log && WinJS.log(error, "sample", "error");
+                if (error.number === SdkSample.E_NO_UNICODE_TRANSLATION) {
+                    WinJS.log && WinJS.log("File cannot be decoded as Unicode.", "sample", "error");
+                } else {
+                    WinJS.log && WinJS.log(error, "sample", "error");
+                }
             });
         }
     }

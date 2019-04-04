@@ -8,8 +8,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.18346.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.18346.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,6 +139,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DeviceWatcherHelper.h" />
     <ClInclude Include="DisplayHelpers.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
@@ -149,31 +150,31 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_DevicePicker.xaml.h">
-      <DependentUpon>Scenario1_DevicePicker.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DevicePicker.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_DeviceWatcher.xaml.h">
-      <DependentUpon>Scenario2_DeviceWatcher.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_DeviceWatcher.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario3_BackgroundDeviceWatcher.xaml.h">
-      <DependentUpon>Scenario3_BackgroundDeviceWatcher.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_BackgroundDeviceWatcher.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario4_Snapshot.xaml.h">
-      <DependentUpon>Scenario4_Snapshot.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_Snapshot.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario5_GetSingleDevice.xaml.h">
-      <DependentUpon>Scenario5_GetSingleDevice.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario5_GetSingleDevice.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario6_CustomFilterAddedProps.xaml.h">
-      <DependentUpon>Scenario6_CustomFilterAddedProps.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario6_CustomFilterAddedProps.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario7_DeviceInformationKind.xaml.h">
-      <DependentUpon>Scenario7_DeviceInformationKind.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario7_DeviceInformationKind.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario8_PairDevice.xaml.h">
-      <DependentUpon>Scenario8_PairDevice.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario8_PairDevice.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario9_CustomPairDevice.xaml.h">
-      <DependentUpon>Scenario9_CustomPairDevice.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario9_CustomPairDevice.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,18 +184,18 @@
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DevicePicker.xaml" />
-    <Page Include="Scenario2_DeviceWatcher.xaml" />
-    <Page Include="Scenario3_BackgroundDeviceWatcher.xaml" />
-    <Page Include="Scenario4_Snapshot.xaml" />
-    <Page Include="Scenario5_GetSingleDevice.xaml" />
-    <Page Include="Scenario6_CustomFilterAddedProps.xaml" />
-    <Page Include="Scenario7_DeviceInformationKind.xaml" />
-    <Page Include="Scenario8_PairDevice.xaml" />
+    <Page Include="..\shared\Scenario1_DevicePicker.xaml" />
+    <Page Include="..\shared\Scenario2_DeviceWatcher.xaml" />
+    <Page Include="..\shared\Scenario3_BackgroundDeviceWatcher.xaml" />
+    <Page Include="..\shared\Scenario4_Snapshot.xaml" />
+    <Page Include="..\shared\Scenario5_GetSingleDevice.xaml" />
+    <Page Include="..\shared\Scenario6_CustomFilterAddedProps.xaml" />
+    <Page Include="..\shared\Scenario7_DeviceInformationKind.xaml" />
+    <Page Include="..\shared\Scenario8_PairDevice.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
-    <Page Include="Scenario9_CustomPairDevice.xaml" />
+    <Page Include="..\shared\Scenario9_CustomPairDevice.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -205,11 +206,17 @@
     <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="DisplayHelpers.cpp" />
+    <ClCompile Include="DeviceWatcherHelper.cpp">
+      <DependentUpon>DeviceWatcherHelper.h</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="DisplayHelpers.cpp">
+      <DependentUpon>DisplayHelpers.h</DependentUpon>
+    </ClCompile>
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <DependentUpon>pch.h</DependentUpon>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Create</PrecompiledHeader>
@@ -217,33 +224,35 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp">
+      <DependentUpon>SampleConfiguration.h</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Scenario1_DevicePicker.xaml.cpp">
-      <DependentUpon>Scenario1_DevicePicker.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_DevicePicker.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_DeviceWatcher.xaml.cpp">
-      <DependentUpon>Scenario2_DeviceWatcher.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_DeviceWatcher.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario3_BackgroundDeviceWatcher.xaml.cpp">
-      <DependentUpon>Scenario3_BackgroundDeviceWatcher.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario3_BackgroundDeviceWatcher.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario4_Snapshot.xaml.cpp">
-      <DependentUpon>Scenario4_Snapshot.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario4_Snapshot.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario5_GetSingleDevice.xaml.cpp">
-      <DependentUpon>Scenario5_GetSingleDevice.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario5_GetSingleDevice.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario6_CustomFilterAddedProps.xaml.cpp">
-      <DependentUpon>Scenario6_CustomFilterAddedProps.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario6_CustomFilterAddedProps.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario7_DeviceInformationKind.xaml.cpp">
-      <DependentUpon>Scenario7_DeviceInformationKind.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario7_DeviceInformationKind.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario8_PairDevice.xaml.cpp">
-      <DependentUpon>Scenario8_PairDevice.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario8_PairDevice.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario9_CustomPairDevice.xaml.cpp">
-      <DependentUpon>Scenario9_CustomPairDevice.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario9_CustomPairDevice.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

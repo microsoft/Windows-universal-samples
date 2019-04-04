@@ -46,41 +46,15 @@ namespace SDKTemplate
             }
         }
 
-        property Platform::String^ MruToken
-        {
-            Platform::String^ get()
-            {
-                return mruToken;
-            }
-            void set(Platform::String^ value)
-            {
-                mruToken = value;
-            }
-        }
-
-        property Platform::String^ FalToken
-        {
-            Platform::String^ get()
-            {
-                return falToken;
-            }
-            void set(Platform::String^ value)
-            {
-                falToken = value;
-            }
-        }
-
     internal:
-        void Initialize();
         void ValidateFile();
         void NotifyUserFileNotExist();
         void HandleIoException(Platform::COMException^ e, Platform::String^ description);
-
+        static Windows::Storage::Streams::IBuffer^ GetBufferFromString(Platform::String^ string);
+        static Platform::String^ GetStringFromBuffer(Windows::Storage::Streams::IBuffer^ buffer);
     private:
         static Platform::Array<Scenario>^ scenariosInner;
         Windows::Storage::StorageFile^ sampleFile;
-        Platform::String^ mruToken;
-        Platform::String^ falToken;
     };
 
     public value struct Scenario

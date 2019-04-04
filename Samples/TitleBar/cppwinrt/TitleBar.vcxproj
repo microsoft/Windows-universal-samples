@@ -3,7 +3,7 @@
   <Import Project="packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{69E9A7C6-CEFF-40EB-90C5-A756B4AAE40B}</ProjectGuid>
+    <ProjectGuid>{4F8FE0A1-4216-5756-9061-16C83CC9DB0D}</ProjectGuid>
     <ProjectName>TitleBar</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -143,25 +143,15 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DependentUpon>pch.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+      <DependentUpon>Project.idl</DependentUpon>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
-    </Midl>
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
       <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="CustomTitleBar.idl">
-      <DependentUpon>..\shared\CustomTitleBar.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="Scenario1_Colors.idl">
-      <DependentUpon>..\shared\Scenario1_Colors.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario2_Extend.idl">
-      <DependentUpon>..\shared\Scenario2_Extend.xaml</DependentUpon>
-    </Midl>
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

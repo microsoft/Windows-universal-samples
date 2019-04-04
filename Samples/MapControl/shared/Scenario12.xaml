@@ -38,6 +38,7 @@
                 <SymbolIcon Symbol="Play" Tapped ="PlayAnimationTapped" Margin="3"/>
                 <SymbolIcon Symbol="Pause" Tapped= "PauseAnimationTapped" Margin="3"/>
                 <SymbolIcon Symbol="Stop" Tapped ="StopAnimationTapped" Margin="3"/>
+                <Button Content="Clear" Click="ClearMapClick" Margin="3"/>
             </VariableSizedWrapGrid>
             <maps:MapControl x:Name="myMap" TransitFeaturesVisible="False" Loaded="MyMapLoaded" Grid.Row="2"/>
         </Grid>

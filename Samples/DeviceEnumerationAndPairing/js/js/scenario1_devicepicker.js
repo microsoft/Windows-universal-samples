@@ -4,15 +4,11 @@
     "use strict";
 
     var DevEnum = Windows.Devices.Enumeration;
-    var devicePicker = null;
     var resultCollection = new WinJS.Binding.List([]);
     var resultsListView;
 
     var page = WinJS.UI.Pages.define("/html/scenario1_devicepicker.html", {
         ready: function (element, options) {
-
-            // Setup beforeNavigate event
-            WinJS.Navigation.addEventListener("beforenavigate", onLeavingPage);
 
             // Hook up button event handlers
             document.getElementById("pickSingleDeviceButton").addEventListener("click", pickSingleDeviceClick, false);
@@ -31,13 +27,11 @@
 
             // Process any data bindings
             WinJS.UI.processAll();
+        },
+        unload: function () {
+            resultCollection.splice(0, resultCollection.length);
         }
     });
-
-    function onLeavingPage() {
-        WinJS.Navigation.removeEventListener("beforenavigate", onLeavingPage);
-        resultCollection.splice(0, resultCollection.length);
-    }
 
     function pickSingleDeviceClick() {
         showDevicePicker(true);
@@ -52,7 +46,7 @@
         showDevicePickerButton.disabled = true;
         resultCollection.splice(0, resultCollection.length);
 
-        devicePicker = new DevEnum.DevicePicker();
+        var devicePicker = new DevEnum.DevicePicker();
 
         var selectedItem = DisplayHelpers.devicePickerSelectors.getAt(selectorComboBox.selectedIndex);
 
@@ -99,8 +93,7 @@
     }
 
     function onDeviceSelected(args) {
-        resultCollection.splice(0, resultCollection.length);
-        resultCollection.push(new DisplayHelpers.DeviceInformationDisplay(args.selectedDevice));
+        resultCollection.splice(0, resultCollection.length, new DisplayHelpers.DeviceInformationDisplay(args.selectedDevice));
     }
 
 })();

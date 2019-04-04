@@ -51,9 +51,11 @@
 
         this.start = function (uri, fileName, priority) {
             // Asynchronously create the destination file in the pictures folder.
-            Windows.Storage.KnownFolders.picturesLibrary.createFileAsync(
-                fileName, Windows.Storage.CreationCollisionOption.generateUniqueName)
-                .done(function (destinationFile) {
+            Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary)
+                .then(function (picturesLibrary) {
+                    return picturesLibrary.createFileAsync(
+                        fileName, Windows.Storage.CreationCollisionOption.generateUniqueName);
+                }).done(function (destinationFile) {
                     var downloader = new BackgroundTransfer.BackgroundDownloader();
 
                     // Create a new download operation.

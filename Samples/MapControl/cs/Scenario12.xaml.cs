@@ -56,6 +56,12 @@ namespace SDKTemplate
             }
         }
 
+        private void ClearMapClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            myMap.TileSources.Clear();
+            httpTileSource = null;
+        }
+
         private void HttpMapTileDataSourceUriRequested(HttpMapTileDataSource sender, MapTileUriRequestedEventArgs args)
         {
             args.Request.Uri = new Uri(urlTemplate.Replace("{timestamp}", timestamps[args.FrameIndex]));

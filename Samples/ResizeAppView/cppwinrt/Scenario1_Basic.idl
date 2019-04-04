@@ -1,8 +1,0 @@
-namespace SDKTemplate
-{
-    [default_interface]
-    runtimeclass Scenario1_Basic : Windows.UI.Xaml.Controls.Page
-    {
-        Scenario1_Basic();
-    }
-}

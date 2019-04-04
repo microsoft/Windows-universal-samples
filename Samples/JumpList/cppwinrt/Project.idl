@@ -1,0 +1,43 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_Launched : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_Launched();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_Remove : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Remove();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_CustomItems : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_CustomItems();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_ChangeSystemGroup : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_ChangeSystemGroup();
+    }
+
+    [default_interface]
+    runtimeclass Scenario5_IsSupported : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_IsSupported();
+    }
+}

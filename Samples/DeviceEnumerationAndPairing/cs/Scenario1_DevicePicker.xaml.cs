@@ -9,26 +9,19 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace DeviceEnumeration
+namespace SDKTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class Scenario1 : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
-        private DevicePicker devicePicker = null;
-
-        public ObservableCollection<DeviceInformationDisplay> ResultCollection
-        {
-            get;
-            private set;
-        }
+        private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
         public Scenario1()
         {
@@ -37,17 +30,9 @@ namespace DeviceEnumeration
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-            ResultCollection = new ObservableCollection<DeviceInformationDisplay>();
-
+            resultsListView.ItemsSource = resultCollection;
             selectorComboBox.ItemsSource = DeviceSelectorChoices.DevicePickerSelectors;
             selectorComboBox.SelectedIndex = 0;
-
-            DataContext = this;
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
         }
 
         private void PickSingleDeviceButton_Click(object sender, RoutedEventArgs e)
@@ -67,9 +52,9 @@ namespace DeviceEnumeration
         private async void ShowDevicePicker(bool pickSingle)
         {
             showDevicePickerButton.IsEnabled = false;
-            ResultCollection.Clear();
+            resultCollection.Clear();
 
-            devicePicker = new DevicePicker();
+            var devicePicker = new DevicePicker();
 
             // First get the device selector chosen by the UI.
             DeviceSelectorInfo deviceSelectorInfo = (DeviceSelectorInfo)selectorComboBox.SelectedItem;
@@ -97,7 +82,7 @@ namespace DeviceEnumeration
                 DeviceInformation di = await devicePicker.PickSingleDeviceAsync(rect);
                 if (null != di)
                 {
-                    ResultCollection.Add(new DeviceInformationDisplay(di));
+                    resultCollection.Add(new DeviceInformationDisplay(di));
                 }
                 showDevicePickerButton.IsEnabled = true;
             }
@@ -106,7 +91,7 @@ namespace DeviceEnumeration
                 devicePicker.DevicePickerDismissed += new TypedEventHandler<DevicePicker, object>(
                 async (picker, obj) =>
                 {
-                    // Since we have the collection databound to a UI element, we need to update the collection on the UI thread.
+                    // Must access UI elements from the UI thread.
                     await rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                     {
                         showDevicePickerButton.IsEnabled = true;
@@ -120,8 +105,8 @@ namespace DeviceEnumeration
                     // Since we have the collection databound to a UI element, we need to update the collection on the UI thread.
                     await rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                     {
-                        ResultCollection.Clear();
-                        ResultCollection.Add(new DeviceInformationDisplay(args.SelectedDevice));
+                        resultCollection.Clear();
+                        resultCollection.Add(new DeviceInformationDisplay(args.SelectedDevice));
                     });
                 });
 

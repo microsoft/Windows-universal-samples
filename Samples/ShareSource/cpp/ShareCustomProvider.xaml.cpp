@@ -52,6 +52,7 @@ bool ShareCustomProvider::GetShareContent(DataRequest^ request)
 {
     DataPackage^ requestData = request->Data;
     requestData->Properties->Title = "I got a new high score!";
+    requestData->Properties->ContentSourceApplicationLink = ApplicationLink;
     requestData->SetText("I got a high score of 15063!");
     return true;
 }

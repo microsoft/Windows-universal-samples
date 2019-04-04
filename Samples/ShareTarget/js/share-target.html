@@ -1,0 +1,102 @@
+﻿<!--
+Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <!-- WinJS references -->
+    <link href="/Microsoft.WinJS.4.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="/Microsoft.WinJS.4.0/js/base.js"></script>
+    <script src="/Microsoft.WinJS.4.0/js/ui.js"></script>
+
+    <link rel="stylesheet" href="/css/default.css" />
+    <link rel="stylesheet" href="/css/share-target.css" />
+    <script src="/js/share-target.js"></script>
+</head>
+
+<body class="win-type-body">
+    <div id="contentWrapper">
+        <div id="header" role="contentinfo" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/sample-utils/header.html'}"></div>
+        <div id="scenarioPane">
+            <p>
+                <strong>QuickLink Id</strong>: <span id="selectedQuickLinkId">This app was not activated through a frequent QuickLink.</span>
+            </p>
+            <p>The following Data Package was received from the source app:</p>
+            <h3>Data Package Properties</h3>
+            <div id="dataPackageProperties"></div>
+
+            <h3>Data Package Contents</h3>
+            <div id="dataPackageContents">
+                <div id="htmlContentArea" class="hidden"><strong>HTML: </strong><br /><iframe id="htmlContent" style="width:600px; height:auto; display:none"></iframe></div>
+            </div>
+
+            <p>
+                Your share target app should report completed after the share task completes successfully. This API applies to both quick
+                and long-running shares.
+            </p>
+            <div id="quickLinkArea">
+                <p>
+                    When reporting completed, you can optionally add a QuickLink to make it easier for users to repeat the way they share
+                    most often. This saves them from having to select that person or group in your app every time they share to them.
+                </p>
+                <p>
+                    If no user interaction is required, you can dismiss your share target programatically while continuing to execute
+                    a task in the background. (e.g - Uploading a user selected file in the background)
+                </p>
+                <label for="addQuickLink">
+                    <input type="checkbox" id="addQuickLink" class="win-checkbox" value="addQuickLink" /> Add a QuickLink (optional)
+                </label>
+                <br />
+                <div id="quickLinkFields" class="hidden">
+                    <div id="quickLinkError" class="hidden"></div>
+                    QuickLink Id: <input type="text" id="quickLinkId" class="win-textbox" value="ABC123" /><br />
+                    Title: <input type="text" id="quickLinkTitle" class="win-textbox" value="Email John Smith" /><br />
+                    Icon: <img alt="QuickLink icon" src="images/smallTile-sdk.png" id="quickLinkIcon" />
+                </div>
+            </div>
+            <br />
+            <button id="dismissUI" class="win-button">Dismiss UI</button>
+            <button id="reportCompleted" class="win-button">Report Completed</button>
+            <br />
+            <h3 id="expandoClick">Long-running Share Support&#8192;<span id="expandoGlyph" style="font-family:'Segoe UI Symbol'">&#57361;</span></h3>
+            <div id="extendedSharing" class="hidden">
+                This API is required if your app supports uploading a format that may take some time, such as images or videos.
+                A user should be able to dismiss your app and have the upload continue in the background while they do other things.
+                In order for the dismiss behavior to work correctly, you need to report to the share platform that you finished getting
+                user input.  After you call this, a user can go back to the share pane and see your application in the share progress
+                list.
+                <br /><br />
+                <button id="reportStarted" class="win-button">Report Started</button>
+                <br /><br />
+                This API is optional and helps Windows to optimize resource usage of the system.  You should report this if you have finished
+                extracting data from the Data Package so that Windows can suspend or terminate the source app as necessary to reclaim
+                system resources.
+                <br /><br />
+                <button id="reportDataRetrieved" class="win-button">Report Data Retrieved</button>
+                <br /><br />
+                This API is optional and helps Windows to optimize resource usage of the system.  You should report this if you have called
+                the Windows Runtime Background Transfer class to upload your content.  Then Windows can suspend your app as necessary
+                to reclaim system resources. If you use this API, call it after Report Started.
+                <br /><br />
+                <button id="reportSubmittedBackgroundTask" class="win-button">Report Submitted To BackgroundTask</button>
+                <br /><br />
+                If for any reason the long-running share was unsuccessful and failed in the background, you should report failure and
+                include a message for the user about how they can recover from the error.  When the user goes back to the share pane
+                they can see your message in the progress list. You must never call Report Error if your app is visible in the
+                foreground.
+                <br /><br />
+                <span>Error message:</span>
+                <input type="text" id="extendedShareErrorMessage" value="Could not contact server" />
+                <br /><br />
+                <button id="reportError" class="win-button">Report Error</button>
+                <br /><br />
+            </div>
+        </div>
+        <div id="footer" data-win-control="WinJS.UI.HtmlControl" data-win-options="{uri: '/sample-utils/footer.html'}"></div>
+    </div>
+</body>
+
+</html>

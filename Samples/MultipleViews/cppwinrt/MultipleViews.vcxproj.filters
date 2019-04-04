@@ -16,10 +16,7 @@
   <ItemGroup>
     <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
-    <Midl Include="Scenario3.idl" />
-    <Midl Include="Scenario1.idl" />
-    <Midl Include="ViewLifetimeControl.idl" />
-    <Midl Include="SecondaryViewPage.idl" />
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

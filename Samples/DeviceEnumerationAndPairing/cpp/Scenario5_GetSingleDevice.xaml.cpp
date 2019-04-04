@@ -20,18 +20,14 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario5::Scenario5() : 
-    rootPage(MainPage::Current),
-    deviceInformationKind(DeviceInformationKind::Unknown)
+Scenario5::Scenario5()
 {
     InitializeComponent();
 }
 
 void Scenario5::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    ResultCollection = ref new Vector<DeviceInformationDisplay^>();
-
-    DataContext = this;
+    resultsListView->ItemsSource = resultCollection;
 }
 
 void Scenario5::InterfaceIdTextBox_Loaded(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -55,7 +51,7 @@ void Scenario5::GetButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Rou
 
     interfaceIdTextBox->IsEnabled = false;
     getButton->IsEnabled = false;
-    ResultCollection->Clear();
+    resultCollection->Clear();
 
     rootPage->NotifyUser("CreateFromIdAsync operation started...", NotifyType::StatusMessage);
 
@@ -68,7 +64,7 @@ void Scenario5::GetButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Rou
         {
             rootPage->NotifyUser("CreateFromIdAsync operation completed.", NotifyType::StatusMessage);
 
-            ResultCollection->Append(ref new DeviceInformationDisplay(deviceInfo));
+            resultCollection->Append(ref new DeviceInformationDisplay(deviceInfo));
 
             getButton->IsEnabled = true;
             getButton->Focus(Windows::UI::Xaml::FocusState::Keyboard);

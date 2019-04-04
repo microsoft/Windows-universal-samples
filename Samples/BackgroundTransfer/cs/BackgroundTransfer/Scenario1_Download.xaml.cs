@@ -136,7 +136,8 @@ namespace SDKTemplate
             StorageFile destinationFile;
             try
             {
-                destinationFile = await KnownFolders.PicturesLibrary.CreateFileAsync(
+                StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+                destinationFile = await picturesLibrary.CreateFileAsync(
                     destination,
                     CreationCollisionOption.GenerateUniqueName);
             }

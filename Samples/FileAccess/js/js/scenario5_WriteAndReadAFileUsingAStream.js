@@ -12,50 +12,55 @@
     });
 
     function writeToStream() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             var textArea = document.getElementById("textarea");
             var userContent = textArea.value;
-            if (userContent !== "") {
-                SdkSample.sampleFile.openTransactedWriteAsync().then(function (transaction) {
-                    var dataWriter = new Windows.Storage.Streams.DataWriter(transaction.stream);
-                    dataWriter.writeString(userContent);
-                    dataWriter.storeAsync().then(function (size) {
-                        transaction.stream.size = size; // reset stream size to override the file
-                        transaction.commitAsync().done(function () {
-                            WinJS.log && WinJS.log("The following text was written to '" + SdkSample.sampleFile.name + "' using a stream:\n" + userContent, "sample", "status");
-                            transaction.close();
-                        });
-                    });
-                },
-                function (error) {
-                    WinJS.log && WinJS.log(error, "sample", "error");
-                });
-            } else {
-                WinJS.log && WinJS.log("The text box is empty, please write something and then click 'Write' again.", "sample", "error");
-            }
-        }
-    };
-
-    function readFromStream() {
-        if (SdkSample.sampleFile !== null) {
-            SdkSample.sampleFile.openAsync(Windows.Storage.FileAccessMode.read).then(function (readStream) {
-                var size = readStream.size;
-                var maxuint32 = 4294967295; // loadAsync only takes UINT32 value.
-                if (size <= maxuint32) {
-                    var dataReader = new Windows.Storage.Streams.DataReader(readStream);
-                    dataReader.loadAsync(size).done(function (numBytesLoaded) {
-                        var fileContent = dataReader.readString(numBytesLoaded);
-                        WinJS.log && WinJS.log("The following text was read from '" + SdkSample.sampleFile.name + "' using a stream:\n" + fileContent, "sample", "status");
-                        dataReader.close();
-                    });
-                } else {
-                    var error = "File " + SdkSample.sampleFile.name + " is too big for LoadAsync to load in a single chunk. Files larger than 4GB need to be broken into multiple chunks to be loaded by LoadAsync.";
-                    WinJS.log && WinJS.log(error, "sample", "error");
-                }
+            var transaction;
+            SdkSample.sampleFile.openTransactedWriteAsync().then(function (newTransaction) {
+                transaction = newTransaction;
+                var buffer = SdkSample.getBufferFromString(userContent);
+                return transaction.stream.writeAsync(buffer);
+            }).then(function (bytesWritten) {
+                transaction.stream.size = bytesWritten; // truncate file
+                return transaction.commitAsync();
+            }).then(function () {
+                WinJS.log && WinJS.log("The following text was written to '" + SdkSample.sampleFile.name + "' using a stream:\n" + userContent, "sample", "status");
             },
             function (error) {
                 WinJS.log && WinJS.log(error, "sample", "error");
+            }).done(function () {
+                // Ensure we close the transaction even if an error occurs.
+                transaction && transaction.close();
             });
         }
-    };
+    }
+
+    function readFromStream() {
+        if (SdkSample.sampleFile) {
+            SdkSample.sampleFile.openAsync(Windows.Storage.FileAccessMode.read).then(function (readStream) {
+                var size = readStream.size;
+                var maxuint32 = 4294967295; // Buffer size is UINT32
+                if (size <= maxuint32) {
+                    var buffer = new Windows.Storage.Streams.Buffer(size);
+                    return readStream.readAsync(buffer, size, Windows.Storage.Streams.InputStreamOptions.none).then(function (buffer) {
+                        var fileContent = SdkSample.getStringFromBuffer(buffer);
+                        WinJS.log && WinJS.log("The following text was read from '" + SdkSample.sampleFile.name + "' using a stream:\n" + fileContent, "sample", "status");
+                    }).then(function () {
+                        readStream.close();
+                    });
+                } else {
+                    readStream.close();
+                    var error = "File " + SdkSample.sampleFile.name + " is too big for ReadAsync to read in a single chunk. Files larger than 4GB need to be broken into multiple chunks to be loaded by ReadAsync.";
+                    WinJS.log && WinJS.log(error, "sample", "error");
+                }
+            }).then(null,
+            function (error) {
+                if (error.number === SdkSample.E_NO_UNICODE_TRANSLATION) {
+                    WinJS.log && WinJS.log("File is not UTF-8 encoded.", "sample", "error");
+                } else {
+                    WinJS.log && WinJS.log(error, "sample", "error");
+                }
+            });
+        }
+    }
 })();

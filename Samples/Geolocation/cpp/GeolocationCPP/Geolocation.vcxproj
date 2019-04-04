@@ -253,6 +253,9 @@
     <Image Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
     </Image>
+    <Image Include="..\..\..\..\SharedContent\media\badge-logo.png">
+      <Link>Assets\badge-logo.png</Link>
+    </Image>
     <Image Include="..\..\..\..\SharedContent\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Image>

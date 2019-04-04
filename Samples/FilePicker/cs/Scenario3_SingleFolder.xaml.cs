@@ -29,7 +29,6 @@ namespace SDKTemplate
         public Scenario3()
         {
             this.InitializeComponent();
-            PickFolderButton.Click += new RoutedEventHandler(PickFolderButton_Click);
         }
 
         private async void PickFolderButton_Click(object sender, RoutedEventArgs e)

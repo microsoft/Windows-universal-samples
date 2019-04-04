@@ -26,7 +26,6 @@ namespace SDKTemplate
         public Scenario4()
         {
             this.InitializeComponent();
-            GetThumbnailButton.Click += new RoutedEventHandler(GetThumbnailButton_Click);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

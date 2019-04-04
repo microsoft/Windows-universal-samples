@@ -4,7 +4,7 @@
   <PropertyGroup Label="Globals">
     <CppWinRTEnabled>true</CppWinRTEnabled>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{61A5BDCE-56C7-42B5-9E09-7FD131024D1A}</ProjectGuid>
+    <ProjectGuid>{DA7056F9-221A-5328-A604-7EE2740B0222}</ProjectGuid>
     <ProjectName>FullScreenMode</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -133,7 +133,9 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DependentUpon>pch.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+      <DependentUpon>Project.idl</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Scenario1_Basic.cpp">
       <DependentUpon>..\shared\Scenario1_Basic.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -144,20 +146,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
-    </Midl>
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
       <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="Scenario1_Basic.idl">
-      <DependentUpon>..\shared\Scenario1_Basic.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="Scenario2_Launch.idl">
-      <DependentUpon>..\shared\Scenario2_Launch.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

@@ -228,6 +228,9 @@
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
+    <Image Include="..\..\..\SharedContent\media\placeholder-sdk.png">
+      <Link>Assets\placeholder-sdk.png</Link>
+    </Image>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
     </Image>

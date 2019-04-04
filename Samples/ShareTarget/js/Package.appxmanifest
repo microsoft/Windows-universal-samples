@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+IgnorableNamespaces="uap mp">
+  <Identity Name="4d1ffe69-da36-4dfb-98c2-1672bcb517d5" Version="1.0.1.0" Publisher="CN=Microsoft" />
+  <mp:PhoneIdentity PhoneProductId="4d1ffe69-da36-4dfb-98c2-1672bcb517d5" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>Share Target JS Sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>images\storelogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.17763.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <uap:VisualElements DisplayName="Share Target JS Sample" Description="Share Target JS Sample" BackgroundColor="#00b2f0" Square150x150Logo="images\squareTile-sdk.png" Square44x44Logo="images\smalltile-sdk.png">
+        <uap:SplashScreen Image="images\splash-sdk.png" />
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.shareTarget" StartPage="share-target.html">
+          <uap:ShareTarget>
+            <uap:SupportedFileTypes>
+              <uap:SupportsAnyFileType />
+            </uap:SupportedFileTypes>
+            <uap:DataFormat>Text</uap:DataFormat>
+            <uap:DataFormat>Bitmap</uap:DataFormat>
+            <uap:DataFormat>Html</uap:DataFormat>
+            <uap:DataFormat>http://schema.org/Book</uap:DataFormat>
+            <uap:DataFormat>WebLink</uap:DataFormat>
+            <uap:DataFormat>ApplicationLink</uap:DataFormat>
+          </uap:ShareTarget>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

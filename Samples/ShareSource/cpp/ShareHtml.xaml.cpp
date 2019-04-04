@@ -54,6 +54,7 @@ bool ShareHtml::GetShareContent(DataRequest^ request)
             {
                 requestData->Properties->Title = "A web snippet for you";
                 requestData->Properties->Description = "HTML selection from a WebView control"; // The description is optional.
+                requestData->Properties->ContentSourceApplicationLink = ApplicationLink;
                 requestData->Properties->ContentSourceWebLink = ShareWebView->Source;
                 request->Data = requestData;
                 deferral->Complete();

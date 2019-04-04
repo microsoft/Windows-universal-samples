@@ -26,7 +26,13 @@ namespace SDKTemplate
     {
     public:
         static Windows::Foundation::Uri^ GetApplicationLink(Platform::String^ sharePageFullName);
-
+        property Windows::Foundation::Uri^ ApplicationLink
+        {
+            Windows::Foundation::Uri^ get()
+            {
+                return GetApplicationLink(GetType()->FullName);
+            }
+        }
     protected:
         property MainPage^ RootPage { MainPage^ get() { return rootPage; } }
 

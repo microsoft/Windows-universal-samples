@@ -3,7 +3,7 @@
   <Import Project="packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.1.0.190109.2\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{982CF3C9-2D7B-45DA-A426-2C775E5485A7}</ProjectGuid>
+    <ProjectGuid>{9156CFB4-C0B7-51DD-8A5A-BB33B141984A}</ProjectGuid>
     <ProjectName>MultipleViews</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -102,9 +102,7 @@
       <DependentUpon>..\shared\SecondaryViewPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SizePreferenceString.h" />
-    <ClInclude Include="ViewLifetimeControl.h">
-      <DependentUpon>ViewLifetimeControl.idl</DependentUpon>
-    </ClInclude>
+    <ClInclude Include="ViewLifetimeControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -140,31 +138,21 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <DependentUpon>pch.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
+      <DependentUpon>Project.idl</DependentUpon>
+    </ClCompile>
     <ClCompile Include="SecondaryViewPage.cpp">
       <DependentUpon>..\shared\SecondaryViewPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="ViewLifetimeControl.cpp">
-      <DependentUpon>ViewLifetimeControl.idl</DependentUpon>
+      <DependentUpon>ViewLifetimeControl.h</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
-    </Midl>
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
       <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
     </Midl>
-    <Midl Include="Scenario1.idl">
-      <DependentUpon>..\shared\Scenario1.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="Scenario3.idl">
-      <DependentUpon>..\shared\Scenario3.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="SecondaryViewPage.idl">
-      <DependentUpon>..\shared\SecondaryViewPage.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="ViewLifetimeControl.idl" />
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

@@ -18,11 +18,7 @@
   <ItemGroup>
     <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
-    <Midl Include="Scenario1_Launched.idl" />
-    <Midl Include="Scenario2_Remove.idl" />
-    <Midl Include="Scenario3_CustomItems.idl" />
-    <Midl Include="Scenario4_ChangeSystemGroup.idl" />
-    <Midl Include="Scenario5_IsSupported.idl" />
+    <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

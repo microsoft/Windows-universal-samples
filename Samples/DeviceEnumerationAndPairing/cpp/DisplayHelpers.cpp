@@ -128,6 +128,11 @@ namespace SDKTemplate
         return ref new DeviceSelectorInfo("UPnP", DeviceClass::All, "System.Devices.Aep.ProtocolId:=\"{0e261de4-12f0-46e6-91ba-428607ccef64}\"", DeviceInformationKind::AssociationEndpoint);
     }
 
+    DeviceSelectorInfo^ DeviceSelectorChoices::NetworkCamera::get()
+    {
+        return ref new DeviceSelectorInfo("Web Services on Devices (NetworkCamera)", DeviceClass::All, "System.Devices.Aep.ProtocolId:=\"{43cc0de4-8ca8-4a56-805a-86fc63f21602}\"", DeviceInformationKind::AssociationEndpoint);
+    }
+
     void AddVideoCastingIfSupported(Vector<DeviceSelectorInfo^>^ selectors)
     {
         try
@@ -212,6 +217,7 @@ namespace SDKTemplate
         AddVideoCastingIfSupported(selectors);
         selectors->Append(Wsd);
         selectors->Append(Upnp);
+        selectors->Append(NetworkCamera);
 
         return selectors->GetView();
     }

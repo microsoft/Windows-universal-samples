@@ -62,8 +62,9 @@ namespace SDKTemplate
             queryOptions.SetPropertyPrefetch(Windows.Storage.FileProperties.PropertyPrefetchOptions.DocumentProperties, propertyNames);
 
             // Query the Pictures library.
-            StorageFileQueryResult queryResult = Windows.Storage.KnownFolders.PicturesLibrary.CreateFileQueryWithOptions(queryOptions);
-            IReadOnlyList<StorageFile> files = await queryResult.GetFilesAsync();
+            StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+            StorageFileQueryResult queryResult = picturesLibrary.CreateFileQueryWithOptions(queryOptions);
+            IReadOnlyList<StorageFile> files = await queryResult.GetFilesAsync(0, 20); // limit to 20 results
             foreach (StorageFile file in files)
             {
                 IDictionary<String, IReadOnlyList<Windows.Data.Text.TextSegment>> fileRangeProperties = queryResult.GetMatchingPropertiesWithRanges(file);

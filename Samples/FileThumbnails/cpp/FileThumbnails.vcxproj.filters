@@ -55,6 +55,9 @@
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="..\..\..\SharedContent\media\placeholder-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Filter>Assets</Filter>
     </Image>

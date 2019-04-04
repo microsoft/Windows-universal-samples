@@ -55,6 +55,7 @@ bool ShareApplicationLink::GetShareContent(DataRequest^ request)
     {
         request->Data->Properties->Title = TitleInputBox->Text;
         request->Data->Properties->Description = DescriptionInputBox->Text;
+        request->Data->Properties->ContentSourceApplicationLink = ApplicationLink;
         request->Data->SetApplicationLink(selectedApplicationLink);
 
         // Place the selected logo and the background color in the data package properties

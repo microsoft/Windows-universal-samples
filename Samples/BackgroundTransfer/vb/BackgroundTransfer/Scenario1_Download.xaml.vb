@@ -107,7 +107,8 @@ Namespace Global.BackgroundTransfer
 
             Dim destinationFile As StorageFile
             Try
-                destinationFile = Await KnownFolders.PicturesLibrary.CreateFileAsync(destination, CreationCollisionOption.GenerateUniqueName)
+                Dim picturesLibrary As StorageFolder = Await KnownFolders.GetFolderForUserAsync(Nothing, KnownFolderId.PicturesLibrary) ' Nothing = current user
+                destinationFile = Await picturesLibrary.CreateFileAsync(destination, CreationCollisionOption.GenerateUniqueName)
             Catch ex As FileNotFoundException
                 rootPage.NotifyUser("Error while creating file: " & ex.Message, NotifyType.ErrorMessage)
                 Return

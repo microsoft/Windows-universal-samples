@@ -36,13 +36,8 @@ bool ShareText::GetShareContent(DataRequest^ request)
     {
         auto requestData = request->Data;
         requestData->Properties->Title = TitleInputBox->Text;
-
-        // The description is optional.
-        auto dataPackageDescription = DescriptionInputBox->Text;
-        if (dataPackageDescription != nullptr)
-        {
-            requestData->Properties->Description = dataPackageDescription;
-        }
+        requestData->Properties->Description = DescriptionInputBox->Text; // The description is optional.
+        requestData->Properties->ContentSourceApplicationLink = ApplicationLink;
         requestData->SetText(dataPackageText);
         succeeded = true;
     }
