@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Microsoft. All rights reserved. -->
 <Page
-    x:Class="SDKTemplate.Scenario2"
+    x:Class="SDKTemplate.Scenario6"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SDKTemplate"
@@ -10,9 +10,7 @@
 
     <Page.Resources>
 
-        <DataTemplate x:Key="ComboBoxItemTemplate">
-            <TextBlock Margin="0,0,10,0" Text="{Binding Path=DisplayName}" />
-        </DataTemplate>
+        <local:GeneralPropertyValueConverter x:Key="generalPropertyValueConverter"/>
 
         <DataTemplate x:Key="ResultsListViewTemplate">
             <Grid Margin="5">
@@ -34,6 +32,16 @@
                             <TextBlock Text="Id:" Margin="0,0,5,0"/>
                             <TextBlock Text="{Binding Path=Id}" TextWrapping="Wrap"/>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="System.Devices.InterfaceClassGuid:" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding Path=Properties, Converter={StaticResource generalPropertyValueConverter}, ConverterParameter=System.Devices.InterfaceClassGuid}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="System.ItemNameDisplay:" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding Path=Properties, Converter={StaticResource generalPropertyValueConverter}, ConverterParameter=System.ItemNameDisplay}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -47,19 +55,19 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ScrollViewer Grid.Row="0" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Grid.Row="0" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" >
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,15,0">
 
                     <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,10" 
-                               Text="This scenario demonstrates the use of the Windows.Devices.Enumeration DeviceWatcher. Device Watcher allows you to find and recieve updates for devices that you care about" />
+                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,10"
+                        Text="This scenario demonstrates using custom filters and/or requesting additional properties with the DeviceWatcher. A custom filter and/or requested additional properties can also be done with the DevicePicker, FindAllAsync, and DeviceWatcherTrigger.">
+                    </TextBlock>
 
-                    <TextBlock Margin="0,0,0,2" Text="Choose a device selector:" />
-                    <ComboBox x:Name="selectorComboBox" 
-                              Margin="0,0,0,5"
-                              HorizontalAlignment="Left" 
-                              ItemTemplate="{StaticResource ComboBoxItemTemplate}"
-                              ItemsSource="{Binding}" />
+                    <TextBlock Margin="0,0,0,2" Text="Enter an Advanced Query Syntax (AQS) filter"/>
+                    <TextBox x:Name="aqsFilterTextBox" 
+                             Margin="0,0,0,5"
+                             HorizontalAlignment="Stretch"
+                             Text="System.Devices.InterfaceClassGuid:=&quot;{e6327cad-dcec-4949-ae8a-991e976a79d2}&quot; AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True" />
 
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="startWatcherButton"
@@ -76,19 +84,11 @@
                         </Button>
                     </StackPanel>
 
-                    <Border BorderBrush="AntiqueWhite" BorderThickness="1">
-                        <ListView x:Name="resultsListView"
-                                  ItemTemplate="{StaticResource ResultsListViewTemplate}"
-                                  ItemsSource="{Binding Path=ResultCollection}">
-                        </ListView>
-                    </Border>
+                    <ListView x:Name="resultsListView" BorderBrush="AntiqueWhite" BorderThickness="1"
+                              MinHeight="20" Margin="0,10,0,0"
+                              ItemTemplate="{StaticResource ResultsListViewTemplate}"/>
                 </StackPanel>
             </ScrollViewer>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="1" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

@@ -19,7 +19,7 @@ using Windows.Media.DialProtocol;
 using Windows.Devices.Sensors;
 using Windows.Devices.PointOfService;
 
-namespace DeviceEnumeration
+namespace SDKTemplate
 {
     public class DeviceSelectorInfo
     {
@@ -56,7 +56,7 @@ namespace DeviceEnumeration
 
     public static class DeviceSelectorChoices
     {
-        
+
         public static List<DeviceSelectorInfo> CommonDeviceSelectors
         {
             get
@@ -72,7 +72,7 @@ namespace DeviceEnumeration
                 selectors.Add(new DeviceSelectorInfo() { DisplayName = "Portable Storage", DeviceClassSelector = DeviceClass.PortableStorageDevice, Selector = null });
                 selectors.Add(new DeviceSelectorInfo() { DisplayName = "Video Capture", DeviceClassSelector = DeviceClass.VideoCapture, Selector = null });
 
-                // A few examples of selectors built dynamically by windows runtime apis. 
+                // A few examples of selectors built dynamically by windows runtime apis.
                 selectors.Add(new DeviceSelectorInfo() { DisplayName = "Human Interface (HID)", Selector = HidDevice.GetDeviceSelector(0, 0) });
                 selectors.Add(new DeviceSelectorInfo() { DisplayName = "Activity Sensor", Selector = ActivitySensor.GetDeviceSelector() });
                 selectors.Add(new DeviceSelectorInfo() { DisplayName = "Pedometer", Selector = Pedometer.GetDeviceSelector() });
@@ -88,7 +88,7 @@ namespace DeviceEnumeration
             get
             {
                 // Currently Bluetooth APIs don't provide a selector to get ALL devices that are both paired and non-paired.  Typically you wouldn't need this for common scenarios, but it's convenient to demonstrate the
-                // various sample scenarios. 
+                // various sample scenarios.
                 return new DeviceSelectorInfo() { DisplayName = "Bluetooth", Selector = "System.Devices.Aep.ProtocolId:=\"{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}\"", Kind = DeviceInformationKind.AssociationEndpoint };
             }
         }
@@ -114,7 +114,7 @@ namespace DeviceEnumeration
             get
             {
                 // Currently Bluetooth APIs don't provide a selector to get ALL devices that are both paired and non-paired.  Typically you wouldn't need this for common scenarios, but it's convenient to demonstrate the
-                // various sample scenarios. 
+                // various sample scenarios.
                 return new DeviceSelectorInfo() { DisplayName = "Bluetooth LE", Selector = "System.Devices.Aep.ProtocolId:=\"{bb7bb05e-5972-42b5-94fc-76eaa7084d49}\"", Kind = DeviceInformationKind.AssociationEndpoint };
             }
         }
@@ -150,7 +150,7 @@ namespace DeviceEnumeration
                 return new DeviceSelectorInfo() { DisplayName = "Wi-Fi Direct (paired)", Selector = WiFiDirectDevice.GetDeviceSelector() };
             }
         }
-        
+
         public static DeviceSelectorInfo PointOfServicePrinter
         {
             get
@@ -175,10 +175,10 @@ namespace DeviceEnumeration
             }
         }
 
-        // WSD and UPnP are unique in that there are currently no general WSD or UPnP APIs to USE the devices once you've discovered them. 
+        // WSD and UPnP are unique in that there are currently no general WSD or UPnP APIs to USE the devices once you've discovered them.
         // You can pair the devices using DeviceInformation.Pairing.PairAsync etc, and you can USE them with the sockets APIs. However, since
         // there's no specific API right now, there's no *.GetDeviceSelector available.  That's why we just simply build the device selector
-        // ourselves and specify the correct DeviceInformationKind (AssociationEndpoint). 
+        // ourselves and specify the correct DeviceInformationKind (AssociationEndpoint).
         public static DeviceSelectorInfo Wsd
         {
             get
@@ -239,7 +239,7 @@ namespace DeviceEnumeration
                 return selectors;
             }
         }
-        
+
         public static List<DeviceSelectorInfo> DeviceWatcherSelectors
         {
             get
@@ -468,7 +468,7 @@ namespace DeviceEnumeration
             GlyphBitmapImage = glyphBitmapImage;
             OnPropertyChanged("GlyphBitmapImage");
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

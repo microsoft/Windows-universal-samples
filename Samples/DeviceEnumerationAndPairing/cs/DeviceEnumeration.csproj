@@ -7,7 +7,7 @@
     <ProjectGuid>{C65CA893-D291-55B2-B332-6898A11A371C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeviceEnumerationCs</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>DeviceEnumeration</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -95,6 +95,7 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeviceWatcherHelper.cs" />
     <Compile Include="DisplayHelpers.cs" />
     <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
@@ -148,39 +149,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_DevicePicker.xaml">
+    <Page Include="..\shared\Scenario1_DevicePicker.xaml">
+      <Link>Scenario1_DevicePicker.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_DeviceWatcher.xaml">
+    <Page Include="..\shared\Scenario2_DeviceWatcher.xaml">
+      <Link>Scenario2_DeviceWatcher.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_BackgroundDeviceWatcher.xaml">
+    <Page Include="..\shared\Scenario3_BackgroundDeviceWatcher.xaml">
+      <Link>Scenario3_BackgroundDeviceWatcher.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_Snapshot.xaml">
+    <Page Include="..\shared\Scenario4_Snapshot.xaml">
+      <Link>Scenario4_Snapshot.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5_GetSingleDevice.xaml">
+    <Page Include="..\shared\Scenario5_GetSingleDevice.xaml">
+      <Link>Scenario5_GetSingleDevice.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6_CustomFilterAddedProps.xaml">
+    <Page Include="..\shared\Scenario6_CustomFilterAddedProps.xaml">
+      <Link>Scenario6_CustomFilterAddedProps.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7_DeviceInformationKind.xaml">
+    <Page Include="..\shared\Scenario7_DeviceInformationKind.xaml">
+      <Link>Scenario7_DeviceInformationKind.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario9_CustomPairDevice.xaml">
+    <Page Include="..\shared\Scenario9_CustomPairDevice.xaml">
+      <Link>Scenario9_CustomPairDevice.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario8_PairDevice.xaml">
+    <Page Include="..\shared\Scenario8_PairDevice.xaml">
+      <Link>Scenario8_PairDevice.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

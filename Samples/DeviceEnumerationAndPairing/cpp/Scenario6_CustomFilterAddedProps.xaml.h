@@ -5,6 +5,7 @@
 #include "Scenario6_CustomFilterAddedProps.g.h"
 #include "MainPage.xaml.h"
 #include "DisplayHelpers.h"
+#include "DeviceWatcherHelper.h"
 
 namespace SDKTemplate
 {
@@ -18,8 +19,6 @@ namespace SDKTemplate
     public:
         Scenario6();
 
-        property Windows::Foundation::Collections::IObservableVector<DeviceInformationDisplay^>^ ResultCollection;
-
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
         virtual void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
@@ -31,17 +30,8 @@ namespace SDKTemplate
         void StartWatcher();
         void StopWatcher();
 
-        SDKTemplate::MainPage^ rootPage;
-        Windows::Devices::Enumeration::DeviceWatcher^ deviceWatcher;
-        Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::DeviceWatcher^, Windows::Devices::Enumeration::DeviceInformation^>^ handlerAdded;
-        Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::DeviceWatcher^, Windows::Devices::Enumeration::DeviceInformationUpdate^>^ handlerUpdated;
-        Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::DeviceWatcher^, Windows::Devices::Enumeration::DeviceInformationUpdate^>^ handlerRemoved;
-        Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::DeviceWatcher^, Platform::Object^>^ handlerEnumCompleted;
-        Windows::Foundation::TypedEventHandler<Windows::Devices::Enumeration::DeviceWatcher^, Platform::Object^>^ handlerStopped;
-        Windows::Foundation::EventRegistrationToken handlerAddedToken;
-        Windows::Foundation::EventRegistrationToken handlerUpdatedToken;
-        Windows::Foundation::EventRegistrationToken handlerRemovedToken;
-        Windows::Foundation::EventRegistrationToken handlerEnumCompletedToken;
-        Windows::Foundation::EventRegistrationToken handlerStoppedAddedToken;
+        MainPage^ rootPage = MainPage::Current;
+        Windows::Foundation::Collections::IObservableVector<DeviceInformationDisplay^>^ resultCollection = ref new Platform::Collections::Vector<DeviceInformationDisplay^>();
+        DeviceWatcherHelper^ deviceWatcherHelper;
     };
 }

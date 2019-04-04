@@ -71,8 +71,7 @@
                     <ComboBox x:Name="selectorComboBox" 
                               Margin="0,0,0,5"
                               HorizontalAlignment="Left" 
-                              ItemTemplate="{StaticResource ComboBoxItemTemplate}"
-                              ItemsSource="{Binding}" />
+                              ItemTemplate="{StaticResource ComboBoxItemTemplate}" />
 
                     <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="60">
                         <Button x:Name="startWatcherButton"
@@ -112,21 +111,14 @@
                         </Button>
                     </VariableSizedWrapGrid>
 
-                    <Border BorderBrush="AntiqueWhite" BorderThickness="1">
-                        <ListView x:Name="resultsListView"
-                                  ItemTemplate="{StaticResource ResultsListViewTemplate}"
-                                  ItemsSource="{Binding Path=ResultCollection}"
-                                  SelectionChanged="ResultsListView_SelectionChanged"
-                                  MaxHeight="450">
-                        </ListView>
-                    </Border>
+                    <ListView x:Name="resultsListView" BorderBrush="AntiqueWhite" BorderThickness="1"
+                              MinHeight="20" Margin="0,10,0,0"
+                              HorizontalContentAlignment="Stretch"
+                              ItemTemplate="{StaticResource ResultsListViewTemplate}"
+                              SelectionChanged="ResultsListView_SelectionChanged"
+                              MaxHeight="450"/>
                 </StackPanel>
             </ScrollViewer>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

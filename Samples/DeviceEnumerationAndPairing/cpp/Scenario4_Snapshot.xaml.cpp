@@ -21,19 +21,17 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario4::Scenario4() : rootPage(MainPage::Current)
+Scenario4::Scenario4()
 {
     InitializeComponent();
 }
 
 void Scenario4::OnNavigatedTo(NavigationEventArgs^ e)
 {
-    ResultCollection = ref new Vector<DeviceInformationDisplay^>();
+    resultsListView->ItemsSource = resultCollection;
 
     selectorComboBox->ItemsSource = DeviceSelectorChoices::FindAllAsyncSelectors;
     selectorComboBox->SelectedIndex = 0;
-
-    DataContext = this;
 }
 
 void Scenario4::FindButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
@@ -42,7 +40,7 @@ void Scenario4::FindButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
     IAsyncOperation<DeviceInformationCollection^>^ asyncOp;
 
     findButton->IsEnabled = false;
-    ResultCollection->Clear();
+    resultCollection->Clear();
 
     // First get the device selector chosen by the UI.
     deviceSelectorInfo = safe_cast<DeviceSelectorInfo^>(selectorComboBox->SelectedItem);
@@ -81,7 +79,7 @@ void Scenario4::FindButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
             rootPage->Dispatcher->RunAsync(CoreDispatcherPriority::Low, ref new DispatchedHandler(
                 [this, deviceInfo]()
             {
-                ResultCollection->Append(ref new DeviceInformationDisplay(deviceInfo));
+                resultCollection->Append(ref new DeviceInformationDisplay(deviceInfo));
             }));
         });
 

@@ -40,6 +40,12 @@
 
                 iter.moveNext();
             }
+        },
+        unload: function () {
+            if (backgroundTaskRegistration) {
+                backgroundTaskRegistration.removeEventListener("completed", onCompleted);
+                backgroundTaskRegistration = null;
+            }
         }
     });
 
@@ -115,7 +121,7 @@
         taskBuilder.setTrigger(deviceWatcherTrigger);
 
         backgroundTaskRegistration = taskBuilder.register();
-        backgroundTaskRegistration.addEventListener("completed", onCompleted)
+        backgroundTaskRegistration.addEventListener("completed", onCompleted);
     }
 
     function onCompleted(args) {
