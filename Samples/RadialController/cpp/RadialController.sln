@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RadialController", "RadialController.vcxproj", "{473037F9-8D21-5042-B95E-8ACAC8F61FBE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RadialController", "RadialController.vcxproj", "{A776CB1A-5B94-57C5-9C12-483435450638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|ARM.ActiveCfg = Debug|ARM
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|ARM.Build.0 = Debug|ARM
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|ARM.Deploy.0 = Debug|ARM
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|x64.ActiveCfg = Debug|x64
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|x64.Build.0 = Debug|x64
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|x64.Deploy.0 = Debug|x64
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|x86.ActiveCfg = Debug|Win32
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|x86.Build.0 = Debug|Win32
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Debug|x86.Deploy.0 = Debug|Win32
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|ARM.ActiveCfg = Release|ARM
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|ARM.Build.0 = Release|ARM
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|ARM.Deploy.0 = Release|ARM
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|x64.ActiveCfg = Release|x64
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|x64.Build.0 = Release|x64
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|x64.Deploy.0 = Release|x64
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|x86.ActiveCfg = Release|Win32
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|x86.Build.0 = Release|Win32
-		{473037F9-8D21-5042-B95E-8ACAC8F61FBE}.Release|x86.Deploy.0 = Release|Win32
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|ARM.Build.0 = Debug|ARM
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|x64.ActiveCfg = Debug|x64
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|x64.Build.0 = Debug|x64
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|x64.Deploy.0 = Debug|x64
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|x86.ActiveCfg = Debug|Win32
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|x86.Build.0 = Debug|Win32
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Debug|x86.Deploy.0 = Debug|Win32
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|ARM.ActiveCfg = Release|ARM
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|ARM.Build.0 = Release|ARM
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|ARM.Deploy.0 = Release|ARM
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|x64.ActiveCfg = Release|x64
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|x64.Build.0 = Release|x64
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|x64.Deploy.0 = Release|x64
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|x86.ActiveCfg = Release|Win32
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|x86.Build.0 = Release|Win32
+		{A776CB1A-5B94-57C5-9C12-483435450638}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

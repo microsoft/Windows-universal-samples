@@ -1,0 +1,49 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_SecondaryWindow : Windows.UI.Xaml.Controls.Page
+    {
+		Scenario1_SecondaryWindow();
+    }
+
+	[default_interface]
+	runtimeclass Scenario2_DisplayRegion : Windows.UI.Xaml.Controls.Page
+	{
+		Scenario2_DisplayRegion();
+	}
+
+	[default_interface]
+	runtimeclass Scenario3_Size : Windows.UI.Xaml.Controls.Page
+	{
+		Scenario3_Size();
+	}
+
+	[default_interface]
+	runtimeclass Scenario4_CompactOverlay : Windows.UI.Xaml.Controls.Page
+	{
+		Scenario4_CompactOverlay();
+	}
+
+	[default_interface]
+	runtimeclass Scenario5_RelativePositioning : Windows.UI.Xaml.Controls.Page
+	{
+		Scenario5_RelativePositioning();
+	}
+
+    [default_interface]
+    runtimeclass SecondaryAppWindowPage : Windows.UI.Xaml.Controls.Page
+    {
+		SecondaryAppWindowPage();
+    }
+}

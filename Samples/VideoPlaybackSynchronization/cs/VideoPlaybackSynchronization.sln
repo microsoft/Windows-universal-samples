@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlaybackSynchronization", "VideoPlaybackSynchronization.csproj", "{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoPlaybackSynchronization", "VideoPlaybackSynchronization.csproj", "{F13E5132-1851-518A-A948-EC9355C81473}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|ARM.ActiveCfg = Debug|ARM
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|ARM.Build.0 = Debug|ARM
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|ARM.Deploy.0 = Debug|ARM
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|x64.ActiveCfg = Debug|x64
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|x64.Build.0 = Debug|x64
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|x64.Deploy.0 = Debug|x64
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|x86.ActiveCfg = Debug|x86
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|x86.Build.0 = Debug|x86
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Debug|x86.Deploy.0 = Debug|x86
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|ARM.ActiveCfg = Release|ARM
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|ARM.Build.0 = Release|ARM
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|ARM.Deploy.0 = Release|ARM
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|x64.ActiveCfg = Release|x64
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|x64.Build.0 = Release|x64
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|x64.Deploy.0 = Release|x64
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|x86.ActiveCfg = Release|x86
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|x86.Build.0 = Release|x86
-		{A02B06AA-83F8-58D9-AF58-1A00CF1A286A}.Release|x86.Deploy.0 = Release|x86
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|ARM.Build.0 = Debug|ARM
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|x64.ActiveCfg = Debug|x64
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|x64.Build.0 = Debug|x64
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|x64.Deploy.0 = Debug|x64
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|x86.ActiveCfg = Debug|x86
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|x86.Build.0 = Debug|x86
+		{F13E5132-1851-518A-A948-EC9355C81473}.Debug|x86.Deploy.0 = Debug|x86
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|ARM.ActiveCfg = Release|ARM
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|ARM.Build.0 = Release|ARM
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|ARM.Deploy.0 = Release|ARM
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|x64.ActiveCfg = Release|x64
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|x64.Build.0 = Release|x64
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|x64.Deploy.0 = Release|x64
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|x86.ActiveCfg = Release|x86
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|x86.Build.0 = Release|x86
+		{F13E5132-1851-518A-A948-EC9355C81473}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

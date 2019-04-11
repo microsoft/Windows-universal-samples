@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inclinometer", "Inclinometer.csproj", "{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inclinometer", "Inclinometer.csproj", "{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|ARM.ActiveCfg = Debug|ARM
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|ARM.Build.0 = Debug|ARM
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|ARM.Deploy.0 = Debug|ARM
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|x64.ActiveCfg = Debug|x64
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|x64.Build.0 = Debug|x64
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|x64.Deploy.0 = Debug|x64
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|x86.ActiveCfg = Debug|x86
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|x86.Build.0 = Debug|x86
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Debug|x86.Deploy.0 = Debug|x86
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|ARM.ActiveCfg = Release|ARM
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|ARM.Build.0 = Release|ARM
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|ARM.Deploy.0 = Release|ARM
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|x64.ActiveCfg = Release|x64
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|x64.Build.0 = Release|x64
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|x64.Deploy.0 = Release|x64
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|x86.ActiveCfg = Release|x86
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|x86.Build.0 = Release|x86
-		{8FC73B0E-4A6C-5B55-BDAA-CB0237D561A8}.Release|x86.Deploy.0 = Release|x86
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|ARM.Build.0 = Debug|ARM
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|ARM.Deploy.0 = Debug|ARM
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|x64.ActiveCfg = Debug|x64
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|x64.Build.0 = Debug|x64
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|x64.Deploy.0 = Debug|x64
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|x86.ActiveCfg = Debug|x86
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|x86.Build.0 = Debug|x86
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Debug|x86.Deploy.0 = Debug|x86
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|ARM.ActiveCfg = Release|ARM
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|ARM.Build.0 = Release|ARM
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|ARM.Deploy.0 = Release|ARM
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|x64.ActiveCfg = Release|x64
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|x64.Build.0 = Release|x64
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|x64.Deploy.0 = Release|x64
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|x86.ActiveCfg = Release|x86
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|x86.Build.0 = Release|x86
+		{ADD1C7C5-6C1C-50F4-BAE3-2F3631D073EE}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

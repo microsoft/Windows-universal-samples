@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchKeyboardTextInput", "TouchKeyboardTextInput.csproj", "{946B2792-CDF0-53A0-BF7D-A9376684EFF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchKeyboardTextInput", "TouchKeyboardTextInput.csproj", "{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|ARM.ActiveCfg = Debug|ARM
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|ARM.Build.0 = Debug|ARM
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|ARM.Deploy.0 = Debug|ARM
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|x64.ActiveCfg = Debug|x64
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|x64.Build.0 = Debug|x64
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|x64.Deploy.0 = Debug|x64
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|x86.ActiveCfg = Debug|x86
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|x86.Build.0 = Debug|x86
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Debug|x86.Deploy.0 = Debug|x86
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|ARM.ActiveCfg = Release|ARM
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|ARM.Build.0 = Release|ARM
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|ARM.Deploy.0 = Release|ARM
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|x64.ActiveCfg = Release|x64
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|x64.Build.0 = Release|x64
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|x64.Deploy.0 = Release|x64
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|x86.ActiveCfg = Release|x86
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|x86.Build.0 = Release|x86
-		{946B2792-CDF0-53A0-BF7D-A9376684EFF3}.Release|x86.Deploy.0 = Release|x86
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|ARM.Build.0 = Debug|ARM
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|ARM.Deploy.0 = Debug|ARM
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|x64.ActiveCfg = Debug|x64
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|x64.Build.0 = Debug|x64
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|x64.Deploy.0 = Debug|x64
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|x86.ActiveCfg = Debug|x86
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|x86.Build.0 = Debug|x86
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Debug|x86.Deploy.0 = Debug|x86
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|ARM.ActiveCfg = Release|ARM
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|ARM.Build.0 = Release|ARM
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|ARM.Deploy.0 = Release|ARM
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|x64.ActiveCfg = Release|x64
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|x64.Build.0 = Release|x64
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|x64.Deploy.0 = Release|x64
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|x86.ActiveCfg = Release|x86
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|x86.Build.0 = Release|x86
+		{1AF8BFA6-00D6-5CDF-9CC3-9271ABD31DEE}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

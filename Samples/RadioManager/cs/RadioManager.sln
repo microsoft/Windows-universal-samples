@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioManager", "RadioManager.csproj", "{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioManager", "RadioManager.csproj", "{C90B6F98-3F0B-51A1-8C89-FB21B133A284}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|ARM.ActiveCfg = Debug|ARM
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|ARM.Build.0 = Debug|ARM
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|ARM.Deploy.0 = Debug|ARM
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|x64.ActiveCfg = Debug|x64
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|x64.Build.0 = Debug|x64
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|x64.Deploy.0 = Debug|x64
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|x86.ActiveCfg = Debug|x86
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|x86.Build.0 = Debug|x86
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Debug|x86.Deploy.0 = Debug|x86
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|ARM.ActiveCfg = Release|ARM
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|ARM.Build.0 = Release|ARM
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|ARM.Deploy.0 = Release|ARM
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|x64.ActiveCfg = Release|x64
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|x64.Build.0 = Release|x64
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|x64.Deploy.0 = Release|x64
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|x86.ActiveCfg = Release|x86
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|x86.Build.0 = Release|x86
-		{F8D9BEF6-42CB-5023-A3F3-CEDED24F515B}.Release|x86.Deploy.0 = Release|x86
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|ARM.Build.0 = Debug|ARM
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|ARM.Deploy.0 = Debug|ARM
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|x64.ActiveCfg = Debug|x64
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|x64.Build.0 = Debug|x64
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|x64.Deploy.0 = Debug|x64
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|x86.ActiveCfg = Debug|x86
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|x86.Build.0 = Debug|x86
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Debug|x86.Deploy.0 = Debug|x86
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|ARM.ActiveCfg = Release|ARM
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|ARM.Build.0 = Release|ARM
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|ARM.Deploy.0 = Release|ARM
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|x64.ActiveCfg = Release|x64
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|x64.Build.0 = Release|x64
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|x64.Deploy.0 = Release|x64
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|x86.ActiveCfg = Release|x86
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|x86.Build.0 = Release|x86
+		{C90B6F98-3F0B-51A1-8C89-FB21B133A284}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

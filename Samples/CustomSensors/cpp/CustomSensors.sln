@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomSensors", "CustomSensors.vcxproj", "{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CustomSensors", "CustomSensors.vcxproj", "{2257388F-4BB9-5CFC-84C2-51795698849A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|ARM.ActiveCfg = Debug|ARM
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|ARM.Build.0 = Debug|ARM
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|ARM.Deploy.0 = Debug|ARM
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|Win32.Build.0 = Debug|Win32
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|Win32.Deploy.0 = Debug|Win32
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|x64.ActiveCfg = Debug|x64
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|x64.Build.0 = Debug|x64
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Debug|x64.Deploy.0 = Debug|x64
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|ARM.ActiveCfg = Release|ARM
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|ARM.Build.0 = Release|ARM
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|ARM.Deploy.0 = Release|ARM
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|Win32.ActiveCfg = Release|Win32
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|Win32.Build.0 = Release|Win32
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|Win32.Deploy.0 = Release|Win32
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|x64.ActiveCfg = Release|x64
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|x64.Build.0 = Release|x64
-		{2F0A84FC-71AF-5F16-9BB3-78D5353B7EBD}.Release|x64.Deploy.0 = Release|x64
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|ARM.Build.0 = Debug|ARM
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|Win32.Build.0 = Debug|Win32
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|Win32.Deploy.0 = Debug|Win32
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|x64.ActiveCfg = Debug|x64
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|x64.Build.0 = Debug|x64
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Debug|x64.Deploy.0 = Debug|x64
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|ARM.ActiveCfg = Release|ARM
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|ARM.Build.0 = Release|ARM
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|ARM.Deploy.0 = Release|ARM
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|Win32.ActiveCfg = Release|Win32
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|Win32.Build.0 = Release|Win32
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|Win32.Deploy.0 = Release|Win32
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|x64.ActiveCfg = Release|x64
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|x64.Build.0 = Release|x64
+		{2257388F-4BB9-5CFC-84C2-51795698849A}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

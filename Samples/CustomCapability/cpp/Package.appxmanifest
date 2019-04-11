@@ -8,14 +8,14 @@
   IgnorableNamespaces="uap mp uap4 rescap"
   >
   <Identity Name="Microsoft.SDKSamples.CustomCapability.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="26388851-6c33-4124-b1e5-96e859da28bf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="bab86afa-0a63-4aa6-8205-1f7bb248240a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Custom Capability C++ Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17134.0" MaxVersionTested="10.0.17763.0"/>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17134.0" MaxVersionTested="10.0.18362.0"/>
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />

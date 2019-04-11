@@ -6,14 +6,14 @@
   IgnorableNamespaces="uap mp"
   >
   <Identity Name="Microsoft.SDKSamples.HolographicSpatialStage.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
-  <mp:PhoneIdentity PhoneProductId="d49985cd-cda5-4faa-b256-d255f1ea55e2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="49248bde-4ee5-45d5-9df6-9ddbe07f5176" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
     <DisplayName>Holographic Spatial Stage C++ Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.17763.0"/>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.18362.0"/>
   </Dependencies>
   <Resources>
     <Resource Language="x-generate"/>

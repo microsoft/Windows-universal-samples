@@ -11,7 +11,7 @@
       Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
       Version="1.0.0.0" />
 
-    <mp:PhoneIdentity PhoneProductId="5359479d-f6c0-4292-ad36-b31c3a272b7e" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="b2589dc6-9116-4c92-8fc1-b194fb97be70" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
         <DisplayName>XAML Bottom-Up List C# Sample</DisplayName>
@@ -20,7 +20,7 @@
     </Properties>
 
     <Dependencies>
-        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.17763.0" />
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.14393.0" MaxVersionTested="10.0.18362.0" />
     </Dependencies>
 
     <Resources>

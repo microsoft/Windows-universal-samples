@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrientationSensor", "OrientationSensor.vcxproj", "{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrientationSensor", "OrientationSensor.vcxproj", "{DC853236-4615-551E-93A3-C30B1BABCE33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|ARM.ActiveCfg = Debug|ARM
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|ARM.Build.0 = Debug|ARM
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|ARM.Deploy.0 = Debug|ARM
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|Win32.Build.0 = Debug|Win32
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|Win32.Deploy.0 = Debug|Win32
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|x64.ActiveCfg = Debug|x64
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|x64.Build.0 = Debug|x64
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Debug|x64.Deploy.0 = Debug|x64
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|ARM.ActiveCfg = Release|ARM
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|ARM.Build.0 = Release|ARM
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|ARM.Deploy.0 = Release|ARM
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|Win32.ActiveCfg = Release|Win32
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|Win32.Build.0 = Release|Win32
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|Win32.Deploy.0 = Release|Win32
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|x64.ActiveCfg = Release|x64
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|x64.Build.0 = Release|x64
-		{DC188300-4A22-5956-BA17-7CD8E7B9F1C4}.Release|x64.Deploy.0 = Release|x64
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|ARM.ActiveCfg = Debug|ARM
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|ARM.Build.0 = Debug|ARM
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|ARM.Deploy.0 = Debug|ARM
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|Win32.Build.0 = Debug|Win32
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|Win32.Deploy.0 = Debug|Win32
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|x64.ActiveCfg = Debug|x64
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|x64.Build.0 = Debug|x64
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Debug|x64.Deploy.0 = Debug|x64
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|ARM.ActiveCfg = Release|ARM
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|ARM.Build.0 = Release|ARM
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|ARM.Deploy.0 = Release|ARM
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|Win32.ActiveCfg = Release|Win32
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|Win32.Build.0 = Release|Win32
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|Win32.Deploy.0 = Release|Win32
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|x64.ActiveCfg = Release|x64
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|x64.Build.0 = Release|x64
+		{DC853236-4615-551E-93A3-C30B1BABCE33}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

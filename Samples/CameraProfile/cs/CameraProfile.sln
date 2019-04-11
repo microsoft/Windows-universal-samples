@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraProfile", "CameraProfile.csproj", "{2C428842-7137-50DA-B428-9A56C984EC92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CameraProfile", "CameraProfile.csproj", "{4AD04190-84D2-56B4-B46A-32AA61086F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|ARM.ActiveCfg = Debug|ARM
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|ARM.Build.0 = Debug|ARM
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|ARM.Deploy.0 = Debug|ARM
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|x64.ActiveCfg = Debug|x64
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|x64.Build.0 = Debug|x64
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|x64.Deploy.0 = Debug|x64
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|x86.ActiveCfg = Debug|x86
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|x86.Build.0 = Debug|x86
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Debug|x86.Deploy.0 = Debug|x86
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|ARM.ActiveCfg = Release|ARM
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|ARM.Build.0 = Release|ARM
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|ARM.Deploy.0 = Release|ARM
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|x64.ActiveCfg = Release|x64
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|x64.Build.0 = Release|x64
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|x64.Deploy.0 = Release|x64
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|x86.ActiveCfg = Release|x86
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|x86.Build.0 = Release|x86
-		{2C428842-7137-50DA-B428-9A56C984EC92}.Release|x86.Deploy.0 = Release|x86
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|ARM.Build.0 = Debug|ARM
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|ARM.Deploy.0 = Debug|ARM
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|x64.ActiveCfg = Debug|x64
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|x64.Build.0 = Debug|x64
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|x64.Deploy.0 = Debug|x64
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|x86.ActiveCfg = Debug|x86
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|x86.Build.0 = Debug|x86
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Debug|x86.Deploy.0 = Debug|x86
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|ARM.ActiveCfg = Release|ARM
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|ARM.Build.0 = Release|ARM
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|ARM.Deploy.0 = Release|ARM
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|x64.ActiveCfg = Release|x64
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|x64.Build.0 = Release|x64
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|x64.Deploy.0 = Release|x64
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|x86.ActiveCfg = Release|x86
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|x86.Build.0 = Release|x86
+		{4AD04190-84D2-56B4-B46A-32AA61086F37}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
