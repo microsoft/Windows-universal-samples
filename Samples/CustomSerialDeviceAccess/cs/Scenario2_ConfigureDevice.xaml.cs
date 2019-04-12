@@ -161,7 +161,7 @@ namespace CustomSerialDeviceAccess
             }
             else if (HandShakeComboBox.SelectedItem.Equals("XOnXOff"))
             {
-                EventHandlerForDevice.Current.Device.Handshake = SerialHandshake.RequestToSendXOnXOff;
+                EventHandlerForDevice.Current.Device.Handshake = SerialHandshake.XOnXOff;
             }
             else if (HandShakeComboBox.SelectedItem.Equals("RequestToSendXOnXOff"))
             {
