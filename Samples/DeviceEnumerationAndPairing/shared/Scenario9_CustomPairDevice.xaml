@@ -80,6 +80,7 @@
                         <CheckBox x:Name="displayPinOption" Content="DisplayPin" IsChecked="True" />
                         <CheckBox x:Name="providePinOption" Content="ProvidePin" IsChecked="True" />
                         <CheckBox x:Name="confirmPinMatchOption" Content="ConfirmPinMatch" IsChecked="True" />
+                        <CheckBox x:Name="passwordCredentialOption" Content="Credential" IsChecked="True" />
                     </VariableSizedWrapGrid>
                     <StackPanel Orientation="Vertical" >
                         <TextBlock Margin="0,0,0,2" Text="Choose a protection level:" />
@@ -133,6 +134,9 @@
                             <StackPanel Orientation="Horizontal" >
                                 <TextBox x:Name="pinEntryTextBox" MinWidth="100" Margin="2" Visibility="Collapsed" />
                                 <Button x:Name="okButton" MinWidth="75" Margin="2" Click="okButton_Click" Visibility="Collapsed">OK</Button>
+                                <TextBox x:Name="usernameEntryTextBox" MinWidth="100" Margin="2" Visibility="Collapsed" />
+                                <TextBox x:Name="passwordEntryTextBox" MinWidth="100" Margin="2" Visibility="Collapsed" />
+                                <Button x:Name="verifyButton" MinWidth="75" Margin="2" Click="verifyButton_Click" Visibility="Collapsed">Verify</Button>
                                 <Button x:Name="yesButton" MinWidth="75" Margin="2" Click="yesButton_Click" Visibility="Collapsed">Yes</Button>
                                 <Button x:Name="noButton" MinWidth="75" Margin="2" Click="noButton_Click" Visibility="Collapsed">No</Button>
                             </StackPanel>

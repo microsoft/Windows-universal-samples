@@ -10,11 +10,11 @@
         }
     });
 
-    var dateAccessedProperty = "System.DateAccessed";
-    var fileOwnerProperty    = "System.FileOwner";
-
     function showProperties() {
-        if (SdkSample.sampleFile !== null) {
+        var dateAccessedProperty = "System.DateAccessed";
+        var fileOwnerProperty = "System.FileOwner";
+
+        if (SdkSample.sampleFile) {
             // Get top level file properties
             var outputText = "Filename: " + SdkSample.sampleFile.name;
             outputText += "\nFile type: " + SdkSample.sampleFile.fileType;

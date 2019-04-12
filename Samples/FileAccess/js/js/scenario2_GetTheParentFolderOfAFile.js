@@ -11,7 +11,7 @@
     });
 
     function getParent() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             SdkSample.sampleFile.getParentAsync().done(function (parentFolder) {
                 var outputText = "Item: " + SdkSample.sampleFile.name + " (" + SdkSample.sampleFile.path + ")";
                 outputText += "\nParent: " + parentFolder.name + " (" + parentFolder.path + ")";

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "UserInfo", "UserInfo.jsproj", "{4CA0D1B7-7842-568F-BADC-68CDE650609E}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "UserInfo", "UserInfo.jsproj", "{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4CA0D1B7-7842-568F-BADC-68CDE650609E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CA0D1B7-7842-568F-BADC-68CDE650609E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CA0D1B7-7842-568F-BADC-68CDE650609E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{4CA0D1B7-7842-568F-BADC-68CDE650609E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CA0D1B7-7842-568F-BADC-68CDE650609E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CA0D1B7-7842-568F-BADC-68CDE650609E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FB5A8F6-0FB2-532A-A7BD-540B12CD71EC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

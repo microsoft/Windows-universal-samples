@@ -129,6 +129,11 @@ namespace SDKTemplate
             DeviceSelectorInfo^ get();
         }
 
+        static property DeviceSelectorInfo^ NetworkCamera
+        {
+            DeviceSelectorInfo^ get();
+        }
+
         static property Windows::Foundation::Collections::IVectorView<DeviceSelectorInfo^>^ DevicePickerSelectors
         {
             Windows::Foundation::Collections::IVectorView<DeviceSelectorInfo^>^ get();

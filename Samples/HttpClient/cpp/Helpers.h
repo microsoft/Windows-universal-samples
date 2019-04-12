@@ -15,6 +15,9 @@
 
 namespace SDKTemplate
 {
+    // Forward reference.
+    ref class MainPage;
+
     class Helpers
     {
     public:
@@ -22,10 +25,12 @@ namespace SDKTemplate
             Windows::UI::Xaml::Controls::Page^ page,
             Windows::UI::Xaml::Controls::TextBox^ output,
             Platform::String^ text);
-        static concurrency::task<Windows::Web::Http::HttpResponseMessage^> DisplayTextResultAsync(
+        static concurrency::task<void> DisplayTextResultAsync(
             Windows::Web::Http::HttpResponseMessage^ response,
             Windows::UI::Xaml::Controls::TextBox^ output,
             concurrency::cancellation_token token);
+        static void DisplayWebError(MainPage^ rootPage,
+            Windows::Foundation::HResult hresult);
         static Platform::String^ SerializeHeaders(
             Windows::Web::Http::HttpResponseMessage^ response);
         static Platform::String^ SerializeHeaderCollection(

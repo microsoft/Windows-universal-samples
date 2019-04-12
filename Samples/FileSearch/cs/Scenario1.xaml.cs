@@ -28,7 +28,6 @@ namespace SDKTemplate
         public Scenario1()
         {
             this.InitializeComponent();
-            SearchButton.Click += new RoutedEventHandler(SearchButton_Click);
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)

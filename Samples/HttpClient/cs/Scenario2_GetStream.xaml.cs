@@ -78,54 +78,57 @@ namespace SDKTemplate
             Helpers.ScenarioStarted(StartButton, CancelButton, OutputField);
             rootPage.NotifyUser("In progress", NotifyType.StatusMessage);
 
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceAddress);
+
+            // This sample uses a "try" in order to support TaskCanceledException.
+            // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceAddress);
-
                 // Do not buffer the response.
-                HttpResponseMessage response = await httpClient.SendRequestAsync(
+                HttpRequestResult result = await httpClient.TrySendRequestAsync(
                     request,
                     HttpCompletionOption.ResponseHeadersRead).AsTask(cts.Token);
 
-                OutputField.Text += Helpers.SerializeHeaders(response);
-
-                StringBuilder responseBody = new StringBuilder();
-                using (Stream responseStream = (await response.Content.ReadAsInputStreamAsync()).AsStreamForRead())
+                if (result.Succeeded)
                 {
-                    int read = 0;
-                    byte[] responseBytes = new byte[1000];
-                    do
+                    OutputField.Text += Helpers.SerializeHeaders(result.ResponseMessage);
+
+                    StringBuilder responseBody = new StringBuilder();
+                    using (Stream responseStream = (await result.ResponseMessage.Content.ReadAsInputStreamAsync()).AsStreamForRead())
                     {
-                        read = await responseStream.ReadAsync(responseBytes, 0, responseBytes.Length);
+                        int read = 0;
+                        byte[] responseBytes = new byte[1000];
+                        do
+                        {
+                            read = await responseStream.ReadAsync(responseBytes, 0, responseBytes.Length);
 
-                        responseBody.AppendFormat("Bytes read from stream: {0}", read);
-                        responseBody.AppendLine();
+                            responseBody.AppendFormat("Bytes read from stream: {0}", read);
+                            responseBody.AppendLine();
 
-                        // Use the buffer contents for something. We can't safely display it as a string though, since encodings
-                        // like UTF-8 and UTF-16 have a variable number of bytes per character and so the last bytes in the buffer
-                        // may not contain a whole character. Instead, we'll convert the bytes to hex and display the result.
-                        IBuffer responseBuffer = CryptographicBuffer.CreateFromByteArray(responseBytes);
-                        responseBuffer.Length = (uint)read;
-                        responseBody.AppendFormat(CryptographicBuffer.EncodeToHexString(responseBuffer));
-                        responseBody.AppendLine();
-                    } while (read != 0);
+                            // Use the buffer contents for something. We can't safely display it as a string though, since encodings
+                            // like UTF-8 and UTF-16 have a variable number of bytes per character and so the last bytes in the buffer
+                            // may not contain a whole character. Instead, we'll convert the bytes to hex and display the result.
+                            IBuffer responseBuffer = CryptographicBuffer.CreateFromByteArray(responseBytes);
+                            responseBuffer.Length = (uint)read;
+                            responseBody.AppendFormat(CryptographicBuffer.EncodeToHexString(responseBuffer));
+                            responseBody.AppendLine();
+                        } while (read != 0);
+                    }
+                    OutputField.Text += responseBody.ToString();
+
+                    rootPage.NotifyUser("Completed", NotifyType.StatusMessage);
                 }
-                OutputField.Text += responseBody.ToString();
-
-                rootPage.NotifyUser("Completed", NotifyType.StatusMessage);
+                else
+                {
+                    Helpers.DisplayWebError(rootPage, result.ExtendedError);
+                }
             }
             catch (TaskCanceledException)
             {
                 rootPage.NotifyUser("Request canceled.", NotifyType.ErrorMessage);
             }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Error: " + ex.Message, NotifyType.ErrorMessage);
-            }
-            finally
-            {
-                Helpers.ScenarioCompleted(StartButton, CancelButton);
-            }
+
+            Helpers.ScenarioCompleted(StartButton, CancelButton);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

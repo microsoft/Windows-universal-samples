@@ -75,6 +75,8 @@ namespace SDKTemplate
             Helpers.ScenarioStarted(StartButton, CancelButton, OutputField);
             rootPage.NotifyUser("In progress", NotifyType.StatusMessage);
 
+            // This sample uses a "try" in order to support TaskCanceledException.
+            // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceAddress);
@@ -90,24 +92,25 @@ namespace SDKTemplate
                 }
                 request.Properties["meteredConnectionPriority"] = priority;
 
-                HttpResponseMessage response = await httpClient.SendRequestAsync(request).AsTask(cts.Token);
+                HttpRequestResult result = await httpClient.TrySendRequestAsync(request).AsTask(cts.Token);
 
-                await Helpers.DisplayTextResultAsync(response, OutputField, cts.Token);
+                if (result.Succeeded)
+                {
+                    await Helpers.DisplayTextResultAsync(result.ResponseMessage, OutputField, cts.Token);
 
-                rootPage.NotifyUser("Completed", NotifyType.StatusMessage);
+                    rootPage.NotifyUser("Completed", NotifyType.StatusMessage);
+                }
+                else
+                {
+                    Helpers.DisplayWebError(rootPage, result.ExtendedError);
+                }
             }
             catch (TaskCanceledException)
             {
                 rootPage.NotifyUser("Request canceled.", NotifyType.ErrorMessage);
             }
-            catch (Exception ex)
-            {
-                rootPage.NotifyUser("Error: " + ex.Message, NotifyType.ErrorMessage);
-            }
-            finally
-            {
-                Helpers.ScenarioCompleted(StartButton, CancelButton);
-            }
+
+            Helpers.ScenarioCompleted(StartButton, CancelButton);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

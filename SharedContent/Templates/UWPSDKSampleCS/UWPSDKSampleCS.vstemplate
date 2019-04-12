@@ -25,10 +25,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.xaml.cs">Scenario1_ShortName.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.xaml">Scenario2_ShortName.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.xaml.cs">Scenario2_ShortName.xaml.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml">Scenario3_ShortName.xaml</ProjectItem>
-      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml.cs">Scenario3_ShortName.xaml.cs</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package.appxmanifest</ProjectItem>
-      <ProjectItem ReplaceParameters="false" TargetFileName="project.json">project.json</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="README.md">README.md</ProjectItem>
     </Project>
   </TemplateContent>

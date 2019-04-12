@@ -3,6 +3,7 @@ topic: sample
 languages:
 - csharp
 - cpp
+- cppcx
 products:
 - windows
 - windows-uwp
@@ -63,6 +64,8 @@ Scenario 15: Validate the server certificate
 **Note**  This sample by default requires network access using the loopback interface.
 
 For a sample that shows how to use [HttpClient](http://msdn.microsoft.com/library/windows/apps/dn298639) so that the app is always connected and always reachable using background network notifications in a Universal Windows Platform (UWP) app, download the [ControlChannelTrigger HttpClient sample](http://go.microsoft.com/fwlink/p/?linkid=258323) .
+
+This sample uses the Try versions of the HttpClient methods which do not raise exceptions. For a version that uses the exception-based methods, see [the v7.0.6 sample](https://github.com/Microsoft/Windows-universal-samples/tree/v7.0.6/Samples/HttpClient).
 
 ## Network capabilities
 

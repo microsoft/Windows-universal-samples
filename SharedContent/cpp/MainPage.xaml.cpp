@@ -46,19 +46,10 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
     // Populate the ListBox with the scenarios as defined in SampleConfiguration.cpp.
     auto itemCollection = ref new Platform::Collections::Vector<Object^>();
     int i = 1;
-    for (auto const& s : MainPage::Current->scenarios)
+    for (auto s : MainPage::Current->scenarios)
     {
-        // Create a textBlock to hold the content and apply the ListItemTextStyle from Styles.xaml
-        TextBlock^ textBlock = ref new TextBlock();
-        ListBoxItem^ item = ref new ListBoxItem();
-        auto style = App::Current->Resources->Lookup("ListItemTextStyle");
-
-        textBlock->Text = (i++).ToString() + ") " + s.Title;
-        textBlock->Style = safe_cast<Windows::UI::Xaml::Style ^>(style);
-
-        item->Name = s.ClassName;
-        item->Content = textBlock;
-        itemCollection->Append(item);
+        s.Title = (i++).ToString() + ") " + s.Title;
+        itemCollection->Append(s);
     }
 
     // Set the newly created itemCollection as the ListBox ItemSource.
@@ -82,14 +73,14 @@ void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
 void MainPage::ScenarioControl_SelectionChanged(Object^ sender, SelectionChangedEventArgs^ e)
 {
     ListBox^ scenarioListBox = safe_cast<ListBox^>(sender); //as ListBox;
-    ListBoxItem^ item = dynamic_cast<ListBoxItem^>(scenarioListBox->SelectedItem);
-    if (item != nullptr)
+    if (scenarioListBox->SelectedItem != nullptr)
     {
         // Clear the status block when changing scenarios
         NotifyUser("", NotifyType::StatusMessage);
 
         // Navigate to the selected scenario.
-        TypeName scenarioType = { item->Name, TypeKind::Custom };
+        Scenario s = (Scenario)scenarioListBox->SelectedItem;
+        TypeName scenarioType = { s.ClassName, TypeKind::Custom };
         ScenarioFrame->Navigate(scenarioType, this);
 
         if (Window::Current->Bounds.Width < 640)

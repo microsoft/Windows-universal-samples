@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="SDKTemplate.Scenario5_RelativePositioning"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Create and shows an AppWindow at an offset relative to either the main ApplicationView or the DisplayRegion that the view is on.
+            </TextBlock>
+            <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">
+                Requests to position or resize an AppWindow are subject to system policies and may not have any effect,
+                for example, if the system is in Tablet Mode.
+                In order for positioning and sizing requests to succeed,
+                the app must be running in an overlapped windowing environment, such as on Desktop PCs.
+            </TextBlock>
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <RadioButton Name="positionOffsetAppViewRB" Content="Position relative to ApplicationView" GroupName="RelativeTo" Margin="0,10,10,0" IsChecked="True"/>
+                <RadioButton Name="positionOffsetDisplayRegionRB" Content="Position relative to DisplayRegion" GroupName="RelativeTo" Margin="0,10,10,0"/>
+            </VariableSizedWrapGrid>
+            <VariableSizedWrapGrid Orientation="Horizontal">
+                <TextBox Name="windowOffsetXTxt" Header="X offset" InputScope="Number" Text="50" Margin="0,10,10,0"/>
+                <TextBox x:Name="windowOffsetYTxt" Header="Y offset" InputScope="Number" Text="50" Margin="0,10,10,0"/>
+            </VariableSizedWrapGrid>
+            <Button Name="showWindowBtn" Content="Show window at specified offset" Margin="0,10,0,0" Click="ShowWindowBtn_Click" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

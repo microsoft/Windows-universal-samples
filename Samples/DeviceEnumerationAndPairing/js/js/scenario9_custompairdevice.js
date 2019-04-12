@@ -9,6 +9,7 @@
     var deviceWatcherHelper = new SdkSample.DeviceWatcherHelper(resultCollection);
     var providePinTaskSrc;
     var confirmPinTaskSrc;
+    var providePasswordCredentialTaskSrc;
 
     var page = WinJS.UI.Pages.define("/html/scenario9_custompairdevice.html", {
         ready: function (element, options) {
@@ -21,6 +22,7 @@
             document.getElementById("okButton").addEventListener("click", okButton, false);
             document.getElementById("yesButton").addEventListener("click", yesButton, false);
             document.getElementById("noButton").addEventListener("click", noButton, false);
+            document.getElementById("verifyButton").addEventListener("click", verifyButton, false);
 
             // Hook up result list selection changed event handler
             resultsListView = element.querySelector("#resultsListView").winControl;
@@ -186,6 +188,15 @@
                 displayMessageDeferral.complete();
             });
         }
+        else if (args.pairingKind == DevEnum.DevicePairingKinds.providePasswordCredential) {
+            var collectCredentialDeferral = args.getDeferral();
+            getPasswordCredentialFromUserAsync().then(function (credential) {
+                if (credential) {
+                    args.acceptWithPasswordCredential(credential);
+                }
+                collectCredentialDeferral.complete();
+            });
+        }
     }
 
     function showPairingPanel(text, pairingKind) {
@@ -194,6 +205,9 @@
         document.getElementById("okButton").style.display = "none";
         document.getElementById("yesButton").style.display = "none";
         document.getElementById("noButton").style.display = "none";
+        document.getElementById("usernameEntryTextBox").style.display = "none";
+        document.getElementById("passwordEntryTextBox").style.display = "none";
+        document.getElementById("verifyButton").style.display = "none";
         pairingTextBlock.innerHTML = text;
 
         switch (pairingKind) {
@@ -209,6 +223,11 @@
             case DevEnum.DevicePairingKinds.confirmPinMatch:
                 document.getElementById("yesButton").style.display = "inline";
                 document.getElementById("noButton").style.display = "inline";
+                break;
+            case DevEnum.DevicePairingKinds.providePasswordCredential:
+                document.getElementById("usernameEntryTextBox").style.display = "inline";
+                document.getElementById("passwordEntryTextBox").style.display = "inline";
+                document.getElementById("verifyButton").style.display = "inline";
                 break;
         }
     }
@@ -239,6 +258,30 @@
         }
     }
 
+    function getPasswordCredentialFromUserAsync() {
+        hidePairingPanel();
+        completePasswordCredential(); // Abandon any previous pin request.
+
+        showPairingPanel(
+            "Please enter the username and password",
+            DevEnum.DevicePairingKinds.providePasswordCredential);
+
+        return new WinJS.Promise(function (c) {
+            providePasswordCredentialTaskSrc = c;
+        });
+    }
+
+    function  completePasswordCredential(username, password)
+    {
+        if (providePasswordCredentialTaskSrc) {
+            var passwordCredential = new Windows.Security.Credentials.PasswordCredential();
+            passwordCredential.userName = username;
+            passwordCredential.password = password;
+            providePasswordCredentialTaskSrc(passwordCredential);
+            providePasswordCredentialTaskSrc = null;
+        }
+    }
+
     function getUserConfirmationAsync(pin) {
         hidePairingPanel();
         completeConfirmPinTask(false);
@@ -263,6 +306,12 @@
     function okButton() {
         // OK button is only used for the ProvidePin scenario
         completeProvidePinTask(pinEntryTextBox.value);
+        hidePairingPanel();
+    }
+
+    function verifyButton(){
+        // verify button is only used for the ProvidePin scenario
+        completePasswordCredential(usernameEntryTextBox.value, passwordEntryTextBox.value);
         hidePairingPanel();
     }
 
@@ -293,6 +342,9 @@
                         break;
                     case "confirmPinMatchOption":
                         ceremonySelection |= DevEnum.DevicePairingKinds.confirmPinMatch;
+                        break;
+                    case "passwordCredentialOption":
+                        ceremonySelection |= DevEnum.DevicePairingKinds.providePasswordCredential;
                         break;
                 }
             }

@@ -11,7 +11,7 @@
     });
 
     function deleteFile() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             SdkSample.sampleFile.deleteAsync().done(function () {
                 SdkSample.sampleFile = null;
                 WinJS.log && WinJS.log("The file 'sample.dat' was deleted.", "sample", "status");

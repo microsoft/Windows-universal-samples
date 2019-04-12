@@ -62,6 +62,7 @@ namespace SDKTemplate
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            SelectedDeviceRun.Text = rootPage.SelectedBleDeviceName;
             if (string.IsNullOrEmpty(rootPage.SelectedBleDeviceId))
             {
                 ConnectButton.IsEnabled = false;
@@ -107,7 +108,7 @@ namespace SDKTemplate
             if (!await ClearBluetoothLEDeviceAsync())
             {
                 rootPage.NotifyUser("Error: Unable to reset state, try again.", NotifyType.ErrorMessage);
-                ConnectButton.IsEnabled = false;
+                ConnectButton.IsEnabled = true;
                 return;
             }
 

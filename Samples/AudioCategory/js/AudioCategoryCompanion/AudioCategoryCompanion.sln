@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "AudioCategoryCompanion", "AudioCategoryCompanion.jsproj", "{3792A24B-2B7D-507B-B763-A5F4C260EC35}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "AudioCategoryCompanion", "AudioCategoryCompanion.jsproj", "{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,30 +17,30 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|ARM.ActiveCfg = Debug|ARM
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|ARM.Build.0 = Debug|ARM
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|ARM.Deploy.0 = Debug|ARM
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|x64.ActiveCfg = Debug|x64
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|x64.Build.0 = Debug|x64
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|x64.Deploy.0 = Debug|x64
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|x86.ActiveCfg = Debug|x86
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|x86.Build.0 = Debug|x86
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Debug|x86.Deploy.0 = Debug|x86
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|ARM.ActiveCfg = Release|ARM
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|ARM.Build.0 = Release|ARM
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|ARM.Deploy.0 = Release|ARM
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|x64.ActiveCfg = Release|x64
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|x64.Build.0 = Release|x64
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|x64.Deploy.0 = Release|x64
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|x86.ActiveCfg = Release|x86
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|x86.Build.0 = Release|x86
-		{3792A24B-2B7D-507B-B763-A5F4C260EC35}.Release|x86.Deploy.0 = Release|x86
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|ARM.Build.0 = Debug|ARM
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|ARM.Deploy.0 = Debug|ARM
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|x64.ActiveCfg = Debug|x64
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|x64.Build.0 = Debug|x64
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|x64.Deploy.0 = Debug|x64
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|x86.ActiveCfg = Debug|x86
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|x86.Build.0 = Debug|x86
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Debug|x86.Deploy.0 = Debug|x86
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|ARM.ActiveCfg = Release|ARM
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|ARM.Build.0 = Release|ARM
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|ARM.Deploy.0 = Release|ARM
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|x64.ActiveCfg = Release|x64
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|x64.Build.0 = Release|x64
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|x64.Deploy.0 = Release|x64
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|x86.ActiveCfg = Release|x86
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|x86.Build.0 = Release|x86
+		{4D57E7DC-A474-59B0-94D4-0BFD29BA8D70}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

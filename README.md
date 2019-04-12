@@ -206,19 +206,20 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Printing">Printing</a></td>
   <td><a href="Samples/DpiScaling">Scaling according to DPI</a></td>
-  <td><a href="Samples/SplashScreen">Splash screen</a></td>
+  <td><a href="Samples/AppWindow">Secondary windows</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SplashScreen">Splash screen</a></td>
   <td><a href="Samples/XamlStateTriggers">State triggers</a></td>
   <td><a href="Samples/XamlTailoredMultipleViews">Tailored multiple views</a></td>
-  <td><a href="Samples/TitleBar">Title bar</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TitleBar">Title bar</a></td>
   <td><a href="https://github.com/Microsoft/Xaml-Controls-Gallery">UI basics (XAML)</a></td>
   <td><a href="Samples/UserInteractionMode">User interaction mode</a></td>
-  <td><a href="Samples/WebView">WebView control (HTML)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WebView">WebView control (HTML)</a></td>
   <td><a href="Samples/XamlWebView">WebView control (XAML)</a></td>
   <td><a href="Samples/ResizeAppView">Window resizing</a></td>
  </tr>

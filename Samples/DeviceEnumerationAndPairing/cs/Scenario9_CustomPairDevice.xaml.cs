@@ -10,6 +10,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.Security.Credentials;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,6 +27,7 @@ namespace SDKTemplate
 
         TaskCompletionSource<string> providePinTaskSrc;
         TaskCompletionSource<bool> confirmPinTaskSrc;
+        TaskCompletionSource<PasswordCredential> providePasswordCredential;
 
         private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
@@ -207,6 +209,19 @@ namespace SDKTemplate
                     });
                     break;
 
+                case DevicePairingKinds.ProvidePasswordCredential:
+                    var collectCredentialDeferral = args.GetDeferral();
+                    await rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                    {
+                        var credential = await GetPasswordCredentialFromUserAsync();
+                        if (credential != null)
+                        {
+                            args.AcceptWithPasswordCredential(credential);
+                        }
+                        collectCredentialDeferral.Complete();
+                    });
+                    break;
+
                 case DevicePairingKinds.ConfirmPinMatch:
                     // We show the PIN here and the user responds with whether the PIN matches what they see
                     // on the target device. Response comes back and we set it on the PinComparePairingRequestedData
@@ -232,6 +247,9 @@ namespace SDKTemplate
             pairingPanel.Visibility = Visibility.Collapsed;
             pinEntryTextBox.Visibility = Visibility.Collapsed;
             okButton.Visibility = Visibility.Collapsed;
+            usernameEntryTextBox.Visibility = Visibility.Collapsed;
+            passwordEntryTextBox.Visibility = Visibility.Collapsed;
+            verifyButton.Visibility = Visibility.Collapsed;
             yesButton.Visibility = Visibility.Collapsed;
             noButton.Visibility = Visibility.Collapsed;
             pairingTextBlock.Text = text;
@@ -250,6 +268,13 @@ namespace SDKTemplate
                 case DevicePairingKinds.ConfirmPinMatch:
                     yesButton.Visibility = Visibility.Visible;
                     noButton.Visibility = Visibility.Visible;
+                    break;
+                case DevicePairingKinds.ProvidePasswordCredential:
+                    usernameEntryTextBox.Text = "";
+                    passwordEntryTextBox.Text = "";
+                    passwordEntryTextBox.Visibility = Visibility.Visible;
+                    usernameEntryTextBox.Visibility = Visibility.Visible;
+                    verifyButton.Visibility = Visibility.Visible;
                     break;
             }
 
@@ -286,6 +311,32 @@ namespace SDKTemplate
             }
         }
 
+        private async Task<PasswordCredential> GetPasswordCredentialFromUserAsync()
+        {
+            HidePairingPanel();
+            CompletePasswordCredential(); // Abandon any previous pin request.
+
+            ShowPairingPanel(
+                "Please enter the username and password",
+                DevicePairingKinds.ProvidePasswordCredential);
+
+            providePasswordCredential = new TaskCompletionSource<PasswordCredential>();
+
+            return await providePasswordCredential.Task;
+        }
+
+        private void CompletePasswordCredential(string username = null, string password = null)
+        {
+            if (providePasswordCredential != null)
+            {
+                var passwordCredential = new PasswordCredential();
+                passwordCredential.UserName = username;
+                passwordCredential.Password = password;
+                providePasswordCredential.SetResult(passwordCredential);
+                providePasswordCredential = null;
+            }
+        }
+
         private async Task<bool> GetUserConfirmationAsync(string pin)
         {
             HidePairingPanel();
@@ -317,6 +368,13 @@ namespace SDKTemplate
             HidePairingPanel();
         }
 
+        private void verifyButton_Click(object sender, RoutedEventArgs e)
+        {
+            // verify button is only used for the ProvidePin scenario
+            CompletePasswordCredential(usernameEntryTextBox.Text, passwordEntryTextBox.Text);
+            HidePairingPanel();
+        }
+
         private void yesButton_Click(object sender, RoutedEventArgs e)
         {
             CompleteConfirmPinTask(true);
@@ -336,6 +394,7 @@ namespace SDKTemplate
             if (displayPinOption.IsChecked.Value) ceremonySelection |= DevicePairingKinds.DisplayPin;
             if (providePinOption.IsChecked.Value) ceremonySelection |= DevicePairingKinds.ProvidePin;
             if (confirmPinMatchOption.IsChecked.Value) ceremonySelection |= DevicePairingKinds.ConfirmPinMatch;
+            if (passwordCredentialOption.IsChecked.Value) ceremonySelection |= DevicePairingKinds.ProvidePasswordCredential;
             return ceremonySelection;
         }
 

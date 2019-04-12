@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiFiScan", "WiFiScan.vcxproj", "{81B75105-7A66-597F-A414-030348CFD5E9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WiFiScan", "WiFiScan.vcxproj", "{40951DBA-D2E3-5835-9015-AF50834224AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,24 +15,24 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|ARM.ActiveCfg = Debug|ARM
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|ARM.Build.0 = Debug|ARM
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|ARM.Deploy.0 = Debug|ARM
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|x64.ActiveCfg = Debug|x64
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|x64.Build.0 = Debug|x64
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|x64.Deploy.0 = Debug|x64
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|x86.ActiveCfg = Debug|Win32
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|x86.Build.0 = Debug|Win32
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Debug|x86.Deploy.0 = Debug|Win32
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|ARM.ActiveCfg = Release|ARM
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|ARM.Build.0 = Release|ARM
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|ARM.Deploy.0 = Release|ARM
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|x64.ActiveCfg = Release|x64
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|x64.Build.0 = Release|x64
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|x64.Deploy.0 = Release|x64
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|x86.ActiveCfg = Release|Win32
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|x86.Build.0 = Release|Win32
-		{81B75105-7A66-597F-A414-030348CFD5E9}.Release|x86.Deploy.0 = Release|Win32
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|ARM.Build.0 = Debug|ARM
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|ARM.Deploy.0 = Debug|ARM
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|x64.ActiveCfg = Debug|x64
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|x64.Build.0 = Debug|x64
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|x64.Deploy.0 = Debug|x64
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|x86.ActiveCfg = Debug|Win32
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|x86.Build.0 = Debug|Win32
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Debug|x86.Deploy.0 = Debug|Win32
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|ARM.ActiveCfg = Release|ARM
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|ARM.Build.0 = Release|ARM
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|ARM.Deploy.0 = Release|ARM
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|x64.ActiveCfg = Release|x64
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|x64.Build.0 = Release|x64
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|x64.Deploy.0 = Release|x64
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|x86.ActiveCfg = Release|Win32
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|x86.Build.0 = Release|Win32
+		{40951DBA-D2E3-5835-9015-AF50834224AA}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

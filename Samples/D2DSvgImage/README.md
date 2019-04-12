@@ -2,6 +2,7 @@
 topic: sample
 languages:
 - cpp
+- cppcx
 products:
 - windows
 - windows-uwp

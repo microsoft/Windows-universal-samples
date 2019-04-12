@@ -42,6 +42,20 @@ namespace SDKTemplate
             output.Text += responseBodyAsText;
         }
 
+        internal static void DisplayWebError(MainPage rootPage, Exception exception)
+        {
+            WebErrorStatus webErrorStatus = WebError.GetStatus(exception.HResult);
+            if (webErrorStatus == WebErrorStatus.Unknown)
+            {
+                rootPage.NotifyUser("Unknown Error: " + exception.Message, NotifyType.ErrorMessage);
+            }
+            else
+            {
+                rootPage.NotifyUser("Web Error: " + webErrorStatus, NotifyType.ErrorMessage);
+            }
+
+        }
+
         internal static string SerializeHeaders(HttpResponseMessage response)
         {
             StringBuilder output = new StringBuilder();

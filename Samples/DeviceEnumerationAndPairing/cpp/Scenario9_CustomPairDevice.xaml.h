@@ -43,6 +43,9 @@ namespace SDKTemplate
         concurrency::task<bool> GetUserConfirmationAsync(Platform::String^ pin);
         void CompleteConfirmPinTask(bool accept);
         void okButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void verifyButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        concurrency::task<Windows::Security::Credentials::PasswordCredential^> GetPasswordCredentialFromUserAsync();
+        void CompletePasswordCredential(Platform::String^ username = nullptr, Platform::String^ password = nullptr);
         void yesButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         void noButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
         
@@ -56,5 +59,6 @@ namespace SDKTemplate
 
         concurrency::task_completion_event<Platform::String^> providePinTaskSrc;
         concurrency::task_completion_event<bool> confirmPinTaskSrc;
+        concurrency::task_completion_event<Windows::Security::Credentials::PasswordCredential^> providePasswordCredentialSrc;
     };
 }

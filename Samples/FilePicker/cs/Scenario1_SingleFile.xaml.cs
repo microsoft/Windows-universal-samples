@@ -28,7 +28,6 @@ namespace SDKTemplate
         public Scenario1()
         {
             this.InitializeComponent();
-            PickAFileButton.Click += new RoutedEventHandler(PickAFileButton_Click);
         }
 
         private async void PickAFileButton_Click(object sender, RoutedEventArgs e)

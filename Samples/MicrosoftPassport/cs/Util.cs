@@ -42,14 +42,15 @@ namespace SDKTemplate
             HttpStringContent content = new HttpStringContent(message.Stringify(), UnicodeEncoding.Utf8, "application/json");
 
             HttpClient httpClient = new HttpClient();
-            HttpResponseMessage httpResponse = null;
-            try
+            HttpRequestResult result = await httpClient.TryPostAsync(new Uri(serverBaseUri, relativeUri), content);
+            if (result.Succeeded)
             {
-                httpResponse = await httpClient.PostAsync(new Uri(serverBaseUri, relativeUri), content);
+                // We assume that if the server responds at all, it responds with valid JSON.
+                return JsonValue.Parse(await result.ResponseMessage.Content.ReadAsStringAsync());
             }
-            catch (Exception ex)
+            else
             {
-                switch (ex.HResult)
+                switch (result.ExtendedError.HResult)
                 {
                     case E_WINHTTP_TIMEOUT:
                     // The connection to the server timed out.
@@ -62,9 +63,6 @@ namespace SDKTemplate
                         return null;
                 }
             }
-
-            // We assume that if the server responds at all, it responds with valid JSON.
-            return JsonValue.Parse(await httpResponse.Content.ReadAsStringAsync());
         }
     }
 

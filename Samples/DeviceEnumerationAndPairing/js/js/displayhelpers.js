@@ -55,6 +55,7 @@
     // ourselves and specify the correct DeviceInformationKind (AssociationEndpoint). 
     var wsd = { displayName: "Web Services on Devices (WSD)", selector: "System.Devices.Aep.ProtocolId:=\"{782232aa-a2f9-4993-971b-aedc551346b0}\"", kind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpoint };
     var upnp = { displayName: "UPnP", selector: "System.Devices.Aep.ProtocolId:=\"{0e261de4-12f0-46e6-91ba-428607ccef64}\"", kind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpoint };
+    var networkCamera = { displayName: "Web Services on Devices (NetworkCamera)", selector: "System.Devices.Aep.ProtocolId:=\"{43cc0de4-8ca8-4a56-805a-86fc63f21602}\"", kind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpoint };
     
     var devicePickerArray = commonArray.slice();
     devicePickerArray.push(bluetoothPairedOnly);
@@ -103,6 +104,8 @@
     videoCasting && pairingArray.push(videoCasting);
     pairingArray.push(wsd);
     pairingArray.push(upnp);
+    pairingArray.push(networkCamera);
+
     var pairingSelectors = new WinJS.Binding.List(pairingArray);
     
     var kindArray = [

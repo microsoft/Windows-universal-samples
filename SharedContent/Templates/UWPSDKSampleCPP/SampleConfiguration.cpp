@@ -10,14 +10,21 @@
 //*********************************************************
 
 #include "pch.h"
-#include "MainPage.xaml.h"
+#include <winrt/SDKTemplate.h>
+#include "MainPage.h"
 #include "SampleConfiguration.h"
 
+using namespace winrt;
+using namespace Windows::Foundation::Collections;
 using namespace SDKTemplate;
 
-Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
+hstring implementation::MainPage::FEATURE_NAME()
 {
-    { "Add Scenario 1 here", "SDKTemplate.Scenario1_ShortName" },
-    { "Add Scenario 2 here", "SDKTemplate.Scenario2_ShortName" },
-    { "Add Scenario 3 here", "SDKTemplate.Scenario3_ShortName" }
-};
+    return L"$safeprojectname$ C++/WinRT Sample";
+}
+
+IVector<Scenario> implementation::MainPage::scenariosInner = winrt::single_threaded_observable_vector<Scenario>(
+{
+    Scenario{ L"Add Scenario 1 here", xaml_typename<SDKTemplate::Scenario1_ShortName>() },
+    Scenario{ L"Add Scenario 2 here", xaml_typename<SDKTemplate::Scenario2_ShortName>() },
+});

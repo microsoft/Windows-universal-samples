@@ -195,6 +195,14 @@ namespace SDKTemplate
             }
         }
 
+        public static DeviceSelectorInfo NetworkCamera
+        {
+            get
+            {
+                return new DeviceSelectorInfo() { DisplayName = "Web Services on Devices (NetworkCamera)", Selector = "System.Devices.Aep.ProtocolId:=\"{43cc0de4-8ca8-4a56-805a-86fc63f21602}\"", Kind = DeviceInformationKind.AssociationEndpoint };
+            }
+        }
+
         public static void AddVideoCastingIfSupported(List<DeviceSelectorInfo> selectors)
         {
             try
@@ -294,6 +302,7 @@ namespace SDKTemplate
                 AddVideoCastingIfSupported(selectors);
                 selectors.Add(Wsd);
                 selectors.Add(Upnp);
+                selectors.Add(NetworkCamera);
 
                 return selectors;
             }

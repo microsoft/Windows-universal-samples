@@ -27,15 +27,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{92595763-D1C7-5DC8-B57B-8861F343FB31}</ProjectGuid>
+    <ProjectGuid>{F05F0BF8-B7A5-5049-9A54-348DEF64FC74}</ProjectGuid>
     <RootNamespace>ProxyStubsForWinRTComponents</RootNamespace>
     <ProjectName>ProxyStubsForWinRTComponentsPS</ProjectName>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetName>Microsoft.SDKSamples.Kitchen.Proxies</TargetName>

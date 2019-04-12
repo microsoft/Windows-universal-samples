@@ -11,12 +11,12 @@
     });
 
     function compareFiles() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
             picker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
             picker.fileTypeFilter.replaceAll(["*"]);
             picker.pickSingleFileAsync().done(function (comparand) {
-                if (comparand !== null) {
+                if (comparand) {
                     if (SdkSample.sampleFile.isEqual(comparand)) {
                         WinJS.log && WinJS.log("Files are equal", "sample", "status");
                     } else {

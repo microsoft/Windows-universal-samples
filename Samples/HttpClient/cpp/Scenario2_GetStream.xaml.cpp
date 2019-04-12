@@ -74,34 +74,42 @@ void Scenario2::Start_Click(Object^ sender, RoutedEventArgs^ e)
     }
     HttpRequestMessage^ request = ref new HttpRequestMessage(HttpMethod::Get, resourceAddress);
 
-    // Do an asynchronous GET, do not buffer the response. We need to use use_current() with the continuations since
-    // the tasks are completed on background threads and we need to run on the UI thread to update the UI.
+    // Do an asynchronous GET, do not buffer the response.
     create_task(
-        httpClient->SendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead),
-        cancellationTokenSource.get_token()).then([this](HttpResponseMessage^ response)
+        httpClient->TrySendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead),
+        cancellationTokenSource.get_token()).then([this](HttpRequestResult^ result)
     {
-        OutputField->Text += Helpers::SerializeHeaders(response);
+        if (result->Succeeded)
+        {
+            HttpResponseMessage^ response = result->ResponseMessage;
+            OutputField->Text += Helpers::SerializeHeaders(response);
+            return create_task(response->Content->ReadAsInputStreamAsync(), cancellationTokenSource.get_token())
+                .then([=](IInputStream^ stream)
+            {
+                return Scenario2ReadData(stream);
+            }).then([=](task<IBuffer^> /* buffer */)
+            {
+                rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
+            });
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+        }
 
-        return create_task(response->Content->ReadAsInputStreamAsync(), cancellationTokenSource.get_token());
-    }, task_continuation_context::use_current()).then([this](IInputStream^ stream)
+    }).then([this](task<void> previousTask)
     {
-        return Scenario2ReadData(stream);
-    }, task_continuation_context::use_current()).then([this](task<IBuffer^> previousTask)
-    {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if any previous task threw an exception.
+            // Check if the task was canceled.
             previousTask.get();
 
-            rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
-        }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
         }
 
         Helpers::ScenarioCompleted(StartButton, CancelButton);
@@ -110,8 +118,7 @@ void Scenario2::Start_Click(Object^ sender, RoutedEventArgs^ e)
 
 task<IBuffer^> Scenario2::Scenario2ReadData(IInputStream^ stream)
 {
-    // Do an asynchronous read. We need to use use_current() with the continuations since the tasks are completed on
-    // background threads and we need to run on the UI thread to update the UI.
+    // Do an asynchronous read.
     return create_task(
         stream->ReadAsync(readBuffer, readBuffer->Capacity, InputStreamOptions::Partial),
         cancellationTokenSource.get_token()).then([=](task<IBuffer^> readTask)
@@ -128,7 +135,7 @@ task<IBuffer^> Scenario2::Scenario2ReadData(IInputStream^ stream)
 
         // Continue reading until the response is complete.  When done, return previousTask that is complete.
         return buffer->Length ? Scenario2ReadData(stream) : readTask;
-    }, task_continuation_context::use_current());
+    });
 }
 
 void Scenario2::Cancel_Click(Object^ sender, RoutedEventArgs^ e)

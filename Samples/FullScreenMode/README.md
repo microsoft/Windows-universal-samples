@@ -3,6 +3,8 @@ topic: sample
 languages:
 - csharp
 - cpp
+- cppcx
+- cppwinrt
 - js
 products:
 - windows

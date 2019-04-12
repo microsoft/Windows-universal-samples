@@ -20,6 +20,7 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Devices::Enumeration;
+using namespace Windows::Security::Credentials;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -72,8 +73,7 @@ void Scenario9::StartWatcher()
         // Kind will be determined by the selector
         deviceWatcher = DeviceInformation::CreateWatcher(
             selector,
-            nullptr // don't request additional properties for this sample
-            );
+            nullptr); // don't request additional properties for this sample
     }
     else
     {
@@ -190,7 +190,7 @@ void Scenario9::PairingRequestedHandler(DeviceInformationCustomPairing^ sender, 
 
     case DevicePairingKinds::ProvidePin:
         {
-            // A PIN may be shown on the target device and the user needs to enter the matching PIN on 
+            // A PIN may be shown on the target device and the user needs to enter the matching PIN on
             // this Windows device. Get a deferral so we can perform the async request to the user.
             auto collectPinDeferral = args->GetDeferral();
 
@@ -205,6 +205,25 @@ void Scenario9::PairingRequestedHandler(DeviceInformationCustomPairing^ sender, 
                     }
 
                     collectPinDeferral->Complete();
+                }, task_continuation_context::use_current());
+            }));
+        }
+        break;
+
+    case DevicePairingKinds::ProvidePasswordCredential:
+        {
+            auto collectCredentialDeferral = args->GetDeferral();
+            rootPage->Dispatcher->RunAsync(CoreDispatcherPriority::Normal, ref new DispatchedHandler(
+                [this, collectCredentialDeferral, args]()
+            {
+                GetPasswordCredentialFromUserAsync().then([this, collectCredentialDeferral, args](PasswordCredential^ credential)
+                {
+                    if (credential != nullptr)
+                    {
+                        args->AcceptWithPasswordCredential(credential);
+                    }
+                    collectCredentialDeferral->Complete();
+
                 }, task_continuation_context::use_current());
             }));
         }
@@ -240,6 +259,9 @@ void Scenario9::ShowPairingPanel(Platform::String^ text, Windows::Devices::Enume
     pairingPanel->Visibility = ::Visibility::Collapsed;
     pinEntryTextBox->Visibility = ::Visibility::Collapsed;
     okButton->Visibility = ::Visibility::Collapsed;
+    usernameEntryTextBox->Visibility = ::Visibility::Collapsed;
+    passwordEntryTextBox->Visibility = ::Visibility::Collapsed;
+    verifyButton->Visibility = ::Visibility::Collapsed;
     yesButton->Visibility = ::Visibility::Collapsed;
     noButton->Visibility = ::Visibility::Collapsed;
     pairingTextBlock->Text = text;
@@ -258,6 +280,13 @@ void Scenario9::ShowPairingPanel(Platform::String^ text, Windows::Devices::Enume
     case DevicePairingKinds::ConfirmPinMatch:
         yesButton->Visibility = ::Visibility::Visible;
         noButton->Visibility = ::Visibility::Visible;
+        break;
+    case DevicePairingKinds::ProvidePasswordCredential:
+        usernameEntryTextBox->Text = "";
+        passwordEntryTextBox->Text = "";
+        passwordEntryTextBox->Visibility = ::Visibility::Visible;
+        usernameEntryTextBox->Visibility = ::Visibility::Visible;
+        verifyButton->Visibility = ::Visibility::Visible;
         break;
     }
 
@@ -288,6 +317,28 @@ void Scenario9::CompleteProvidePinTask(Platform::String^ pin)
     providePinTaskSrc.set(pin);
 }
 
+concurrency::task<PasswordCredential^> Scenario9::GetPasswordCredentialFromUserAsync()
+{
+    HidePairingPanel();
+    CompletePasswordCredential(); // Abandon any previous pin request.
+
+    ShowPairingPanel(
+        "Please enter the username and password",
+        DevicePairingKinds::ProvidePasswordCredential);
+
+    providePasswordCredentialSrc = task_completion_event<PasswordCredential^>();
+
+    return concurrency::task<PasswordCredential^>(providePasswordCredentialSrc);
+}
+
+void Scenario9::CompletePasswordCredential(Platform::String^ username, Platform::String^ password)
+{
+    auto passwordCredential = ref new PasswordCredential();
+    passwordCredential->UserName = username;
+    passwordCredential->Password = password;
+    providePasswordCredentialSrc.set(passwordCredential);
+}
+
 concurrency::task<bool> Scenario9::GetUserConfirmationAsync(Platform::String^ pin)
 {
     HidePairingPanel();
@@ -310,6 +361,13 @@ void Scenario9::okButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Rout
 {
     // OK button is only used for the ProvidePin scenario
     CompleteProvidePinTask(pinEntryTextBox->Text);
+    HidePairingPanel();
+}
+
+void SDKTemplate::Scenario9::verifyButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+{
+    // verify button is only used for the ProvidePin scenario
+    CompletePasswordCredential(usernameEntryTextBox->Text, passwordEntryTextBox->Text);
     HidePairingPanel();
 }
 
@@ -344,6 +402,10 @@ DevicePairingKinds Scenario9::GetSelectedCeremonies()
     if (confirmPinMatchOption->IsChecked->Value)
     {
         ceremonySelection = ceremonySelection | DevicePairingKinds::ConfirmOnly;
+    }
+    if (passwordCredentialOption->IsChecked->Value)
+    {
+        ceremonySelection = ceremonySelection | DevicePairingKinds::ProvidePasswordCredential;
     }
 
     return ceremonySelection;

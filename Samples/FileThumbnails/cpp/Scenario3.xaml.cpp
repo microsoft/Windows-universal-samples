@@ -32,7 +32,6 @@ Scenario3::Scenario3()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
-    GetThumbnailButton->Click += ref new RoutedEventHandler(this, &Scenario3::GetThumbnailButton_Click);
 }
 
 void Scenario3::OnNavigatedTo(NavigationEventArgs^ e)

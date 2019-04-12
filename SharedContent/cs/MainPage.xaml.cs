@@ -43,7 +43,14 @@ namespace SDKTemplate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // Populate the scenario list from the SampleConfiguration.cs file
-            ScenarioControl.ItemsSource = scenarios;
+            var itemCollection = new List<Scenario>();
+            int i = 1;
+            foreach (Scenario s in scenarios)
+            {
+                itemCollection.Add(new Scenario { Title = $"{i++}) {s.Title}", ClassType = s.ClassType });
+            }
+            ScenarioControl.ItemsSource = itemCollection;
+
             if (Window.Current.Bounds.Width < 640)
             {
                 ScenarioControl.SelectedIndex = -1;
@@ -152,18 +159,4 @@ namespace SDKTemplate
         StatusMessage,
         ErrorMessage
     };
-
-    public class ScenarioBindingConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            Scenario s = value as Scenario;
-            return (MainPage.Current.Scenarios.IndexOf(s) + 1) + ") " + s.Title;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            return true;
-        }
-    }
 }

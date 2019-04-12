@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{72416C06-23EE-55E6-A25D-DD7AC861B163}</ProjectGuid>
+    <ProjectGuid>{AB0F9D5D-2B17-5E90-83FC-53A4374B9480}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>FileAccess</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -100,38 +100,38 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1_CreateAFileInThePicturesLibrary.xaml.cs">
-      <DependentUpon>Scenario1_CreateAFileInThePicturesLibrary.xaml</DependentUpon>
+    <Compile Include="Scenario1_Create.xaml.cs">
+      <DependentUpon>Scenario1_Create.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2_GetTheParentFolderOfAFile.xaml.cs">
-      <DependentUpon>Scenario2_GetTheParentFolderOfAFile.xaml</DependentUpon>
+    <Compile Include="Scenario2_GetParent.xaml.cs">
+      <DependentUpon>Scenario2_GetParent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario3_WriteAndReadTextInAFile.xaml.cs">
-      <DependentUpon>Scenario3_WriteAndReadTextInAFile.xaml</DependentUpon>
+    <Compile Include="Scenario3_Text.xaml.cs">
+      <DependentUpon>Scenario3_Text.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario4_WriteAndReadBytesInAFile.xaml.cs">
-      <DependentUpon>Scenario4_WriteAndReadBytesInAFile.xaml</DependentUpon>
+    <Compile Include="Scenario4_Bytes.xaml.cs">
+      <DependentUpon>Scenario4_Bytes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario5_WriteAndReadAFileUsingAStream.xaml.cs">
-      <DependentUpon>Scenario5_WriteAndReadAFileUsingAStream.xaml</DependentUpon>
+    <Compile Include="Scenario5_Stream.xaml.cs">
+      <DependentUpon>Scenario5_Stream.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario6_DisplayFileProperties.xaml.cs">
-      <DependentUpon>Scenario6_DisplayFileProperties.xaml</DependentUpon>
+    <Compile Include="Scenario6_Properties.xaml.cs">
+      <DependentUpon>Scenario6_Properties.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml.cs">
-      <DependentUpon>Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml</DependentUpon>
+    <Compile Include="Scenario7_FutureAccess.xaml.cs">
+      <DependentUpon>Scenario7_FutureAccess.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario8_CopyAFile.xaml.cs">
-      <DependentUpon>Scenario8_CopyAFile.xaml</DependentUpon>
+    <Compile Include="Scenario8_Copy.xaml.cs">
+      <DependentUpon>Scenario8_Copy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml.cs">
-      <DependentUpon>Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml</DependentUpon>
+    <Compile Include="Scenario9_Compare.xaml.cs">
+      <DependentUpon>Scenario9_Compare.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario10_DeleteAFile.xaml.cs">
-      <DependentUpon>Scenario10_DeleteAFile.xaml</DependentUpon>
+    <Compile Include="Scenario10_Delete.xaml.cs">
+      <DependentUpon>Scenario10_Delete.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario11_TryToGetAFileWithoutGettingAnError.xaml.cs">
-      <DependentUpon>Scenario11_TryToGetAFileWithoutGettingAnError.xaml</DependentUpon>
+    <Compile Include="Scenario11_TryGet.xaml.cs">
+      <DependentUpon>Scenario11_TryGet.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -150,58 +150,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario1_CreateAFileInThePicturesLibrary.xaml">
-      <Link>Scenario1_CreateAFileInThePicturesLibrary.xaml</Link>
+    <Page Include="..\shared\Scenario1_Create.xaml">
+      <Link>Scenario1_Create.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario2_GetTheParentFolderOfAFile.xaml">
-      <Link>Scenario2_GetTheParentFolderOfAFile.xaml</Link>
+    <Page Include="..\shared\Scenario2_GetParent.xaml">
+      <Link>Scenario2_GetParent.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario3_WriteAndReadTextInAFile.xaml">
-      <Link>Scenario3_WriteAndReadTextInAFile.xaml</Link>
+    <Page Include="..\shared\Scenario3_Text.xaml">
+      <Link>Scenario3_Text.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario4_WriteAndReadBytesInAFile.xaml">
-      <Link>Scenario4_WriteAndReadBytesInAFile.xaml</Link>
+    <Page Include="..\shared\Scenario4_Bytes.xaml">
+      <Link>Scenario4_Bytes.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario5_WriteAndReadAFileUsingAStream.xaml">
-      <Link>Scenario5_WriteAndReadAFileUsingAStream.xaml</Link>
+    <Page Include="..\shared\Scenario5_Stream.xaml">
+      <Link>Scenario5_Stream.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario6_DisplayFileProperties.xaml">
-      <Link>Scenario6_DisplayFileProperties.xaml</Link>
+    <Page Include="..\shared\Scenario6_Properties.xaml">
+      <Link>Scenario6_Properties.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml">
-      <Link>Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml</Link>
+    <Page Include="..\shared\Scenario7_FutureAccess.xaml">
+      <Link>Scenario7_FutureAccess.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario8_CopyAFile.xaml">
-      <Link>Scenario8_CopyAFile.xaml</Link>
+    <Page Include="..\shared\Scenario8_Copy.xaml">
+      <Link>Scenario8_Copy.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml">
-      <Link>Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml</Link>
+    <Page Include="..\shared\Scenario9_Compare.xaml">
+      <Link>Scenario9_Compare.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario10_DeleteAFile.xaml">
-      <Link>Scenario10_DeleteAFile.xaml</Link>
+    <Page Include="..\shared\Scenario10_Delete.xaml">
+      <Link>Scenario10_Delete.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario11_TryToGetAFileWithoutGettingAnError.xaml">
-      <Link>Scenario11_TryToGetAFileWithoutGettingAnError.xaml</Link>
+    <Page Include="..\shared\Scenario11_TryGet.xaml">
+      <Link>Scenario11_TryGet.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -73,53 +73,60 @@ void Scenario3::Start_Click(Object^ sender, RoutedEventArgs^ e)
 
     // Do an asynchronous GET.  We need to use use_current() with the continuations since the tasks are completed on
     // background threads and we need to run on the UI thread to update the UI.
-    create_task(httpClient->GetAsync(resourceAddress), cancellationTokenSource.get_token()).then([this](HttpResponseMessage^ response)
+    create_task(httpClient->TryGetAsync(resourceAddress), cancellationTokenSource.get_token())
+        .then([this](HttpRequestResult^ result)
     {
-        Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token());
-        response->EnsureSuccessStatusCode();
-
-        return create_task(response->Content->ReadAsStringAsync(), cancellationTokenSource.get_token()).then(
-            [=](String^ contentString)
+        if (result->Succeeded)
         {
-            // Create and load the XML document from the response.
-            XmlDocument^ xmlDocument = ref new XmlDocument();
-            xmlDocument->LoadXml(contentString);
-
-            if (response->StatusCode == HttpStatusCode::Ok)
+            HttpResponseMessage^ response = result->ResponseMessage;
+            return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token()).
+                then([=]()
             {
-                // Create a collection to bind to the view.
-                auto items = ref new Vector<Object^>();
-                auto elements = xmlDocument->GetElementsByTagName("item");
-                for (IXmlNode^ node : elements)
+                return create_task(response->Content->ReadAsStringAsync(), cancellationTokenSource.get_token());
+            }).then([=](String^ contentString)
+            {
+                // Create and load the XML document from the response.
+                XmlDocument^ xmlDocument = ref new XmlDocument();
+                xmlDocument->LoadXml(contentString);
+
+                if (response->StatusCode == HttpStatusCode::Ok)
                 {
-                    XmlElement^ element = safe_cast<XmlElement^>(node);
-                    items->Append(element->GetAttribute("name"));
+                    // Create a collection to bind to the view.
+                    auto items = ref new Vector<Object^>();
+                    auto elements = xmlDocument->GetElementsByTagName("item");
+                    for (IXmlNode^ node : elements)
+                    {
+                        XmlElement^ element = safe_cast<XmlElement^>(node);
+                        items->Append(element->GetAttribute("name"));
+                    }
+
+                    OutputList->ItemsSource = items;
                 }
 
-                OutputList->ItemsSource = items;
-            }
-        }, task_continuation_context::use_current());
-    }, task_continuation_context::use_current()).then([=](task<void> previousTask)
+                rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
+            });
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+            return task_from_result();
+        }
+    }).then([=](task<void> previousTask)
     {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if any previous task threw an exception.
+            // Check if the task was canceled.
             previousTask.get();
-
-            rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         Helpers::ScenarioCompleted(StartButton, CancelButton);
-
-    }, task_continuation_context::use_current());
+    });
 }
 
 void Scenario3::Cancel_Click(Object^ sender, RoutedEventArgs^ e)

@@ -31,7 +31,6 @@ Scenario3::Scenario3()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
-    PickFolderButton->Click += ref new RoutedEventHandler(this, &Scenario3::PickFolderButton_Click);
 }
 
 void Scenario3::PickFolderButton_Click(Object^ sender, RoutedEventArgs^ e)

@@ -3,6 +3,7 @@ topic: sample
 languages:
 - csharp
 - cpp
+- cppcx
 - vb
 products:
 - windows

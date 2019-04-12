@@ -33,17 +33,17 @@ namespace WebAuthentication
 
         private async Task<string> SendDataAsync(String Url)
         {
-            try
+            HttpClient httpClient = new HttpClient();
+            HttpGetStringResult result = await httpClient.TryGetStringAsync(new Uri(Url));
+            if (result.Succeeded)
             {
-                HttpClient httpClient = new HttpClient();
-                return await httpClient.GetStringAsync(new Uri(Url));
+                return result.Value;
             }
-            catch (Exception Err)
+            else
             {
-                rootPage.NotifyUser("Error getting data from server." + Err.Message, NotifyType.StatusMessage);
+                rootPage.NotifyUser("Error getting data from server." + result.ExtendedError.Message, NotifyType.StatusMessage);
+                return null;
             }
-
-            return null;
         }
 
         private void OutputToken(String TokenUri)

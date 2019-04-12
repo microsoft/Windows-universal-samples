@@ -4,9 +4,11 @@
     "use strict";
 
     var FA_E_MAX_PERSISTED_ITEMS_REACHED = 0x80270220 | 0;
-    var E_INVALIDARG = 0x80070057 | 0;
 
     var StorageApplicationPermissions = Windows.Storage.AccessCache.StorageApplicationPermissions;
+
+    var mruToken;
+    var falToken;
 
     var page = WinJS.UI.Pages.define("/html/scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.html", {
         ready: function (element, options) {
@@ -17,7 +19,7 @@
     });
 
     function addToList() {
-        if (SdkSample.sampleFile !== null) {
+        if (SdkSample.sampleFile) {
             var MRUradio = document.getElementById("MRUradio");
             var systemMRUcheckbox = document.getElementById("systemMRUcheckbox");
             if (MRUradio.checked) {
@@ -25,15 +27,15 @@
                 var visibility = systemMRUcheckbox.checked ?
                     Windows.Storage.AccessCache.RecentStorageItemVisibility.appAndSystem :
                     Windows.Storage.AccessCache.RecentStorageItemVisibility.appOnly;
-                SdkSample.mruToken = StorageApplicationPermissions.mostRecentlyUsedList.add(SdkSample.sampleFile, SdkSample.sampleFile.name,
+                mruToken = StorageApplicationPermissions.mostRecentlyUsedList.add(SdkSample.sampleFile, SdkSample.sampleFile.name,
                     visibility);
                 WinJS.log && WinJS.log("The file '" + SdkSample.sampleFile.name + "' was added to the MRU list and a token was stored.", "sample", "status");
             } else {
                 try { 
-                    SdkSample.falToken = StorageApplicationPermissions.futureAccessList.add(SdkSample.sampleFile, SdkSample.sampleFile.name);
+                    falToken = StorageApplicationPermissions.futureAccessList.add(SdkSample.sampleFile, SdkSample.sampleFile.name);
                     WinJS.log && WinJS.log("The file '" + SdkSample.sampleFile.name + "' was added to the FAL list and a token was stored.", "sample", "status");
                 } catch (error) {
-                    if (error.number == FA_E_MAX_PERSISTED_ITEMS_REACHED) {
+                    if (error.number === FA_E_MAX_PERSISTED_ITEMS_REACHED) {
                         // A real program would call remove() to create room in the FAL.
                         WinJS.log && WinJS.log("The file '" + SdkSample.sampleFile.name + "' was not added to the FAL list because the FAL list is full.", "sample", "error");
                     } else {
@@ -74,12 +76,12 @@
         var fileTask = WinJS.Promise.wrap();
         var MRUradio = document.getElementById("MRUradio");
         if (MRUradio.checked) {
-            if (SdkSample.mruToken !== null) {
+            if (mruToken) {
                 // When the MRU becomes full, older entries are automatically deleted, so check if the
                 // token is still valid before using it.
-                if (StorageApplicationPermissions.mostRecentlyUsedList.containsItem(SdkSample.mruToken)) {
+                if (StorageApplicationPermissions.mostRecentlyUsedList.containsItem(mruToken)) {
                     // Open the 'sample.dat' via the token that was stored when adding this file into the MRU list.
-                    fileTask = StorageApplicationPermissions.mostRecentlyUsedList.getFileAsync(SdkSample.mruToken);
+                    fileTask = StorageApplicationPermissions.mostRecentlyUsedList.getFileAsync(mruToken);
                 } else {
                     // When the MRU becomes full, older entries are automatically deleted.
                     WinJS.log && WinJS.log("The token is no longer valid.", "sample", "error");
@@ -88,10 +90,10 @@
                 WinJS.log && WinJS.log("This operation requires a token. Add file to the MRU list first.", "sample", "error");
             }
         } else {
-            if (SdkSample.falToken !== null) {
+            if (falToken) {
                 // Open the 'sample.dat' via the token that was stored when adding this file into the FAL list.
                 // The token remains valid until we explicitly remove it.
-                fileTask = StorageApplicationPermissions.futureAccessList.getFileAsync(SdkSample.falToken);
+                fileTask = StorageApplicationPermissions.futureAccessList.getFileAsync(falToken);
             } else {
                 WinJS.log && WinJS.log("This operation requires a token. Add file to the FAL list first.", "sample", "error");
             }

@@ -32,7 +32,6 @@ Scenario2::Scenario2()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
-    PickFilesButton->Click += ref new RoutedEventHandler(this, &Scenario2::PickFilesButton_Click);
 }
 
 void Scenario2::PickFilesButton_Click(Object^ sender, RoutedEventArgs^ e)

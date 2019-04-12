@@ -76,8 +76,7 @@ void Scenario5::Start_Click(Object^ sender, RoutedEventArgs^ e)
 
     const unsigned int contentLength = 1000;
 
-    // Create a sample stream. We need to use use_current() with the continuations since the tasks are completed on
-    // background threads and we need to run on the UI thread to update the UI.
+    // Create a sample stream.
     create_task(GenerateSampleStreamAsync(contentLength, cancellationTokenSource.get_token())).then(
         [=](IRandomAccessStream^ stream)
     {
@@ -89,45 +88,56 @@ void Scenario5::Start_Click(Object^ sender, RoutedEventArgs^ e)
         request->Content = streamContent;
 
         // Do an asynchronous POST.
-        return create_task(httpClient->SendRequestAsync(request), cancellationTokenSource.get_token());
+        return create_task(httpClient->TrySendRequestAsync(request), cancellationTokenSource.get_token());
 
         // The above lines could be replaced by the following lines if you know the content-length in advance
         // and chunked transfer encoding will not be used during the request.
         // streamContent->Headers->ContentLength = ref new Box<UINT64>(contentLength);
         // return create_task(
-        //     httpClient->PostAsync(resourceAddress, streamContent),
+        //     httpClient->TryPostAsync(resourceAddress, streamContent),
         //     cancellationTokenSource.get_token());
-    }, task_continuation_context::use_current()).then([this](HttpResponseMessage^ response)
+    }).then([this](HttpRequestResult^ result)
     {
-        return Helpers::DisplayTextResultAsync(response, OutputField, cancellationTokenSource.get_token());
-    }, task_continuation_context::use_current()).then([=](task<HttpResponseMessage^> previousTask)
+        if (result->Succeeded)
+        {
+            return Helpers::DisplayTextResultAsync(result->ResponseMessage, OutputField, cancellationTokenSource.get_token())
+                .then([=]()
+            {
+                rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
+            });
+        }
+        else
+        {
+            Helpers::DisplayWebError(rootPage, result->ExtendedError);
+            return task_from_result();
+        }
+    }).then([=](task<void> previousTask)
     {
+        // This sample uses a "try" in order to support cancellation.
+        // If you don't need to support cancellation, then the "try" is not needed.
         try
         {
-            // Check if any previous task threw an exception.
+            // Check if the task was canceled.
             previousTask.get();
 
-            rootPage->NotifyUser("Completed", NotifyType::StatusMessage);
         }
         catch (const task_canceled&)
         {
             rootPage->NotifyUser("Request canceled.", NotifyType::ErrorMessage);
         }
-        catch (Exception^ ex)
-        {
-            rootPage->NotifyUser("Error: " + ex->Message, NotifyType::ErrorMessage);
-        }
 
         Helpers::ScenarioCompleted(StartButton, CancelButton);
-
-    }, task_continuation_context::use_current());
+    });
 }
 
 task<IRandomAccessStream^> Scenario5::GenerateSampleStreamAsync(
     unsigned int size,
     cancellation_token token)
 {
-    return create_task([=]()
+    IRandomAccessStream^ stream = ref new InMemoryRandomAccessStream();
+
+    // Create an IAsyncAction-based task so it remains UI-thread-aware.
+    return create_task(create_async([] {})).then([=]()
     {
         Buffer^ buffer = ref new Buffer(size);
         buffer->Length = size;
@@ -152,10 +162,10 @@ task<IRandomAccessStream^> Scenario5::GenerateSampleStreamAsync(
             rawBuffer[i] = '@';
         }
 
-        IRandomAccessStream^ stream = ref new InMemoryRandomAccessStream();
-        task<unsigned int> writeTask(stream->WriteAsync(buffer), token);
-        writeTask.wait();
-        assert(writeTask.get() == size);
+        return create_task(stream->WriteAsync(buffer), token);
+    }).then([=](unsigned bytesWritten)
+    {
+        assert(bytesWritten == size);
 
         // Rewind stream.
         stream->Seek(0);

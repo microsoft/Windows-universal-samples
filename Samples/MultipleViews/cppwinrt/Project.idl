@@ -1,0 +1,56 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass SizePreferenceString
+    {
+            String Title{ get; };
+            Windows.UI.ViewManagement.ViewSizePreference Preference{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Scenario1 : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3 : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3();
+    }
+
+    [default_interface]
+    runtimeclass SecondaryViewPage : Windows.UI.Xaml.Controls.Page
+    {
+        SecondaryViewPage();
+
+        void SwitchAndAnimate(Int32 fromViewId);
+        void HandleProtocolLaunch(Windows.Foundation.Uri uri);
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass ViewLifetimeControl : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        static ViewLifetimeControl CreateForCurrentView();
+        Windows.UI.Core.CoreDispatcher Dispatcher{ get; };
+        Int32 Id{ get; };
+        String Title;
+        Int32 StartViewInUse();
+        Int32 StopViewInUse();
+
+        // A custom event that fires whenever the secondary view is ready to be closed. You should
+        // clean up any state (including deregistering for events) then close the window in this handler
+        event Windows.Foundation.TypedEventHandler<ViewLifetimeControl, Object> Released;
+    }
+}

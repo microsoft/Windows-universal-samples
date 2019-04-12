@@ -12,7 +12,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Windows.Security.Cryptography;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 
 namespace SDKTemplate
@@ -40,6 +42,7 @@ namespace SDKTemplate
         public StorageFile sampleFile = null;
         public string mruToken = null;
         public string falToken = null;
+        public const int E_NO_UNICODE_TRANSLATION = unchecked((int)0x80070459);
 
         /// <summary>
         /// Checks if sample file already exists, if it does assign it to sampleFile
@@ -47,7 +50,7 @@ namespace SDKTemplate
         internal async void ValidateFile()
         {
             StorageFolder picturesLibrary = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
-            sampleFile = (StorageFile)await picturesLibrary.TryGetItemAsync(filename);
+            sampleFile = (await picturesLibrary.TryGetItemAsync(filename)) as StorageFile;
             if (sampleFile == null)
             {
                 // If file doesn't exist, indicate users to use scenario 1
@@ -58,6 +61,24 @@ namespace SDKTemplate
         internal void NotifyUserFileNotExist()
         {
             NotifyUser(String.Format("The file '{0}' does not exist. Use scenario one to create this file.", filename), NotifyType.ErrorMessage);
+        }
+
+        static internal IBuffer GetBufferFromString(string str)
+        {
+            if (String.IsNullOrEmpty(str))
+            {
+                return new Windows.Storage.Streams.Buffer(0);
+            }
+            else
+            {
+                return CryptographicBuffer.ConvertStringToBinary(str, BinaryStringEncoding.Utf8);
+            }
+        }
+
+        static internal string GetStringFromBuffer(IBuffer buffer)
+        {
+            // Throws E_NO_UNICODE_TRANSLATION if the buffer is not properly encoded.
+            return CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, buffer);
         }
     }
 

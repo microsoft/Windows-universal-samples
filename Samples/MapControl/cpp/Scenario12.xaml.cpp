@@ -63,6 +63,12 @@ void Scenario12::AddAnimatedTilesClick(Object^ sender, RoutedEventArgs^ e)
     }
 }
 
+void Scenario12::ClearMapClick(Object^ sender, RoutedEventArgs^ e)
+{
+    myMap->TileSources->Clear();
+    httpTileSource = nullptr;
+}
+
 void Scenario12::HttpMapTileDataSourceUriRequested(HttpMapTileDataSource^ sender, MapTileUriRequestedEventArgs^ e)
 {
     e->Request->Uri = ref new Uri(urls[e->FrameIndex]);

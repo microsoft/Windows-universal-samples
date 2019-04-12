@@ -13,7 +13,7 @@
         Windows.Storage.KnownFolders.getFolderForUserAsync(null /* current user */, Windows.Storage.KnownFolderId.picturesLibrary).then(function (picturesLibrary) {
             return picturesLibrary.tryGetItemAsync("sample.dat");
         }).done(function (file) {
-            if (file !== null) {
+            if (file) {
                 WinJS.log && WinJS.log("Operation result: " + file.name, "sample", "status");;
             } else {
                 WinJS.log && WinJS.log("Operation result: null", "sample", "status");;

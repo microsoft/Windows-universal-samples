@@ -34,17 +34,17 @@ namespace WebAuthentication
 
         private async Task<String> SendDataAsync(String Url)
         {
-            try
+            HttpClient httpClient = new HttpClient();
+            HttpGetStringResult result = await httpClient.TryGetStringAsync(new Uri(Url));
+            if (result.Succeeded)
             {
-                HttpClient httpClient = new HttpClient();
-                return await httpClient.GetStringAsync(new Uri(Url));
+                return result.Value;
             }
-            catch (Exception Err)
+            else
             {
-                rootPage.NotifyUser("Error getting data from server." + Err.Message, NotifyType.StatusMessage);
+                rootPage.NotifyUser("Error getting data from server." + result.ExtendedError.Message, NotifyType.StatusMessage);
+                return null;
             }
-
-            return null;
         }
 
         private void OutputToken(String TokenUri)
@@ -67,32 +67,30 @@ namespace WebAuthentication
                 rootPage.NotifyUser("Please enter an Client Secret.", NotifyType.StatusMessage);
             }
 
-            try
+            string oauth_token = await GetTwitterRequestTokenAsync(TwitterCallbackUrl.Text, TwitterClientID.Text);
+            if (String.IsNullOrEmpty(oauth_token))
             {
-                string oauth_token = await GetTwitterRequestTokenAsync(TwitterCallbackUrl.Text, TwitterClientID.Text);
-                string TwitterUrl = "https://api.twitter.com/oauth/authorize?oauth_token=" + oauth_token;
-                System.Uri StartUri = new Uri(TwitterUrl);
-                System.Uri EndUri = new Uri(TwitterCallbackUrl.Text);
-
-                WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, StartUri, EndUri);
-                if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.Success)
-                {
-                    OutputToken(WebAuthenticationResult.ResponseData.ToString());
-                    await GetTwitterUserNameAsync(WebAuthenticationResult.ResponseData.ToString());
-                }
-                else if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
-                {
-                    OutputToken("HTTP Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseErrorDetail.ToString());
-                }
-                else
-                {
-                    OutputToken("Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseStatus.ToString());
-                }
+                rootPage.NotifyUser("Unable to obtain oauth token.", NotifyType.StatusMessage);
+                return;
             }
-            catch (Exception Error)
+
+            string TwitterUrl = "https://api.twitter.com/oauth/authorize?oauth_token=" + oauth_token;
+            System.Uri StartUri = new Uri(TwitterUrl);
+            System.Uri EndUri = new Uri(TwitterCallbackUrl.Text);
+
+            WebAuthenticationResult WebAuthenticationResult = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.None, StartUri, EndUri);
+            if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.Success)
             {
-                // Bad Parameter, SSL/TLS Errors and Network Unavailable errors are to be handled here.
-                rootPage.NotifyUser(Error.Message, NotifyType.ErrorMessage);
+                OutputToken(WebAuthenticationResult.ResponseData.ToString());
+                await GetTwitterUserNameAsync(WebAuthenticationResult.ResponseData.ToString());
+            }
+            else if (WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.ErrorHttp)
+            {
+                OutputToken("HTTP Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseErrorDetail.ToString());
+            }
+            else
+            {
+                OutputToken("Error returned by AuthenticateAsync() : " + WebAuthenticationResult.ResponseStatus.ToString());
             }
         }
 
@@ -141,43 +139,46 @@ namespace WebAuthentication
             HttpClient httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("OAuth", authorizationHeaderParams);
-            var httpResponseMessage = await httpClient.PostAsync(new Uri(TwitterUrl), httpContent);
-            string response = await httpResponseMessage.Content.ReadAsStringAsync();
-
-            String[] Tokens = response.Split('&');
-            string oauth_token_secret = null;
-            string access_token = null;
-            string screen_name = null;
-
-            for (int i = 0; i < Tokens.Length; i++)
+            HttpRequestResult result = await httpClient.TryPostAsync(new Uri(TwitterUrl), httpContent);
+            if (result.Succeeded)
             {
-                String[] splits = Tokens[i].Split('=');
-                switch (splits[0])
+                string response = await result.ResponseMessage.Content.ReadAsStringAsync();
+
+                String[] Tokens = response.Split('&');
+                string oauth_token_secret = null;
+                string access_token = null;
+                string screen_name = null;
+
+                for (int i = 0; i < Tokens.Length; i++)
                 {
-                    case "screen_name":
-                        screen_name = splits[1];
-                        break;
-                    case "oauth_token":
-                        access_token = splits[1];
-                        break;
-                    case "oauth_token_secret":
-                        oauth_token_secret = splits[1];
-                        break;
+                    String[] splits = Tokens[i].Split('=');
+                    switch (splits[0])
+                    {
+                        case "screen_name":
+                            screen_name = splits[1];
+                            break;
+                        case "oauth_token":
+                            access_token = splits[1];
+                            break;
+                        case "oauth_token_secret":
+                            oauth_token_secret = splits[1];
+                            break;
+                    }
                 }
-            }
 
-            if (access_token != null)
-            {
-                // Store access_token for futher use. See Scenario 5 (Account Management).
-            }
+                if (access_token != null)
+                {
+                    // Store access_token for futher use. See Scenario 5 (Account Management).
+                }
 
-            if (oauth_token_secret != null)
-            {
-                // Store oauth_token_secret for further use. See Scenario 5 (Account Management).
-            }
-            if (screen_name != null)
-            {
-                rootPage.NotifyUser(screen_name + " is connected!", NotifyType.StatusMessage);
+                if (oauth_token_secret != null)
+                {
+                    // Store oauth_token_secret for further use. See Scenario 5 (Account Management).
+                }
+                if (screen_name != null)
+                {
+                    rootPage.NotifyUser(screen_name + " is connected!", NotifyType.StatusMessage);
+                }
             }
         }
 
@@ -200,26 +201,28 @@ namespace WebAuthentication
 
             TwitterUrl += "?" + SigBaseStringParams + "&oauth_signature=" + Uri.EscapeDataString(Signature);
             HttpClient httpClient = new HttpClient();
-            string GetResponse = await httpClient.GetStringAsync(new Uri(TwitterUrl));
-
             string request_token = null;
-            string oauth_token_secret = null;
-            string[] keyValPairs = GetResponse.Split('&');
 
-            for (int i = 0; i < keyValPairs.Length; i++)
+            HttpGetStringResult result = await httpClient.TryGetStringAsync(new Uri(TwitterUrl));
+            if (result.Succeeded)
             {
-                string[] splits = keyValPairs[i].Split('=');
-                switch (splits[0])
+                string oauth_token_secret = null;
+                string[] keyValPairs = result.Value.Split('&');
+
+                for (int i = 0; i < keyValPairs.Length; i++)
                 {
-                    case "oauth_token":
-                        request_token = splits[1];
-                        break;
-                    case "oauth_token_secret":
-                        oauth_token_secret = splits[1];
-                        break;
+                    string[] splits = keyValPairs[i].Split('=');
+                    switch (splits[0])
+                    {
+                        case "oauth_token":
+                            request_token = splits[1];
+                            break;
+                        case "oauth_token_secret":
+                            oauth_token_secret = splits[1];
+                            break;
+                    }
                 }
             }
-
             return request_token;
         }
 

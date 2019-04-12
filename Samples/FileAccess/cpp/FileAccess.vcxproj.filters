@@ -17,34 +17,34 @@
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1_CreateAFileInThePicturesLibrary.xaml.cpp" />
-    <ClCompile Include="Scenario2_GetTheParentFolderOfAFile.xaml.cpp" />
-    <ClCompile Include="Scenario3_WriteAndReadTextInAFile.xaml.cpp" />
-    <ClCompile Include="Scenario4_WriteAndReadBytesInAFile.xaml.cpp" />
-    <ClCompile Include="Scenario5_WriteAndReadAFileUsingAStream.xaml.cpp" />
-    <ClCompile Include="Scenario6_DisplayFileProperties.xaml.cpp" />
-    <ClCompile Include="Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml.cpp" />
-    <ClCompile Include="Scenario8_CopyAFile.xaml.cpp" />
-    <ClCompile Include="Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml.cpp" />
-    <ClCompile Include="Scenario10_DeleteAFile.xaml.cpp" />
-    <ClCompile Include="Scenario11_TryToGetAFileWithoutGettingAnError.xaml.cpp" />
+    <ClCompile Include="Scenario1_Create.xaml.cpp" />
+    <ClCompile Include="Scenario2_GetParent.xaml.cpp" />
+    <ClCompile Include="Scenario3_Text.xaml.cpp" />
+    <ClCompile Include="Scenario4_Bytes.xaml.cpp" />
+    <ClCompile Include="Scenario5_Stream.xaml.cpp" />
+    <ClCompile Include="Scenario6_Properties.xaml.cpp" />
+    <ClCompile Include="Scenario7_FutureAccess.xaml.cpp" />
+    <ClCompile Include="Scenario8_Copy.xaml.cpp" />
+    <ClCompile Include="Scenario9_Compare.xaml.cpp" />
+    <ClCompile Include="Scenario10_Delete.xaml.cpp" />
+    <ClCompile Include="Scenario11_TryGet.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_CreateAFileInThePicturesLibrary.xaml.h" />
-    <ClInclude Include="Scenario2_GetTheParentFolderOfAFile.xaml.h" />
-    <ClInclude Include="Scenario3_WriteAndReadTextInAFile.xaml.h" />
-    <ClInclude Include="Scenario4_WriteAndReadBytesInAFile.xaml.h" />
-    <ClInclude Include="Scenario5_WriteAndReadAFileUsingAStream.xaml.h" />
-    <ClInclude Include="Scenario6_DisplayFileProperties.xaml.h" />
-    <ClInclude Include="Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml.h" />
-    <ClInclude Include="Scenario8_CopyAFile.xaml.h" />
-    <ClInclude Include="Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml.h" />
-    <ClInclude Include="Scenario10_DeleteAFile.xaml.h" />
-    <ClInclude Include="Scenario11_TryToGetAFileWithoutGettingAnError.xaml.h" />
+    <ClInclude Include="Scenario1_Create.xaml.h" />
+    <ClInclude Include="Scenario2_GetParent.xaml.h" />
+    <ClInclude Include="Scenario3_Text.xaml.h" />
+    <ClInclude Include="Scenario4_Bytes.xaml.h" />
+    <ClInclude Include="Scenario5_Stream.xaml.h" />
+    <ClInclude Include="Scenario6_Properties.xaml.h" />
+    <ClInclude Include="Scenario7_FutureAccess.xaml.h" />
+    <ClInclude Include="Scenario8_Copy.xaml.h" />
+    <ClInclude Include="Scenario9_Compare.xaml.h" />
+    <ClInclude Include="Scenario10_Delete.xaml.h" />
+    <ClInclude Include="Scenario11_TryGet.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -54,17 +54,17 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Filter>Styles</Filter>
     </Page>
-    <Page Include="..\shared\Scenario1_CreateAFileInThePicturesLibrary.xaml" />
-    <Page Include="..\shared\Scenario2_GetTheParentFolderOfAFile.xaml" />
-    <Page Include="..\shared\Scenario3_WriteAndReadTextInAFile.xaml" />
-    <Page Include="..\shared\Scenario4_WriteAndReadBytesInAFile.xaml" />
-    <Page Include="..\shared\Scenario5_WriteAndReadAFileUsingAStream.xaml" />
-    <Page Include="..\shared\Scenario6_DisplayFileProperties.xaml" />
-    <Page Include="..\shared\Scenario7_TrackAFileOrFolderSoThatYouCanAccessItLater.xaml" />
-    <Page Include="..\shared\Scenario8_CopyAFile.xaml" />
-    <Page Include="..\shared\Scenario9_CompareTwoFilesToSeeIfTheyAreTheSame.xaml" />
-    <Page Include="..\shared\Scenario10_DeleteAFile.xaml" />
-    <Page Include="..\shared\Scenario11_TryToGetAFileWithoutGettingAnError.xaml" />
+    <Page Include="..\shared\Scenario1_Create.xaml" />
+    <Page Include="..\shared\Scenario2_GetParent.xaml" />
+    <Page Include="..\shared\Scenario3_Text.xaml" />
+    <Page Include="..\shared\Scenario4_Bytes.xaml" />
+    <Page Include="..\shared\Scenario5_Stream.xaml" />
+    <Page Include="..\shared\Scenario6_Properties.xaml" />
+    <Page Include="..\shared\Scenario7_FutureAccess.xaml" />
+    <Page Include="..\shared\Scenario8_Copy.xaml" />
+    <Page Include="..\shared\Scenario9_Compare.xaml" />
+    <Page Include="..\shared\Scenario10_Delete.xaml" />
+    <Page Include="..\shared\Scenario11_TryGet.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
