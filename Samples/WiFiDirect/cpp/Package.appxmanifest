@@ -48,7 +48,7 @@
     </Applications>
 
     <Capabilities>
-        <Capability Name="internetClient" />
+        <Capability Name="internetClientServer" />
         <DeviceCapability Name="proximity" />
     </Capabilities>
 </Package>
