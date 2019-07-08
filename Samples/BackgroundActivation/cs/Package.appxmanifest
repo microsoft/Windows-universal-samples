@@ -38,7 +38,7 @@
               Square44x44Logo="Assets\SmallTile-sdk.png"
               Description="Background Activation C# Sample"
               BackgroundColor="#00b2f0">
-              <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\smalltile-sdk.png" />
+              <uap:LockScreen Notification="badgeAndTileText" BadgeLogo="Assets\badge-logo.png" />
                 <uap:SplashScreen Image="Assets\Splash-sdk.png" />
                 <uap:DefaultTile Wide310x150Logo="Assets\tile-sdk.png" >
                     <uap:ShowNameOnTiles>
