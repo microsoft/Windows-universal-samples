@@ -181,6 +181,9 @@
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\media\badge-logo.png">
+      <Link>Assets\badge-logo.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>
@@ -205,7 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.0.0</Version>
+      <Version>6.2.8</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
