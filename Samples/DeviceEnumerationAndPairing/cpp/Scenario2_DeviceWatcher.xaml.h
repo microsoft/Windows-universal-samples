@@ -10,11 +10,10 @@
 namespace SDKTemplate
 {
     [Windows::Foundation::Metadata::WebHostHidden]
-    [Windows::UI::Xaml::Data::Bindable]
-    public ref class Scenario2 sealed
+    public ref class Scenario2_DeviceWatcher sealed
     {
     public:
-        Scenario2();
+        Scenario2_DeviceWatcher();
 
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;

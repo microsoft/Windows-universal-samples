@@ -1,6 +1,6 @@
 ﻿<!-- Copyright (c) Microsoft. All rights reserved. -->
 <Page
-    x:Class="SDKTemplate.Scenario8"
+    x:Class="SDKTemplate.Scenario8_PairDevice"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SDKTemplate"
@@ -9,116 +9,110 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-
         <DataTemplate x:Key="ComboBoxItemTemplate">
             <TextBlock Margin="0,0,10,0" Text="{Binding Path=DisplayName}" />
         </DataTemplate>
 
-        <DataTemplate x:Key="ResultsListViewTemplate">
+        <DataTemplate x:Key="ResultsListViewTemplate" x:DataType="local:DeviceInformationDisplay">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*" MinWidth="100"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Height="40" Width="40" Margin="5" VerticalAlignment="Top">
-                    <Image Source="{Binding Path=GlyphBitmapImage}"
+                    <Image Source="{x:Bind GlyphBitmapImage, Mode=OneWay}"
                            Stretch="UniformToFill"/>
                 </Border>
                 <Border Grid.Column="1" Margin="5">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Name:" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="{x:Bind Name, Mode=OneWay}" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Id:" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding Path=Id}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{x:Bind Id, Mode=OneWay}" TextWrapping="Wrap"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="CanPair:" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding Path=CanPair}"/>
+                            <TextBlock Text="{x:Bind CanPair, Mode=OneWay}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="IsPaired:" Margin="0,0,5,0"/>
-                            <TextBlock Text="{Binding Path=IsPaired}"/>
+                            <TextBlock Text="{x:Bind IsPaired, Mode=OneWay}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
             </Grid>
         </DataTemplate>
-        
     </Page.Resources>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="RootGrid" Margin="12,20,12,12">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <ScrollViewer Grid.Row="0" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,15,0">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,10">
+                This scenario demonstrates how to perform basic pairing. Basic pairing allows you to tell Windows which device you want paired, and then Windows will
+                handle the ceremony and the UI. If you want to display your own UI and be involved in the pairing ceremony, please see the Custom Pairing scenario.
+                <LineBreak />This method can be used to pair devices like WiFiDirect, WSD, UPnP, Bluetooth or Bluetooth LE devices.
+                <LineBreak />Pairing can only be performed on DeviceInformation objects of kind DeviceInformationKind.AssociationEndpoint.
+            </TextBlock>
 
-                    <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
-                    <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,10">
-                        This scenario demonstrates how to perform basic pairing. Basic pairing allows you to tell Windows which device you want paired, and then Windows will 
-                        handle the ceremony and the UI. If you want to display your own UI and be involved in the pairing ceremony, please see the Custom Pairing scenario.
-                        <LineBreak />This method can be used to pair devices like WiFiDirect, WSD, UPnP, Bluetooth or Bluetooth LE devices.
-                        <LineBreak />Pairing can only be performed on DeviceInformation objects of kind DeviceInformationKind.AssociationEndpoint.
-                    </TextBlock>
+            <TextBlock Margin="0,0,0,2" Text="Choose a device selector:" />
+            <ComboBox x:Name="selectorComboBox"
+                      Margin="0,0,0,5"
+                      HorizontalAlignment="Left"
+                      ItemTemplate="{StaticResource ComboBoxItemTemplate}" />
 
-                    <TextBlock Margin="0,0,0,2" Text="Choose a device selector:" />
-                    <ComboBox x:Name="selectorComboBox" 
-                              Margin="0,0,0,5"
-                              HorizontalAlignment="Left" 
-                              ItemTemplate="{StaticResource ComboBoxItemTemplate}" />
+            <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="60">
+                <Button x:Name="startWatcherButton"
+                        Margin="1"
+                        Click="StartWatcherButton_Click"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VariableSizedWrapGrid.ColumnSpan="2">
+                    Start Watcher
+                </Button>
+                <Button x:Name="stopWatcherButton"
+                        Margin="1"
+                        IsEnabled="False"
+                        Click="StopWatcherButton_Click"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VariableSizedWrapGrid.ColumnSpan="2">
+                    Stop Watcher
+                </Button>
+                <Button x:Name="pairButton"
+                        Margin="1"
+                        IsEnabled="False"
+                        Click="PairButton_Click"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VariableSizedWrapGrid.ColumnSpan="3">
+                    Pair Selected Device
+                </Button>
+                <Button x:Name="unpairButton"
+                        Margin="1"
+                        IsEnabled="False"
+                        Click="UnpairButton_Click"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VariableSizedWrapGrid.ColumnSpan="3">
+                    Unpair Selected Device
+                </Button>
+            </VariableSizedWrapGrid>
+        </StackPanel>
 
-                    <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="60">
-                        <Button x:Name="startWatcherButton"
-                                Margin="1"
-                                Click="StartWatcherButton_Click"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                VariableSizedWrapGrid.ColumnSpan="2">
-                            Start Watcher
-                        </Button>
-                        <Button x:Name="stopWatcherButton"
-                                Margin="1"
-                                IsEnabled="False"
-                                Click="StopWatcherButton_Click"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                VariableSizedWrapGrid.ColumnSpan="2">
-                            Stop Watcher
-                        </Button>
-                        <Button x:Name="pairButton"
-                                Margin="1"
-                                IsEnabled="False"
-                                Click="PairButton_Click"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                VariableSizedWrapGrid.ColumnSpan="3">
-                            Pair Selected Device
-                        </Button>
-                        <Button x:Name="unpairButton"
-                                Margin="1"
-                                IsEnabled="False"
-                                Click="UnpairButton_Click"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                VariableSizedWrapGrid.ColumnSpan="3">
-                            Unpair Selected Device
-                        </Button>
-                    </VariableSizedWrapGrid>
-
-                    <ListView x:Name="resultsListView" BorderBrush="AntiqueWhite" BorderThickness="1"
-                              MinHeight="20" Margin="0,10,0,0"
-                              HorizontalContentAlignment="Stretch"
-                              ItemTemplate="{StaticResource ResultsListViewTemplate}"
-                              SelectionChanged="ResultsListView_SelectionChanged"
-                              MaxHeight="450"/>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+        <ListView x:Name="resultsListView" BorderBrush="AntiqueWhite" BorderThickness="1"
+                  Grid.Row="1"
+                  MinHeight="20" Margin="0,10,0,0"
+                  HorizontalContentAlignment="Stretch"
+                  ItemTemplate="{StaticResource ResultsListViewTemplate}"
+                  SelectionChanged="ResultsListView_SelectionChanged"
+                  MaxHeight="450"/>
     </Grid>
 </Page>

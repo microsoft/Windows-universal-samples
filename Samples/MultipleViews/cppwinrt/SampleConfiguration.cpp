@@ -128,7 +128,7 @@ fire_and_forget winrt::SDKTemplate::App_OnActivated(IActivatedEventArgs const& e
                 SampleState::MainViewId = ApplicationView::GetForCurrentView().Id();
             }
 
-            auto rootPage = implementation::MainPage::Current();
+            auto rootPage = MainPage::Current();
             rootPage.Navigate(xaml_typename<Scenario3>(), nullptr);
                 rootPage.NotifyUser(L"Main window was launched with protocol: " + uri.AbsoluteUri(),
                     NotifyType::StatusMessage);

@@ -28,7 +28,7 @@ namespace winrt::SDKTemplate::implementation
         void EnableControls_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
         event_token windowSizeChangedToken;
 
         void UpdateFullScreenModeStatus();

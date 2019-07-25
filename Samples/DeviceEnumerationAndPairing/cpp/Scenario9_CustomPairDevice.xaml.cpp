@@ -24,14 +24,14 @@ using namespace Windows::Security::Credentials;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario9::Scenario9()
+Scenario9_CustomPairDevice::Scenario9_CustomPairDevice()
 {
     InitializeComponent();
     deviceWatcherHelper = ref new DeviceWatcherHelper(resultCollection, Dispatcher);
-    deviceWatcherHelper->DeviceChanged += ref new TypedEventHandler<DeviceWatcher^, String^>(this, &Scenario9::OnDeviceListChanged);
+    deviceWatcherHelper->DeviceChanged += ref new TypedEventHandler<DeviceWatcher^, String^>(this, &Scenario9_CustomPairDevice::OnDeviceListChanged);
 }
 
-void Scenario9::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario9_CustomPairDevice::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
 
@@ -42,22 +42,22 @@ void Scenario9::OnNavigatedTo(NavigationEventArgs^ e)
     protectionLevelComboBox->SelectedIndex = 0;
 }
 
-void Scenario9::OnNavigatedFrom(NavigationEventArgs^ e)
+void Scenario9_CustomPairDevice::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     deviceWatcherHelper->Reset();
 }
 
-void Scenario9::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StartWatcher();
 }
 
-void Scenario9::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StopWatcher();
 }
 
-void Scenario9::StartWatcher()
+void Scenario9_CustomPairDevice::StartWatcher()
 {
     startWatcherButton->IsEnabled = false;
     resultCollection->Clear();
@@ -89,7 +89,7 @@ void Scenario9::StartWatcher()
     stopWatcherButton->IsEnabled = true;
 }
 
-void Scenario9::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
+void Scenario9_CustomPairDevice::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
 {
     // If the item being updated is currently "selected", then update the pairing buttons
     DeviceInformationDisplay^ selectedDeviceInfoDisp = safe_cast<DeviceInformationDisplay^>(resultsListView->SelectedItem);
@@ -99,7 +99,7 @@ void Scenario9::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
     }
 }
 
-void Scenario9::StopWatcher()
+void Scenario9_CustomPairDevice::StopWatcher()
 {
     stopWatcherButton->IsEnabled = false;
 
@@ -108,7 +108,7 @@ void Scenario9::StopWatcher()
     startWatcherButton->IsEnabled = true;
 }
 
-void Scenario9::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // Gray out the pair button and results view while pairing is in progress.
     resultsListView->IsEnabled = false;
@@ -125,7 +125,7 @@ void Scenario9::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
     DeviceInformationCustomPairing^ customPairing = deviceInfoDisp->DeviceInfo->Pairing->Custom;
 
     // Hook up handlers for the pairing events before starting the pairing
-    EventRegistrationToken handlerPairingRequestedToken = customPairing->PairingRequested += ref new TypedEventHandler<DeviceInformationCustomPairing^, DevicePairingRequestedEventArgs^>(this, &Scenario9::PairingRequestedHandler);
+    EventRegistrationToken handlerPairingRequestedToken = customPairing->PairingRequested += ref new TypedEventHandler<DeviceInformationCustomPairing^, DevicePairingRequestedEventArgs^>(this, &Scenario9_CustomPairDevice::PairingRequestedHandler);
 
     create_task(customPairing->PairAsync(ceremoniesSelected, protectionLevel)).then(
         [this, customPairing, handlerPairingRequestedToken](DevicePairingResult^ pairingResult)
@@ -142,7 +142,7 @@ void Scenario9::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
     }, task_continuation_context::use_current());
 }
 
-void Scenario9::UnpairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::UnpairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // Gray out the unpair button and results view while unpairing is in progress.
     resultsListView->IsEnabled = false;
@@ -163,7 +163,7 @@ void Scenario9::UnpairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::
     }, task_continuation_context::use_current());
 }
 
-void Scenario9::PairingRequestedHandler(DeviceInformationCustomPairing^ sender, DevicePairingRequestedEventArgs^ args)
+void Scenario9_CustomPairDevice::PairingRequestedHandler(DeviceInformationCustomPairing^ sender, DevicePairingRequestedEventArgs^ args)
 {
     switch (args->PairingKind)
     {
@@ -254,7 +254,7 @@ void Scenario9::PairingRequestedHandler(DeviceInformationCustomPairing^ sender, 
     }
 }
 
-void Scenario9::ShowPairingPanel(Platform::String^ text, Windows::Devices::Enumeration::DevicePairingKinds pairingKind)
+void Scenario9_CustomPairDevice::ShowPairingPanel(Platform::String^ text, Windows::Devices::Enumeration::DevicePairingKinds pairingKind)
 {
     pairingPanel->Visibility = ::Visibility::Collapsed;
     pinEntryTextBox->Visibility = ::Visibility::Collapsed;
@@ -293,13 +293,13 @@ void Scenario9::ShowPairingPanel(Platform::String^ text, Windows::Devices::Enume
     pairingPanel->Visibility = ::Visibility::Visible;
 }
 
-void Scenario9::HidePairingPanel()
+void Scenario9_CustomPairDevice::HidePairingPanel()
 {
     pairingPanel->Visibility = ::Visibility::Collapsed;
     pairingTextBlock->Text = "";
 }
 
-concurrency::task<Platform::String^> Scenario9::GetPinFromUserAsync()
+concurrency::task<Platform::String^> Scenario9_CustomPairDevice::GetPinFromUserAsync()
 {
     HidePairingPanel();
     CompleteProvidePinTask();
@@ -312,12 +312,12 @@ concurrency::task<Platform::String^> Scenario9::GetPinFromUserAsync()
     return concurrency::task<String^>(providePinTaskSrc);
 }
 
-void Scenario9::CompleteProvidePinTask(Platform::String^ pin)
+void Scenario9_CustomPairDevice::CompleteProvidePinTask(Platform::String^ pin)
 {
     providePinTaskSrc.set(pin);
 }
 
-concurrency::task<PasswordCredential^> Scenario9::GetPasswordCredentialFromUserAsync()
+concurrency::task<PasswordCredential^> Scenario9_CustomPairDevice::GetPasswordCredentialFromUserAsync()
 {
     HidePairingPanel();
     CompletePasswordCredential(); // Abandon any previous pin request.
@@ -331,15 +331,22 @@ concurrency::task<PasswordCredential^> Scenario9::GetPasswordCredentialFromUserA
     return concurrency::task<PasswordCredential^>(providePasswordCredentialSrc);
 }
 
-void Scenario9::CompletePasswordCredential(Platform::String^ username, Platform::String^ password)
+void Scenario9_CustomPairDevice::CompletePasswordCredential(Platform::String^ username, Platform::String^ password)
 {
-    auto passwordCredential = ref new PasswordCredential();
-    passwordCredential->UserName = username;
-    passwordCredential->Password = password;
-    providePasswordCredentialSrc.set(passwordCredential);
+    if (username)
+    {
+        auto passwordCredential = ref new PasswordCredential();
+        passwordCredential->UserName = username;
+        passwordCredential->Password = password;
+        providePasswordCredentialSrc.set(passwordCredential);
+    }
+    else
+    {
+        providePasswordCredentialSrc.set(nullptr);
+    }
 }
 
-concurrency::task<bool> Scenario9::GetUserConfirmationAsync(Platform::String^ pin)
+concurrency::task<bool> Scenario9_CustomPairDevice::GetUserConfirmationAsync(Platform::String^ pin)
 {
     HidePairingPanel();
     CompleteConfirmPinTask(false);
@@ -352,38 +359,38 @@ concurrency::task<bool> Scenario9::GetUserConfirmationAsync(Platform::String^ pi
     return concurrency::task<bool>(confirmPinTaskSrc);
 }
 
-void Scenario9::CompleteConfirmPinTask(bool accept)
+void Scenario9_CustomPairDevice::CompleteConfirmPinTask(bool accept)
 {
     confirmPinTaskSrc.set(accept);
 }
 
-void Scenario9::okButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::okButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // OK button is only used for the ProvidePin scenario
     CompleteProvidePinTask(pinEntryTextBox->Text);
     HidePairingPanel();
 }
 
-void SDKTemplate::Scenario9::verifyButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void SDKTemplate::Scenario9_CustomPairDevice::verifyButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // verify button is only used for the ProvidePin scenario
     CompletePasswordCredential(usernameEntryTextBox->Text, passwordEntryTextBox->Text);
     HidePairingPanel();
 }
 
-void Scenario9::yesButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::yesButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     CompleteConfirmPinTask(true);
     HidePairingPanel();
 }
 
-void Scenario9::noButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario9_CustomPairDevice::noButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     CompleteConfirmPinTask(false);
     HidePairingPanel();
 }
 
-DevicePairingKinds Scenario9::GetSelectedCeremonies()
+DevicePairingKinds Scenario9_CustomPairDevice::GetSelectedCeremonies()
 {
     DevicePairingKinds ceremonySelection = DevicePairingKinds::None;
 
@@ -411,12 +418,12 @@ DevicePairingKinds Scenario9::GetSelectedCeremonies()
     return ceremonySelection;
 }
 
-void Scenario9::ResultsListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
+void Scenario9_CustomPairDevice::ResultsListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
     UpdatePairingButtons();
 }
 
-void Scenario9::UpdatePairingButtons()
+void Scenario9_CustomPairDevice::UpdatePairingButtons()
 {
     DeviceInformationDisplay^ deviceInfoDisp = static_cast<DeviceInformationDisplay^>(resultsListView->SelectedItem);
 

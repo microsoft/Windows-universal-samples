@@ -10,7 +10,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Security.Credentials;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -19,7 +18,7 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario9 : Page
+    public sealed partial class Scenario9_CustomPairDevice : Page
     {
         private MainPage rootPage = MainPage.Current;
 
@@ -31,7 +30,7 @@ namespace SDKTemplate
 
         private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
-        public Scenario9()
+        public Scenario9_CustomPairDevice()
         {
             this.InitializeComponent();
 
@@ -53,6 +52,9 @@ namespace SDKTemplate
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             deviceWatcherHelper.Reset();
+            CompleteProvidePinTask(); // Abandon any previous pin request.
+            CompletePasswordCredential(); // Abandon any previous pin request.
+            CompleteConfirmPinTask(false); // Abandon any previous request.
         }
 
         private void StartWatcherButton_Click(object sender, RoutedEventArgs e)
@@ -98,6 +100,13 @@ namespace SDKTemplate
             stopWatcherButton.IsEnabled = true;
         }
 
+        private void StopWatcher()
+        {
+            stopWatcherButton.IsEnabled = false;
+            deviceWatcherHelper.StopWatcher();
+            startWatcherButton.IsEnabled = true;
+        }
+
         private void OnDeviceListChanged(DeviceWatcher sender, string id)
         {
             // If the item being updated is currently "selected", then update the pairing buttons
@@ -106,13 +115,6 @@ namespace SDKTemplate
             {
                 UpdatePairingButtons();
             }
-        }
-
-        private void StopWatcher()
-        {
-            stopWatcherButton.IsEnabled = false;
-            deviceWatcherHelper.StopWatcher();
-            startWatcherButton.IsEnabled = true;
         }
 
         private async void PairButton_Click(object sender, RoutedEventArgs e)
@@ -228,7 +230,7 @@ namespace SDKTemplate
                     // then complete the deferral.
                     var displayMessageDeferral = args.GetDeferral();
 
-                    await rootPage.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                     {
                         bool accept = await GetUserConfirmationAsync(args.Pin);
                         if (accept)
@@ -329,10 +331,14 @@ namespace SDKTemplate
         {
             if (providePasswordCredential != null)
             {
-                var passwordCredential = new PasswordCredential();
-                passwordCredential.UserName = username;
-                passwordCredential.Password = password;
-                providePasswordCredential.SetResult(passwordCredential);
+                if (String.IsNullOrEmpty(username))
+                {
+                    providePasswordCredential.SetResult(null);
+                }
+                else
+                {
+                    providePasswordCredential.SetResult(new PasswordCredential() { UserName = username, Password = password });
+                }
                 providePasswordCredential = null;
             }
         }

@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "BluetoothLEDeviceDisplay.h"
+#include "BluetoothLEDeviceDisplay.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

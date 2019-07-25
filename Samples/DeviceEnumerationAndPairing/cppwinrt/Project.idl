@@ -1,0 +1,98 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass DeviceSelectorInfo
+    {
+        String DisplayName{ get; };
+    };
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass DeviceInformationKindChoice
+    {
+        String DisplayName{ get; };
+    };
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass ProtectionLevelSelectorInfo
+    {
+        String DisplayName{ get; };
+    };
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass DeviceInformationDisplay : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        String Id{ get; };
+        Windows.Devices.Enumeration.DeviceInformationKind Kind{ get; };
+        String Name{ get; };
+        Windows.UI.Xaml.Media.Imaging.BitmapImage GlyphBitmapImage{ get; };
+        Boolean CanPair{ get; };
+        Boolean IsPaired{ get; };
+        IMapView<String, Object> Properties{ get; };
+        String GetPropertyForDisplay(String key);
+    };
+
+    [default_interface]
+    runtimeclass Scenario1_DevicePicker : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_DevicePicker();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_DeviceWatcher : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_DeviceWatcher();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_BackgroundDeviceWatcher : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_BackgroundDeviceWatcher();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_Snapshot : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_Snapshot();
+    }
+
+    [default_interface]
+    runtimeclass Scenario5_GetSingleDevice : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_GetSingleDevice();
+    }
+
+    [default_interface]
+    runtimeclass Scenario6_CustomFilterAddedProps : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario6_CustomFilterAddedProps();
+    }
+
+    [default_interface]
+    runtimeclass Scenario7_DeviceInformationKind : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario7_DeviceInformationKind();
+    }
+
+    [default_interface]
+    runtimeclass Scenario8_PairDevice : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario8_PairDevice();
+    }
+
+    [default_interface]
+    runtimeclass Scenario9_CustomPairDevice : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario9_CustomPairDevice();
+    }
+}

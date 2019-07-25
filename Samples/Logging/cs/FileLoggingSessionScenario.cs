@@ -169,12 +169,11 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// This handler is called by the FileLoggingSession instance when a log
-        /// file reaches a size of 256MB. When FileLoggingSession calls this handler, 
-        /// it's effectively giving the developer a chance to take ownership of the
-        /// log file. Typically, this handler should move or rename the log file.
-        /// Note that once this handler has returned, the FileLoggingSession is free
-        /// to reuse the original log file name for a new log file at any time.
+        // When the log file gets large, the system closes it and starts a new one.
+        // The LogFileGenerated event is raised to give the app a chance to move
+        // the recently-generated log file to a safe place. When the handler returns,
+        // the FileLoggingSession may reuse the file name for a new log file.
+        // This function moves the log file to an app-defined location.
         /// </summary>
         /// <param name="sender">The FileLoggingSession which has generated a new file.</param>
         /// <param name="args">Contains a StorageFile field LogFileGeneratedEventArgs.File representing the new log file.</param>

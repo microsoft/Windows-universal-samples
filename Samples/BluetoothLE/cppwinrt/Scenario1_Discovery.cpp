@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario1_Discovery.h"
+#include "Scenario1_Discovery.g.cpp"
 #include "SampleConfiguration.h"
 #include "BluetoothLEDeviceDisplay.h"
 

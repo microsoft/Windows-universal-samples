@@ -75,9 +75,9 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario3_ServerForeground.h"
+#include "Scenario3_ServerForeground.g.cpp"
 #include "SampleConfiguration.h"
 #include "PresentationFormats.h"
 

@@ -23,7 +23,7 @@ namespace winrt::SDKTemplate::implementation
         fire_and_forget GetThumbnailButton_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
     };
 }
 

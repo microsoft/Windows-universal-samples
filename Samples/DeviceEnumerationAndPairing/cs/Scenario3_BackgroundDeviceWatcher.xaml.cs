@@ -16,14 +16,14 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario3 : Page
+    public sealed partial class Scenario3_BackgroundDeviceWatcher : Page
     {
         private MainPage rootPage = MainPage.Current;
 
         private string backgroundTaskName = "DeviceEnumerationCs_BackgroundTaskName";
         private IBackgroundTaskRegistration backgroundTaskRegistration = null;
 
-        public Scenario3()
+        public Scenario3_BackgroundDeviceWatcher()
         {
             this.InitializeComponent();
         }

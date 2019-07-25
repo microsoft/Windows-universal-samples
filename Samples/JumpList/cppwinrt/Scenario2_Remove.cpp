@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario2_Remove.h"
+#include "Scenario2_Remove.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

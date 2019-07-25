@@ -28,11 +28,16 @@ Copyright (c) Microsoft Corporation. All rights reserved
         </div>
         <div id="scenarioContent">
             <p>
-                Enter a device interface id:
+                Remembered device interface id:
                 <br>
-                <input type="text" id="interfaceIdTextBox" style="width:100%" class="win-textbox">
+                <input type="text" id="interfaceIdTextBox" style="width:100%" disabled class="win-textbox">
             </p>
-            <button id="getButton" class="win-button">Get</button>
+            <p>
+                Remembered device information kind:
+                <br>
+                <input type="text" id="informationKindTextBox" style="width:100%" disabled class="win-textbox">
+            </p>
+            <button id="getButton" disabled class="win-button">Get</button>
         </div>
         <div id="resultsListView" style="border:2px solid white;" data-win-control="WinJS.UI.ListView" data-win-options="{
                 itemTemplate: select(&apos;#resultsViewTemplate&apos;),

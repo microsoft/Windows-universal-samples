@@ -16,7 +16,7 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario8 : Page
+    public sealed partial class Scenario8_PairDevice : Page
     {
         private MainPage rootPage = MainPage.Current;
 
@@ -24,7 +24,7 @@ namespace SDKTemplate
 
         private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
-        public Scenario8()
+        public Scenario8_PairDevice()
         {
             this.InitializeComponent();
 
@@ -88,6 +88,15 @@ namespace SDKTemplate
             stopWatcherButton.IsEnabled = true;
         }
 
+        private void StopWatcher()
+        {
+            stopWatcherButton.IsEnabled = false;
+
+            deviceWatcherHelper.StopWatcher();
+
+            startWatcherButton.IsEnabled = true;
+        }
+
         private void OnDeviceListChanged(DeviceWatcher sender, string id)
         {
             // If the item being updated is currently "selected", then update the pairing buttons
@@ -96,15 +105,6 @@ namespace SDKTemplate
             {
                 UpdatePairingButtons();
             }
-        }
-
-        private void StopWatcher()
-        {
-            stopWatcherButton.IsEnabled = false;
-
-            deviceWatcherHelper.StopWatcher();
-
-            startWatcherButton.IsEnabled = true;
         }
 
         private async void PairButton_Click(object sender, RoutedEventArgs e)

@@ -181,6 +181,9 @@
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
+    <Content Include="..\..\..\SharedContent\media\badge-logo.png">
+      <Link>Assets\badge-logo.png</Link>
+    </Content>
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>

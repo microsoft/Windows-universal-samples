@@ -55,6 +55,11 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [RadialControllerMenuItem](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.radialcontrollermenuitem.aspx)  
 [RadialControllerConfiguration](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.radialcontrollerconfiguration.aspx)  
 
+### Other samples
+
+* [RadialController for C++ desktop apps](https://github.com/Microsoft/Windows-classic-samples/tree/master/Samples/RadialController/cpp)
+* [RadialController for WinForms desktop apps](https://github.com/Microsoft/Windows-classic-samples/tree/master/Samples/RadialController/cs/winforms)
+
 ## System requirements
 
 **Client:** Windows 10

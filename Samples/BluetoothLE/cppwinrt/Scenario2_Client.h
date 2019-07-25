@@ -23,16 +23,6 @@ namespace winrt::SDKTemplate::implementation
         void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
         fire_and_forget OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
 
-        Windows::Foundation::Collections::IObservableVector<IInspectable> ServiceCollection()
-        {
-            return m_serviceCollection;
-        }
-
-        Windows::Foundation::Collections::IObservableVector<IInspectable> CharacteristicCollection()
-        {
-            return m_characteristicCollection;
-        }
-
         fire_and_forget ConnectButton_Click();
         fire_and_forget ServiceList_SelectionChanged();
         fire_and_forget CharacteristicList_SelectionChanged();
@@ -42,9 +32,7 @@ namespace winrt::SDKTemplate::implementation
         fire_and_forget ValueChangedSubscribeToggle_Click();
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
-        Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> m_serviceCollection = single_threaded_observable_vector<Windows::Foundation::IInspectable>();
-        Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> m_characteristicCollection = single_threaded_observable_vector<Windows::Foundation::IInspectable>();
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
         Windows::Devices::Bluetooth::BluetoothLEDevice bluetoothLeDevice{ nullptr };
         Windows::Devices::Bluetooth::GenericAttributeProfile::GattCharacteristic selectedCharacteristic{ nullptr };
 

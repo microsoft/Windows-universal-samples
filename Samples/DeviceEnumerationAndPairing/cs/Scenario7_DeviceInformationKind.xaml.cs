@@ -17,7 +17,7 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario7 : Page
+    public sealed partial class Scenario7_DeviceInformationKind : Page
     {
         private MainPage rootPage = MainPage.Current;
 
@@ -25,7 +25,7 @@ namespace SDKTemplate
 
         private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
-        public Scenario7()
+        public Scenario7_DeviceInformationKind()
         {
             this.InitializeComponent();
         }

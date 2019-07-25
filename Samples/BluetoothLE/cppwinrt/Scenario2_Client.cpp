@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario2_Client.h"
+#include "Scenario2_Client.g.cpp"
 #include "SampleConfiguration.h"
 #include "BluetoothLEAttributeDisplay.h"
 
@@ -24,6 +25,7 @@ using namespace Windows::Globalization;
 using namespace Windows::Security::Cryptography;
 using namespace Windows::Storage::Streams;
 using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
 namespace
@@ -212,7 +214,10 @@ namespace winrt::SDKTemplate::implementation
                 rootPage.NotifyUser(L"Found " + to_hstring(services.Size()) + L" services", NotifyType::StatusMessage);
                 for (auto&& service : services)
                 {
-                    m_serviceCollection.Append(make<BluetoothLEAttributeDisplay>(service));
+                    ComboBoxItem item;
+                    item.Content(box_value(DisplayHelpers::GetServiceName(service)));
+                    item.Tag(service);
+                    ServiceList().Items().Append(item);
                 }
                 ConnectButton().Visibility(Visibility::Collapsed);
                 ServiceList().Visibility(Visibility::Visible);
@@ -230,21 +235,22 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
 
-        auto attributeInfoDisp = ServiceList().SelectedItem().as<SDKTemplate::BluetoothLEAttributeDisplay>();
+        auto selectedItem = ServiceList().SelectedItem().as<ComboBoxItem>();
+        GattDeviceService service = selectedItem ? selectedItem.Tag().as<GattDeviceService>() : nullptr;
 
-        m_characteristicCollection.Clear();
+        CharacteristicList().Items().Clear();
         RemoveValueChangedHandler();
 
         IVectorView<GattCharacteristic> characteristics{ nullptr };
         try
         {
             // Ensure we have access to the device.
-            auto accessStatus = co_await attributeInfoDisp.service().RequestAccessAsync();
+            auto accessStatus = co_await service.RequestAccessAsync();
             if (accessStatus == DeviceAccessStatus::Allowed)
             {
                 // BT_Code: Get all the child characteristics of a service. Use the cache mode to specify uncached characterstics only 
                 // and the new Async functions to get the characteristics of unpaired devices as well. 
-                GattCharacteristicsResult result = co_await attributeInfoDisp.service().GetCharacteristicsAsync(BluetoothCacheMode::Uncached);
+                GattCharacteristicsResult result = co_await service.GetCharacteristicsAsync(BluetoothCacheMode::Uncached);
                 if (result.Status() == GattCommunicationStatus::Success)
                 {
                     characteristics = result.Characteristics();
@@ -270,7 +276,10 @@ namespace winrt::SDKTemplate::implementation
         {
             for (GattCharacteristic&& c : characteristics)
             {
-                m_characteristicCollection.Append(make<BluetoothLEAttributeDisplay>(c));
+                ComboBoxItem item;
+                item.Content(box_value(DisplayHelpers::GetCharacteristicName(c)));
+                item.Tag(c);
+                CharacteristicList().Items().Append(item);
             }
         }
         CharacteristicList().Visibility(Visibility::Visible);
@@ -300,18 +309,12 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
 
-        selectedCharacteristic = nullptr;
+        auto selectedItem = ServiceList().SelectedItem().as<ComboBoxItem>();
+        selectedCharacteristic = selectedItem ? selectedItem.Tag().as<GattCharacteristic>() : nullptr;
 
-        auto attributeInfoDisp = CharacteristicList().SelectedItem().as<SDKTemplate::BluetoothLEAttributeDisplay>();
-        if (attributeInfoDisp == nullptr)
-        {
-            EnableCharacteristicPanels(GattCharacteristicProperties::None);
-            co_return;
-        }
-
-        selectedCharacteristic = attributeInfoDisp.characteristic();
         if (selectedCharacteristic == nullptr)
         {
+            EnableCharacteristicPanels(GattCharacteristicProperties::None);
             rootPage.NotifyUser(L"No characteristic selected", NotifyType::ErrorMessage);
             co_return;
         }

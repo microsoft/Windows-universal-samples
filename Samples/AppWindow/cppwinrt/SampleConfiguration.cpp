@@ -27,15 +27,15 @@ IVector<Scenario> implementation::MainPage::scenariosInner = winrt::single_threa
 {
     Scenario{ L"Create and show secondary window", xaml_typename<SDKTemplate::Scenario1_SecondaryWindow>() },
     Scenario{ L"Show window on another display", xaml_typename<SDKTemplate::Scenario2_DisplayRegion>() },
-	Scenario{ L"Specific size for secondary window", xaml_typename<SDKTemplate::Scenario3_Size>() },
-	Scenario{ L"CompactOverlay secondary window",  xaml_typename < SDKTemplate::Scenario4_CompactOverlay>() },
-	Scenario{ L"Position secondary window",  xaml_typename < SDKTemplate::Scenario5_RelativePositioning>() },
+    Scenario{ L"Specific size for secondary window", xaml_typename<SDKTemplate::Scenario3_Size>() },
+    Scenario{ L"CompactOverlay secondary window",  xaml_typename < SDKTemplate::Scenario4_CompactOverlay>() },
+    Scenario{ L"Position secondary window",  xaml_typename < SDKTemplate::Scenario5_RelativePositioning>() },
 });
 
 bool winrt::SDKTemplate::TryParseFloat(hstring const& str, float& result)
 {
-	errno = 0;
-	wchar_t* endptr;
-	result = wcstof(str.c_str(), &endptr);
-	return errno == 0 && std::isfinite(result);
+    errno = 0;
+    wchar_t* endptr;
+    result = wcstof(str.c_str(), &endptr);
+    return errno == 0 && std::isfinite(result);
 }

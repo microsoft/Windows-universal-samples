@@ -8,14 +8,11 @@
 
 namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     [Windows::Foundation::Metadata::WebHostHidden]
-    public ref class Scenario3 sealed
+    public ref class Scenario3_BackgroundDeviceWatcher sealed
     {
     public:
-        Scenario3();
+        Scenario3_BackgroundDeviceWatcher();
 
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;

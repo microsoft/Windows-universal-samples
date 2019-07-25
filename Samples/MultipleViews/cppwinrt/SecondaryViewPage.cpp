@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "SecondaryViewPage.h"
+#include "SecondaryViewPage.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

@@ -11,15 +11,16 @@
 
 #include "pch.h"
 #include "MainPage.h"
+#include "MainPage.g.cpp"
 
 using namespace winrt;
-using namespace Windows::Foundation;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Automation::Peers;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Interop;
-using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Xaml::Automation::Peers;
+using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Windows::UI::Xaml::Interop;
+using namespace winrt::Windows::UI::Xaml::Media;
+using namespace winrt::Windows::UI::Xaml::Navigation;
 
 namespace winrt::SDKTemplate::implementation
 {

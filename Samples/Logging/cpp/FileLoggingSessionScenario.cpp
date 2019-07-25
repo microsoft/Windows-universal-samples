@@ -87,9 +87,11 @@ void FileLoggingSessionScenario::OnChannelLoggingEnabled(ILoggingChannel^ sender
     _channelLoggingLevel = sender->Level;
 }
 
-// OnLogFileGenerated handles events from the FileLoggingSession, 
-// where args->File is the StorageFile of the new log file.
-// This function move that file to an app-defined location. 
+// When the log file gets large, the system closes it and starts a new one.
+// The LogFileGenerated event is raised to give the app a chance to move
+// the recently-generated log file to a safe place. When the handler returns,
+// the FileLoggingSession may reuse the file name for a new log file.
+// This function moves the log file to an app-defined location.
 void FileLoggingSessionScenario::OnLogFileGenerated(IFileLoggingSession^ sender, LogFileGeneratedEventArgs^ args)
 {
     InterlockedIncrement(&_logFileGeneratedCount);

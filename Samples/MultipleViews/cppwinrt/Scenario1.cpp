@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario1.h"
+#include "Scenario1.g.cpp"
 #include "SampleConfiguration.h"
 #include "SizePreferenceString.h"
 #include "ViewLifetimeControl.h"

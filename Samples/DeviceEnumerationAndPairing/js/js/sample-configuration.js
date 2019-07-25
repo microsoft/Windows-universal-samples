@@ -108,7 +108,7 @@
             // Watcher may have stopped while we were waiting for our chance to run.
             if (DeviceWatcherHelper.isWatcherStarted(sender)) {
                 for (var i = 0; this._resultCollection.length; i++) {
-                    if (this._resultCollection.getAt(i).id == deviceInfoUpdate.id) {
+                    if (this._resultCollection.getAt(i).id === deviceInfoUpdate.id) {
                         this._resultCollection.splice(i, 1);
                         this._raiseDeviceChanged(sender, deviceInfoUpdate.id);
                         break;

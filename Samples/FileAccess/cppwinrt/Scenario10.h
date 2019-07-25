@@ -23,7 +23,7 @@ namespace winrt::SDKTemplate::implementation
         void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
         fire_and_forget DeleteFileButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
     };
 }
 

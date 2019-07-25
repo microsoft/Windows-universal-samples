@@ -181,9 +181,11 @@
             },
             _onLogFileGenerated: function (args) {
 
-                // This handler is called by the FileLoggingSession instance when a log
-                // file reaches a size of 256MB. When FileLoggingSession calls this handler, 
-                // it's effectively giving the developer a chance to own the log file.
+                // When the log file gets large, the system closes it and starts a new one.
+                // The LogFileGenerated event is raised to give the app a chance to move
+                // the recently-generated log file to a safe place. When the handler returns,
+                // the FileLoggingSession may reuse the file name for a new log file.
+                // This function moves the log file to an app-defined location.
 
                 var data = { scenario: FileLoggingSessionScenario.instance, finalLogFileOfSession: args.file, ourAppLogFolder: null, newLogFileName: null };
                 data.scenario._logFileGeneratedCount++;

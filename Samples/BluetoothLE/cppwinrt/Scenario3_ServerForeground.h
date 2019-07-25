@@ -45,7 +45,7 @@ namespace winrt::SDKTemplate::implementation
             return op >= CalculatorOperators::Add && op < CalculatorOperators::Divide;
         }
 
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
         Windows::Devices::Bluetooth::GenericAttributeProfile::GattServiceProvider serviceProvider{ nullptr };
         Windows::Devices::Bluetooth::GenericAttributeProfile::GattLocalCharacteristic op1Characteristic{ nullptr };
         Windows::Devices::Bluetooth::GenericAttributeProfile::GattLocalCharacteristic op2Characteristic{ nullptr };

@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario3_CustomItems.h"
+#include "Scenario3_CustomItems.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

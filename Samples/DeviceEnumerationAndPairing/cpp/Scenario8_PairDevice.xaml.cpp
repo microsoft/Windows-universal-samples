@@ -21,14 +21,14 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario8::Scenario8()
+Scenario8_PairDevice::Scenario8_PairDevice()
 {
     InitializeComponent();
     deviceWatcherHelper = ref new DeviceWatcherHelper(resultCollection, Dispatcher);
-    deviceWatcherHelper->DeviceChanged += ref new TypedEventHandler<DeviceWatcher^, String^>(this, &Scenario8::OnDeviceListChanged);
+    deviceWatcherHelper->DeviceChanged += ref new TypedEventHandler<DeviceWatcher^, String^>(this, &Scenario8_PairDevice::OnDeviceListChanged);
 }
 
-void Scenario8::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario8_PairDevice::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
     
@@ -36,22 +36,22 @@ void Scenario8::OnNavigatedTo(NavigationEventArgs^ e)
     selectorComboBox->SelectedIndex = 0;
 }
 
-void Scenario8::OnNavigatedFrom(NavigationEventArgs^ e)
+void Scenario8_PairDevice::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     deviceWatcherHelper->Reset();
 }
 
-void Scenario8::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario8_PairDevice::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StartWatcher();
 }
 
-void Scenario8::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario8_PairDevice::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StopWatcher();
 }
 
-void Scenario8::StartWatcher()
+void Scenario8_PairDevice::StartWatcher()
 {
     startWatcherButton->IsEnabled = false;
     resultCollection->Clear();
@@ -84,7 +84,7 @@ void Scenario8::StartWatcher()
     stopWatcherButton->IsEnabled = true;
 }
 
-void Scenario8::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
+void Scenario8_PairDevice::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
 {
     // If the item being updated is currently "selected", then update the pairing buttons
     DeviceInformationDisplay^ selectedDeviceInfoDisp = safe_cast<DeviceInformationDisplay^>(resultsListView->SelectedItem);
@@ -95,7 +95,7 @@ void Scenario8::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
 }
 
 
-void Scenario8::StopWatcher()
+void Scenario8_PairDevice::StopWatcher()
 {
     stopWatcherButton->IsEnabled = false;
 
@@ -104,7 +104,7 @@ void Scenario8::StopWatcher()
     startWatcherButton->IsEnabled = true;
 }
 
-void Scenario8::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario8_PairDevice::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // Gray out the pair button and results view while pairing is in progress.
     resultsListView->IsEnabled = false;
@@ -125,7 +125,7 @@ void Scenario8::PairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::Ro
     }, concurrency::task_continuation_context::use_current());
 }
 
-void Scenario8::UnpairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario8_PairDevice::UnpairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // Gray out the unpair button and results view while unpairing is in progress.
     resultsListView->IsEnabled = false;
@@ -146,12 +146,12 @@ void Scenario8::UnpairButton_Click(Platform::Object^ sender, Windows::UI::Xaml::
     }, concurrency::task_continuation_context::use_current());
 }
 
-void Scenario8::ResultsListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
+void Scenario8_PairDevice::ResultsListView_SelectionChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::SelectionChangedEventArgs^ e)
 {
     UpdatePairingButtons();
 }
 
-void Scenario8::UpdatePairingButtons()
+void Scenario8_PairDevice::UpdatePairingButtons()
 {
     DeviceInformationDisplay^ deviceInfoDisp = safe_cast<DeviceInformationDisplay^>(resultsListView->SelectedItem);
 

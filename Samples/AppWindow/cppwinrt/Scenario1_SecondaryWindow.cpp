@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario1_SecondaryWindow.h"
+#include "Scenario1_SecondaryWindow.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

@@ -17,13 +17,13 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario1 : Page
+    public sealed partial class Scenario1_DevicePicker : Page
     {
         private MainPage rootPage = MainPage.Current;
 
         private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
-        public Scenario1()
+        public Scenario1_DevicePicker()
         {
             this.InitializeComponent();
         }

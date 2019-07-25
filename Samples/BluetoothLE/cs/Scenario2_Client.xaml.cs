@@ -11,8 +11,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Bluetooth;
@@ -36,9 +34,6 @@ namespace SDKTemplate
     public sealed partial class Scenario2_Client : Page
     {
         private MainPage rootPage = MainPage.Current;
-
-        private ObservableCollection<BluetoothLEAttributeDisplay> ServiceCollection = new ObservableCollection<BluetoothLEAttributeDisplay>();
-        private ObservableCollection<BluetoothLEAttributeDisplay> CharacteristicCollection = new ObservableCollection<BluetoothLEAttributeDisplay>();
 
         private BluetoothLEDevice bluetoothLeDevice = null;
         private GattCharacteristic selectedCharacteristic;
@@ -140,7 +135,7 @@ namespace SDKTemplate
                     rootPage.NotifyUser(String.Format("Found {0} services", services.Count), NotifyType.StatusMessage);
                     foreach (var service in services)
                     {
-                        ServiceCollection.Add(new BluetoothLEAttributeDisplay(service));
+                        ServiceList.Items.Add(new ComboBoxItem { Content = DisplayHelpers.GetServiceName(service), Tag = service });
                     }
                     ConnectButton.Visibility = Visibility.Collapsed;
                     ServiceList.Visibility = Visibility.Visible;
@@ -157,21 +152,21 @@ namespace SDKTemplate
         #region Enumerating Characteristics
         private async void ServiceList_SelectionChanged()
         {
-            var attributeInfoDisp = (BluetoothLEAttributeDisplay)ServiceList.SelectedItem;
+            var service = (GattDeviceService)((ComboBoxItem)ServiceList.SelectedItem)?.Tag;
 
-            CharacteristicCollection.Clear();
+            CharacteristicList.Items.Clear();
             RemoveValueChangedHandler();
 
             IReadOnlyList<GattCharacteristic> characteristics = null;
             try
             {
                 // Ensure we have access to the device.
-                var accessStatus = await attributeInfoDisp.service.RequestAccessAsync();
+                var accessStatus = await service.RequestAccessAsync();
                 if (accessStatus == DeviceAccessStatus.Allowed)
                 {
                     // BT_Code: Get all the child characteristics of a service. Use the cache mode to specify uncached characterstics only 
                     // and the new Async functions to get the characteristics of unpaired devices as well. 
-                    var result = await attributeInfoDisp.service.GetCharacteristicsAsync(BluetoothCacheMode.Uncached);
+                    var result = await service.GetCharacteristicsAsync(BluetoothCacheMode.Uncached);
                     if (result.Status == GattCommunicationStatus.Success)
                     {
                         characteristics = result.Characteristics;
@@ -204,7 +199,7 @@ namespace SDKTemplate
 
             foreach (GattCharacteristic c in characteristics)
             {
-                CharacteristicCollection.Add(new BluetoothLEAttributeDisplay(c));
+                CharacteristicList.Items.Add(new ComboBoxItem { Content = DisplayHelpers.GetCharacteristicName(c), Tag = c });
             }
             CharacteristicList.Visibility = Visibility.Visible;
         }
@@ -234,18 +229,10 @@ namespace SDKTemplate
 
         private async void CharacteristicList_SelectionChanged()
         {
-            selectedCharacteristic = null;
-
-            var attributeInfoDisp = (BluetoothLEAttributeDisplay)CharacteristicList.SelectedItem;
-            if (attributeInfoDisp == null)
-            {
-                EnableCharacteristicPanels(GattCharacteristicProperties.None);
-                return;
-            }
-
-            selectedCharacteristic = attributeInfoDisp.characteristic;
+            selectedCharacteristic = (GattCharacteristic)((ComboBoxItem)CharacteristicList.SelectedItem)?.Tag;
             if (selectedCharacteristic == null)
             {
+                EnableCharacteristicPanels(GattCharacteristicProperties.None);
                 rootPage.NotifyUser("No characteristic selected", NotifyType.ErrorMessage);
                 return;
             }

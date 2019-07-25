@@ -29,8 +29,6 @@ namespace SDKTemplate
     {
         Scenario2_Client();
 
-        Windows.Foundation.Collections.IObservableVector<Object> ServiceCollection{ get; };
-        Windows.Foundation.Collections.IObservableVector<Object> CharacteristicCollection{ get; };
         void ConnectButton_Click();
         void ServiceList_SelectionChanged();
         void CharacteristicList_SelectionChanged();
@@ -48,35 +46,11 @@ namespace SDKTemplate
         void PublishButton_ClickAsync();
     }
 
-    enum AttributeType
-    {
-        Service = 0,
-        Characteristic = 1,
-        Descriptor = 2
-    };
-
-    /// <summary>
-    ///     Represents the display of an attribute - both characteristics and services.
-    /// </summary>
-    runtimeclass BluetoothLEAttributeDisplay
-    {
-        static BluetoothLEAttributeDisplay CreateFromService(Windows.Devices.Bluetooth.GenericAttributeProfile.GattDeviceService service);
-        static BluetoothLEAttributeDisplay CreateFromCharacteristic(Windows.Devices.Bluetooth.GenericAttributeProfile.GattCharacteristic characteristic);
-
-        Windows.Devices.Bluetooth.GenericAttributeProfile.GattCharacteristic characteristic;
-        Windows.Devices.Bluetooth.GenericAttributeProfile.GattDescriptor descriptor;
-        Windows.Devices.Bluetooth.GenericAttributeProfile.GattDeviceService service;
-        String Name{ get; };
-        String AttributeDisplayType{ get; };
-    };
-
     /// <summary>
     ///     Display class used to represent a BluetoothLEDevice in the Device list
     /// </summary>
     runtimeclass BluetoothLEDeviceDisplay : Windows.UI.Xaml.Data.INotifyPropertyChanged
     {
-        BluetoothLEDeviceDisplay(Windows.Devices.Enumeration.DeviceInformation deviceInfoIn);
-
         Windows.Devices.Enumeration.DeviceInformation DeviceInformation{ get; };
 
         String Id{ get; };

@@ -274,6 +274,11 @@ namespace SDKTemplate
 
         void Update(Windows::Devices::Enumeration::DeviceInformationUpdate^ deviceInfoUpdateIn);
 
+        Platform::String^ GetPropertyForDisplay(Platform::String^ key)
+        {
+            return Properties->HasKey(key) ? Properties->Lookup(key)->ToString() : nullptr;
+        }
+
         virtual event Windows::UI::Xaml::Data::PropertyChangedEventHandler^ PropertyChanged;
 
     protected:

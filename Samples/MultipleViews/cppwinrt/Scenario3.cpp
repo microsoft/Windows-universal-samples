@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario3.h"
+#include "Scenario3.g.cpp"
 #include "SampleConfiguration.h"
 #include "SecondaryViewPage.h"
 

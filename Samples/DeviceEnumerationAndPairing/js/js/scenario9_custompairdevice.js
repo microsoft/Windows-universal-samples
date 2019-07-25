@@ -274,10 +274,14 @@
     function  completePasswordCredential(username, password)
     {
         if (providePasswordCredentialTaskSrc) {
-            var passwordCredential = new Windows.Security.Credentials.PasswordCredential();
-            passwordCredential.userName = username;
-            passwordCredential.password = password;
-            providePasswordCredentialTaskSrc(passwordCredential);
+            if (username) {
+                var passwordCredential = new Windows.Security.Credentials.PasswordCredential();
+                passwordCredential.userName = username;
+                passwordCredential.password = password;
+                providePasswordCredentialTaskSrc(passwordCredential);
+            } else {
+                providePasswordCredentialTaskSrc(null);
+            }
             providePasswordCredentialTaskSrc = null;
         }
     }

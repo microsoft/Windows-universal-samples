@@ -59,7 +59,7 @@ fire_and_forget SampleState::ValidateFile()
 
 void SampleState::NotifyUserFileNotExist()
 {
-    implementation::MainPage::Current().NotifyUser(
+    MainPage::Current().NotifyUser(
         L"The file '" + fileName +  L"' does not exist. Use scenario one to create this file.",
         NotifyType::ErrorMessage);
 

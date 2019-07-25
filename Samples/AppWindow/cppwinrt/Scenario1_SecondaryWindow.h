@@ -25,7 +25,7 @@ namespace winrt::SDKTemplate::implementation
 
     private:
         Windows::UI::WindowManagement::AppWindow appWindow{ nullptr };
-		Windows::UI::Xaml::Controls::Frame appWindowFrame{};
+        Windows::UI::Xaml::Controls::Frame appWindowFrame{};
 
         void OnWindowClosed(Windows::UI::WindowManagement::AppWindow const& sender, IInspectable const&);
     };

@@ -63,10 +63,3 @@ namespace winrt::SDKTemplate::implementation
         bool LookupBooleanProperty(param::hstring const& property);
     };
 }
-
-namespace winrt::SDKTemplate::factory_implementation
-{
-    struct BluetoothLEDeviceDisplay : BluetoothLEDeviceDisplayT<BluetoothLEDeviceDisplay, implementation::BluetoothLEDeviceDisplay>
-    {
-    };
-}

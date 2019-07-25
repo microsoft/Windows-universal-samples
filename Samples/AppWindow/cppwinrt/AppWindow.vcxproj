@@ -62,6 +62,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cppwinrt</IncludePath>
+    <CppWinRTOptimized>true</CppWinRTOptimized>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

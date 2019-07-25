@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario6.h"
+#include "Scenario6.g.cpp"
 #include "SampleConfiguration.h"
 #include <sstream>
 

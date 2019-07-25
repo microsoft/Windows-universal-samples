@@ -22,11 +22,15 @@ namespace
         possibleBluetoothGuid.Data1 &= 0xFFFF0000;
         return possibleBluetoothGuid == BluetoothGuid;
     }
+}
 
-    hstring GetGattServiceFriendlyName(guid const& uuid)
+namespace winrt::SDKTemplate::DisplayHelpers
+{
+    hstring GetServiceName(GattDeviceService const& service)
     {
         uint16_t shortId;
 
+        guid uuid = service.Uuid();
         if (TryParseSigDefinedUuid(uuid, shortId))
         {
             // Reference: https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx
@@ -64,10 +68,11 @@ namespace
         return L"Custom service: " + to_hstring(uuid);
     }
 
-    hstring GetGattCharacteristicFriendlyName(guid const& uuid, hstring const& userDescription)
+    hstring GetCharacteristicName(GattCharacteristic const& characteristic)
     {
         uint16_t shortId;
 
+        guid uuid = characteristic.Uuid();
         if (TryParseSigDefinedUuid(uuid, shortId))
         {
             // Reference: https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicsHome.aspx
@@ -183,41 +188,13 @@ namespace
                 return it->second;
             }
         }
+
+        hstring userDescription = characteristic.UserDescription();
         if (!userDescription.empty())
         {
             return userDescription;
         }
 
         return L"Custom Characteristic: " + to_hstring(uuid);
-    }
-}
-
-namespace winrt::SDKTemplate::implementation
-{
-    hstring BluetoothLEAttributeDisplay::Name()
-    {
-        switch (m_attributeType)
-        {
-        case AttributeType::Service:
-            return GetGattServiceFriendlyName(m_service.Uuid());
-
-        case AttributeType::Characteristic:
-            return GetGattCharacteristicFriendlyName(m_characteristic.Uuid(), m_characteristic.UserDescription());
-        }
-        return L"Invalid";
-    }
-
-    hstring BluetoothLEAttributeDisplay::AttributeDisplayType()
-    {
-        switch (m_attributeType)
-        {
-        case AttributeType::Service:
-            return L"Service";
-        case AttributeType::Characteristic:
-            return L"Characteristic";
-        case AttributeType::Descriptor:
-            return L"Descriptor";
-        }
-        return L"Invalid";
     }
 }

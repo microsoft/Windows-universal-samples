@@ -12,11 +12,10 @@ namespace SDKTemplate
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     [Windows::Foundation::Metadata::WebHostHidden]
-    [Windows::UI::Xaml::Data::Bindable]
-    public ref class Scenario4 sealed
+    public ref class Scenario4_Snapshot sealed
     {
     public:
-        Scenario4();
+        Scenario4_Snapshot();
 
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;

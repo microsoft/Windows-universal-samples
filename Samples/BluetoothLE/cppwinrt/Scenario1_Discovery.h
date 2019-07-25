@@ -32,7 +32,7 @@ namespace winrt::SDKTemplate::implementation
         bool Not(bool value) { return !value; }
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
         Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable> m_knownDevices = single_threaded_observable_vector<Windows::Foundation::IInspectable>();
         std::vector<Windows::Devices::Enumeration::DeviceInformation> UnknownDevices;
         Windows::Devices::Enumeration::DeviceWatcher deviceWatcher{ nullptr };

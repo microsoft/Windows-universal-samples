@@ -21,12 +21,12 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario7::Scenario7()
+Scenario7_DeviceInformationKind::Scenario7_DeviceInformationKind()
 {
     InitializeComponent();
 }
 
-void Scenario7::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario7_DeviceInformationKind::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
 
@@ -34,22 +34,22 @@ void Scenario7::OnNavigatedTo(NavigationEventArgs^ e)
     kindComboBox->SelectedIndex = 0;
 }
 
-void Scenario7::OnNavigatedFrom(NavigationEventArgs^ e)
+void Scenario7_DeviceInformationKind::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     StopWatchers(/* reset */ true);
 }
 
-void Scenario7::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario7_DeviceInformationKind::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StartWatchers();
 }
 
-void Scenario7::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario7_DeviceInformationKind::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StopWatchers();
 }
 
-void Scenario7::StartWatchers()
+void Scenario7_DeviceInformationKind::StartWatchers()
 {
     startWatcherButton->IsEnabled = false;
     resultCollection->Clear();
@@ -66,7 +66,7 @@ void Scenario7::StartWatchers()
 
         DeviceWatcherHelper^ deviceWatcherHelper = ref new DeviceWatcherHelper(resultCollection, Dispatcher);
         deviceWatcherHelper->UpdateStatus = false;
-        deviceWatcherHelper->DeviceChanged += ref new TypedEventHandler<DeviceWatcher^, String^>(this, &Scenario7::OnDeviceListChanged);
+        deviceWatcherHelper->DeviceChanged += ref new TypedEventHandler<DeviceWatcher^, String^>(this, &Scenario7_DeviceInformationKind::OnDeviceListChanged);
         deviceWatcherHelpers->Append(deviceWatcherHelper);
 
         deviceWatcherHelper->StartWatcher(deviceWatcher);
@@ -76,7 +76,7 @@ void Scenario7::StartWatchers()
     stopWatcherButton->Focus(::FocusState::Keyboard);
 }
 
-void Scenario7::StopWatchers(bool reset)
+void Scenario7_DeviceInformationKind::StopWatchers(bool reset)
 {
     stopWatcherButton->IsEnabled = false;
 
@@ -93,7 +93,7 @@ void Scenario7::StopWatchers(bool reset)
     startWatcherButton->IsEnabled = true;
 }
 
-void Scenario7::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
+void Scenario7_DeviceInformationKind::OnDeviceListChanged(DeviceWatcher^ sender, String^ id)
 {
     int watchersRunning = 0;
 

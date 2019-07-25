@@ -21,12 +21,12 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario4::Scenario4()
+Scenario4_Snapshot::Scenario4_Snapshot()
 {
     InitializeComponent();
 }
 
-void Scenario4::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario4_Snapshot::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
 
@@ -34,7 +34,7 @@ void Scenario4::OnNavigatedTo(NavigationEventArgs^ e)
     selectorComboBox->SelectedIndex = 0;
 }
 
-void Scenario4::FindButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario4_Snapshot::FindButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     DeviceSelectorInfo^ deviceSelectorInfo;
     IAsyncOperation<DeviceInformationCollection^>^ asyncOp;

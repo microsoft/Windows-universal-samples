@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario2.h"
+#include "Scenario2.g.cpp"
 #include "SampleConfiguration.h"
 
 using namespace winrt;

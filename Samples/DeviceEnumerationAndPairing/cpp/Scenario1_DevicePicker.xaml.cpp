@@ -21,12 +21,12 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario1::Scenario1()
+Scenario1_DevicePicker::Scenario1_DevicePicker()
 {
     InitializeComponent();
 }
 
-void Scenario1::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario1_DevicePicker::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
 
@@ -34,21 +34,21 @@ void Scenario1::OnNavigatedTo(NavigationEventArgs^ e)
     selectorComboBox->SelectedIndex = 0;
 }
 
-void Scenario1::PickSingleDeviceButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_DevicePicker::PickSingleDeviceButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     ShowDevicePicker(
         true // pickSingle
         );
 }
 
-void Scenario1::ShowDevicePickerButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_DevicePicker::ShowDevicePickerButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     ShowDevicePicker(
         false // pickSingle
         );
 }
 
-void Scenario1::ShowDevicePicker(bool pickSingle)
+void Scenario1_DevicePicker::ShowDevicePicker(bool pickSingle)
 {
     showDevicePickerButton->IsEnabled = false;
     resultCollection->Clear();

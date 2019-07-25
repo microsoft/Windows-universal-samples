@@ -15,14 +15,14 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario5 : Page
+    public sealed partial class Scenario5_GetSingleDevice : Page
     {
         private MainPage rootPage = MainPage.Current;
         private DeviceInformationKind deviceInformationKind;
 
         private ObservableCollection<DeviceInformationDisplay> resultCollection = new ObservableCollection<DeviceInformationDisplay>();
 
-        public Scenario5()
+        public Scenario5_GetSingleDevice()
         {
             this.InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace SDKTemplate
             resultsListView.ItemsSource = resultCollection;
         }
 
-        private async void InterfaceIdTextBox_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             DeviceInformationCollection deviceInfoCollection;
 
@@ -44,16 +44,17 @@ namespace SDKTemplate
                 // use both the DeviceInformation.Kind and the DeviceInformation.Id.
                 interfaceIdTextBox.Text = deviceInfoCollection[0].Id;
                 deviceInformationKind = deviceInfoCollection[0].Kind;
+                InformationKindTextBox.Text = deviceInformationKind.ToString();
+                getButton.IsEnabled = true;
             }
         }
 
         private async void GetButton_Click(object sender, RoutedEventArgs e)
         {
-            string interfaceId = interfaceIdTextBox.Text;
-
-            interfaceIdTextBox.IsEnabled = false;
-            getButton.IsEnabled = false;
             resultCollection.Clear();
+
+            string interfaceId = interfaceIdTextBox.Text;
+            getButton.IsEnabled = false;
 
             rootPage.NotifyUser("CreateFromIdAsync operation started...", NotifyType.StatusMessage);
 
@@ -74,7 +75,6 @@ namespace SDKTemplate
 
             getButton.IsEnabled = true;
             getButton.Focus(FocusState.Keyboard);
-            interfaceIdTextBox.IsEnabled = true;
         }
     }
 }

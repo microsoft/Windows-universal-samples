@@ -28,7 +28,7 @@ namespace winrt::SDKTemplate::implementation
         fire_and_forget ReadBytesButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
     };
 }
 

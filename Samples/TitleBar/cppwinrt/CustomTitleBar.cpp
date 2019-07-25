@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "CustomTitleBar.h"
+#include "CustomTitleBar.g.cpp"
 
 using namespace winrt;
 using namespace Windows::ApplicationModel::Core;

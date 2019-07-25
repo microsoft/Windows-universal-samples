@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario1_Colors.h"
+#include "Scenario1_Colors.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

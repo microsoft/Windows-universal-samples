@@ -18,26 +18,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:SDKTemplate"
     mc:Ignorable="d">
-    <Page.Resources>
-        <DataTemplate x:Key="AttributeTemplate" x:DataType="local:BluetoothLEAttributeDisplay">
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*" MinWidth="100"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="1" Margin="5">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Bind Name}" Style="{StaticResource ListItemTextStyle}" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Bind AttributeDisplayType}" Margin="10,0,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
     <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,10,12,12">
         <StackPanel>
             <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
@@ -52,10 +32,8 @@
             </TextBlock>
             <Button x:Name="ConnectButton" Content="Connect" Click="{x:Bind ConnectButton_Click}" Margin="0,10,0,0"/>
             <ComboBox x:Name="ServiceList" Margin="0,10,0,0" PlaceholderText="Choose a service" Visibility="Collapsed"
-                      ItemsSource="{x:Bind ServiceCollection}" DisplayMemberPath="Name"
                       SelectionChanged="{x:Bind ServiceList_SelectionChanged}"/>
             <ComboBox x:Name="CharacteristicList" Margin="0,10,0,0" PlaceholderText="Choose a characteristic" Visibility="Collapsed"
-                      ItemsSource="{x:Bind CharacteristicCollection}"  DisplayMemberPath="Name"
                       SelectionChanged="{x:Bind CharacteristicList_SelectionChanged}" />
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="CharacteristicReadButton" Content="Read Value" Click="{x:Bind CharacteristicReadButton_Click}"

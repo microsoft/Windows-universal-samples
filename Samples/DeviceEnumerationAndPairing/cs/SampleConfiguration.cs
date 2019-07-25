@@ -22,15 +22,15 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Device Picker Common Control", ClassType=typeof(Scenario1)},
-            new Scenario() { Title="Enumerate and Watch Devices", ClassType=typeof(Scenario2)},
-            new Scenario() { Title="Enumerate and Watch Devices in a Background Task", ClassType=typeof(Scenario3)},
-            new Scenario() { Title="Enumerate Snapshot of Devices", ClassType=typeof(Scenario4)},
-            new Scenario() { Title="Get Single Device", ClassType=typeof(Scenario5)},
-            new Scenario() { Title= "Custom Filter with Additional Properties", ClassType=typeof(Scenario6)},
-            new Scenario() { Title= "Request Specific DeviceInformationKind", ClassType=typeof(Scenario7)},
-            new Scenario() { Title= "Basic Device Pairing", ClassType=typeof(Scenario8)},
-            new Scenario() { Title= "Custom Device Pairing", ClassType=typeof(Scenario9)}
+            new Scenario() { Title="Device Picker Common Control", ClassType=typeof(Scenario1_DevicePicker)},
+            new Scenario() { Title="Enumerate and Watch Devices", ClassType=typeof(Scenario2_DeviceWatcher)},
+            new Scenario() { Title="Enumerate and Watch Devices in a Background Task", ClassType=typeof(Scenario3_BackgroundDeviceWatcher)},
+            new Scenario() { Title="Enumerate Snapshot of Devices", ClassType=typeof(Scenario4_Snapshot)},
+            new Scenario() { Title="Get Single Device", ClassType=typeof(Scenario5_GetSingleDevice)},
+            new Scenario() { Title= "Custom Filter with Additional Properties", ClassType=typeof(Scenario6_CustomFilterAddedProps)},
+            new Scenario() { Title= "Request Specific DeviceInformationKind", ClassType=typeof(Scenario7_DeviceInformationKind)},
+            new Scenario() { Title= "Basic Device Pairing", ClassType=typeof(Scenario8_PairDevice)},
+            new Scenario() { Title= "Custom Device Pairing", ClassType=typeof(Scenario9_CustomPairDevice)}
         };
     }
 

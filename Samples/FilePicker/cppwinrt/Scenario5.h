@@ -27,7 +27,7 @@ namespace winrt::SDKTemplate::implementation
         fire_and_forget GetFileFromFutureAccessListButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
 
         Windows::Storage::StorageFile m_afterWriteFile{ nullptr };
         Windows::Storage::StorageFile m_beforeReadFile{ nullptr };

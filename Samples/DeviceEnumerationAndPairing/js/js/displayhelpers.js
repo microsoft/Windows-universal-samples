@@ -115,7 +115,7 @@
         { displayName: "DeviceInterfaceClass", deviceInformationKind: Windows.Devices.Enumeration.DeviceInformationKind.deviceInterfaceClass },
         { displayName: "AssociationEndpointContainer", deviceInformationKind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpointContainer },
         { displayName: "AssociationEndpoint", deviceInformationKind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpoint },
-        { displayName: "AssociationEndpointService", deviceInformationKind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpointService },
+        { displayName: "AssociationEndpointService", deviceInformationKind: Windows.Devices.Enumeration.DeviceInformationKind.associationEndpointService }
     ];
     var kindList = new WinJS.Binding.List(kindArray);
 
@@ -129,7 +129,7 @@
             this.id = deviceInfo.id;
             this.kind = kindStringFromType(deviceInfo.kind);
             this.name = deviceInfo.name;
-            if (null != deviceInfo.pairing) {
+            if (deviceInfo.pairing) {
                 this.canPair = deviceInfo.pairing.canPair;
                 this.isPaired = deviceInfo.pairing.isPaired;
             }
@@ -143,7 +143,7 @@
                 this.deviceInfo.update(deviceInfoUpdate);
                 this.name = this.deviceInfo.name;
 
-                if (null != this.deviceInfo.pairing) {
+                if (this.deviceInfo.pairing) {
                     this.canPair = this.deviceInfo.pairing.canPair;
                     this.isPaired = this.deviceInfo.pairing.isPaired;
                 }
@@ -160,6 +160,31 @@
         WinJS.Binding.mixin,
         WinJS.Binding.expandProperties({ id: "", kind: "", name: "", canPair: "", isPaired: "", interfaceClass: "", itemNameDisplay: "" }));
 
+    function kindStringFromType(kindType) {
+        var DevEnum = Windows.Devices.Enumeration;
+
+        switch (kindType) {
+            case DevEnum.DeviceInformationKind.associationEndpoint:
+                return "AssociationEndpoint";
+            case DevEnum.DeviceInformationKind.associationEndpointContainer:
+                return "AssociationEndpointContainer";
+            case DevEnum.DeviceInformationKind.associationEndpointService:
+                return "AssociationEndpointService";
+            case DevEnum.DeviceInformationKind.device:
+                return "Device";
+            case DevEnum.DeviceInformationKind.deviceContainer:
+                return "DeviceContainer";
+            case DevEnum.DeviceInformationKind.deviceInterface:
+                return "DeviceInterface";
+            case DevEnum.DeviceInformationKind.deviceInterfaceClass:
+                return "DeviceInterfaceClass";
+            case DevEnum.DeviceInformationKind.unknown:
+                return "Unknown";
+            default:
+                return kindType;
+        }
+    }
+
     var publicMembers =
         {
             devicePickerSelectors: devicePickerSelectors,
@@ -168,30 +193,9 @@
             findAllAsyncSelectors: findAllAsyncSelectors,
             pairingSelectors: pairingSelectors,
             kindList: kindList,
+            kindStringFromType: kindStringFromType,
             DeviceInformationDisplay: DeviceInformationDisplayMix
         };
 
     WinJS.Namespace.define("DisplayHelpers", publicMembers);
 })();
-
-
-function kindStringFromType(kindType) {
-    var DevEnum = Windows.Devices.Enumeration;
-
-    switch (kindType) {
-        case DevEnum.DeviceInformationKind.associationEndpoint:
-            return "AssociationEndpoint";
-        case DevEnum.DeviceInformationKind.associationEndpointContainer:
-            return "AssociationEndpointContainer";
-        case DevEnum.DeviceInformationKind.associationEndpointService:
-            return "AssociationEndpointService";
-        case DevEnum.DeviceInformationKind.device:
-            return "Device";
-        case DevEnum.DeviceInformationKind.deviceContainer:
-            return "DeviceContainer";
-        case DevEnum.DeviceInformationKind.deviceInterface:
-            return "DeviceInterface";
-        case DevEnum.DeviceInformationKind.deviceInterfaceClass:
-            return "DeviceInterfaceClass";
-    }
-};

@@ -11,7 +11,7 @@
 
 #include "pch.h"
 #include "Scenario1_Basic.h"
-#include <winrt/Windows.UI.Composition.h>
+#include "Scenario1_Basic.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

@@ -27,6 +27,7 @@
 
 #include "pch.h"
 #include "ViewLifetimeControl.h"
+#include "ViewLifetimeControl.g.cpp"
 
 using namespace winrt;
 using namespace SDKTemplate;

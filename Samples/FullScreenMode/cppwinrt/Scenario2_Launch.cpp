@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario2_Launch.h"
+#include "Scenario2_Launch.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

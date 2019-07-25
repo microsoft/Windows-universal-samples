@@ -100,9 +100,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="..\..\..\SharedContent\cs\DispatcherTaskExtensions.cs">
-      <Link>DispatcherTaskExtensions.cs</Link>
-    </Compile>
     <Compile Include="DisplayHelpers.cs" />
     <Compile Include="PresentationFormats.cs" />
     <Compile Include="SampleConfiguration.cs" />

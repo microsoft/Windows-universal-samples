@@ -154,7 +154,8 @@ namespace SDKTemplate
 
     IVectorView<DeviceSelectorInfo^>^ DeviceSelectorChoices::DevicePickerSelectors::get()
     {
-        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(CommonDeviceSelectors), end(CommonDeviceSelectors));
+        auto commonDeviceSelectors = CommonDeviceSelectors;
+        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(commonDeviceSelectors), end(commonDeviceSelectors));
         selectors->Append(BluetoothPairedOnly);
         selectors->Append(BluetoothUnpairedOnly);
         selectors->Append(BluetoothLEPairedOnly);
@@ -169,7 +170,8 @@ namespace SDKTemplate
 
     IVectorView<DeviceSelectorInfo^>^ DeviceSelectorChoices::FindAllAsyncSelectors::get()
     {
-        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(CommonDeviceSelectors), end(CommonDeviceSelectors));
+        auto commonDeviceSelectors = CommonDeviceSelectors;
+        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(commonDeviceSelectors), end(commonDeviceSelectors));
         selectors->Append(BluetoothPairedOnly);
         selectors->Append(BluetoothLEPairedOnly);
         selectors->Append(WiFiDirectPairedOnly);
@@ -179,7 +181,8 @@ namespace SDKTemplate
 
     IVectorView<DeviceSelectorInfo^>^ DeviceSelectorChoices::DeviceWatcherSelectors::get()
     {
-        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(CommonDeviceSelectors), end(CommonDeviceSelectors));
+        auto commonDeviceSelectors = CommonDeviceSelectors;
+        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(commonDeviceSelectors), end(commonDeviceSelectors));
         selectors->Append(Bluetooth);
         selectors->Append(BluetoothLE);
         selectors->Append(WiFiDirect);
@@ -194,7 +197,8 @@ namespace SDKTemplate
 
     IVectorView<DeviceSelectorInfo^>^ DeviceSelectorChoices::BackgroundDeviceWatcherSelectors::get()
     {
-        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(CommonDeviceSelectors), end(CommonDeviceSelectors));
+        auto commonDeviceSelectors = CommonDeviceSelectors;
+        Vector<DeviceSelectorInfo^>^ selectors = ref new Vector<DeviceSelectorInfo^>(begin(commonDeviceSelectors), end(commonDeviceSelectors));
         selectors->Append(BluetoothPairedOnly);
         selectors->Append(BluetoothLEPairedOnly);
         selectors->Append(WiFiDirectPairedOnly);
@@ -327,6 +331,7 @@ namespace SDKTemplate
         OnPropertyChanged("DeviceInformation");
         OnPropertyChanged("CanPair");
         OnPropertyChanged("IsPaired");
+        OnPropertyChanged("GetPropertyForDisplay");
 
         UpdateGlyphBitmapImage();
     }

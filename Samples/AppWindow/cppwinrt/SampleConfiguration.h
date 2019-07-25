@@ -14,22 +14,22 @@
 
 namespace winrt::SDKTemplate
 {
-	struct unique_disabled_control
-	{
-		unique_disabled_control(Windows::UI::Xaml::Controls::Control const& control) : c{ control }
-		{
-			c.IsEnabled(false);
-		}
+    struct unique_disabled_control
+    {
+        unique_disabled_control(Windows::UI::Xaml::Controls::Control const& control) : c{ control }
+        {
+            c.IsEnabled(false);
+        }
 
-		unique_disabled_control(const unique_disabled_control&) = delete;
-		void operator=(unique_disabled_control const&) = delete;
+        unique_disabled_control(const unique_disabled_control&) = delete;
+        void operator=(unique_disabled_control const&) = delete;
 
-		~unique_disabled_control()
-		{
-			c.IsEnabled(true);
-		}
-		Windows::UI::Xaml::Controls::Control c;
-	};
+        ~unique_disabled_control()
+        {
+            c.IsEnabled(true);
+        }
+        Windows::UI::Xaml::Controls::Control c;
+    };
 
-	bool TryParseFloat(hstring const& str, float& result);
+    bool TryParseFloat(hstring const& str, float& result);
 }

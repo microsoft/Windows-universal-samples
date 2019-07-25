@@ -13,7 +13,6 @@
     <Page Include="..\shared\Scenario2_Launch.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\App.idl" />
     <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
     <Midl Include="Project.idl" />
   </ItemGroup>
@@ -61,9 +60,9 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

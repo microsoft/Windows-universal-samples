@@ -28,7 +28,7 @@ namespace winrt::SDKTemplate::implementation
         void UseMinimalOverlaysCheckBox_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
 
     private:
-        SDKTemplate::MainPage rootPage{ SDKTemplate::implementation::MainPage::Current() };
+        SDKTemplate::MainPage rootPage{ MainPage::Current() };
 
         // What is the program's last known full-screen state?
         // We use this to detect when the system forced us out of full-screen mode.

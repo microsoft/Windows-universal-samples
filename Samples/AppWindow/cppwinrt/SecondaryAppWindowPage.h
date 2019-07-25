@@ -17,7 +17,7 @@ namespace winrt::SDKTemplate::implementation
 {
     struct SecondaryAppWindowPage : SecondaryAppWindowPageT<SecondaryAppWindowPage>
     {
-		SecondaryAppWindowPage();
+        SecondaryAppWindowPage();
     };
 }
 

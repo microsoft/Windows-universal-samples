@@ -21,13 +21,13 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario2::Scenario2()
+Scenario2_DeviceWatcher::Scenario2_DeviceWatcher()
 {
     InitializeComponent();
     deviceWatcherHelper = ref new DeviceWatcherHelper(resultCollection, Dispatcher);
 }
 
-void Scenario2::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario2_DeviceWatcher::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
 
@@ -35,22 +35,22 @@ void Scenario2::OnNavigatedTo(NavigationEventArgs^ e)
     selectorComboBox->SelectedIndex = 0;
 }
 
-void Scenario2::OnNavigatedFrom(NavigationEventArgs^ e)
+void Scenario2_DeviceWatcher::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     deviceWatcherHelper->Reset();
 }
 
-void Scenario2::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2_DeviceWatcher::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StartWatcher();
 }
 
-void Scenario2::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario2_DeviceWatcher::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StopWatcher();
 }
 
-void Scenario2::StartWatcher()
+void Scenario2_DeviceWatcher::StartWatcher()
 {
     startWatcherButton->IsEnabled = false;
     resultCollection->Clear();
@@ -87,7 +87,7 @@ void Scenario2::StartWatcher()
     stopWatcherButton->IsEnabled = true;
 }
 
-void Scenario2::StopWatcher()
+void Scenario2_DeviceWatcher::StopWatcher()
 {
     stopWatcherButton->IsEnabled = false;
     deviceWatcherHelper->StopWatcher();

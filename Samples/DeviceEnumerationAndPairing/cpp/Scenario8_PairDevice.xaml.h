@@ -14,10 +14,10 @@ namespace SDKTemplate
     /// </summary>
     [Windows::Foundation::Metadata::WebHostHidden]
     [Windows::UI::Xaml::Data::Bindable]
-    public ref class Scenario8 sealed
+    public ref class Scenario8_PairDevice sealed
     {
     public:
-        Scenario8();
+        Scenario8_PairDevice();
 
     protected:
         virtual void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;

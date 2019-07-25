@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario4_ChangeSystemGroup.h"
+#include "Scenario4_ChangeSystemGroup.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

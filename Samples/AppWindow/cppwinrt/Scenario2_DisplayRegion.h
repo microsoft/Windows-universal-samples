@@ -15,28 +15,28 @@
 
 namespace winrt::SDKTemplate::implementation
 {
-	struct Scenario2_DisplayRegion : Scenario2_DisplayRegionT<Scenario2_DisplayRegion>
-	{
-		Scenario2_DisplayRegion();
+    struct Scenario2_DisplayRegion : Scenario2_DisplayRegionT<Scenario2_DisplayRegion>
+    {
+        Scenario2_DisplayRegion();
 
-		void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
-		fire_and_forget OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
+        void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
+        fire_and_forget OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
 
-		fire_and_forget Button_Click(IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
+        fire_and_forget Button_Click(IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
 
-	private:
-		Windows::UI::WindowManagement::AppWindow appWindow{ nullptr };
-		Windows::UI::Xaml::Controls::Frame appWindowFrame{};
+    private:
+        Windows::UI::WindowManagement::AppWindow appWindow{ nullptr };
+        Windows::UI::Xaml::Controls::Frame appWindowFrame{};
 
-		int NumberOfAvailableDisplayRegions();
-		Windows::UI::WindowManagement::DisplayRegion GetOtherDisplayRegion(Windows::UI::WindowManagement::DisplayRegion currentAppDisplayRegion);
-		void OnWindowClosed(Windows::UI::WindowManagement::AppWindow const& sender, IInspectable const&);
-	};
+        int NumberOfAvailableDisplayRegions();
+        Windows::UI::WindowManagement::DisplayRegion GetOtherDisplayRegion(Windows::UI::WindowManagement::DisplayRegion currentAppDisplayRegion);
+        void OnWindowClosed(Windows::UI::WindowManagement::AppWindow const& sender, IInspectable const&);
+    };
 }
 
 namespace winrt::SDKTemplate::factory_implementation
 {
-	struct Scenario2_DisplayRegion : Scenario2_DisplayRegionT<Scenario2_DisplayRegion, implementation::Scenario2_DisplayRegion>
-	{
-	};
+    struct Scenario2_DisplayRegion : Scenario2_DisplayRegionT<Scenario2_DisplayRegion, implementation::Scenario2_DisplayRegion>
+    {
+    };
 }

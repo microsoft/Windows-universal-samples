@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>4416d50a-7676-4d0a-9b2c-91ff70c6047f</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
+    <Page Include="..\..\..\SharedContent\xaml\MainPage.xaml" />
+    <Page Include="..\shared\Scenario1_DevicePicker.xaml" />
+    <Page Include="..\shared\Scenario2_DeviceWatcher.xaml" />
+    <Page Include="..\shared\Scenario3_BackgroundDeviceWatcher.xaml" />
+    <Page Include="..\shared\Scenario4_Snapshot.xaml" />
+    <Page Include="..\shared\Scenario5_GetSingleDevice.xaml" />
+    <Page Include="..\shared\Scenario6_CustomFilterAddedProps.xaml" />
+    <Page Include="..\shared\Scenario7_DeviceInformationKind.xaml" />
+    <Page Include="..\shared\Scenario8_PairDevice.xaml" />
+    <Page Include="..\shared\Scenario9_CustomPairDevice.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cppwinrt\App.cpp" />
+    <ClCompile Include="..\..\..\SharedContent\cppwinrt\MainPage.cpp" />
+    <ClCompile Include="DeviceHelpers.cpp" />
+    <ClCompile Include="DeviceWatcherHelper.cpp" />
+    <ClCompile Include="Scenario1_DevicePicker.cpp" />
+    <ClCompile Include="Scenario2_DeviceWatcher.cpp" />
+    <ClCompile Include="Scenario3_BackgroundDeviceWatcher.cpp" />
+    <ClCompile Include="Scenario4_Snapshot.cpp" />
+    <ClCompile Include="Scenario5_GetSingleDevice.cpp" />
+    <ClCompile Include="Scenario6_CustomFilterAddedProps.cpp" />
+    <ClCompile Include="Scenario7_DeviceInformationKind.cpp" />
+    <ClCompile Include="Scenario8_PairDevice.cpp" />
+    <ClCompile Include="Scenario9_CustomPairDevice.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="..\..\..\SharedContent\cppwinrt\App.h" />
+    <ClInclude Include="..\..\..\SharedContent\cppwinrt\MainPage.h" />
+    <ClInclude Include="DeviceHelpers.h" />
+    <ClInclude Include="DeviceWatcherHelper.h" />
+    <ClInclude Include="Scenario1_DevicePicker.h" />
+    <ClInclude Include="Scenario2_DeviceWatcher.h" />
+    <ClInclude Include="Scenario3_BackgroundDeviceWatcher.h" />
+    <ClInclude Include="Scenario4_Snapshot.h" />
+    <ClInclude Include="Scenario5_GetSingleDevice.h" />
+    <ClInclude Include="Scenario6_CustomFilterAddedProps.h" />
+    <ClInclude Include="Scenario7_DeviceInformationKind.h" />
+    <ClInclude Include="Scenario8_PairDevice.h" />
+    <ClInclude Include="Scenario9_CustomPairDevice.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

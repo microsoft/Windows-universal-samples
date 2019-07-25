@@ -4,84 +4,50 @@ using System.ComponentModel;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Devices.Enumeration;
 using Windows.Storage.Streams;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace SDKTemplate
 {
     /// <summary>
-    ///     Represents the display of an attribute - both characteristics and services.
+    /// Helpers for formatting information for display.
     /// </summary>
-    public class BluetoothLEAttributeDisplay
+    public static class DisplayHelpers
     {
-        public GattCharacteristic characteristic;
-        public GattDescriptor descriptor;
-
-        public GattDeviceService service;
-
-        public BluetoothLEAttributeDisplay(GattDeviceService service)
+        public static string GetServiceName(GattDeviceService service)
         {
-            this.service = service;
-            AttributeDisplayType = AttributeType.Service;
-        }
-
-        public BluetoothLEAttributeDisplay(GattCharacteristic characteristic)
-        {
-            this.characteristic = characteristic;
-            AttributeDisplayType = AttributeType.Characteristic;
-        }
-
-        public string Name
-        {
-            get
+            if (IsSigDefinedUuid(service.Uuid))
             {
-                switch (AttributeDisplayType)
+                GattNativeServiceUuid serviceName;
+                if (Enum.TryParse(Utilities.ConvertUuidToShortId(service.Uuid).ToString(), out serviceName))
                 {
-                    case AttributeType.Service:
-                        if (IsSigDefinedUuid(service.Uuid))
-                        {
-                            GattNativeServiceUuid serviceName;
-                            if (Enum.TryParse(Utilities.ConvertUuidToShortId(service.Uuid).ToString(), out serviceName))
-                            {
-                                return serviceName.ToString();
-                            }
-                        }
-                        else
-                        {
-                            return "Custom Service: " + service.Uuid;
-                        }
-                        break;
-                    case AttributeType.Characteristic:
-                        if (IsSigDefinedUuid(characteristic.Uuid))
-                        {
-                            GattNativeCharacteristicUuid characteristicName;
-                            if (Enum.TryParse(Utilities.ConvertUuidToShortId(characteristic.Uuid).ToString(),
-                                out characteristicName))
-                            {
-                                return characteristicName.ToString();
-                            }
-                        }
-                        else
-                        {
-                            if (!string.IsNullOrEmpty(characteristic.UserDescription))
-                            {
-                                return characteristic.UserDescription;
-                            }
-                                
-                            else
-                            {
-                                return "Custom Characteristic: " + characteristic.Uuid;
-                            }
-                        }
-                        break;
-                    default:
-                        break;
+                    return serviceName.ToString();
                 }
-                return "Invalid";
+            }
+            return "Custom Service: " + service.Uuid;
+        }
+
+        public static string GetCharacteristicName(GattCharacteristic characteristic)
+        {
+            if (IsSigDefinedUuid(characteristic.Uuid))
+            {
+                GattNativeCharacteristicUuid characteristicName;
+                if (Enum.TryParse(Utilities.ConvertUuidToShortId(characteristic.Uuid).ToString(),
+                    out characteristicName))
+                {
+                    return characteristicName.ToString();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(characteristic.UserDescription))
+            {
+                return characteristic.UserDescription;
+            }
+
+            else
+            {
+                return "Custom Characteristic: " + characteristic.Uuid;
             }
         }
-
-        public AttributeType AttributeDisplayType { get; }
 
         /// <summary>
         ///     The SIG has a standard base value for Assigned UUIDs. In order to determine if a UUID is SIG defined,
@@ -105,13 +71,6 @@ namespace SDKTemplate
             var baseUuid = new Guid(bytes);
             return baseUuid == bluetoothBaseUuid;
         }
-    }
-
-    public enum AttributeType
-    {
-        Service = 0,
-        Characteristic = 1,
-        Descriptor = 2
     }
 
     /// <summary>

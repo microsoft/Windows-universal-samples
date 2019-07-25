@@ -52,7 +52,7 @@ void SampleState::AddCustomTitleBar()
 
         // Make the main page's content a child of the title bar,
         // and make the title bar the new page content.
-        MainPage rootPage = implementation::MainPage::Current();
+        MainPage rootPage = MainPage::Current();
         UIElement mainContent = rootPage.Content();
         rootPage.Content(nullptr);
         customTitleBar.SetPageContent(mainContent);
@@ -66,7 +66,7 @@ void SampleState::RemoveCustomTitleBar()
     {
         // Take the title bar's page content and make it
         // the window content.
-        MainPage rootPage = implementation::MainPage::Current();
+        MainPage rootPage = MainPage::Current();
         rootPage.Content(customTitleBar.SetPageContent(nullptr));
         customTitleBar = nullptr;
     }

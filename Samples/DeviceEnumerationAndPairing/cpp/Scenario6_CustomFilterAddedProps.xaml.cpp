@@ -21,33 +21,33 @@ using namespace Windows::Devices::Enumeration;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-Scenario6::Scenario6()
+Scenario6_CustomFilterAddedProps::Scenario6_CustomFilterAddedProps()
 {
     InitializeComponent();
     deviceWatcherHelper = ref new DeviceWatcherHelper(resultCollection, Dispatcher);
 }
 
-void Scenario6::OnNavigatedTo(NavigationEventArgs^ e)
+void Scenario6_CustomFilterAddedProps::OnNavigatedTo(NavigationEventArgs^ e)
 {
     resultsListView->ItemsSource = resultCollection;
 }
 
-void Scenario6::OnNavigatedFrom(NavigationEventArgs^ e)
+void Scenario6_CustomFilterAddedProps::OnNavigatedFrom(NavigationEventArgs^ e)
 {
     deviceWatcherHelper->Reset();
 }
 
-void Scenario6::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario6_CustomFilterAddedProps::StartWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StartWatcher();
 }
 
-void Scenario6::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario6_CustomFilterAddedProps::StopWatcherButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     StopWatcher();
 }
 
-void Scenario6::StartWatcher()
+void Scenario6_CustomFilterAddedProps::StartWatcher()
 {
     aqsFilterTextBox->IsEnabled = false;
     startWatcherButton->IsEnabled = false;
@@ -72,7 +72,7 @@ void Scenario6::StartWatcher()
     aqsFilterTextBox->IsEnabled = true;
 }
 
-void Scenario6::StopWatcher()
+void Scenario6_CustomFilterAddedProps::StopWatcher()
 {
     aqsFilterTextBox->IsEnabled = false;
     stopWatcherButton->IsEnabled = false;

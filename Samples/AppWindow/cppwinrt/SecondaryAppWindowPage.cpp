@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "SecondaryAppWindowPage.h"
+#include "SecondaryAppWindowPage.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -18,7 +19,7 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::SDKTemplate::implementation
 {
-	SecondaryAppWindowPage::SecondaryAppWindowPage()
+    SecondaryAppWindowPage::SecondaryAppWindowPage()
     {
         InitializeComponent();
     }
