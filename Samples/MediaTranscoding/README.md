@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -47,21 +46,18 @@ For more info about transcoding video files, see [Transcode media files](https:/
 
 ## Related topics  
   
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
-  
-**Roadmaps**  
+### Roadmaps
   
 [Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)  
-[Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)  
 [Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)  
 [Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)  
 [Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)  
   
-**Tasks**  
+### Tasks
   
 [Transcode media files](https://msdn.microsoft.com/library/windows/apps/mt282149)  
 
-**Reference**  
+### Reference
   
 [Windows.Media.Transcoding](http://msdn.microsoft.com/library/windows/apps/br207105)  
 [MediaTranscoder](http://msdn.microsoft.com/library/windows/apps/br207080)  
@@ -71,12 +67,14 @@ For more info about transcoding video files, see [Transcode media files](https:/
 [MediaProperties.MediaEncodingProfile](http://msdn.microsoft.com/library/windows/apps/hh701026)  
 [TrimStart](http://msdn.microsoft.com/library/windows/apps/br207103)  
 [TrimStop](http://msdn.microsoft.com/library/windows/apps/br207104)  
+
+### Related samples
+
+* [MediaTranscoding sample](/archived/MediaTranscoding/) for JavaScript (archived)
   
 ## System requirements
 
-**Client:** Windows 10
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -40,6 +39,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
+### Other topics
+
 [DataReader](http://msdn.microsoft.com/library/windows/apps/br208119)  
 [DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154)  
 [OpenSequentialReadAsync](http://msdn.microsoft.com/library/windows/apps/hh701853)  
@@ -49,13 +50,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [Streams](http://msdn.microsoft.com/library/windows/apps/br241791)  
 
+### Related samples
+
+* [DataReaderWriter sample](/archived/DataReaderWriter/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

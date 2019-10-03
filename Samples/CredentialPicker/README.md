@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -32,10 +31,15 @@ This sample allows the user launch different types of credential prompts. You ca
 - Message and Caption
 - Message, Caption, Save Credential Option, and a type of protocol.
 
-Operating system requirements
------------------------------
+## Related topics
 
-Windows 10
+### Related samples
+
+* [CredentialPicker sample](/archived/CredentialPicker/) for JavaScript (archived)
+
+## System requirements
+
+* Windows 10
 
 Related topics
 ---------------

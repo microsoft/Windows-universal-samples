@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>4d57e7dc-a474-59b0-94d4-0bfd29ba8d70</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\css\default.css">
+      <Link>css\default.css</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\js\default.js">
+      <Link>js\default.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\css\ui-dark.css">
+      <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\css\ui-light.css">
+      <Link>Microsoft.WinJS.4.0\css\ui-light.css</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\fonts\Symbols.ttf">
+      <Link>Microsoft.WinJS.4.0\fonts\Symbols.ttf</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\base.js">
+      <Link>Microsoft.WinJS.4.0\js\base.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\en-US\ui.strings.js">
+      <Link>Microsoft.WinJS.4.0\js\en-US\ui.strings.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\ui.js">
+      <Link>Microsoft.WinJS.4.0\js\ui.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\WinJS.intellisense-setup.js">
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense-setup.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\WinJS.intellisense.js">
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\sample-utils\footer.html">
+      <Link>sample-utils\footer.html</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\sample-utils\header.html">
+      <Link>sample-utils\header.html</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\sample-utils\sample-utils.js">
+      <Link>sample-utils\sample-utils.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\sample-utils\scenario-select.css">
+      <Link>sample-utils\scenario-select.css</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\sample-utils\scenario-select.html">
+      <Link>sample-utils\scenario-select.html</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>images\microsoft-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>images\smalltile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>images\splash-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>images\storelogo-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>images\tile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>images\windows-sdk.png</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\alerts.css">
+      <Link>css\alerts.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\communications.css">
+      <Link>css\communications.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\gamechat.css">
+      <Link>css\gamechat.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\gameeffects.css">
+      <Link>css\gameeffects.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\gamemedia.css">
+      <Link>css\gamemedia.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\media.css">
+      <Link>css\media.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\movie.css">
+      <Link>css\movie.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\other.css">
+      <Link>css\other.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\soundeffects.css">
+      <Link>css\soundeffects.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\css\speech.css">
+      <Link>css\speech.css</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\alerts.html">
+      <Link>html\alerts.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\communications.html">
+      <Link>html\communications.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\gamechat.html">
+      <Link>html\gamechat.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\gameeffects.html">
+      <Link>html\gameeffects.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\gamemedia.html">
+      <Link>html\gamemedia.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\media.html">
+      <Link>html\media.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\movie.html">
+      <Link>html\movie.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\other.html">
+      <Link>html\other.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\soundeffects.html">
+      <Link>html\soundeffects.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\html\speech.html">
+      <Link>html\speech.html</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\alerts.js">
+      <Link>js\alerts.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\communications.js">
+      <Link>js\communications.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\gamechat.js">
+      <Link>js\gamechat.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\gameeffects.js">
+      <Link>js\gameeffects.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\gamemedia.js">
+      <Link>js\gamemedia.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\media.js">
+      <Link>js\media.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\movie.js">
+      <Link>js\movie.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\other.js">
+      <Link>js\other.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\sample-configuration.js">
+      <Link>js\sample-configuration.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\soundeffects.js">
+      <Link>js\soundeffects.js</Link>
+    </Content>
+    <Content Include="..\AudioCategory\js\speech.js">
+      <Link>js\speech.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\\.\.\\SharedContent\\js\default.html">
+      <Link>default.html</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="html\" />
+    <Folder Include="images\" />
+    <Folder Include="js\" />
+    <Folder Include="Microsoft.WinJS.4.0\css\" />
+    <Folder Include="Microsoft.WinJS.4.0\fonts\" />
+    <Folder Include="Microsoft.WinJS.4.0\js\en-US\" />
+    <Folder Include="sample-utils\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below then uncomment
+       that target and the DisableFastUpToDateCheck PropertyGroup. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  -->
+</Project>

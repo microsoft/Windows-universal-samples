@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -84,13 +83,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [USB HID POS Scanner specification](http://go.microsoft.com/fwlink/p/?linkid=309230)  
 [Windows app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 
+### Related samples
+
+* [BarcodeScanner sample](/archived/BarcodeScanner/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -5,7 +5,6 @@ languages:
 - cpp
 - cppcx
 - cppwinrt
-- js
 products:
 - windows
 - windows-uwp
@@ -61,25 +60,22 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-## Samples
-
-[File access sample](http://go.microsoft.com/fwlink/p/?linkid=231445)  
-[File picker sample](http://go.microsoft.com/fwlink/p/?linkid=231464)  
-[Folder enumeration sample](http://go.microsoft.com/fwlink/p/?linkid=231512)  
-[Programmatic file search sample](http://go.microsoft.com/fwlink/p/?linkid=231532)  
-
-## Reference
+### Reference
 
 [Windows.Storage namespace](http://msdn.microsoft.com/library/windows/apps/br227346)  
 [Windows.Storage.FileProperties namespace](http://msdn.microsoft.com/library/windows/apps/br207831)  
 
+### Related samples
+
+* [File access sample](http://go.microsoft.com/fwlink/p/?linkid=231445)
+* [File picker sample](http://go.microsoft.com/fwlink/p/?linkid=231464)
+* [Folder enumeration sample](http://go.microsoft.com/fwlink/p/?linkid=231512)
+* [Programmatic file search sample](http://go.microsoft.com/fwlink/p/?linkid=231532)
+* [FileThumbnails sample](/archived/FileThumbnails/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

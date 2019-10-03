@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -52,13 +51,15 @@ This demonstrates using a Proximity sensor's state as a background trigger.
 When you click the 'Register Task' button, an available proximity sensor will be used to register for notifications in the change of proximity.
 When a change in the proximity is detected by the sensor, the registered background task gets fired. Proximity Sensor readings are then retrieved from the trigger to update the scenario UI.
 
+## Related topics
+
+### Related samples
+
+* [ProximitySensor sample](/archived/ProximitySensor/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

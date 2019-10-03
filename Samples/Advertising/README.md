@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -48,7 +47,8 @@ for more details.
 
 ### Samples
 
-[Microsoft Store in-app purchase](/Samples/Store)  
+* [Microsoft Store in-app purchase](/Samples/Store)
+* [Advertising sample](/archived/Advertising/) for JavaScript (archived)
 
 ## Reference
 
@@ -62,9 +62,7 @@ for more details.
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

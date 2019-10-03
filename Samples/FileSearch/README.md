@@ -5,7 +5,6 @@ languages:
 - cpp
 - cppcx
 - cppwinrt
-- js
 products:
 - windows
 - windows-uwp
@@ -44,23 +43,20 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[File access sample](http://go.microsoft.com/fwlink/p/?linkid=231445)  
-[Folder enumeration sample](http://go.microsoft.com/fwlink/p/?linkid=231512)  
-
 ### Reference
 
 [Windows.Storage namespace](http://msdn.microsoft.com/library/windows/apps/br227346)  
 [Windows.Storage.Search namespace](http://msdn.microsoft.com/library/windows/apps/br208106)  
 
+### Related samples
+
+* [File access sample](http://go.microsoft.com/fwlink/p/?linkid=231445)
+* [Folder enumeration sample](http://go.microsoft.com/fwlink/p/?linkid=231512)
+* [FileSearch sample](/archived/FileSearch/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10 build 10500 or higher
-
-**Server:** Windows Server 2016 Technical Preview build 10500 or higher
-
-**Phone:** Windows 10 build 10500 or higher
+* Windows 10 build 10586 or higher
 
 ## Build the sample
 

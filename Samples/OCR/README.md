@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -46,11 +45,7 @@ Scenario 2: Capture image from camera and extract text.
 
 ## Related topics
 
-**Samples**
-
-[InkAnalysis](/Samples/InkAnalysis)  
-
-**Reference**
+### Reference
 
 [Windows.Media.Ocr namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.ocr.aspx)  
 [Windows.Globalization.Language class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.language.aspx)  
@@ -59,15 +54,15 @@ Scenario 2: Capture image from camera and extract text.
 [Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)  
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.aspx)  
 
+### Related samples
+
+* [InkAnalysis](/Samples/InkAnalysis)
+* [OCR sample](/archived/OCR/) for JavaScript (archived)
+
 ## System requirements
 
-**Hardware:** Camera
-
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
+* Camera (required by sample but not by OCR feature itself)
 
 ## Build the sample
 

@@ -3,7 +3,7 @@
   <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.190620.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.190620.2\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{278B9682-93F2-4D05-AD65-6DC66741EA23}</ProjectGuid>
+    <ProjectGuid>{A7A13311-34DE-5237-BE22-0C645620E635}</ProjectGuid>
     <ProjectName>DeviceEnumeration</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

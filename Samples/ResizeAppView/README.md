@@ -5,7 +5,6 @@ languages:
 - cpp
 - cppcx
 - cppwinrt
-- js
 products:
 - windows
 - windows-uwp
@@ -34,7 +33,7 @@ The sample shows the following techniques:
 - Launching at a specific size.
 
 **Note** Although the sample will compile and run, the level of functionality will depend on which build of Windows you are running and what device you are running it on.
-In particular, the view resizing feature is not enabled on phones or on PCs in Tablet mode because those systems do not permit free resizing.
+In particular, the view resizing feature is not enabled on PCs in Tablet mode because they do not permit free resizing.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -44,21 +43,18 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[FullScreenMode](/Samples/FullScreenMode)  
-
 ### Reference
 
 [ApplicationView class](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)  
 
+### Related samples
+
+* [FullScreenMode](/Samples/FullScreenMode)
+* [ResizeAppView sample](/archived/ResizeAppView/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10 (but non-functional; see discussion above)
+* Windows 10
 
 ## Build the sample
 

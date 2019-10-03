@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -41,13 +40,15 @@ When you choose the Enable button for the **Data Events** option, the app will b
 
 When you choose the Enable button for the **Polling** option, the app will retrieve the current sensor readings.
 
+## Related topics
+
+### Related samples
+
+* [SimpleOrientationSensor sample](/archived/SimpleOrientationSensor/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

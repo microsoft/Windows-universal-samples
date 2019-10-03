@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -38,15 +37,17 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
+### Conceptual
+
 [Adding message dialogs](http://msdn.microsoft.com/library/windows/apps/hh738361)  
+
+### Related samples
+
+* [MessageDialog sample](/archived/MessageDialog/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

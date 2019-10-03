@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -44,9 +43,15 @@ You can find more Windows IoT Core samples in the [Windows 10 Internet of Things
 
 To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
+## Related topics
+
+### Related samples
+
+* [IoT-SPI sample](/archived/IoT-SPI/) for JavaScript (archived)
+
 ## System requirements
 
-**IoT:** Windows 10 IoT Core
+* Windows 10 IoT Core
 
 ## Build the sample
 

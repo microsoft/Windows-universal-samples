@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -46,17 +45,14 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [Windows.System.UserProfile namespace](http://msdn.microsoft.com/library/windows/apps/br241881)  
 
-## Related samples
+### Related samples
 
-[Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)  
+* [Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)
+* [UserInfo sample](/archived/UserInfo/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -42,21 +41,18 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[Unicode](/Samples/Unicode)  
-
 ### Reference
 
 [JapanesePhoneticAnalyzer class](https://msdn.microsoft.com/library/windows/apps/windows.globalization.japanesephoneticanalyzer.aspx)  
 
+### Related samples
+
+* [Unicode](/Samples/Unicode)
+* [JapanesePhoneticAnalysis sample](/archived/JapanesePhoneticAnalysis/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Not supported
+* Windows 10 Desktop
 
 ## Build the sample
 

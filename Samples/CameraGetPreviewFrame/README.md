@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -42,12 +41,12 @@ Due to the custom UI that this sample implements, any messages intended for the 
 
 ## Related topics
 
-**Conceptual**
+### Conceptual
 
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)  
 [Get a preview frame](http://go.microsoft.com/fwlink/?LinkId=627229)  
 
-**Reference**
+### Reference
 
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  
 [Windows.Media.Capture.MediaCaptureInitializationSettings constructor](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx)  
@@ -58,15 +57,14 @@ Due to the custom UI that this sample implements, any messages intended for the 
 [Windows.Graphics.Display.DisplayInformation class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.display.displayinformation.aspx)  
 [Windows.UI.Xaml.Media.Imaging.WriteableBitmap class](https://msdn.microsoft.com/library/windows/apps/windows.ui.xaml.media.imaging.writeablebitmap.aspx)  
 
+### Related samples
+
+* [CameraGetPreviewFrame sample](/archived/CameraGetPreviewFrame/) for JavaScript (archived)
+
 ## System requirements
 
-**Hardware:** Camera
-
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
+* Camera
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -69,7 +68,8 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 ### Samples
 
-[Display orientation sample](../DisplayOrientation)
+* [Display orientation sample](../DisplayOrientation)
+* [Accelerometer sample](/archived/Accelerometer/) for JavaScript (archived)
 
 ### Reference
 
@@ -83,17 +83,13 @@ When you choose the **Enable** button for the **Data Events** option, the app be
 
 ## System requirements
 
-**Client:** Windows 10 build 14295
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10 build 14295
+* Windows 10 build 14393
 
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
 2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
+3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language. Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -66,11 +65,6 @@ the changes will be reflected in any videos taken with the video button.
 
 ## Related topics
 
-### Samples
-
-[Basic camera app sample](/Samples/CameraStarterKit)  
-[Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)  
-
 ### Reference
 
 [Windows.Media.Devices namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  
@@ -82,13 +76,15 @@ the changes will be reflected in any videos taken with the video button.
 [Windows.Graphics.Imaging.BitmapEncoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)  
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)  
 
-### System requirements
+### Related samples
 
-**Client:** Windows 10
+* [Basic camera app sample](/Samples/CameraStarterKit)
+* [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
+* [CameraResolution sample](/archived/CameraResolution/) for JavaScript (archived)
 
-**Server:** Windows Server 2016 Technical Preview
+## System requirements
 
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

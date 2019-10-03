@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 products:
 - windows
 - windows-uwp
@@ -58,19 +57,16 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [Version adaptive code](https://msdn.microsoft.com/windows/uwp/debug-test-perf/version-adaptive-code)  
 [Guide to UWP apps](https://msdn.microsoft.com/windows/uwp/get-started/universal-application-platform-guide)  
 
-#### Samples
+### Related samples
 
-[OrientationSensor sample](/Samples/OrientationSensor)  
-[BackgroundActivation sample](/Samples/BackgroundActivation)  
-[XamlStateTriggers sample](/Samples/XamlStateTriggers)  
+* [OrientationSensor sample](/Samples/OrientationSensor)
+* [BackgroundActivation sample](/Samples/BackgroundActivation)
+* [XamlStateTriggers sample](/Samples/XamlStateTriggers)
+* [VersionAdaptiveCode sample](/archived/VersionAdaptiveCode/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

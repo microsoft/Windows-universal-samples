@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -44,18 +43,19 @@ When you choose the **Enable** button for the **Polling** option, the app will r
 
 Allows the user to simulate sensor accuracy and demonstrates usage of the calibration bar.
 
-Related topics
---------------
+## Related topics
+
+### Reference
 
 [Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)  
 
+### Related samples
+
+* [Inclinometer sample](/archived/Inclinometer/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

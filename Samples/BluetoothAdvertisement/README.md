@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 - vb
 products:
 - windows
@@ -34,13 +33,15 @@ This sample allows the user to publish and watch for Bluetooth Low Energy advert
 
 **Note:** A working Bluetooth dongle/radio is needed in order to test this sample's functionality.  The VS Emulator is a valid target, but since there's technically no valid Bluetooth, the app will treat it as if there's no Bluetooth radio and beacon functionality cannot be used.  
 
+## Related topics
+
+### Related samples
+
+* [BluetoothAdvertisement sample](/archived/BluetoothAdvertisement/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

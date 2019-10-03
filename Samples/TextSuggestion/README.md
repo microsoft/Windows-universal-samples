@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -26,18 +25,22 @@ Shows how to get text suggestion (including Conversion, Prediction, Reverse Conv
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-## Reference
+## Related topics
+
+### Reference
 
 [Windows.Data.Text](http://msdn.microsoft.com/library/windows/apps/dn263535)  
 [TextConversionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textconversiongenerator.aspx)  
 [TextPredictionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textpredictiongenerator.aspx)  
 [TextReverseConversionGenerator class](http://msdn.microsoft.com/library/windows/apps/xaml/windows.data.text.textreverseconversiongenerator.aspx)  
 
-## Operating system requirements
+### Related samples
 
-Client
+* [TextSuggestion sample](/archived/TextSuggestion/) for JavaScript (archived)
 
-Windows 10
+## System requirements
+
+* Windows 10
 
 ## Build the sample
 

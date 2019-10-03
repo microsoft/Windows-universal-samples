@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -44,11 +43,7 @@ This sample also implements a custom UI to better simulate the experience that a
 
 ## Related topics
 
-**Samples**
-
-[CameraStarterKit](/Samples/CameraStarterKit)
-
-**Conceptual**
+### Conceptual
 
 [Capture photos and video with MediaCapture](https://msdn.microsoft.com/library/windows/apps/mt243896)
 
@@ -56,7 +51,7 @@ This sample also implements a custom UI to better simulate the experience that a
 
 [Using the Video Stabilization effect](http://go.microsoft.com/fwlink/?LinkId=627235)
 
-**Reference**
+### Reference
 
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
@@ -78,15 +73,15 @@ This sample also implements a custom UI to better simulate the experience that a
 
 [Windows.Graphics.Imaging.BitmapEncoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)
 
+### Related samples
+
+* [CameraStarterKit](/Samples/CameraStarterKit)
+* [CameraVideoStabilization sample](/archived/CameraVideoStabilization/) for JavaScript (archived)
+
 ## System requirements
 
-**Hardware:** Camera
-
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
+* Camera
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -54,13 +53,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [QuickStart: Clipboard basics](http://msdn.microsoft.com/library/windows/apps/hh750308)  
 [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)  
 
+### Related samples
+
+* [Clipboard sample](/archived/Clipboard/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

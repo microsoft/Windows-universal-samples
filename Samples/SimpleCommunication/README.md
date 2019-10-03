@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -60,29 +59,21 @@ and security issues and should not be used outside of a test environment. They a
 
 **Important**  The URL passed to the code is not validated or authenticated. The application must perform these actions.
 
-To obtain an evaluation copy of Windows 8.1, go to [Windows 8.1](http://go.microsoft.com/fwlink/p/?linkid=301696).
+## Related topics
 
-To obtain an evaluation copy of Microsoft Visual Studio 2013, go to [Visual Studio 2013](http://go.microsoft.com/fwlink/p/?linkid=301697).
-
-Related topics
---------------
-
-[Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
-
-**Roadmaps**
+### Roadmaps
 
 [Roadmap for apps using C\# and Visual Basic](http://msdn.microsoft.com/library/windows/apps/br229583)  
 [Roadmap for apps using C++](http://msdn.microsoft.com/library/windows/apps/hh700360)  
-[Roadmap for apps using JavaScript](http://msdn.microsoft.com/library/windows/apps/hh465037)  
 [Designing UX for apps](http://msdn.microsoft.com/library/windows/apps/hh767284)  
 [Audio, video, and camera](https://msdn.microsoft.com/library/windows/apps/mt203788)  
 
-**Tasks**
+### Tasks
 
 [How to enable low-latency playback](http://msdn.microsoft.com/library/windows/apps/hh452742)  
 [Creating an app using WRL and Media Foundation](http://go.microsoft.com/fwlink/p/?LinkID=309355)  
 
-**Reference**
+### Reference
 
 [Windows.Media.Capture.MediaCapture](http://msdn.microsoft.com/library/windows/apps/br226738)  
 [MediaCapture](http://msdn.microsoft.com/library/windows/apps/br241124)  
@@ -90,14 +81,13 @@ Related topics
 [MediaExtensionManager](http://msdn.microsoft.com/library/windows/apps/br240987)  
 [Windows.Media.MediaProperties](http://msdn.microsoft.com/library/windows/apps/hh701296)  
 
-Operating system requirements
------------------------------
+### Related samples
 
-**Client:** Windows 10
+* [SimpleCommunication sample](/archived/SimpleCommunication/) for JavaScript (archived)
 
-**Server:** Windows Server 2016 Technical Preview
+## System requirements
 
-**Phone:** Windows 10
+* Windows 10
 
 Build the sample
 ----------------

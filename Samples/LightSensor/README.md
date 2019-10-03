@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -41,15 +40,17 @@ When you click the **Enable** button for the **Polling** option, the app will re
 
 ## Related topics
 
+### Reference
+
 [Windows.Devices.Sensors namespace](http://go.microsoft.com/fwlink/p/?linkid=241981)  
+
+### Related samples
+
+* [LightSensor sample](/archived/LightSensor/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -59,23 +58,25 @@ This sample requires that location capability be set in the *Package.appxmanifes
 
 ## Related topics
 
-[Get current location](https://msdn.microsoft.com/library/windows/apps/mt219698)  
-[Windows.Devices.Geolocation](http://msdn.microsoft.com/library/windows/apps/br225603)  
-[Windows.Devices.Geolocation.Geofencing](https://msdn.microsoft.com/library/windows/apps/dn263744)    
-[Guidelines for location-aware apps](https://msdn.microsoft.com/library/windows/apps/hh465148)  
+### Conceptual
 
-## Related samples
+* [Get current location](https://msdn.microsoft.com/library/windows/apps/mt219698)
+* [Guidelines for location-aware apps](https://msdn.microsoft.com/library/windows/apps/hh465148)
 
-[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
-[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
+### Reference
+
+* [Windows.Devices.Geolocation](http://msdn.microsoft.com/library/windows/apps/br225603)
+* [Windows.Devices.Geolocation.Geofencing](https://msdn.microsoft.com/library/windows/apps/dn263744)
+
+### Related samples
+
+* [Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)
+* [Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)
+* [Geolocation sample](/archived/Geolocation/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

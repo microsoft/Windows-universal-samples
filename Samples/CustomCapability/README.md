@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -166,15 +165,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-* [IoT-GPIO](/Samples/IoT-GPIO)
-* [IoT-I2C](/Samples/IoT-I2C)
-* [IoT-SPI](/Samples/IoT-SPI)
-* [Custom HID device access](/Samples/CustomHidDeviceAccess)
-* [Custom serial device access](/Samples/CustomSerialDeviceAccess)
-* [Custom USB device access](/Samples/CustomUsbDeviceAccess)
-
 ### Reference
 
 * [Windows.Devices.Custom.CustomDevice runtime class](https://msdn.microsoft.com/library/windows/apps/windows.devices.custom.customdevice.aspx) class
@@ -184,13 +174,19 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 * [Custom Capabilities for Universal Windows Platform apps](https://msdn.microsoft.com/windows/hardware/drivers/devapps/custom-capabilities-for-universal-windows-platform-apps)
 * [Hardware access for Universal Windows Platform apps](https://msdn.microsoft.com/windows/hardware/drivers/devapps/hardware-access-for-universal-windows-platform-apps)
 
+### Related samples
+
+* [IoT-GPIO](/Samples/IoT-GPIO)
+* [IoT-I2C](/Samples/IoT-I2C)
+* [IoT-SPI](/Samples/IoT-SPI)
+* [Custom HID device access](/Samples/CustomHidDeviceAccess)
+* [Custom serial device access](/Samples/CustomSerialDeviceAccess)
+* [Custom USB device access](/Samples/CustomUsbDeviceAccess)
+* [CustomCapability sample](/archived/CustomCapability/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10 version 1703
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10 version 1703
+* Windows 10 build 15063 or higher
 
 ## Build the sample
 

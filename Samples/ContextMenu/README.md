@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -59,13 +58,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [Windows.UI.Popups](http://msdn.microsoft.com/library/windows/apps/br242180)  
 
+### Related samples
+
+* [ContextMenu sample](/archived/ContextMenu/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

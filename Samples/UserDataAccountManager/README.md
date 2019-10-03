@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -39,13 +38,15 @@ For more info, see [App capability declarations](https://msdn.microsoft.com/libr
 
 - This sample will not pass WACK because it uses a special-use capability.
 
+## Related topics
+
+### Related samples
+
+* [UserDataAccountManager sample](/archived/UserDataAccountManager/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

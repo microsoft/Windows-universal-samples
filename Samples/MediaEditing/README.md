@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -88,18 +87,19 @@ to the composition's **OverlayLayers** collection. Finally, a **MediaStreamSourc
 **GeneratePreviewMediaStreamSource** and then the **MediaElement** method **SetMediaStreamSource** is called to make the composition
 viewable in the UI. 
 
+## Related topics
 
-Related topics
---------------
+### Reference
 
 [Windows.Media.Editing namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.editing.aspx)  
 
-System requirements
------------------------------
+### Related samples
 
-**Client:** Windows 10
+* [MediaEditing sample](/archived/MediaEditing/) for JavaScript (archived)
 
-**Phone:** Windows 10
+## System requirements
+
+* Windows 10
 
 Build the sample
 ----------------

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -73,13 +72,13 @@ For more information on network capabilities, see [How to set network capabiliti
 [Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346)  
 [XHR](http://msdn.microsoft.com/library/windows/apps/br229787)  
 
+### Related samples
+
+* [BackgroundTransfer sample](/archived/BackgroundTransfer/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

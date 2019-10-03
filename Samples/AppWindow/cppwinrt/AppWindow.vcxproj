@@ -3,7 +3,7 @@
   <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{A00EEFA7-7045-4B0E-969B-84B534020D69}</ProjectGuid>
+    <ProjectGuid>{F2EE7569-2AFA-53F7-89E6-93447D31465A}</ProjectGuid>
     <ProjectName>AppWindow</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

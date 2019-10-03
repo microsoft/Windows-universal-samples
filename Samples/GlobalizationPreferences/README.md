@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -53,12 +52,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[Calendar sample](../Calendar)  
-[DateTimeFormatting sample](../DateTimeFormatting)  
-[NumberFormatting sample](../NumberFormatting)  
-
 ### Reference
 
 [Windows.System.UserProfile namespace](http://msdn.microsoft.com/library/windows/apps/br241881)  
@@ -68,13 +61,16 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [Windows.Globalization.GeographicRegion class](http://msdn.microsoft.com/library/windows/apps/br206792)  
 [Windows.Globalization.Language class](http://msdn.microsoft.com/library/windows/apps/br206804)  
 
+### Related samples
+
+* [Calendar sample](../Calendar)
+* [DateTimeFormatting sample](../DateTimeFormatting)
+* [NumberFormatting sample](../NumberFormatting)
+* [GlobalizationPreferences sample](/archived/GlobalizationPreferences/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

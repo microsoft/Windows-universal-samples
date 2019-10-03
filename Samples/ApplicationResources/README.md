@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -40,6 +39,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
+### Reference
+
 [Creating and retrieving resources in Windows apps](http://go.microsoft.com/fwlink/p/?linkid=251463)  
 [ResourceLoader class](http://msdn.microsoft.com/library/windows/apps/br206014)  
 [ResourceManager class](http://msdn.microsoft.com/library/windows/apps/br206078)  
@@ -48,13 +49,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)  
 [WinJS.Resources namespace](http://msdn.microsoft.com/library/windows/apps/br229779)  
 
+### Related samples
+
+* [ApplicationResources sample](/archived/ApplicationResources/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

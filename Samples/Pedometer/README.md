@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -54,13 +53,15 @@ This demonstrates using a Pedometer's step goal as a background trigger.
 When you click the 'Register Task' button, it gets the current step count from the default Pedometer and sets a step goal of 50 additional steps.
 When the step goal is met, the registered background task gets fired. Pedometer readings are then retrieved from the trigger to update the scenario UI.
 
+## Related topics
+
+### Related samples
+
+* [Pedometer sample](/archived/Pedometer/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -49,21 +48,23 @@ the default lamp device when page loads and provide a toggle to turn the lamp on
     1) When you choose "Register for AvailablityChanged Event" button, the app registers for the AvailablityChanged event
     2) When you choose "Unregister for AvailablityChanged Event", the app unregisters for the AvailablityChanged event.
 
-Related topics
---------------
+## Related topics
+
+### Reference
 
 [Windows.Media.Devices namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)
 
 Windows 8 and 8.1 method for turning on flash (requires starting a video recording session)
 [Windows.Media.Devices.VideoDeviceController.TorchControl](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.videodevicecontroller.torchcontrol.aspx)
 
+### Related samples
 
-System requirements
------------------------------
-Independent Flash Device
-Client
-Windows 10
-Windows Phone 10
+* [LampDevice sample](/archived/LampDevice/) for JavaScript (archived)
+
+## System requirements
+
+* Windows 10
+* Independent flash device
 
 Build the sample
 ----------------

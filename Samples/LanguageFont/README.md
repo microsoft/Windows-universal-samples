@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -46,16 +45,18 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
+### Reference
+
 [Windows.Globalization.Fonts namespace](http://msdn.microsoft.com/library/windows/apps/br206881)  
 [LanguageFontGroup class](http://msdn.microsoft.com/library/windows/apps/br206865)  
 
+### Related samples
+
+* [LanguageFont sample](/archived/LanguageFont/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

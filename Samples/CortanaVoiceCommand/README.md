@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -41,20 +40,6 @@ Specifically, this sample covers:
 -   Implements progress screens, ensuring that Cortana does not time out during lengthy I/O operations (AdventureWorksVoiceCommandService.cs:ShowProgressScreen())
 -   Infix/Suffix Voice Command support, allowing for more natural phrases to be used. 
 
-
-**WinJS:**
-
-- Installing a VCD file. (installVCD.js, AdventureWorksCommands.xml)
-- Using a WebWorker to install the VCD in the background, speeding up app initialization (default.js, installVCD.js)
-- Updating a phrase list within a VCD file at runtime. (installVCD.js, tripDetails.js)
-- Registration of a background task and protocol handler for Cortana (Package.appxmanifest, AdventureWorksCommands.xml)
-- Implement a background task and Voice Command services for Cortana (voiceCommandService.js), including:
-  - Simple headless Cortana background activation for displaying content within Cortana (when is my trip to *destination*)
-  - Confirmation dialogs (cancel trip to *destination*)
-  - Disambiguation of multiple items with automatic reprompting.
-  - Resolution scaling images
-  - Progress dialogs for lengthy operations.
-  
 **C++/CX**
 
 -  Installing a VCD file. (adventureworkscommands.xml, App.xaml.cpp:OnLaunched() )
@@ -97,31 +82,24 @@ Duplicates can also be handled. For an example of handling disambiguation, add a
 
 - "Adventure Works, cancel trip to London"
 
-## Known Issues
-
-* WinJS version of the sample app is not localized. It should handle dates correctly in alternate regions, but currently does not install a localized VCD, or provide localized strings to Cortana.
-
 ## Related topics
+
+### Conceptual
 
 [Cortana design guidelines](https://msdn.microsoft.com/library/windows/apps/xaml/dn974233.aspx)  
 [Cortana interactions (XAML)](https://msdn.microsoft.com/library/windows/apps/mt185598)  
 [Cortana interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn974231.aspx)  
 
-## See also
+### Related samples
 
-[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
-[Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)  
-[WebWorkers](https://msdn.microsoft.com/library/hh673568.aspx)
+* [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)
+* [Hue Lights sample](https://github.com/Microsoft/Windows-appsample-huelightcontroller)
+* [CortanaVoiceCommand sample](/archived/CortanaVoiceCommand/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
-
-Cortana requires an appropriate recording device, and the system must be associated with a Microsoft Account in order for Cortana to function.
+* Windows 10
+* Cortana requires an appropriate recording device, and the system must be associated with a Microsoft Account in order for Cortana to function.
 
 ## Build the sample
 

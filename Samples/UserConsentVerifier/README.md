@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -26,21 +25,24 @@ Shows how to use the UserConsentVerifier class to check whether a verifier devic
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-Related topics
---------------
+## Related topics
 
-[UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)  
+### Reference
 
-Related technologies
---------------------
+[UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134) 
+
+### Related technologies
 
 [Windows.Security.Credentials.UI](http://msdn.microsoft.com/library/windows/apps/hh701356)  
 [Windows.Security.Credentials.UI.UserConsentVerifier](http://msdn.microsoft.com/library/windows/apps/dn279134)  
 
-Operating system requirements
------------------------------
+### Related samples
 
-Windows 10
+* [UserConsentVerifier sample](/archived/UserConsentVerifier/) for JavaScript (archived) 
+
+## System requirements
+
+* Windows 10
 
 Build the sample
 ----------------

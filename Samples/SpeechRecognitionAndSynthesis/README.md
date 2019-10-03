@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -49,25 +48,23 @@ You can disable functionality that requires accepting this policy by turning off
 
 ## Related topics
 
+### Conceptual
+
 [Speech recognition](https://msdn.microsoft.com/library/windows.media.speechrecognition.aspx)  
 [Speech synthesis](https://msdn.microsoft.com/library/windows/apps/windows.media.speechsynthesis.aspx)  
 [Speech design guidelines](https://msdn.microsoft.com/library/windows/apps/dn596121.aspx)  
 [Speech interactions](https://msdn.microsoft.com/library/windows/apps/mt185614)  
 [Responding to speech interactions (HTML)](https://msdn.microsoft.com/library/windows/apps/dn720491.aspx)  
 
-## Related samples
+### Related samples
 
-[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+* [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)
+* [SpeechRecognitionAndSynthesis sample](/archived/SpeechRecognitionAndSynthesis/) for JavaScript (archived)
 
 ## System requirements
 
-**Hardware:** Speech recognition requires an appropriate audio input device. 
-
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
+* Speech recognition requires an appropriate audio input device. 
 
 ## Build the sample
 

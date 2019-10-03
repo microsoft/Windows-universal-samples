@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -51,16 +50,16 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
-**Conceptual**
+## Related topics
+
+### Conceptual
 
 [Packaging apps](https://msdn.microsoft.com/library/windows/apps/mt270969)  
 
-**Reference**
+### Reference
 
 [Windows.ApplicationModel.Package](http://msdn.microsoft.com/library/windows/apps/br224667)  
 [Windows.ApplicationModel.PackageId](http://msdn.microsoft.com/library/windows/apps/br224668)  
-
-### Reference
 
 To learn more about sharing and the [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967) namespace, 
 we recommend you take a look at the [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923) section of our documentation, 
@@ -72,26 +71,22 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 
 -   [Sharing content target app sample](http://go.microsoft.com/fwlink/p/?linkid=231519)
 -   [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923)
--   [How to share files (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758308)
 -   [How to share files (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871371)
--   [How to share HTML (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758310)
 -   [How to share HTML (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973055)
--   [How to share text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758313)
 -   [How to share text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871372)
--   [Quickstart: Sharing content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465261)
 -   [Share data](https://msdn.microsoft.com/library/windows/apps/mt243293)
 -   [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408)
 -   [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977)
 -   [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)
 -   [Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989)
 
+### Related samples
+
+* [Package sample](/archived/Package/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

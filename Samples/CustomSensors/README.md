@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -39,13 +38,15 @@ When you click on the **Enable** button for the **Data Events** option, the app 
 
 When you click on the **Get CO2 level** button for the **Polling** option, the app will retrieve the current sensor readings.
 
+## Related topics
+
+### Related samples
+
+* [CustomSensors sample](/archived/CustomSensors/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

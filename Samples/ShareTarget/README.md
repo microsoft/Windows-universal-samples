@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 products:
 - windows
 - windows-uwp
@@ -52,36 +51,23 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 
 - [Sharing content source app sample](http://go.microsoft.com/fwlink/p/?linkid=231511)
 - [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923)
-- [How to receive files (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758302)
-- [How to receive HTML (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758303)
 - [How to receive HTML (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973053)
-- [How to receive text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758304)
 - [How to receive text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973054)
-- [Quickstart: Receiving shared content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465255)
 - [Receive data](https://msdn.microsoft.com/library/windows/apps/mt243292)
 - [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408)
 - [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977)
 - [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)
 - [Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989)
 
-
-
-To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
-
-**Note**  For Windows 10 app samples, go to  [Windows 10 Samples](https://github.com/Microsoft/Windows-universal-samples). The samples for Windows 10 can be built and run using Windows developer [tools](https://developer.windows.com).
-
-
 ## Related topics
 
-- [Windows 8 app samples](http://go.microsoft.com/fwlink/p/?LinkID=227694)
+### Related samples
+
+* [ShareTarget sample](/archived/ShareTarget/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -9,8 +9,6 @@ IF /I "%1"=="-UNINSTALL" GOTO Uninstall
 	call :directory "ProjectTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleCPP Shared\Project\*
 	call :directory "ItemTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleScenarioItemCPP Shared\Item\*
 
-rem	call :directory "ProjectTemplates\JavaScript\Windows Universal" UWPSDKSampleJS Shared\README.md
-
 	GOTO :eof
 
 :directory
@@ -39,5 +37,3 @@ rem	call :directory "ProjectTemplates\JavaScript\Windows Universal" UWPSDKSample
 
 	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCPPWINRT"
 	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCPPWINRT"
-
-	REM rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\JavaScript\Windows Universal\UWPSDKSampleJS"

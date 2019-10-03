@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -55,14 +54,13 @@ The sample demonstrates eight scenarios:
 [Enumerating devices article](http://msdn.microsoft.com/library/windows/apps/Hh464977)  
 [Windows.Devices.Enumeration namespace](http://msdn.microsoft.com/library/windows/apps/windows.devices.enumeration.aspx)  
 
+### Related samples
+
+* [DeviceEnumerationAndPairing sample](/archived/DeviceEnumerationAndPairing/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:**  Windows 10
-
+* Windows 10
 
 ## Build the sample
 

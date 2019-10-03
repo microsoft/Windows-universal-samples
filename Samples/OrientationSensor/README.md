@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -46,20 +45,20 @@ When you click the **Enable** button for the **Polling** option, the app will re
 
 Allows the user to simulate sensor accuracy and demonstrates usage of the calibration bar.
 
-Related topics
---------------
+## Related topics
 
-[Accelerometer sample](../Accelerometer)  
+### Reference
+
 [Windows.Devices.Sensors namespace](http://msdn.microsoft.com/library/windows/apps/br206408)  
 
-Operating system requirements
------------------------------
+### Related samples
 
-**Client:** Windows 10 build 14295
+* [Accelerometer sample](../Accelerometer)
+* [OrientationSensor sample](/archived/OrientationSensor/) for JavaScript (archived)
 
-**Server:** Windows Server 2016 Technical Preview
+## System requirements
 
-**Phone:** Windows 10 build 14295
+* Windows 10 build 14393
 
 Build the sample
 ----------------

@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 products:
 - windows
 - windows-uwp
@@ -38,21 +37,18 @@ This example shows how to configure a device to use either software or hardware 
 **Scenario 4: Secure Stop(C#):**    
 Secure Stop enables a service to better manage concurrent streams for an account. The application can send a secure stop message from PlayReady that notifies a service that playback has stopped and a temporary playback license is no longer available. 
 
-***JavaScript Scenarios***
+**XBox One:**
+In order to use PlayReady DRM within a Universal Application on Xbox One, an additional <DeviceCapability> needs to be added to the app manifest. The capability will need to be added manually to the manifest as a setting is not yet available from within the App Manifest Designer. 
 
-**Scenario 1: Reactive License Request(JS):**   
-This example shows the basics of configuring the MediaElement's MediaProtectionManager property to support PlayReady and reactively handle license service requests. License service requests are triggered automatically by when PlayReady does not have a media license available.
+-	Right-click on the package.appxmanifest from Visual Studio and edit with the XML (text) Editor. 
+-	Add the following <DeviceCapability> and save:
 
-**Scenario 2: Reactive License Request(JS):**   
-This example shows how an application can actively manage DRM license requests and the individualization process.
-
-**Scenario 3: License Request via EME(JS):**   
-This example uses W3C standards based Encrypted Media Extensions (EME) to enable protected playback. This is useful for Hosted Web Applications where protected playback is configured the same way it would be in the browser.
-
-**Scenario 4: Secure Stop EME(JS):**   
-This example uses EME for requesting a license and sending a secure stop message. This sample could also be used to provide secure stop capabilities in a web application in Microsoft Edge.
-
-
+```xml
+<Capabilities>
+    ...
+    <DeviceCapability Name="6a7e5907-885c-4bcb-b40a-073c067bd3d5" />
+</Capabilities>
+```
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
 
@@ -61,10 +57,6 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
 ## Related topics
-
-### Samples
-
-[AdaptiveStreaming](../AdaptiveStreaming)  
 
 ### Reference
 
@@ -78,25 +70,14 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [Hardware DRM](https://msdn.microsoft.com/windows/uwp/audio-video-camera/hardware-drm)  
 [Adaptive Streaming with PlayReady](https://msdn.microsoft.com/windows/uwp/audio-video-camera/adaptive-streaming-with-playready)  
 
+### Related samples
+
+* [AdaptiveStreaming](../AdaptiveStreaming)
+* [PlayReady sample](/archived/PlayReady/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10 
-
-**Phone:** Windows 10 
-
-**XBox One:**
-In order to use PlayReady DRM within a Universal Application on Xbox One, an additional <DeviceCapability> needs to be added to the app manifest. The capability will need to be added manually to the manifest as a setting is not yet available from within the App Manifest Designer. 
-
-#### To configure: ####
--	Right-click on the package.appxmanifest from Visual Studio and edit with the XML (text) Editor. 
--	Add the following <DeviceCapability> and save:
-
-```
-<Capabilities>
-    ...
-    <DeviceCapability Name="6a7e5907-885c-4bcb-b40a-073c067bd3d5" />
-</Capabilities>
-```
+* Windows 10 
 
 ## Build the sample
 

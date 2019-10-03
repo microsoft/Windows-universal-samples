@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 products:
 - windows
 - windows-uwp
@@ -128,7 +127,9 @@ The sample adds the [DeviceCapability](http://msdn.microsoft.com/library/windows
   </Capabilities>
 ```
 
-## Related technologies
+## Related topics
+
+### References
 
 * [Windows.Devices.Usb](http://msdn.microsoft.com/library/windows/apps/dn278466)
 
@@ -154,11 +155,13 @@ The sample adds the [DeviceCapability](http://msdn.microsoft.com/library/windows
 
   Writes data to an output stream. Used for writing data to a USB pipe.
 
-## Operating system requirements
+### Related samples
 
-**Client:** Windows 10
+* [CustomUsbDeviceAccess sample](/archived/CustomUsbDeviceAccess/) for JavaScript (archived)
 
-**Server:** Windows Server 2016 Technical Preview
+## System requirements
+
+* Windows 10
 
 ## Driver requirements
 

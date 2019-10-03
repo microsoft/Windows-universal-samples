@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>1ed680b3-e771-5796-910e-751924166cc0</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0'">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>$(VersionNumberMajor).$(VersionNumberMinor)</MinimumVisualStudioVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <Content Include="css\default.css" />
+    <Content Include="default.html" />
+    <Content Include="feedCollection.json" />
+    <Content Include="images\LargeRSSLogo-background-white.png" />
+    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+      <Link>images\microsoft-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+      <Link>images\smalltile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
+      <Link>images\splash-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+      <Link>images\storelogo-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+      <Link>images\squaretile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
+      <Link>images\tile-sdk.png</Link>
+    </Content>
+    <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
+      <Link>images\windows-sdk.png</Link>
+    </Content>
+    <Content Include="js\data.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\io.js" />
+    <Content Include="js\navigator.js" />
+    <Content Include="js\render.js" />
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\css\ui-dark.css">
+      <Link>Microsoft.WinJS.4.0\css\ui-dark.css</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\css\ui-light.css">
+      <Link>Microsoft.WinJS.4.0\css\ui-light.css</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\en-US\ui.strings.js">
+      <Link>Microsoft.WinJS.4.0\js\en-US\ui.strings.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\WinJS.intellisense-setup.js">
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense-setup.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\WinJS.intellisense.js">
+      <Link>Microsoft.WinJS.4.0\js\WinJS.intellisense.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\fonts\Symbols.ttf">
+      <Link>Microsoft.WinJS.4.0\fonts\Symbols.ttf</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\base.js">
+      <Link>Microsoft.WinJS.4.0\js\base.js</Link>
+    </Content>
+    <Content Include="\.\.\\\.\.\\SharedContent\\js\Microsoft.WinJS\js\ui.js">
+      <Link>Microsoft.WinJS.4.0\js\ui.js</Link>
+    </Content>
+    <Content Include="pages\article\article.css" />
+    <Content Include="pages\article\article.html" />
+    <Content Include="pages\article\article.js" />
+    <Content Include="pages\feed\feed.css" />
+    <Content Include="pages\feed\feed.html" />
+    <Content Include="pages\feed\feed.js" />
+    <Content Include="pages\news\news.css" />
+    <Content Include="pages\news\news.html" />
+    <Content Include="pages\news\news.js" />
+    <Content Include="pages\subscriptions\subscriptions.css" />
+    <Content Include="pages\subscriptions\subscriptions.html" />
+    <Content Include="pages\subscriptions\subscriptions.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below then uncomment
+       that target and the DisableFastUpToDateCheck PropertyGroup. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  -->
+</Project>

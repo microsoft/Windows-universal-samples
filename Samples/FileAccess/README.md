@@ -5,7 +5,6 @@ languages:
 - cpp
 - cppcx
 - cppwinrt
-- js
 products:
 - windows
 - windows-uwp
@@ -94,17 +93,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 *Note**  If you want to learn about accessing files using a file picker, see [Open files and folders with a picker](https://msdn.microsoft.com/library/windows/apps/mt186456).
 
-### Samples
-
-[File picker sample](http://go.microsoft.com/fwlink/p/?linkid=231464)  
-[Folder enumeration sample](http://go.microsoft.com/fwlink/p/?linkid=231512)  
-[Programmatic file search sample](http://go.microsoft.com/fwlink/p/?linkid=231532)  
-[File and folder thumbnail sample](http://go.microsoft.com/fwlink/p/?linkid=231522)  
-[RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
-[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
-[Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)  
-[Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)  
-
 ## Reference
 
 [Windows.Storage namespace](http://msdn.microsoft.com/library/windows/apps/br227346)  
@@ -112,13 +100,21 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [Windows.Storage.FileProperties](http://msdn.microsoft.com/library/windows/apps/br207831)  
 [Windows.Storage.Streams namespace](http://msdn.microsoft.com/library/windows/apps/br241791)  
 
+### Related samples
+
+* [File picker sample](http://go.microsoft.com/fwlink/p/?linkid=231464)
+* [Folder enumeration sample](http://go.microsoft.com/fwlink/p/?linkid=231512)
+* [Programmatic file search sample](http://go.microsoft.com/fwlink/p/?linkid=231532)
+* [File and folder thumbnail sample](http://go.microsoft.com/fwlink/p/?linkid=231522)
+* [RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)
+* [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)
+* [Coloring Book app sample](https://github.com/Microsoft/Windows-appsample-coloringbook)
+* [Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)
+* [FileAccess sample](/archived/FileAccess/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10 build 10500 or higher
-
-**Server:** Windows Server 2016 Technical Preview build 10500 or higher
-
-**Phone:** Windows 10 build 10500 or higher
+* Windows 10 build 10586 or higher
 
 ## Build the sample
 

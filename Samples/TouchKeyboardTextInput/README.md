@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -49,17 +48,16 @@ To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.c
 
 To obtain information about Microsoft Visual Studio and the tools for developing Windows apps, go to [Visual Studio](http://go.microsoft.com/fwlink/?LinkID=532422)
 
-Related topics
---------------
+## Related topics
 
-**Conceptual**
+### Conceptual
 
 [Getting started with apps](http://msdn.microsoft.com/library/windows/apps/)  
 [Guidelines and checklist for login controls](http://msdn.microsoft.com/library/windows/apps/hh965453)  
 [Guidelines and checklist for touch keyboard](http://msdn.microsoft.com/library/windows/apps/hh972345)  
 [Responding to user interaction](http://msdn.microsoft.com/library/windows/apps/hh700412)  
 
-**Reference**
+### Reference
 
 [IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688)  
 [IsTextPredictionEnabled](http://msdn.microsoft.com/library/windows/apps/br209690)  
@@ -68,13 +66,13 @@ Related topics
 [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683)  
 [Windows.UI.Core](http://msdn.microsoft.com/library/windows/apps/br208383)  
 
+### Related samples
+
+* [TouchKeyboardTextInput sample](/archived/TouchKeyboardTextInput/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

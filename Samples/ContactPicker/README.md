@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -42,22 +41,19 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[ContactCards](/Samples/ContactCards)  
-
 ### Reference
 
 [ContactPicker class](http://msdn.microsoft.com/library/windows/apps/br224913)  
 [Contacts and calendar](https://msdn.microsoft.com/library/windows/apps/mt269388)  
 
+### Related samples
+
+* [ContactCards](/Samples/ContactCards)
+* [ContactPicker sample](/archived/ContactPicker/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

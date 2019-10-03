@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 - vb
 products:
 - windows
@@ -25,12 +24,15 @@ Shows how to create apps that use various audio categories.
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
 
-System requirements
------------------------------
+## Related topics
 
-**Client:** Windows 10
+### Related samples
 
-**Phone:** Windows 10
+* [AudioCategory sample](/archived/AudioCategory/) for JavaScript (archived)
+
+## System requirements
+
+* Windows 10
 
 Build the sample
 ----------------

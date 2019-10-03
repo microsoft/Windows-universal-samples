@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 products:
 - windows
 - windows-uwp
@@ -74,23 +73,19 @@ user can still control the app, even if it isn't neccesarily on screen. In this
 event handler we take the appropriate action for the command, such as pausing
 our media and then updating the state back on the control.
 
-## JavaScript
+## Related topics
 
-The <video> and <audio> elements do not integrate with SMTC.
-The JavaScript sample shows how to connect SMTC events with the
-HTML media elements.
-
-Related topics
-----------------------------
+### Reference
 
 [SystemMediaTransportControls class](https://msdn.microsoft.com/library/windows/apps/windows.media.systemmediatransportcontrols.aspx)  
 
-System requirements
-----------------------------
+### Related samples
 
-**Client:** Windows 10 version 1607
+* [SystemMediaTransportControls sample](/archived/SystemMediaTransportControls/) for JavaScript (archived)
 
-**Phone:** Windows 10 version 1607
+## System requirements
+
+* Windows 10 build 14393 or higher
 
 Build the sample
 ----------------------------

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -80,11 +79,6 @@ the same process for communication purposes in a UWP app. For more information, 
 [Windows.Storage.Streams.DataWriter](http://msdn.microsoft.com/library/windows/apps/br208154)  
 [SocketActivityTrigger](https://msdn.microsoft.com/library/windows/apps/windows.applicationmodel.background.socketactivitytrigger.aspx)  
 
-### Samples
-
-[DatagramSocket sample](/Samples/DatagramSocket)  
-[SocketActivityTrigger StreamSocket Sample](/Samples/SocketActivityStreamSocket)  
-
 ### Other - C\#/VB/C++ and XAML
 
 [Adding support for networking (XAML)](http://msdn.microsoft.com/library/windows/apps/hh452751)  
@@ -96,24 +90,15 @@ the same process for communication purposes in a UWP app. For more information, 
 [Proximity and tapping (XAML)](http://msdn.microsoft.com/library/windows/apps/hh465221)  
 [Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)  
 
-### Other - JavaScript and HTML
+### Related samples
 
-[Adding support for networking (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[Connecting to network services (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452977)  
-[How to secure socket connections with TLS/SSL (HTML)](http://msdn.microsoft.com/library/windows/apps/hh780595)  
-[How to send and receive network data with a stream socket (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452996)  
-[How to set network capabilities (HTML)](http://msdn.microsoft.com/library/windows/apps/hh770532)  
-[How to use advanced socket controls (HTML)](http://msdn.microsoft.com/library/windows/apps/hh780596)  
-[Supporting proximity and tapping (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465229)  
-[Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)  
+* [DatagramSocket sample](/Samples/DatagramSocket)
+* [SocketActivityTrigger StreamSocket Sample](/Samples/SocketActivityStreamSocket)
+* [StreamSocket sample](/archived/StreamSocket/) for JavaScript (archived)
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:**  Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -53,13 +52,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346)  
 
+### Related samples
+
+* [LibraryManagement sample](/archived/LibraryManagement/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10. Note that you will not be able to add or remove folders from the library.
+* Windows 10
 
 ## Build the sample
 

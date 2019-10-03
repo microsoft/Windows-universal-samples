@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -28,21 +27,10 @@ Shows how to use the WebAuthenticationBroker class to connect to OAuth providers
 
 Specifically, this sample shows you how to use the OAuth protocol for authentication and authorization. You can choose one of three scenarios: 
 
-- Facebook [C++, C#, JS]
-- Twitter [C#, JS]
-- Flickr [C#, JS]
-- Google [C++, C#, JS]
-
-## Related Topics
-
-[Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)  
-[Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)  
-
-[WebAccount](http://msdn.microsoft.com/library/windows/apps/dn279122)  
-[WebAccountCommand](http://msdn.microsoft.com/library/windows/apps/dn298413)  
-[WebAccountProvider](http://msdn.microsoft.com/library/windows/apps/dn279123)  
-[WebAuthenticationBroker](http://msdn.microsoft.com/library/windows/apps/br227025)  
-[Windows.Security.Authentication.Web](http://msdn.microsoft.com/library/windows/apps/br227044)  
+- Facebook [C++, C#]
+- Twitter [C#]
+- Flickr [C#]
+- Google [C++, C#]
 
 ## Obtaining Client Ids For Use with OAuth APIs
 
@@ -65,9 +53,28 @@ To configure Twitter OAuth connections you will have to register an application 
 To configure Flickr OAuth connections you will have to register an application with Flickr
 - [Flickr API Keys Documentation](https://www.flickr.com/services/api/misc.api_keys.html)
 
-## Operating system requirements
+## Related Topics
 
-Windows 10
+### Conceptual
+
+[Quickstart: Connecting using XML HTTP Request](http://msdn.microsoft.com/library/windows/apps/hh770550)  
+[Setting up single sign-on using the web authentication broker](http://msdn.microsoft.com/library/windows/apps/hh465283)  
+
+### Reference
+
+[WebAccount](http://msdn.microsoft.com/library/windows/apps/dn279122)  
+[WebAccountCommand](http://msdn.microsoft.com/library/windows/apps/dn298413)  
+[WebAccountProvider](http://msdn.microsoft.com/library/windows/apps/dn279123)  
+[WebAuthenticationBroker](http://msdn.microsoft.com/library/windows/apps/br227025)  
+[Windows.Security.Authentication.Web](http://msdn.microsoft.com/library/windows/apps/br227044)  
+
+### Related samples
+
+* [WebAuthenticationBroker sample](/archived/WebAuthenticationBroker/) for JavaScript (archived)
+
+## System requirements
+
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -44,13 +43,13 @@ To learn more about the lock screen, see [Lock screen overview](http://msdn.micr
 [LockScreen](http://msdn.microsoft.com/library/windows/apps/br241847)  
 [Windows.System.UserProfile](http://msdn.microsoft.com/library/windows/apps/br241881)  
 
+### Related samples
+
+* [Personalization sample](/archived/Personalization/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Not supported
+* Windows 10 Desktop
 
 ## Build the sample
 

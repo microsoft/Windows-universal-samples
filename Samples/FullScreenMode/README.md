@@ -5,7 +5,6 @@ languages:
 - cpp
 - cppcx
 - cppwinrt
-- js
 products:
 - windows
 - windows-uwp
@@ -43,21 +42,17 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[FullScreenMode](/Samples/FullScreenMode)  
-
 ### Reference
 
 [ApplicationView class](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)  
 
+### Related samples
+
+* [FullScreenMode sample](/archived/FullScreenMode/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

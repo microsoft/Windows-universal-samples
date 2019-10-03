@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -49,25 +48,22 @@ This sample contains scenarios that demonstrate:
 
 ## Related topics
 
-### Samples
-
-[Calendar sample](../Calendar)  
-[GlobalizationPreferences sample](../GlobalizationPreferences)  
-[NumberFormatting sample](../NumberFormatting)  
-
 ### Reference
 
 [Windows.Globalization.CalendarIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229460)  
 [Windows.Globalization.ClockIdentifiers](http://msdn.microsoft.com/library/windows/apps/br229462)  
 [Windows.Globalization.DateTimeFormatting.DateTimeFormatter](http://msdn.microsoft.com/library/windows/apps/br206828)  
 
+### Related samples
+
+* [Calendar sample](../Calendar)
+* [GlobalizationPreferences sample](../GlobalizationPreferences)
+* [NumberFormatting sample](../NumberFormatting)
+* [DateTimeFormatting sample](/archived/DateTimeFormatting/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

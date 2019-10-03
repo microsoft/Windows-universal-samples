@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -65,26 +64,22 @@ For more info about the concepts and APIs demonstrated in this sample, see these
 
 -   [Sharing content target app sample](http://go.microsoft.com/fwlink/p/?linkid=231519)
 -   [Sharing and exchanging data](http://msdn.microsoft.com/library/windows/apps/hh464923)
--   [How to share files (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758308)
 -   [How to share files (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871371)
--   [How to share HTML (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758310)
 -   [How to share HTML (XAML)](http://msdn.microsoft.com/library/windows/apps/hh973055)
--   [How to share text (HTML)](http://msdn.microsoft.com/library/windows/apps/hh758313)
 -   [How to share text (XAML)](http://msdn.microsoft.com/library/windows/apps/hh871372)
--   [Quickstart: Sharing content (HTML)](http://msdn.microsoft.com/library/windows/apps/hh465261)
 -   [Share data](https://msdn.microsoft.com/library/windows/apps/mt243293)
 -   [DataPackageView](http://msdn.microsoft.com/library/windows/apps/hh738408)
 -   [ShareOperation](http://msdn.microsoft.com/library/windows/apps/br205977)
 -   [Windows.ApplicationModel.DataTransfer](http://msdn.microsoft.com/library/windows/apps/br205967)
 -   [Windows.ApplicationModel.DataTransfer.Share](http://msdn.microsoft.com/library/windows/apps/br205989)
 
+### Related samples
+
+* [ShareSource sample](/archived/ShareSource/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

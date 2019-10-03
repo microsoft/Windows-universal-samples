@@ -2,7 +2,6 @@
 topic: sample
 languages:
 - csharp
-- js
 products:
 - windows
 - windows-uwp
@@ -47,26 +46,20 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 All other files provide common SDK sample functionality.
 
-### JS version
-
-- **css\scenario1.css**, **html\scenario1.html**, **js\scenario1.js**: Use the property system APIs (Windows.Storage.FileProperties) to read and edit bitmap properties from an image.
-- **css\scenario2.css**, **html\scenario2.html**, **js\scenario2.js**: Use the imaging APIs (Windows.Graphics.Imaging) to read and edit bitmap properties and apply transformations such as scale, crop and rotate.
-- **js\helpers.cs**: Helper functionality including handling/converting EXIF orientation values.
-
-All other files provide common SDK sample functionality.
-
 ## Related topics
+
+### Reference
 
 [Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346)  
 [Windows.Graphics.Imaging](http://msdn.microsoft.com/library/windows/apps/br226400)  
 
+### Related samples
+
+* [SimpleImaging sample](/archived/SimpleImaging/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

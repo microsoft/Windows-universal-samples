@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -47,22 +46,19 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[Accelerometer](../Accelerometer)
-
 ### Reference
 
 [Windows.Graphics.Display namespace](http://msdn.microsoft.com/library/windows/apps/windows.graphics.display.aspx)  
 [DisplayInformation class](http://msdn.microsoft.com/library/windows/apps/dn264258)  
 
+### Related samples
+
+* [Accelerometer](../Accelerometer)
+* [DisplayOrientation sample](/archived/DisplayOrientation/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:**  Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -54,24 +53,21 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[KeyCredentialManager](../KeyCredentialManager)  
-[Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)  
-
 ### Reference
 
 [Storing user credentials using the Credential Locker](https://msdn.microsoft.com/library/windows/apps/dn448950.aspx)  
 [Storing user credentials](http://msdn.microsoft.com/library/windows/apps/hh465060)  
 [Windows.Security.Credentials namespace](http://msdn.microsoft.com/library/windows/apps/br227089)  
 
+### Related samples
+
+* [KeyCredentialManager](../KeyCredentialManager)
+* [Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)
+* [PasswordVault sample](/archived/PasswordVault/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -5,7 +5,6 @@ languages:
 - cpp
 - cppcx
 - cppwinrt
-- js
 products:
 - windows
 - windows-uwp
@@ -36,7 +35,8 @@ The sample shows the following techniques:
 - Perform an action when a jump list item is activated by the user.
 
 **Note** Although the sample will compile and run, the level of functionality will depend on which build of Windows you are running and what device you are running it on.
-In particular, phone does not support displaying or storing jump list information at this time.
+Full functionality is available on Windows 10 Desktop.
+Functionality on other platforms may be reduced.
 
 **Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
  
@@ -51,13 +51,13 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [JumpList class](https://msdn.microsoft.com/library/windows/apps/windows.ui.startscreen.jumplist.aspx)  
 [JumpListItem class](https://msdn.microsoft.com/library/windows/apps/windows.ui.startscreen.jumplistitem.aspx)  
 
+### Related samples
+
+* [JumpList sample](/archived/JumpList/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10 (but non-functional; see discussion above)
+* Windows 10
 
 ## Build the sample
 

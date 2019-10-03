@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 - vb
 products:
 - windows
@@ -45,13 +44,13 @@ For apps that are interested in capturing a photo or video without requiring acc
 
 ## Related topics
 
-**Conceptual**
+### Conceptual
 
 [Capture photos and video with MediaCapture](http://go.microsoft.com/fwlink/?LinkId=627234)  
 [Capture photos and video with CameraCaptureUI](https://msdn.microsoft.com/library/windows/apps/mt282142)  
 [Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)  
 
-**Reference**
+### Reference
 
 [Windows.Media.Capture.MediaCapture namespace](https://msdn.microsoft.com/library/windows/apps/windows.media.devices.aspx)  
 [Windows.Media.Capture.MediaCaptureInitializationSettings constructor](https://msdn.microsoft.com/library/windows/apps/windows.media.capture.mediacaptureinitializationsettings.mediacaptureinitializationsettings.aspx)  
@@ -65,19 +64,15 @@ For apps that are interested in capturing a photo or video without requiring acc
 [Windows.Graphics.Imaging.BitmapDecoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapdecoder.aspx)  
 [Windows.Graphics.Imaging.BitmapEncoder class](https://msdn.microsoft.com/library/windows/apps/windows.graphics.imaging.bitmapencoder.aspx)  
 
-## Related samples
+### Related samples
 
-[Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)  
+* [Family Notes sample](https://github.com/Microsoft/Windows-appsample-familynotes)
+* [CameraStarterKit sample](/archived/CameraStarterKit/) for JavaScript (archived)
 
 ## System requirements
 
-**Hardware:** Camera
-
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
+* Camera
 
 ## Build the sample
 

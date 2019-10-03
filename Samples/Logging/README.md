@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -135,10 +134,6 @@ xperf version 10.0.16299 and higher support specifying the channel name with a l
 
 ## Related topics
 
-### Samples
-
-[Logging Sample](/Samples/Logging)  
-
 ### Reference
 
 [LoggingChannel](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.loggingchannel.aspx)  
@@ -147,13 +142,13 @@ xperf version 10.0.16299 and higher support specifying the channel name with a l
 [FileLoggingSession](https://msdn.microsoft.com/library/windows/apps/windows.foundation.diagnostics.fileloggingsession.aspx)  
 [Windows Performance Toolkit](https://docs.microsoft.com/en-us/windows-hardware/test/wpt/index)  
 
+### Related samples
+
+* [Logging sample](/archived/Logging/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 

@@ -4,7 +4,6 @@ languages:
 - csharp
 - cpp
 - cppcx
-- js
 products:
 - windows
 - windows-uwp
@@ -50,12 +49,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
-### Samples
-
-[Calendar sample](../Calendar)  
-[DateTimeFormatting sample](../DatetimeFormatting)  
-[GlobalizationPreferences sample](../GlobalizationPreferences)  
-
 ### Reference
 
 [Windows.Globalization.NumberFormatting.CurrencyFormatter](http://msdn.microsoft.com/library/windows/apps/br206883)  
@@ -67,13 +60,16 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [Windows.Globalization.NumberFormatting.RoundingAlgorithm](http://msdn.microsoft.com/library/windows/apps/dn278791)  
 [Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder](http://msdn.microsoft.com/library/windows/apps/dn278794)  
 
+### Related samples
+
+* [Calendar sample](../Calendar)
+* [DateTimeFormatting sample](../DatetimeFormatting)
+* [GlobalizationPreferences sample](../GlobalizationPreferences)
+* [NumberFormatting sample](/archived/NumberFormatting/) for JavaScript (archived)
+
 ## System requirements
 
-**Client:** Windows 10
-
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 
