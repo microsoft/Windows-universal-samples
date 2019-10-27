@@ -1,0 +1,6 @@
+<Project>
+ <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+ </PropertyGroup>
+ <Import Project="$(SharedContentDir)\Samples.props" />
+</Project>

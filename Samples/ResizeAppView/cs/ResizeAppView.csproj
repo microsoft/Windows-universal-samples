@@ -2,8 +2,6 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <SharedContentDir Condition="Exists('..\..\..\SharedContent')">..\..\..\SharedContent</SharedContentDir>
-    <SharedContentDir Condition="Exists('SharedContent')">SharedContent</SharedContentDir>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{63FD21A4-2CE2-5EB1-9CD0-4CEA68CC3843}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
