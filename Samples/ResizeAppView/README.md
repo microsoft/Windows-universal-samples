@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -8,6 +8,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: ResizeAppView
+extendedZipContent:
+ - path: "SharedContent"
+   target: "SharedContent"
+ - path: "LICENSE.md"
+   target: "LICENSE.md"
+description: "Shows how to customize the size of your app's view."
 ---
 
 <!---
