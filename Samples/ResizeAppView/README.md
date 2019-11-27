@@ -12,8 +12,10 @@ urlFragment: ResizeAppView
 extendedZipContent:
  - path: "SharedContent"
    target: "SharedContent"
- - path: "SharedContent/publishroot"
-   target: "."
+ - path: "SharedContent/publishroot/LICENSE"
+   target: "LICENSE"
+ - path: "SharedContent/publishroot/Directory.build.props"
+   target: "Directory.build.props"
 description: "Shows how to customize the size of your app's view."
 ---
 
