@@ -285,7 +285,7 @@ void QuadRenderer::CreateDeviceDependentResources()
 
     // Load shaders asynchronously.
     task<std::vector<byte>> loadVSTask = DX::ReadDataAsync(vertexShaderFileName);
-    task<std::vector<byte>> loadPSTask = DX::ReadDataAsync(L"ms-appx:///UseDistanceFieldPixelShader.cso");
+    task<std::vector<byte>> loadPSTask = DX::ReadDataAsync(L"ms-appx:///TexturePixelShader.cso");
 
     task<std::vector<byte>> loadGSTask;
     if (!m_usingVprtShaders)

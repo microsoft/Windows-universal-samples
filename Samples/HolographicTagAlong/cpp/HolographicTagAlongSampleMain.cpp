@@ -49,15 +49,6 @@ void HolographicTagAlongSampleMain::SetHolographicSpace(HolographicSpace^ hologr
     constexpr unsigned int offscreenRenderTargetWidth = 2048;
     m_textRenderer = std::make_unique<TextRenderer>(m_deviceResources, offscreenRenderTargetWidth, offscreenRenderTargetWidth);
 
-    // Initialize the distance renderer.
-    // The algorithm seems to break down if the target width is any smaller than 16 times the source width.
-    // This is sufficient to reduce the memory requirement for the text message texture by a factor of 768, given the 
-    // reduction in channels:
-    //   * Memory required to store the offscreen DirectWrite source texture: 2048 * 2048 * 3 = 12,582,912 bytes
-    //   * Memory required to store the offscreen distance field texture:      128 *  128 * 1 =     16,384 bytes
-    constexpr unsigned int blurTargetWidth = 256;
-    m_distanceFieldRenderer = std::make_unique<DistanceFieldRenderer>(m_deviceResources, blurTargetWidth, blurTargetWidth);
-
     // Use DirectWrite to create a high-resolution, antialiased image of vector-based text.
     RenderOffscreenTexture();
 
@@ -292,16 +283,6 @@ bool HolographicTagAlongSampleMain::Render(Windows::Graphics::Holographic::Holog
         holographicFrame->UpdateCurrentPrediction();
         HolographicFramePrediction^ prediction = holographicFrame->CurrentPrediction;
 
-        // Off-screen drawing used by all cameras.
-        // The distance function texture only needs to be created once, for a given text string.
-        if (m_distanceFieldRenderer->GetRenderCount() == 0)
-        {
-            m_distanceFieldRenderer->RenderDistanceField(m_textRenderer->GetTexture());
-
-            // The 2048x2048 texture will not be needed again, unless we get hit DeviceLost scenario.
-            m_textRenderer->ReleaseDeviceDependentResources();
-        }
-
         bool atLeastOneCameraRendered = false;
         for (auto cameraPose : prediction->CameraPoses)
         {
@@ -339,7 +320,7 @@ bool HolographicTagAlongSampleMain::Render(Windows::Graphics::Holographic::Holog
             if (cameraActive)
             {
                 // Draw the sample hologram.
-                m_quadRenderer->Render(m_distanceFieldRenderer->GetTexture());
+                m_quadRenderer->Render(m_textRenderer->GetTexture());
             }
 #endif
             atLeastOneCameraRendered = true;
@@ -370,7 +351,6 @@ void HolographicTagAlongSampleMain::OnDeviceLost()
 {
 #ifdef DRAW_SAMPLE_CONTENT
     m_quadRenderer->ReleaseDeviceDependentResources();
-    m_distanceFieldRenderer->ReleaseDeviceDependentResources();
     m_textRenderer->ReleaseDeviceDependentResources();
 #endif
 }
@@ -382,7 +362,6 @@ void HolographicTagAlongSampleMain::OnDeviceRestored()
 #ifdef DRAW_SAMPLE_CONTENT
     m_quadRenderer->CreateDeviceDependentResources();
     m_textRenderer->CreateDeviceDependentResources();
-    m_distanceFieldRenderer->CreateDeviceDependentResources();
     RenderOffscreenTexture();
 #endif
 }
