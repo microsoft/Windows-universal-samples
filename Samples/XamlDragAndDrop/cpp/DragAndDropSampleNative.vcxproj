@@ -101,10 +101,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-    <PropertyGroup>
-        <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
-    </PropertyGroup>
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+  <PropertyGroup>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
@@ -158,6 +158,9 @@
     <ClInclude Include="Scenario3_StartDragAsync.xaml.h">
       <DependentUpon>Scenario3_StartDragAsync.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario4_MoveBetweenListView.xaml.h">
+      <DependentUpon>Scenario4_MoveBetweenListView.xaml</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
@@ -172,6 +175,7 @@
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
+    <Page Include="Scenario4_MoveBetweenListView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -202,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="Scenario3_StartDragAsync.xaml.cpp">
       <DependentUpon>Scenario3_StartDragAsync.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario4_MoveBetweenListView.xaml.cpp">
+      <DependentUpon>Scenario4_MoveBetweenListView.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
