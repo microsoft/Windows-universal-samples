@@ -1,11 +1,18 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - cpp
 - cppcx
 products:
 - windows
 - windows-uwp
+urlFragment: SpatialInteractionSource
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Uses spatial interaction sources such as Hand on HoloLens or Six Degree of Freedom (6DOF) Controllers on Windows Mixed Reality Desktop."
 ---
 
 <!---
@@ -55,7 +62,7 @@ Interactions are triggered by 6DOF Controllers
 
 ### Additional remarks
 
-**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio 2017
+**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio
 to build, and either a Windows Holographic device or a Windows Mixed Reality Headset with
 at least one 6DOF controller to execute. Windows Holographic devices include the
 Microsoft HoloLens and the Microsoft HoloLens Emulator.
@@ -63,7 +70,7 @@ Microsoft HoloLens and the Microsoft HoloLens Emulator.
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Holographic development, including
-Microsoft Visual Studio 2017 and the Microsoft HoloLens Emulator, go to
+Microsoft Visual Studio and the Microsoft HoloLens Emulator, go to
 [Install the tools](https://developer.microsoft.com/windows/holographic/install_the_tools).
 
 ## Related topics
@@ -99,7 +106,7 @@ The following types are used in this code sample:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with
    the sample you want to build.
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or
    JavaScript). Double-click the Visual Studio Solution (.sln) file.
