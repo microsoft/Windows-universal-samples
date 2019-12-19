@@ -2,6 +2,9 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{C7B21AC2-9EB3-537D-BA52-80BA8A0581BB}</ProjectGuid>
@@ -96,7 +99,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
+    <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SubPage.xaml.cs">
@@ -109,19 +112,19 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+    <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Content Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\Splash-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squareTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Content Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\StoreLogo-sdk.png</Link>
     </Content>
   </ItemGroup>

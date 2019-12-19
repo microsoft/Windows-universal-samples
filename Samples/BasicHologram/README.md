@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -8,6 +8,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: BasicHologram
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to render a simple hologram that is a spinning cube."
 ---
 
 <!---
@@ -44,7 +51,7 @@ submit a depth buffer for per-pixel image stabilization.
 
 ### Additional remarks
 
-**Note** The Windows universal samples for Windows Mixed Reality require Visual Studio 2017 Update 2
+**Note** The Windows universal samples for Windows Mixed Reality require Visual Studio
 to build, and a Windows Holographic or Windows Mixed Reality device to execute. Windows Holographic 
 devices include the Microsoft HoloLens and the Microsoft HoloLens Emulator. Windows Mixed Reality
 headsets are available for use with Windows 10 PCs.
@@ -77,7 +84,7 @@ The following Windows Universal API namespaces are used in this code sample:
 2. If you intend to build the C++/WinRT sample,
    install the [C++/WinRT Visual Studio Extension](https://aka.ms/cppwinrt/vsix)
    if you haven't already.
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the 
    subfolder for this specific sample, then the subfolder for your preferred language.
    Double-click the Visual Studio Solution (.sln) file.

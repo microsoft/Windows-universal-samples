@@ -2,6 +2,9 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{00913493-F272-5393-853F-DBB9608D8BDE}</ProjectGuid>
@@ -82,54 +85,54 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\SharedContent\cs\App.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\App.xaml.cs">
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
+    <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\LogView.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\LogView.xaml.cs">
       <Link>Shared\Logging\LogView.xaml.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\AdaptiveMediaSourceHttpFilterLogger.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\AdaptiveMediaSourceHttpFilterLogger.cs">
       <Link>Shared\Logging\AdaptiveMediaSourceHttpFilterLogger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\AdaptiveMediaSourceLogger.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\AdaptiveMediaSourceLogger.cs">
       <Link>Shared\Logging\AdaptiveMediaSourceLogger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaPlaybackItemLogger.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\MediaPlaybackItemLogger.cs">
       <Link>Shared\Logging\MediaPlaybackItemLogger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaPlaybackListLogger.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\MediaPlaybackListLogger.cs">
       <Link>Shared\Logging\MediaPlaybackListLogger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaPlayerLogger.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\MediaPlayerLogger.cs">
       <Link>Shared\Logging\MediaPlayerLogger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\MediaSourceLogger.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\MediaSourceLogger.cs">
       <Link>Shared\Logging\MediaSourceLogger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\AdaptiveMediaSourceStringExtensions.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\Extensions\AdaptiveMediaSourceStringExtensions.cs">
       <Link>Shared\Logging\Extensions\AdaptiveMediaSourceStringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\HttpProgressStringExtensions.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\Extensions\HttpProgressStringExtensions.cs">
       <Link>Shared\Logging\Extensions\HttpProgressStringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\JsonFormatter.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\Extensions\JsonFormatter.cs">
       <Link>Shared\Logging\Extensions\JsonFormatter.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\MediaFoundationGuidStringExtensions.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\Extensions\MediaFoundationGuidStringExtensions.cs">
       <Link>Shared\Logging\Extensions\MediaFoundationGuidStringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\MediaPlaybackItemStringExtensions.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\Extensions\MediaPlaybackItemStringExtensions.cs">
       <Link>Shared\Logging\Extensions\MediaPlaybackItemStringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\Logging\Extensions\MediaPlaybackListStringExtensions.cs">
+    <Compile Include="$(SharedContentDir)\cs\Logging\Extensions\MediaPlaybackListStringExtensions.cs">
       <Link>Shared\Logging\Extensions\MediaPlaybackListStringExtensions.cs</Link>
     </Compile>
     <Compile Include="Helpers\CommonLicenseRequest.cs" />
@@ -168,17 +171,17 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\..\SharedContent\cs\MainPage.xaml">
+    <Page Include="$(SharedContentDir)\cs\MainPage.xaml">
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\..\SharedContent\cs\Logging\LogView.xaml">
+    <Page Include="$(SharedContentDir)\cs\Logging\LogView.xaml">
       <Link>Shared\Logging\LogView.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -215,35 +218,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+    <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Content Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Content Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squareTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Content Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\storeLogo-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Content Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
   </ItemGroup>

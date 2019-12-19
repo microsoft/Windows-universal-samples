@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{F2EE7569-2AFA-53F7-89E6-93447D31465A}</ProjectGuid>
@@ -61,7 +64,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cppwinrt</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);$(SharedContentDir)\cppwinrt</IncludePath>
     <CppWinRTOptimized>true</CppWinRTOptimized>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -85,11 +88,11 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\SharedContent\cppwinrt\App.h">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\App.h">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cppwinrt\MainPage.h">
-      <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\MainPage.h">
+      <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_SecondaryWindow.h">
@@ -113,10 +116,10 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\..\SharedContent\xaml\MainPage.xaml">
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\shared\Scenario1_SecondaryWindow.xaml" />
@@ -125,16 +128,16 @@
     <Page Include="..\shared\Scenario4_CompactOverlay.xaml" />
     <Page Include="..\shared\Scenario5_RelativePositioning.xaml" />
     <Page Include="..\shared\SecondaryAppWindowPage.xaml" />
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\SharedContent\cppwinrt\App.cpp">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\App.cpp">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cppwinrt\MainPage.cpp">
-      <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\MainPage.cpp">
+      <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp">
       <DependentUpon>SampleConfiguration.h</DependentUpon>
@@ -166,8 +169,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl">
-      <DependentUpon>..\..\..\SharedContent\xaml\MainPage.xaml</DependentUpon>
+    <Midl Include="$(SharedContentDir)\cppwinrt\MainPage.idl">
+      <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
     </Midl>
     <Midl Include="Project.idl" />
   </ItemGroup>
@@ -177,25 +180,25 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squareTile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\storeLogo-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
   </ItemGroup>
