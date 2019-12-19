@@ -1,10 +1,17 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 products:
 - windows
 - windows-uwp
+urlFragment: Json
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to encode and decode JavaScript Object Notation (JSON) objects, arrays, strings, numbers and booleans."
 ---
 
 <!---
@@ -73,7 +80,7 @@ The following features can be used to retrieve text that contains JSON from an H
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

@@ -1,11 +1,18 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - cpp
 - cppcx
 products:
 - windows
 - windows-uwp
+urlFragment: HolographicSpatialStage
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to acquire a SpatialStage, and make use of its coordinate system and properties."
 ---
 
 <!---
@@ -34,14 +41,14 @@ sample also draws an indicator for the look direction range.
 
 ### Additional remarks
 
-**Note** The Windows universal samples for Windows Mixed Reality require Visual Studio 2017 
+**Note** The Windows universal samples for Windows Mixed Reality require Visual Studio 
 to build, and a Windows Holographic device to execute. Windows Mixed Reality devices include the
 Microsoft HoloLens, the Microsoft HoloLens Emulator, and PCs with immersive headset devices attached.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421).
 
 To obtain information about the tools used for Windows Mixed Reality development, including
-Microsoft Visual Studio 2017 and the Microsoft HoloLens Emulator, go to
+Microsoft Visual Studio and the Microsoft HoloLens Emulator, go to
 [Install the tools](https://developer.microsoft.com/windows/holographic/install_the_tools).
 
 ## Reference
@@ -62,10 +69,10 @@ The following APIs are used in this code sample:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with
    the sample you want to build.
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or
-   JavaScript). Double-click the Visual Studio 2017 Solution (.sln) file.
+   JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample
