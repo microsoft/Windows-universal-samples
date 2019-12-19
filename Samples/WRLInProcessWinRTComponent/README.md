@@ -20,12 +20,14 @@ description: "Shows how to create an in-process component in C++ using WRL that 
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620630
 --->
 
-# In-process component authoring sample
+# In-process WRL component authoring sample
 
 Shows how to create an in-process component in C++ using WRL that is consumed in C++, JS, and C#.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/wrlinprocesswinrtcomponent/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 

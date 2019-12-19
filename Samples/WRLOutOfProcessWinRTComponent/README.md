@@ -20,12 +20,14 @@ description: "Shows how to create an out-of-process component in C++ using WRL t
   samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620631
 --->
 
-# Out-of-process component authoring
+# Out-of-process WRL component authoring
 
 Shows how to create an out-of-process component in C++ using WRL that is consumed in C++, JS, and C#.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/wrloutofprocesswinrtcomponent/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
