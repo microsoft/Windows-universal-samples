@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: XamlMasterDetail
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to implement a responsive master/detail experience in XAML."
 ---
 
 <!---
@@ -36,7 +43,7 @@ Specifically, this sample demonstrates:
 - **Navigating between the master list and a detail view:** At narrow screen sizes, the user can navigate between the master list in MasterDetailPage.xaml and detail view in DetailPage.xaml to view different items.
 - **Changing the navigation model when the app is resized:** This sample contains the code necessary to adaptively switch between the two experiences described above at runtime based on screen size.
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
@@ -66,7 +73,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

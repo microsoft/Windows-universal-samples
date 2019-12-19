@@ -1,10 +1,17 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 products:
 - windows
 - windows-uwp
+urlFragment: CommunicationBlockAndFilter
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to make a block and filter application for call and text message."
 ---
 
 <!---
@@ -43,7 +50,7 @@ This sample demonstrates how to
 See the Package.appxmanifest file for the extensions and capabilities
 a communication blocking and filtering app must declare.
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
@@ -73,7 +80,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Build the sample
 
-1.  Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+1.  Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the C\# language. Double-click the Visual Studio Solution (.sln) file.
 3.  Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

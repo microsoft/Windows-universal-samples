@@ -1,10 +1,17 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 products:
 - windows
 - windows-uwp
+urlFragment: AdaptiveStreaming
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows various features of the AdaptiveMediaSource object."
 ---
 
 <!---
@@ -172,7 +179,7 @@ an object which provides the offsets between the platform's media Position,
 the original PresentationTimeStamp within the media segments, and
 the content encoding time (EXT-X-PROGRAM-DATE-TIME in HLS and its equivalent in DASH).
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com)
 
@@ -206,7 +213,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Build the sample
 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

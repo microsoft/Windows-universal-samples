@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -8,6 +8,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: BackgroundTransfer
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to download and upload files in the background in Universal Windows Platform (UWP) apps."
 ---
 
 <!---
@@ -83,7 +90,7 @@ For more information on network capabilities, see [How to set network capabiliti
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

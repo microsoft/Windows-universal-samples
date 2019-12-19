@@ -26,6 +26,9 @@
       <Platform>ARM</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F15BFD86-12E2-5559-BD28-0063A225A55F}</ProjectGuid>
     <RootNamespace>WRLOutOfProcessWinRTComponent</RootNamespace>

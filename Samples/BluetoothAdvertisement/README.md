@@ -1,11 +1,18 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - vb
 products:
 - windows
 - windows-uwp
+urlFragment: BluetoothAdvertisement
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to use the Bluetooth Advertisement API to send and receive Bluetooth Low Energy advertisements."
 ---
 
 <!---
@@ -46,7 +53,7 @@ This sample allows the user to publish and watch for Bluetooth Low Energy advert
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

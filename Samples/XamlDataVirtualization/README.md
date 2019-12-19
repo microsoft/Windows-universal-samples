@@ -1,10 +1,17 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 products:
 - windows
 - windows-uwp
+urlFragment: XamlDataVirtualization
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to implement a data source for XAML list controls that implements data virtualization."
 ---
 
 <!---
@@ -28,7 +35,7 @@ Specifically, this sample shows how to:
 - **Implement IItemsRangeInfo:** Use the IItemsRangeInfo interface to understand which items are in view or the buffer area for a list view, and to manage a cache containing those items.
 - **Implement ISelectionInfo:** Use the ISelectionInfo interface to manage the selection of items in the list, accounting for the data virtualization.
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
 To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
 
@@ -57,7 +64,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+1. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 2. Go to the directory to which you unzipped the sample. Double-click the Visual Studio Solution (.sln) file. 
 3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 

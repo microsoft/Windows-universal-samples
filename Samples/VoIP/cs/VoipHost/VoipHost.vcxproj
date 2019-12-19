@@ -32,6 +32,9 @@
   <ItemGroup>
     <AppxManifest Include="..\voip\package.appxmanifest" />
   </ItemGroup>
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{c9cfe4f3-a04b-5d8d-a3ae-b3025c9f2ecd}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>

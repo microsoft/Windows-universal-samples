@@ -1,11 +1,18 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - cpp
 - cppcx
 products:
 - windows
 - windows-uwp
+urlFragment: CameraStreamCoordinateMapper
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Uses spatially correlated color and depth cameras and the depth frames to map image pixels from one camera to another in real time."
 ---
 
 <!---
@@ -36,7 +43,7 @@ This sample is intended to demonstrate how to map entire images from one camera 
 
 There are multiple ways to interpret the result of the image mapping. This sample demonstrates how to visualize the resulting data as a 3D point cloud from different perspectives. This sample also demonstrates how to project the correlated 3D data back onto one of the cameras to correlate the results in 2D (i.e. use the depth data to discard pixels that are too far away from the camera). 
 
-**Note** The Windows universal samples for Windows 10 require Visual Studio 2017 Update 2 and Windows SDK version 15063 or above to build.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com).
 
@@ -63,7 +70,7 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with
    the sample you want to build.
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or
    JavaScript). Double-click the Visual Studio Solution (.sln) file.

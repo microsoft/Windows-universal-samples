@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: IoT-GPIO
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Sets, reads, and reacts to state changes in the General Purpose Input/Output (GPIO) pins on a Windows IoT (Internet of Things) device."
 ---
 
 <!---
@@ -35,7 +42,7 @@ This sample demonstrates the following:
 - Getting GPIO pin values.
 - Listening for changes in GPIO pin values.
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 IoT Core to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 IoT Core to execute.
 
 To obtain information about Windows 10 IoT Core, go to [Windows on Devices](http://windowsondevices.com).
 
@@ -56,7 +63,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

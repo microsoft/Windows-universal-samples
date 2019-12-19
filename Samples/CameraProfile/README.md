@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: CameraProfile
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to query a media capture device for a collection of media types that can work together on a given device called a Video Profile."
 ---
 
 <!---
@@ -16,8 +23,8 @@ products:
 
 # Camera profiles sample
 
-Shows a new extension to Windows.Media.Capture.MediaCaptureInitializationSettings API. This new API lets app 
-developers query a device for a collection of media types that can work together on a given device called a Video Profile. These new Video Profiles 
+Shows how to
+query a media capture device for a collection of media types that can work together on a given device called a Video Profile. These new Video Profiles 
 expose the capabilities of the capture device which the developer can use to set MediaCaptureInitializationSettings to the desired capabilities. In 
 addition, the developer can query the driver to see if it supports additional features available through custom profiles.
 
@@ -94,7 +101,7 @@ Build the sample
 ----------------
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

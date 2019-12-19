@@ -1,11 +1,18 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - cpp
 - cppcx
 products:
 - windows
 - windows-uwp
+urlFragment: HolographicTagAlong
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to render a hologram that follows the user."
 ---
 
 <!---
@@ -61,7 +68,7 @@ Chris Green, Valve Software, 2007.
 
 ### Additional remarks
 
-**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio 2017 Update 2
+**Note** The Windows universal samples for Windows 10 Holographic require Visual Studio
 to build, and a Windows Holographic device to execute. Windows Holographic devices include the 
 Microsoft HoloLens and the Microsoft HoloLens Emulator.
  
@@ -101,7 +108,7 @@ rendering in this code sample:
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with 
    the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the 
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or 
    JavaScript). Double-click the Visual Studio Solution (.sln) file.
