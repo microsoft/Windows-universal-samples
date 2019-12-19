@@ -26,6 +26,9 @@
       <Platform>ARM</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3A5B33E2-EAAA-56FD-9F50-F72693E83761}</ProjectGuid>
     <RootNamespace>ProxyStubsForWinRTComponents</RootNamespace>

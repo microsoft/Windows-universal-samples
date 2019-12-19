@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{28258718-bd7a-563b-bb4f-3bfdabd48bbd}</ProjectGuid>
     <RootNamespace>SDKTemplate</RootNamespace>
@@ -98,7 +101,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);$(SharedContentDir)\cpp</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -144,11 +147,11 @@
       <DependentUpon>PageToPrint.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    <ClInclude Include="$(SharedContentDir)\cpp\App.xaml.h">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
-      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+    <ClInclude Include="$(SharedContentDir)\cpp\MainPage.xaml.h">
+      <DependentUpon>$(SharedContentDir)\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="PreviewUnavailable.xaml.h">
       <DependentUpon>PreviewUnavailable.xaml</DependentUpon>
@@ -175,13 +178,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="ContinuationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
+    <Page Include="$(SharedContentDir)\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PageToPrint.xaml">
@@ -199,7 +202,7 @@
     <Page Include="Scenario5Photos.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
     <Page Include="Scenario6DisablePreview.xaml" />
@@ -210,14 +213,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    <ClCompile Include="$(SharedContentDir)\cpp\App.xaml.cpp">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="ContinuationPage.xaml.cpp">
       <DependentUpon>ContinuationPage.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
-      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+    <ClCompile Include="$(SharedContentDir)\cpp\MainPage.xaml.cpp">
+      <DependentUpon>$(SharedContentDir)\cpp\MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="PageToPrint.xaml.cpp">
       <DependentUpon>PageToPrint.xaml</DependentUpon>
@@ -255,46 +258,46 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\Samples\cliff.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\cliff.jpg">
       <Link>Assets\photo1.jpg</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\grapes.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\grapes.jpg">
       <Link>Assets\photo2.jpg</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\rainier.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\rainier.jpg">
       <Link>Assets\photo3.jpg</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\sunset.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\sunset.jpg">
       <Link>Assets\photo4.jpg</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\treetops.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\treetops.jpg">
       <Link>Assets\photo5.jpg</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\valley.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\valley.jpg">
       <Link>Assets\photo6.jpg</Link>
     </Image>
     <Image Include="..\shared\print_1.png">
       <Link>Assets\print_1.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squaretile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\storelogo-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
   </ItemGroup>
