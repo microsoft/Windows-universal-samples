@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.2.2</Version>
+      <Version>5.2.4</Version>
     </PackageReference>
     <PackageReference Include="SharpDX">
       <Version>3.0.2</Version>
