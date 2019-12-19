@@ -26,6 +26,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f3b18974-dbd8-5afb-99c4-7a06bcb3b7a0}</ProjectGuid>
     <Keyword>WindowsRuntimeComponent</Keyword>
