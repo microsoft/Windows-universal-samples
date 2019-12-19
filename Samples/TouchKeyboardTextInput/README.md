@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: TouchKeyboardTextInput
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to enable optimized views on the touch keyboard by using input scopes and input types with the TextBox control."
 ---
 
 <!---
@@ -16,12 +23,11 @@ products:
 
 # Touch keyboard text input sample
 
-Shows how to enable optimized views on the touch keyboard by using input scopes and input types with controls in the 
-[WinJS.UI](http://msdn.microsoft.com/library/windows/apps/br229782) namespace, 
-and with the [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683) and [RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548) 
-Extensible Application Markup Language (XAML) controls. 
-Also, this sample demonstrates spell checking by using the [spellcheck](http://msdn.microsoft.com/library/windows/apps/hh441107) and 
-[IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688) properties, 
+Shows how to enable optimized views on the touch keyboard by using input scopes and input types
+with the [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683) and [RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548) 
+Extensible Application Markup Language (XAML) control. 
+Also, this sample demonstrates spell checking by using the
+[IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688) property,
 and it shows text prediction by using the [IsTextPredictionEnabled](http://msdn.microsoft.com/library/windows/apps/br209690) property.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
@@ -40,9 +46,7 @@ The input types shown in this sample are:
 -   Search
 -   Telephone
 
-**Note** Because of a known issue, the first Scenario in the JS sample does not work properly in Phone - the text controls in the JS sample do not obey the "spellcheck" attribute.
-
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
 To obtain information about Windows 10, go to [Windows 10](http://go.microsoft.com/fwlink/?LinkID=532421)
 
@@ -61,7 +65,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 [IsSpellCheckEnabled](http://msdn.microsoft.com/library/windows/apps/br209688)  
 [IsTextPredictionEnabled](http://msdn.microsoft.com/library/windows/apps/br209690)  
-[spellcheck](http://msdn.microsoft.com/library/windows/apps/hh441107)  
 [RichEdit](http://msdn.microsoft.com/library/windows/apps/br227548)  
 [TextBox](http://msdn.microsoft.com/library/windows/apps/br209683)  
 [Windows.UI.Core](http://msdn.microsoft.com/library/windows/apps/br208383)  
@@ -76,7 +79,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Build the sample
 
-1. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+1. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 2. Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C#, or JavaScript. Double-click the Visual Studio Solution (.sln) file. 
 3. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**. 
 
