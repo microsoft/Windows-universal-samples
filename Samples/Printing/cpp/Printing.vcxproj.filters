@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\App.xaml.cpp" />
     <ClCompile Include="ContinuationPage.xaml.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\MainPage.xaml.cpp" />
     <ClCompile Include="PageToPrint.xaml.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="PreviewUnavailable.xaml.cpp" />
@@ -23,8 +23,8 @@
     <ClInclude Include="ContinuationPage.xaml.h" />
     <ClInclude Include="PageToPrint.xaml.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\App.xaml.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\MainPage.xaml.h" />
     <ClInclude Include="PreviewUnavailable.xaml.h" />
     <ClInclude Include="PrintHelper.h" />
     <ClInclude Include="SampleConfiguration.h" />
@@ -36,43 +36,43 @@
     <ClInclude Include="Scenario6DisablePreview.xaml.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\sunset.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\sunset.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\treetops.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\treetops.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\valley.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\valley.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\cliff.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\cliff.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\grapes.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\grapes.jpg">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\Samples\rainier.jpg">
+    <Image Include="$(SharedContentDir)\media\Samples\rainier.jpg">
       <Filter>Assets</Filter>
     </Image>
     <Image Include="..\shared\print_1.png">
@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ContinuationPage.xaml" />
-    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml" />
+    <Page Include="$(SharedContentDir)\cpp\MainPage.xaml" />
     <Page Include="PageToPrint.xaml" />
     <Page Include="PreviewUnavailable.xaml" />
     <Page Include="Scenario1Basic.xaml" />
@@ -92,7 +92,7 @@
     <Page Include="Scenario3CustomOptions.xaml" />
     <Page Include="Scenario4PageRange.xaml" />
     <Page Include="Scenario5Photos.xaml" />
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Filter>Sty%3bes</Filter>
     </Page>
     <Page Include="Scenario6DisablePreview.xaml" />
