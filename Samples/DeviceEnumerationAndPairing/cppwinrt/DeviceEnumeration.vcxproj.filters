@@ -7,8 +7,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml" />
-    <Page Include="..\..\..\SharedContent\xaml\MainPage.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
     <Page Include="..\shared\Scenario1_DevicePicker.xaml" />
     <Page Include="..\shared\Scenario2_DeviceWatcher.xaml" />
     <Page Include="..\shared\Scenario3_BackgroundDeviceWatcher.xaml" />
@@ -20,15 +20,15 @@
     <Page Include="..\shared\Scenario9_CustomPairDevice.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Midl Include="..\..\..\SharedContent\cppwinrt\MainPage.idl" />
+    <Midl Include="$(SharedContentDir)\cppwinrt\MainPage.idl" />
     <Midl Include="Project.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cppwinrt\App.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cppwinrt\MainPage.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\App.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\MainPage.cpp" />
     <ClCompile Include="DeviceHelpers.cpp" />
     <ClCompile Include="DeviceWatcherHelper.cpp" />
     <ClCompile Include="Scenario1_DevicePicker.cpp" />
@@ -44,8 +44,8 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="..\..\..\SharedContent\cppwinrt\App.h" />
-    <ClInclude Include="..\..\..\SharedContent\cppwinrt\MainPage.h" />
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\App.h" />
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\MainPage.h" />
     <ClInclude Include="DeviceHelpers.h" />
     <ClInclude Include="DeviceWatcherHelper.h" />
     <ClInclude Include="Scenario1_DevicePicker.h" />
@@ -62,30 +62,30 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml" />
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

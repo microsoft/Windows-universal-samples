@@ -2,6 +2,9 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{72CA5C89-394E-5737-8B1C-33CA812A5669}</ProjectGuid>
@@ -133,62 +136,62 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+    <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Content Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squareTile-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Content Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\storeLogo-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\SharedContent\media\Samples\cliff.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\cliff.jpg">
       <Link>Assets\cliff.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\grapes_background.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\grapes_background.jpg">
       <Link>Assets\grapes_background.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage13.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage13.jpg">
       <Link>Assets\LandscapeImage13.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage2.jpg">
       <Link>Assets\LandscapeImage2.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage24.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage24.jpg">
       <Link>Assets\LandscapeImage24.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage3.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage3.jpg">
       <Link>Assets\LandscapeImage3.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage6.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage6.jpg">
       <Link>Assets\LandscapeImage6.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\LandscapeImage7.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage7.jpg">
       <Link>Assets\LandscapeImage7.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\Ring01.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\Ring01.jpg">
       <Link>Assets\Ring01.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\Ring03Part1.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\Ring03Part1.jpg">
       <Link>Assets\Ring03Part1.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\Ring03Part3.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\Ring03Part3.jpg">
       <Link>Assets\Ring03Part3.jpg</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\Samples\sunset.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\sunset.jpg">
       <Link>Assets\sunset.jpg</Link>
     </Content>
   </ItemGroup>

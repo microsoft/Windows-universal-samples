@@ -2,6 +2,9 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{3081AF80-B4C8-5982-9153-4AC6D3A339FD}</ProjectGuid>
@@ -116,7 +119,7 @@
     <Compile Include="Model\Scenario.cs" />
     <Compile Include="Model\ScenarioGroup.cs" />
     <Compile Include="Model\Scenarios.cs" />
-    <Compile Include="..\..\..\..\SharedContent\cs\AssemblyInfo.cs">
+    <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ScenarioPages\Badges\Local\PrimaryTile\ClearBadge\ScenarioElement.xaml.cs">
@@ -343,43 +346,43 @@
   </ItemGroup>
   <ItemGroup>
     <!--Linked image assets-->
-    <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Content Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\Small.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\Logo.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\SmallLogo.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Square310x310Logo.png">
+    <Content Include="$(SharedContentDir)\media\Square310x310Logo.png">
       <Link>Assets\LargeLogo.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\splash-sdk.png">
+    <Content Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\SplashScreen.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Content Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\StoreLogo.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\WideLogo.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\windows-sdk.png">
+    <Content Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\DefaultSecondaryTileAssests\Small.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\DefaultSecondaryTileAssests\Medium.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\tile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\DefaultSecondaryTileAssests\Wide.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\DefaultSecondaryTileAssests\Large.png</Link>
     </Content>
     <Content Include="Assets\cancel.png">
@@ -388,46 +391,46 @@
     <Content Include="Assets\check.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Content Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage1.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage1.jpg">
       <Link>Assets\Photos\1.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage2.jpg">
       <Link>Assets\Photos\2.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage3.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage3.jpg">
       <Link>Assets\Photos\3.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage4.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage4.jpg">
       <Link>Assets\Photos\4.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage5.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage5.jpg">
       <Link>Assets\Photos\5.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage6.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage6.jpg">
       <Link>Assets\Photos\6.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage7.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage7.jpg">
       <Link>Assets\Photos\7.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage8.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage8.jpg">
       <Link>Assets\Photos\8.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage9.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage9.jpg">
       <Link>Assets\Photos\9.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage10.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage10.jpg">
       <Link>Assets\Photos\10.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\cs\Default.rd.xml">
+    <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage1.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage1.jpg">
       <Link>ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppData\Image.jpg</Link>
     </Content>
-    <Content Include="..\..\..\..\SharedContent\media\Samples\LandscapeImage2.jpg">
+    <Content Include="$(SharedContentDir)\media\Samples\LandscapeImage2.jpg">
       <Link>ScenarioPages\Toasts\AdaptiveTemplates\Image\Src\FromAppPackage\Image.jpg</Link>
     </Content>
   </ItemGroup>

@@ -26,6 +26,9 @@
       <Platform>ARM</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1EA1001D-649F-57C7-A3A3-DACC49CCA5F9}</ProjectGuid>
     <RootNamespace>Simple3DGameDX</RootNamespace>
@@ -105,11 +108,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);$(SharedContentDir)\cpp</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);Common\;..\..\..\SharedContent\cpp\GameContent\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);Common\;$(SharedContentDir)\cpp\GameContent\</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -197,22 +200,22 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squaretile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\storelogo-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
   </ItemGroup>
@@ -226,35 +229,35 @@
     <ClInclude Include="Common\DeviceResources.h" />
     <ClInclude Include="Common\DirectXSample.h" />
     <ClInclude Include="Common\PersistentState.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Animate.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Audio.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Camera.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\ConstantBuffers.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Cylinder.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\CylinderMesh.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Face.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\FaceMesh.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\GameConstants.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\GameObject.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\GameTimer.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level1.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level2.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level3.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level4.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level5.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level6.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Material.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\MediaReader.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\MeshObject.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\MoveLookController.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\pch.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\SoundEffect.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Sphere.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\SphereMesh.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\StereoProjection.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\TargetTexture.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\WorldMesh.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Animate.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Audio.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Camera.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\ConstantBuffers.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Cylinder.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\CylinderMesh.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Face.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\FaceMesh.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\GameConstants.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\GameObject.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\GameTimer.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level1.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level2.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level3.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level4.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level5.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level6.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Material.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\MediaReader.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\MeshObject.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\MoveLookController.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\pch.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\SoundEffect.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Sphere.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\SphereMesh.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\StereoProjection.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\TargetTexture.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\WorldMesh.h" />
     <ClInclude Include="GameHud.h" />
     <ClInclude Include="GameInfoOverlay.h" />
     <ClInclude Include="GameMain.h" />
@@ -275,33 +278,33 @@
     <ClCompile Include="Common\DDSTextureLoader.cpp" />
     <ClCompile Include="Common\DeviceResources.cpp" />
     <ClCompile Include="Common\PersistentState.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Animate.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Audio.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Camera.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Cylinder.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\CylinderMesh.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Face.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\FaceMesh.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\GameObject.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\GameTimer.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level1.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level2.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level3.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level4.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level5.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level6.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Material.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\MediaReader.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\MeshObject.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\MoveLookController.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\SoundEffect.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Sphere.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\SphereMesh.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\StereoProjection.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\TargetTexture.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\WorldMesh.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\pch.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Animate.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Audio.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Camera.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Cylinder.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\CylinderMesh.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Face.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\FaceMesh.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\GameObject.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\GameTimer.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level1.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level2.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level3.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level4.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level5.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level6.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Material.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\MediaReader.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\MeshObject.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\MoveLookController.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\SoundEffect.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Sphere.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\SphereMesh.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\StereoProjection.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\TargetTexture.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\WorldMesh.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
@@ -327,12 +330,12 @@
     <None Include="Assets\bounce.wav">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="..\..\..\SharedContent\cpp\GameContent\ConstantBuffers.hlsli">
+    <None Include="$(SharedContentDir)\cpp\GameContent\ConstantBuffers.hlsli">
       <Link>GameContent\ConstantBuffers.hlsli</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\PixelShader.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\PixelShader.hlsl">
       <Link>GameContent\PixelShader.hlsl</Link>
       <EntryPointName>main</EntryPointName>
       <ShaderType>Pixel</ShaderType>
@@ -347,7 +350,7 @@
       <DisableOptimizations Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableOptimizations>
       <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EnableDebuggingInformation>
     </FxCompile>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\PixelShaderFlat.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\PixelShaderFlat.hlsl">
       <Link>GameContent\PixelShaderFlat.hlsl</Link>
       <EntryPointName>main</EntryPointName>
       <ShaderType>Pixel</ShaderType>
@@ -362,7 +365,7 @@
       <DisableOptimizations Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DisableOptimizations>
       <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EnableDebuggingInformation>
     </FxCompile>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\VertexShader.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\VertexShader.hlsl">
       <Link>GameContent\VertexShader.hlsl</Link>
       <EntryPointName>main</EntryPointName>
       <ShaderType>Vertex</ShaderType>
@@ -371,7 +374,7 @@
       <HeaderFileOutput>
       </HeaderFileOutput>
     </FxCompile>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\VertexShaderFlat.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\VertexShaderFlat.hlsl">
       <Link>GameContent\VertexShaderFlat.hlsl</Link>
       <EntryPointName>main</EntryPointName>
       <ShaderType>Vertex</ShaderType>

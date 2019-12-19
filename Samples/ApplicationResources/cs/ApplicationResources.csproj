@@ -2,6 +2,9 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{5EDC287B-C149-56B9-8336-B575545AABA9}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
@@ -87,16 +90,16 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\SharedContent\cs\App.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\App.xaml.cs">
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="constants.cs" />
-    <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\MainPage.xaml.cs">
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
+    <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="scenario1.xaml.cs">
@@ -145,12 +148,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\..\SharedContent\cs\MainPage.xaml">
+    <Page Include="$(SharedContentDir)\cs\MainPage.xaml">
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -220,20 +223,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
+    <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Content Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Content Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
     <Content Include="..\shared\images\en-US\projector.scale-100_contrast-black.png">
@@ -296,7 +299,7 @@
     <Content Include="..\shared\images\logo.contrast-white_scale-100.png">
       <Link>Images\logo.contrast-white_scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Images\logo.scale-100.png</Link>
     </Content>
     <Content Include="..\shared\images\logo.scale-140.png">
@@ -314,7 +317,7 @@
     <Content Include="..\shared\images\packagelogo.contrast-white_scale-100.png">
       <Link>Images\packagelogo.contrast-white_scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Content Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Images\packagelogo.scale-100.png</Link>
     </Content>
     <Content Include="..\shared\images\packagelogo.scale-140.png">
@@ -323,7 +326,7 @@
     <Content Include="..\shared\images\packagelogo.scale-180.png">
       <Link>Images\packagelogo.scale-180.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\placeholder-sdk.png">
+    <Content Include="$(SharedContentDir)\media\placeholder-sdk.png">
       <Link>Images\placeholder-sdk.png</Link>
     </Content>
     <Content Include="..\shared\images\projectorwithscalecaption.scale-100.png">
@@ -341,7 +344,7 @@
     <Content Include="..\shared\images\smalllogo.contrast-white_scale-100.png">
       <Link>Images\smalllogo.contrast-white_scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Images\smalllogo.scale-100.png</Link>
     </Content>
     <Content Include="..\shared\images\smalllogo.scale-140.png">
@@ -359,7 +362,7 @@
     <Content Include="..\shared\images\splashscreen.contrast-white_scale-100.png">
       <Link>Images\splashscreen.contrast-white_scale-100.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Content Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Images\splashscreen.scale-100.png</Link>
     </Content>
     <Content Include="..\shared\images\splashscreen.scale-140.png">
@@ -368,7 +371,7 @@
     <Content Include="..\shared\images\splashscreen.scale-180.png">
       <Link>Images\splashscreen.scale-180.png</Link>
     </Content>
-    <Content Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Content Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Images\tile-sdk.png</Link>
     </Content>
   </ItemGroup>

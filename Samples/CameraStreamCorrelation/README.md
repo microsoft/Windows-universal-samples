@@ -1,11 +1,18 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - cpp
 - cppcx
 products:
 - windows
 - windows-uwp
+urlFragment: CameraStreamCorrelation
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to use spatially correlated color and depth cameras and the depth frames"
 ---
 
 <!---
@@ -22,7 +29,9 @@ as well as decoding a vendor-specific media frame layout with a [BufferMediaFram
 (https://msdn.microsoft.com/library/windows/apps/Windows.Media.Capture.Frames.BufferMediaFrame.aspx).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/camerastreamcorrelation/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
@@ -58,8 +67,7 @@ This sample also demonstrate how camera vendors can use a WinRT library to wrap 
 camera frame layout into WinRT class so that apps can easily consume the vendor specific data
 with same coding patterns as Windows APIs.
 
-**Note** The Windows universal samples for Windows 10 require Visual Studio 2017 Update 2
-and Windows SDK version 14393 or above to build.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
 
 To obtain information about Windows 10 development, go to the [Windows Dev Center](https://dev.windows.com).
 
@@ -85,7 +93,7 @@ To obtain information about Windows 10 development, go to the [Windows Dev Cente
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with
    the sample you want to build.
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the
    subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or
    JavaScript). Double-click the Visual Studio Solution (.sln) file.

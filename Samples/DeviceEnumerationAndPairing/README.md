@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: DeviceEnumerationAndPairing
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to find and pair devices internal to the system, externally connected, or nearby over wireless or networking protocols."
 ---
 
 <!---
@@ -20,7 +27,9 @@ Shows how to use the Windows.Devices.Enumeration APIs find devices internally co
 or nearby over wireless or networking protocols and get information about them.  It also shows how to pair wireless and networking devices with the system. 
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/deviceenumerationandpairing/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
@@ -64,7 +73,7 @@ The sample demonstrates eight scenarios:
 
 ## Build the sample
 
-1.  Start Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+1.  Start Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 2.  Go to the directory to which you unzipped the sample. Then go to the subdirectory containing the sample in the language you desire - either C++, C\#, or JavaScript. Double-click the Visual Studio Solution (.sln) file.
 3.  Select the appropriate target: x86, x64, ARM. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

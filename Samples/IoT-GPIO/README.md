@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: IoT-GPIO
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Sets, reads, and reacts to state changes in the General Purpose Input/Output (GPIO) pins on a Windows IoT (Internet of Things) device."
 ---
 
 <!---
@@ -23,7 +30,9 @@ on a Windows IoT (Internet of Things) device.
 These pins are often used to access sensors, motors, LEDs, etc.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/iot-gpio/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
@@ -35,7 +44,7 @@ This sample demonstrates the following:
 - Getting GPIO pin values.
 - Listening for changes in GPIO pin values.
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 IoT Core to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 IoT Core to execute.
 
 To obtain information about Windows 10 IoT Core, go to [Windows on Devices](http://windowsondevices.com).
 
@@ -56,7 +65,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

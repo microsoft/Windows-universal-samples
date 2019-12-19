@@ -1,5 +1,5 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 - cpp
@@ -7,6 +7,13 @@ languages:
 products:
 - windows
 - windows-uwp
+urlFragment: LibraryManagement
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to get a list of the folders in a user's library and how to let users add and remove folders from that list."
 ---
 
 <!---
@@ -20,7 +27,9 @@ Shows how to get a list of the folders in a user's library and how to let users 
 [Windows.Storage](http://msdn.microsoft.com/library/windows/apps/br227346).[StorageLibrary](http://msdn.microsoft.com/library/windows/apps/dn251722).
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/librarymanagement/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
@@ -40,7 +49,7 @@ The sample demonstrates these tasks:
 
     Uses [StorageLibrary.GetLibraryAsync](http://msdn.microsoft.com/library/windows/apps/dn251725) to get a specific library and [StorageLibrary.Folders](http://msdn.microsoft.com/library/windows/apps/dn251724) to display a list of folders in the library so the user can select one to remove. Then uses [StorageLibrary.RequestRemoveFolderAsync](http://msdn.microsoft.com/library/windows/apps/dn251727) to remove the folder if the user approves.
 
-**Note** The Windows universal samples require Visual Studio 2017 to build and Windows 10 to execute.
+**Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)
 
@@ -63,7 +72,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

@@ -1,10 +1,17 @@
 ---
-topic: sample
+page_type: sample
 languages:
 - csharp
 products:
 - windows
 - windows-uwp
+urlFragment: 3DPrintingFromUnity
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to load a Unity 3D asset into the Windows 10 3D print dialog."
 ---
 
 <!---
@@ -20,7 +27,9 @@ From there, the user can repair the model, make simple modifications,
 and send it to a local 3D printer or an online 3D print service.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
-> If you are unfamiliar with Git and GitHub, you can download the entire collection as a 
+> You can download this sample as a standalone ZIP file
+> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/3dprintingfromunity/),
+> or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
@@ -34,14 +43,9 @@ Follow the instructions below to create and run the sample.
 
 In addition to Visual Studio and the Windows SDK, you need the following:
 
-* Unity version
+* [Visual Studio Tools for Unity](https://docs.microsoft.com/en-us/visualstudio/cross-platform/visual-studio-tools-for-unity?view=vs-2019)
+  and Unity version
   [5.2.1p2](https://unity3d.com/unity/qa/patch-releases "Unity") or later.
-
-* The Unity plugin for Visual Studio.
-  This can be installed as part of installing Unity,
-  or you can
-  [download it](https://visualstudiogallery.msdn.microsoft.com/8d26236e-4a64-4d64-8486-7df95156aba9 "Visual Studio 2017 Tools for Unity")
-  manually.
 
 * The 3D Builder app.
   This application comes preinstalled with Windows 10.
