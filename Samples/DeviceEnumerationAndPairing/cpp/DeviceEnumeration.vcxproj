@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ace5e4bc-0ee2-51de-b548-97ffa5d6dbbc}</ProjectGuid>
     <RootNamespace>SDKTemplate</RootNamespace>
@@ -100,7 +103,7 @@
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);$(SharedContentDir)\cpp</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -142,11 +145,11 @@
     <ClInclude Include="DeviceWatcherHelper.h" />
     <ClInclude Include="DisplayHelpers.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    <ClInclude Include="$(SharedContentDir)\cpp\App.xaml.h">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
-      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+    <ClInclude Include="$(SharedContentDir)\cpp\MainPage.xaml.h">
+      <DependentUpon>$(SharedContentDir)\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_DevicePicker.xaml.h">
@@ -178,10 +181,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
+    <Page Include="$(SharedContentDir)\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="..\shared\Scenario1_DevicePicker.xaml" />
@@ -192,7 +195,7 @@
     <Page Include="..\shared\Scenario6_CustomFilterAddedProps.xaml" />
     <Page Include="..\shared\Scenario7_DeviceInformationKind.xaml" />
     <Page Include="..\shared\Scenario8_PairDevice.xaml" />
-    <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
     <Page Include="..\shared\Scenario9_CustomPairDevice.xaml" />
@@ -203,8 +206,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\SharedContent\cpp\App.xaml.cpp">
-      <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
+    <ClCompile Include="$(SharedContentDir)\cpp\App.xaml.cpp">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="DeviceWatcherHelper.cpp">
       <DependentUpon>DeviceWatcherHelper.h</DependentUpon>
@@ -212,8 +215,8 @@
     <ClCompile Include="DisplayHelpers.cpp">
       <DependentUpon>DisplayHelpers.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
-      <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+    <ClCompile Include="$(SharedContentDir)\cpp\MainPage.xaml.cpp">
+      <DependentUpon>$(SharedContentDir)\cpp\MainPage.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <DependentUpon>pch.h</DependentUpon>
@@ -256,25 +259,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Link>Assets\squaretile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Link>Assets\storelogo-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
   </ItemGroup>
