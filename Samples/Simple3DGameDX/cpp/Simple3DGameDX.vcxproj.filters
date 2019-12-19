@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Filter>Assets</Filter>
     </Image>
     <Filter Include="Assets">
@@ -52,83 +52,83 @@
     <ClCompile Include="Common\PersistentState.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Audio.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Audio.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Animate.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Animate.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Camera.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Camera.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Cylinder.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Cylinder.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\CylinderMesh.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\CylinderMesh.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Face.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Face.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\FaceMesh.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\FaceMesh.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\GameObject.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\GameTimer.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\GameTimer.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level1.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level1.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level2.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level2.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level3.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level3.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level4.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level4.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level5.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level5.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Level6.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Level6.cpp">
       <Filter>GameLevels</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Material.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Material.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\MediaReader.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\MediaReader.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\MeshObject.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\MeshObject.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\MoveLookController.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\MoveLookController.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\pch.cpp" />
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\SoundEffect.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\pch.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\SoundEffect.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\Sphere.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\Sphere.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\SphereMesh.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\SphereMesh.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\StereoProjection.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\StereoProjection.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\TargetTexture.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\TargetTexture.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\SharedContent\cpp\GameContent\WorldMesh.cpp">
+    <ClCompile Include="$(SharedContentDir)\cpp\GameContent\WorldMesh.cpp">
       <Filter>Meshes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,94 +170,94 @@
     <ClInclude Include="Common\PersistentState.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Audio.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Audio.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Animate.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Animate.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Camera.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Camera.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\ConstantBuffers.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\ConstantBuffers.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Cylinder.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Cylinder.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\CylinderMesh.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\CylinderMesh.h">
       <Filter>Meshes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Face.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Face.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\FaceMesh.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\FaceMesh.h">
       <Filter>Meshes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\GameConstants.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\GameConstants.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\GameObject.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\GameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\GameTimer.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\GameTimer.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level1.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level1.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level2.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level2.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level3.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level3.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level4.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level4.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level5.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level5.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Level6.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Level6.h">
       <Filter>GameLevels</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Material.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Material.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\MediaReader.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\MediaReader.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\MeshObject.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\MeshObject.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\MoveLookController.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\MoveLookController.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\pch.h" />
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\SoundEffect.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\pch.h" />
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\SoundEffect.h">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\SphereMesh.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\SphereMesh.h">
       <Filter>Meshes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\Sphere.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\Sphere.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\StereoProjection.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\StereoProjection.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\TargetTexture.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\TargetTexture.h">
       <Filter>Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\SharedContent\cpp\GameContent\WorldMesh.h">
+    <ClInclude Include="$(SharedContentDir)\cpp\GameContent\WorldMesh.h">
       <Filter>Meshes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\SharedContent\cpp\GameContent\ConstantBuffers.hlsli">
+    <None Include="$(SharedContentDir)\cpp\GameContent\ConstantBuffers.hlsli">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Assets\bounce.wav">
@@ -283,16 +283,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\PixelShader.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\PixelShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\PixelShaderFlat.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\PixelShaderFlat.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\VertexShader.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\VertexShader.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\..\SharedContent\cpp\GameContent\VertexShaderFlat.hlsl">
+    <FxCompile Include="$(SharedContentDir)\cpp\GameContent\VertexShaderFlat.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>
