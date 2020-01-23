@@ -11,7 +11,7 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SDKTemplate.Scenario4"
+    x:Class="SDKTemplate.Scenario4_SaveFile"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,7 +30,7 @@ mc:Ignorable="d">
       <TextBlock Grid.Row="0" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left">
         Prompt the user to save a file.
       </TextBlock>
-      <Button Grid.Row="1" x:Name="SaveFileButton" Content="Save file" Margin="0,10,10,0"/>
+      <Button Grid.Row="1" x:Name="SaveFileButton" Content="Save file" Click="SaveFileButton_Click" Margin="0,10,10,0"/>
     </Grid>
     <Grid x:Name="Output" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
       <TextBlock x:Name="OutputTextBlock" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap"/>

@@ -11,14 +11,14 @@
 
 #pragma once
 
-#include "Scenario4.g.h"
+#include "Scenario4_SaveFile.g.h"
 #include "MainPage.h"
 
 namespace winrt::SDKTemplate::implementation
 {
-    struct Scenario4 : Scenario4T<Scenario4>
+    struct Scenario4_SaveFile : Scenario4_SaveFileT<Scenario4_SaveFile>
     {
-        Scenario4();
+        Scenario4_SaveFile();
         fire_and_forget SaveFileButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
         
     private:
@@ -28,7 +28,7 @@ namespace winrt::SDKTemplate::implementation
 
 namespace winrt::SDKTemplate::factory_implementation
 {
-    struct Scenario4 : Scenario4T<Scenario4, implementation::Scenario4>
+    struct Scenario4_SaveFile : Scenario4_SaveFileT<Scenario4_SaveFile, implementation::Scenario4_SaveFile>
     {
     };
 }

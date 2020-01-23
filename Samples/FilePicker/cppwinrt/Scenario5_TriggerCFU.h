@@ -11,14 +11,14 @@
 
 #pragma once
 
-#include "Scenario5.g.h"
+#include "Scenario5_TriggerCFU.g.h"
 #include "MainPage.h"
 
 namespace winrt::SDKTemplate::implementation
 {
-    struct Scenario5 : Scenario5T<Scenario5>
+    struct Scenario5_TriggerCFU : Scenario5_TriggerCFUT<Scenario5_TriggerCFU>
     {
-        Scenario5();
+        Scenario5_TriggerCFU();
         fire_and_forget CreateFileButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
         fire_and_forget WriteToFileButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
         fire_and_forget WriteToFileWithExplicitCFUButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
@@ -39,7 +39,7 @@ namespace winrt::SDKTemplate::implementation
 
 namespace winrt::SDKTemplate::factory_implementation
 {
-    struct Scenario5 : Scenario5T<Scenario5, implementation::Scenario5>
+    struct Scenario5_TriggerCFU : Scenario5_TriggerCFUT<Scenario5_TriggerCFU, implementation::Scenario5_TriggerCFU>
     {
     };
 }

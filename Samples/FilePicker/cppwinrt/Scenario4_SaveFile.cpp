@@ -10,8 +10,8 @@
 //*********************************************************
 
 #include "pch.h"
-#include "Scenario4.h"
-#include "Scenario4.g.cpp"
+#include "Scenario4_SaveFile.h"
+#include "Scenario4_SaveFile.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -22,12 +22,12 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::SDKTemplate::implementation
 {
-    Scenario4::Scenario4()
+    Scenario4_SaveFile::Scenario4_SaveFile()
     {
         InitializeComponent();
     }
 
-    fire_and_forget Scenario4::SaveFileButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario4_SaveFile::SaveFileButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 

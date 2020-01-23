@@ -1,9 +1,4 @@
-﻿//
-// Scenario5_TriggerCFU.xaml.h
-// Declaration of the Scenario5_TriggerCFU class
-//
-
-#pragma once
+﻿#pragma once
 
 #include "pch.h"
 #include "Scenario5_TriggerCFU.g.h"
@@ -11,10 +6,10 @@
 
 namespace SDKTemplate
 {
-    public ref class Scenario5 sealed
+    public ref class Scenario5_TriggerCFU sealed
     {
     public:
-        Scenario5();
+        Scenario5_TriggerCFU();
 
     private:
         MainPage^ rootPage = MainPage::Current;

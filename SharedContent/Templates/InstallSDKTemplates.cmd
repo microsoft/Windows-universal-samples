@@ -15,7 +15,7 @@ IF /I "%1"=="-UNINSTALL" GOTO Uninstall
 	setlocal
 	set SUBDIR=%1
 	set SUBDIR=%SUBDIR:"=%
-	set OUTPUTDIR=%USERPROFILE%\Documents\Visual Studio 2017\Templates\%SUBDIR%\%2
+	set OUTPUTDIR=%USERPROFILE%\Documents\Visual Studio 2019\Templates\%SUBDIR%\%2
 	xcopy /f /y %2 "%OUTPUTDIR%\"
 	copy "..\media\windows-sdk.png" "%OUTPUTDIR%"
 	shift
@@ -29,11 +29,11 @@ IF /I "%1"=="-UNINSTALL" GOTO Uninstall
 	endlocal
 	goto :eof
 :Uninstall
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\Windows Universal\UWPSDKSampleCS"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C#\Windows Universal\UWPSDKSampleScenarioItemCS"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C#\Windows Universal\UWPSDKSampleCS"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ItemTemplates\Visual C#\Windows Universal\UWPSDKSampleScenarioItemCS"
 
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCX"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCX"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCX"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCX"
 
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCPPWINRT"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2017\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCPPWINRT"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCPPWINRT"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCPPWINRT"

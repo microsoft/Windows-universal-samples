@@ -9,11 +9,6 @@
 //
 //*********************************************************
 
-//
-// Scenario2.xaml.h
-// Declaration of the Scenario2 class
-//
-
 #pragma once
 
 #include "pch.h"
@@ -22,10 +17,10 @@
 
 namespace SDKTemplate
 {
-    public ref class Scenario2 sealed
+    public ref class Scenario2_MultiFile sealed
     {
     public:
-        Scenario2();
+        Scenario2_MultiFile();
 
     private:
         MainPage^ rootPage;

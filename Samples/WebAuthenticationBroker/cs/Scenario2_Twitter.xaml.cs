@@ -168,12 +168,12 @@ namespace WebAuthentication
 
                 if (access_token != null)
                 {
-                    // Store access_token for futher use. See Scenario 5 (Account Management).
+                    // Store access_token for futher use (e.g., account management).
                 }
 
                 if (oauth_token_secret != null)
                 {
-                    // Store oauth_token_secret for further use. See Scenario 5 (Account Management).
+                    // Store oauth_token_secret for further use (e.g., account management).
                 }
                 if (screen_name != null)
                 {

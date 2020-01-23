@@ -60,7 +60,7 @@
                         <Button x:Name="WriteCancelButton" IsEnabled="False" Margin="10,1,0,0" Height="30" Content="CANCEL WRITE" Click="WriteCancelButton_Click" VerticalAlignment="Stretch"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
-                        <TextBlock Text="Written bytes are displayed here: " Margin="10,30,0,0" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="Written bytes are displayed here as text: " Margin="10,30,0,0" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
                         <TextBlock x:Name="WriteBytesCounterValue" Text="0 bytes" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" ></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1" Height="100">
@@ -96,7 +96,7 @@
                         <Button x:Name="ReadCancelButton" IsEnabled="False" Margin="10,30,0,0" Height="30" Content="CANCEL READ" Click="ReadCancelButton_Click"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1">
-                        <TextBlock Text="Read bytes are displayed here: " Margin="10,30,0,0" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="Read bytes are displayed here as text: " Margin="10,30,0,0" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
                         <TextBlock x:Name="ReadBytesCounterValue" Text="0 bytes" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" ></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10,0,0,0" Grid.Row="1" Height="100">

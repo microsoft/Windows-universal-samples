@@ -9,11 +9,6 @@
 //
 //*********************************************************
 
-//
-// Scenario1.xaml.cpp
-// Implementation of the Scenario1 class
-//
-
 #include "pch.h"
 #include "Scenario1_SingleFile.xaml.h"
 
@@ -27,13 +22,13 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
-Scenario1::Scenario1()
+Scenario1_SingleFile::Scenario1_SingleFile()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
 }
 
-void Scenario1::PickAFileButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario1_SingleFile::PickAFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Clear previous returned file name, if it exists, between iterations of this scenario
     OutputTextBlock->Text = "";

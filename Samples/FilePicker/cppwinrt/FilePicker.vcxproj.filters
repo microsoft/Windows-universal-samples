@@ -8,11 +8,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
-    <Page Include="Scenario1.xaml" />
-    <Page Include="Scenario2.xaml" />
-    <Page Include="Scenario3.xaml" />
-    <Page Include="Scenario4.xaml" />
-    <Page Include="Scenario5.xaml" />
+    <Page Include="..\shared\Scenario1_SingleFile.xaml" />
+    <Page Include="..\shared\Scenario2_MultiFile.xaml" />
+    <Page Include="..\shared\Scenario3_SingleFolder.xaml" />
+    <Page Include="..\shared\Scenario4_SaveFile.xaml" />
+    <Page Include="..\shared\Scenario5_TriggerCFU.xaml" />
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -25,22 +25,22 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1.cpp" />
-    <ClCompile Include="Scenario2.cpp" />
-    <ClCompile Include="Scenario3.cpp" />
-    <ClCompile Include="Scenario4.cpp" />
-    <ClCompile Include="Scenario5.cpp" />
+    <ClCompile Include="Scenario1_SingleFile.cpp" />
+    <ClCompile Include="Scenario2_MultiFile.cpp" />
+    <ClCompile Include="Scenario3_SingleFolder.cpp" />
+    <ClCompile Include="Scenario4_SaveFile.cpp" />
+    <ClCompile Include="Scenario5_TriggerCFU.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(SharedContentDir)\cppwinrt\App.h" />
     <ClInclude Include="$(SharedContentDir)\cppwinrt\MainPage.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1.h" />
-    <ClInclude Include="Scenario2.h" />
-    <ClInclude Include="Scenario3.h" />
-    <ClInclude Include="Scenario4.h" />
-    <ClInclude Include="Scenario5.h" />
+    <ClInclude Include="Scenario1_SingleFile.h" />
+    <ClInclude Include="Scenario2_MultiFile.h" />
+    <ClInclude Include="Scenario3_SingleFolder.h" />
+    <ClInclude Include="Scenario4_SaveFile.h" />
+    <ClInclude Include="Scenario5_TriggerCFU.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />

@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace SDKTemplate
 {
-    public sealed partial class Scenario5 : Page
+    public sealed partial class Scenario5_TriggerCFU : Page
     {
         MainPage rootPage = MainPage.Current;
 
@@ -27,7 +27,7 @@ namespace SDKTemplate
         StorageFile m_beforeReadFile = null;
         string m_faToken;
 
-        public Scenario5()
+        public Scenario5_TriggerCFU()
         {
             this.InitializeComponent();
             UpdateButtons();

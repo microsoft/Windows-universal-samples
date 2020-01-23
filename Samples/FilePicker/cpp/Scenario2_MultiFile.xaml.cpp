@@ -28,13 +28,13 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
-Scenario2::Scenario2()
+Scenario2_MultiFile::Scenario2_MultiFile()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
 }
 
-void Scenario2::PickFilesButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario2_MultiFile::PickFilesButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Clear any previously returned files between iterations of this scenario
     OutputTextBlock->Text = "";

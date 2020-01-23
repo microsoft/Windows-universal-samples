@@ -9,11 +9,6 @@
 //
 //*********************************************************
 
-//
-// Scenario4.xaml.cpp
-// Implementation of the Scenario4 class
-//
-
 #include "pch.h"
 #include "Scenario4_SaveFile.xaml.h"
 
@@ -28,13 +23,13 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
-Scenario4::Scenario4()
+Scenario4_SaveFile::Scenario4_SaveFile()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
 }
 
-void Scenario4::SaveFileButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario4_SaveFile::SaveFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Clear previous returned file name, if it exists, between iterations of this scenario
     OutputTextBlock->Text = "";

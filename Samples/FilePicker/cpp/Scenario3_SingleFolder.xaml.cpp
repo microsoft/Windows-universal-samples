@@ -9,11 +9,6 @@
 //
 //*********************************************************
 
-//
-// Scenario3.xaml.cpp
-// Implementation of the Scenario3 class
-//
-
 #include "pch.h"
 #include "Scenario3_SingleFolder.xaml.h"
 
@@ -27,13 +22,13 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
-Scenario3::Scenario3()
+Scenario3_SingleFolder::Scenario3_SingleFolder()
 {
     InitializeComponent();
     rootPage = MainPage::Current;
 }
 
-void Scenario3::PickFolderButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario3_SingleFolder::PickFolderButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Clear previous returned folder name, if it exists, between iterations of this scenario
     OutputTextBlock->Text = "";

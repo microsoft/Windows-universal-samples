@@ -56,7 +56,7 @@ app is running, rather than when the XAML source files are viewed in Visual Stud
 
 ## Related topics
 
-[Guidelines for fonts](https://msdn.microsoft.com/library/windows/apps/hh700394.aspx) 
+[Typography](https://docs.microsoft.com/windows/uwp/design/style/typography) 
 
 ## System requirements
 

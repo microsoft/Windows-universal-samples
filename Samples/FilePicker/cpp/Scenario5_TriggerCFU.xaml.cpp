@@ -1,9 +1,4 @@
-﻿//
-// Scenario5_TriggerCFU.xaml.cpp
-// Implementation of the Scenario5_TriggerCFU class
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "Scenario5_TriggerCFU.xaml.h"
 
 using namespace SDKTemplate;
@@ -18,13 +13,13 @@ using namespace Windows::Storage::Pickers;
 using namespace Windows::Storage::Provider;
 using namespace Windows::UI::Xaml;
 
-Scenario5::Scenario5()
+Scenario5_TriggerCFU::Scenario5_TriggerCFU()
 {
     InitializeComponent();
     UpdateButtons();
 }
 
-void Scenario5::UpdateButtons()
+void Scenario5_TriggerCFU::UpdateButtons()
 {
     WriteToFileButton->IsEnabled = (m_afterWriteFile != nullptr);
     WriteToFileWithCFUButton->IsEnabled = (m_afterWriteFile != nullptr);
@@ -33,7 +28,7 @@ void Scenario5::UpdateButtons()
     GetFileFromFutureAccessListButton->IsEnabled = !m_faToken->IsEmpty();
 }
 
-void Scenario5::CreateFileButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario5_TriggerCFU::CreateFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     rootPage->NotifyUser("", NotifyType::StatusMessage);
 
@@ -58,7 +53,7 @@ void Scenario5::CreateFileButton_Click(Object^ sender, RoutedEventArgs^ e)
     });
 }
 
-void Scenario5::WriteToFileButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario5_TriggerCFU::WriteToFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     create_task(FileIO::WriteTextAsync(m_afterWriteFile, "The File Picker App just wrote to the file!")).then([this]()
     {
@@ -66,7 +61,7 @@ void Scenario5::WriteToFileButton_Click(Object^ sender, RoutedEventArgs^ e)
     });
 }
 
-void Scenario5::WriteToFileWithExplicitCFUButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario5_TriggerCFU::WriteToFileWithExplicitCFUButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     StorageFile^ file = m_afterWriteFile;
     CachedFileManager::DeferUpdates(file);
@@ -93,7 +88,7 @@ void Scenario5::WriteToFileWithExplicitCFUButton_Click(Object^ sender, RoutedEve
     });
 }
 
-void Scenario5::PickAFileButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario5_TriggerCFU::PickAFileButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     rootPage->NotifyUser("", NotifyType::StatusMessage);
 
@@ -116,7 +111,7 @@ void Scenario5::PickAFileButton_Click(Object^ sender, RoutedEventArgs^ e)
     });
 }
 
-void Scenario5::SaveToFutureAccessListButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario5_TriggerCFU::SaveToFutureAccessListButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     m_faToken = StorageApplicationPermissions::FutureAccessList->Add(m_beforeReadFile);
     rootPage->NotifyUser("Saved to Future Access List", NotifyType::StatusMessage);
@@ -124,7 +119,7 @@ void Scenario5::SaveToFutureAccessListButton_Click(Object^ sender, RoutedEventAr
     UpdateButtons();
 }
 
-void Scenario5::GetFileFromFutureAccessListButton_Click(Object^ sender, RoutedEventArgs^ e)
+void Scenario5_TriggerCFU::GetFileFromFutureAccessListButton_Click(Object^ sender, RoutedEventArgs^ e)
 {
     rootPage->NotifyUser("Getting the file from the Future Access List. If applicable, a ReadActivationMode.BeforeAccess activation will occur in approximately 60 seconds on desktop.", NotifyType::StatusMessage);
     create_task(StorageApplicationPermissions::FutureAccessList->GetFileAsync(m_faToken)).then([this](StorageFile^ file)

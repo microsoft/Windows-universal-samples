@@ -11,15 +11,15 @@
 
 #pragma once
 
-#include "Scenario1.g.h"
+#include "Scenario3_SingleFolder.g.h"
 #include "MainPage.h"
 
 namespace winrt::SDKTemplate::implementation
 {
-    struct Scenario1 : Scenario1T<Scenario1>
+    struct Scenario3_SingleFolder : Scenario3_SingleFolderT<Scenario3_SingleFolder>
     {
-        Scenario1();
-        fire_and_forget PickAFileButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
+        Scenario3_SingleFolder();
+        fire_and_forget PickFolderButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
 
     private:
         SDKTemplate::MainPage rootPage{ MainPage::Current() };
@@ -28,7 +28,7 @@ namespace winrt::SDKTemplate::implementation
 
 namespace winrt::SDKTemplate::factory_implementation
 {
-    struct Scenario1 : Scenario1T<Scenario1, implementation::Scenario1>
+    struct Scenario3_SingleFolder : Scenario3_SingleFolderT<Scenario3_SingleFolder, implementation::Scenario3_SingleFolder>
     {
     };
 }

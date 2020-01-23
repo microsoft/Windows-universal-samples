@@ -97,24 +97,24 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1.h">
-      <DependentUpon>Scenario1.xaml</DependentUpon>
+    <ClInclude Include="Scenario1_SingleFile.h">
+      <DependentUpon>..\shared\Scenario1_SingleFile.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="Scenario2.h">
-      <DependentUpon>Scenario2.xaml</DependentUpon>
+    <ClInclude Include="Scenario2_MultiFile.h">
+      <DependentUpon>..\shared\Scenario2_MultiFile.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="Scenario3.h">
-      <DependentUpon>Scenario3.xaml</DependentUpon>
+    <ClInclude Include="Scenario3_SingleFolder.h">
+      <DependentUpon>..\shared\Scenario3_SingleFolder.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="Scenario4.h">
-      <DependentUpon>Scenario4.xaml</DependentUpon>
+    <ClInclude Include="Scenario4_SaveFile.h">
+      <DependentUpon>..\shared\Scenario4_SaveFile.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="Scenario5.h">
-      <DependentUpon>Scenario5.xaml</DependentUpon>
+    <ClInclude Include="Scenario5_TriggerCFU.h">
+      <DependentUpon>..\shared\Scenario5_TriggerCFU.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
   </ItemGroup>
@@ -125,19 +125,19 @@
     <Page Include="$(SharedContentDir)\xaml\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml">
+    <Page Include="..\shared\Scenario1_SingleFile.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2.xaml">
+    <Page Include="..\shared\Scenario2_MultiFile.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3.xaml">
+    <Page Include="..\shared\Scenario3_SingleFolder.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4.xaml">
+    <Page Include="..\shared\Scenario4_SaveFile.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5.xaml">
+    <Page Include="..\shared\Scenario5_TriggerCFU.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
@@ -161,24 +161,24 @@
     <ClCompile Include="SampleConfiguration.cpp">
       <DependentUpon>SampleConfiguration.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario1.cpp">
-      <DependentUpon>Scenario1.xaml</DependentUpon>
+    <ClCompile Include="Scenario1_SingleFile.cpp">
+      <DependentUpon>..\shared\Scenario1_SingleFile.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="Scenario2.cpp">
-      <DependentUpon>Scenario2.xaml</DependentUpon>
+    <ClCompile Include="Scenario2_MultiFile.cpp">
+      <DependentUpon>..\shared\Scenario2_MultiFile.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="Scenario3.cpp">
-      <DependentUpon>Scenario3.xaml</DependentUpon>
+    <ClCompile Include="Scenario3_SingleFolder.cpp">
+      <DependentUpon>..\shared\Scenario3_SingleFolder.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="Scenario4.cpp">
-      <DependentUpon>Scenario4.xaml</DependentUpon>
+    <ClCompile Include="Scenario4_SaveFile.cpp">
+      <DependentUpon>..\shared\Scenario4_SaveFile.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
-    <ClCompile Include="Scenario5.cpp">
-      <DependentUpon>Scenario5.xaml</DependentUpon>
+    <ClCompile Include="Scenario5_TriggerCFU.cpp">
+      <DependentUpon>..\shared\Scenario5_TriggerCFU.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>

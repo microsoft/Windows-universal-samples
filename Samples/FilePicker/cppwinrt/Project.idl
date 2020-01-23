@@ -12,32 +12,32 @@
 namespace SDKTemplate
 {
     [default_interface]
-    runtimeclass Scenario1 : Windows.UI.Xaml.Controls.Page
+    runtimeclass Scenario1_SingleFile : Windows.UI.Xaml.Controls.Page
     {
-        Scenario1();
+        Scenario1_SingleFile();
     }
 
     [default_interface]
-    runtimeclass Scenario2 : Windows.UI.Xaml.Controls.Page
+    runtimeclass Scenario2_MultiFile : Windows.UI.Xaml.Controls.Page
     {
-        Scenario2();
+        Scenario2_MultiFile();
     }
 
     [default_interface]
-    runtimeclass Scenario3 : Windows.UI.Xaml.Controls.Page
+    runtimeclass Scenario3_SingleFolder : Windows.UI.Xaml.Controls.Page
     {
-        Scenario3();
+        Scenario3_SingleFolder();
     }
 
     [default_interface]
-    runtimeclass Scenario4 : Windows.UI.Xaml.Controls.Page
+    runtimeclass Scenario4_SaveFile : Windows.UI.Xaml.Controls.Page
     {
-        Scenario4();
+        Scenario4_SaveFile();
     }
 
     [default_interface]
-    runtimeclass Scenario5 : Windows.UI.Xaml.Controls.Page
+    runtimeclass Scenario5_TriggerCFU : Windows.UI.Xaml.Controls.Page
     {
-        Scenario5();
+        Scenario5_TriggerCFU();
     }
 }

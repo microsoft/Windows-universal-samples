@@ -25,9 +25,9 @@ hstring implementation::MainPage::FEATURE_NAME()
 
 IVector<Scenario> implementation::MainPage::scenariosInner = winrt::single_threaded_observable_vector<Scenario>(
 {
-    Scenario{ L"Pick a single photo",   xaml_typename<SDKTemplate::Scenario1>() },
-    Scenario{ L"Pick multiple files",   xaml_typename<SDKTemplate::Scenario2>() },
-    Scenario{ L"Pick a folder",         xaml_typename<SDKTemplate::Scenario3>() },
-    Scenario{ L"Save a file",           xaml_typename<SDKTemplate::Scenario4>() },
-    Scenario{ L"Trigger CFU",           xaml_typename<SDKTemplate::Scenario5>() },
+    Scenario{ L"Pick a single photo",   xaml_typename<SDKTemplate::Scenario1_SingleFile>() },
+    Scenario{ L"Pick multiple files",   xaml_typename<SDKTemplate::Scenario2_MultiFile>() },
+    Scenario{ L"Pick a folder",         xaml_typename<SDKTemplate::Scenario3_SingleFolder>() },
+    Scenario{ L"Save a file",           xaml_typename<SDKTemplate::Scenario4_SaveFile>() },
+    Scenario{ L"Trigger CFU",           xaml_typename<SDKTemplate::Scenario5_TriggerCFU>() },
 });

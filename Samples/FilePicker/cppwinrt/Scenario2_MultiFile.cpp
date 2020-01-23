@@ -10,9 +10,9 @@
 //*********************************************************
 
 #include "pch.h"
-#include "Scenario2.h"
+#include "Scenario2_MultiFile.h"
 #include <sstream>
-#include "Scenario2.g.cpp"
+#include "Scenario2_MultiFile.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -23,12 +23,12 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::SDKTemplate::implementation
 {
-    Scenario2::Scenario2()
+    Scenario2_MultiFile::Scenario2_MultiFile()
     {
         InitializeComponent();
     }
 
-    fire_and_forget Scenario2::PickFilesButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario2_MultiFile::PickFilesButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 

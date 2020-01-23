@@ -21,11 +21,11 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Pick a single photo",   ClassType = typeof(Scenario1) },
-            new Scenario() { Title = "Pick multiple files",   ClassType = typeof(Scenario2) },
-            new Scenario() { Title = "Pick a folder",         ClassType = typeof(Scenario3) },
-            new Scenario() { Title = "Save a file",           ClassType = typeof(Scenario4) },
-            new Scenario() { Title = "Trigger CFU",           ClassType = typeof(Scenario5) },
+            new Scenario() { Title = "Pick a single photo",   ClassType = typeof(Scenario1_SingleFile) },
+            new Scenario() { Title = "Pick multiple files",   ClassType = typeof(Scenario2_MultiFile) },
+            new Scenario() { Title = "Pick a folder",         ClassType = typeof(Scenario3_SingleFolder) },
+            new Scenario() { Title = "Save a file",           ClassType = typeof(Scenario4_SaveFile) },
+            new Scenario() { Title = "Trigger CFU",           ClassType = typeof(Scenario5_TriggerCFU) },
         };
     }
 

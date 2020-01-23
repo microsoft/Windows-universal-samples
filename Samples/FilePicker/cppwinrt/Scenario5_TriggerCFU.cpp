@@ -10,8 +10,8 @@
 //*********************************************************
 
 #include "pch.h"
-#include "Scenario5.h"
-#include "Scenario5.g.cpp"
+#include "Scenario5_TriggerCFU.h"
+#include "Scenario5_TriggerCFU.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -23,13 +23,13 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::SDKTemplate::implementation
 {
-    Scenario5::Scenario5()
+    Scenario5_TriggerCFU::Scenario5_TriggerCFU()
     {
         InitializeComponent();
         UpdateButtons();
     }
 
-    void Scenario5::UpdateButtons()
+    void Scenario5_TriggerCFU::UpdateButtons()
     {
         WriteToFileButton().IsEnabled(m_afterWriteFile != nullptr);
         WriteToFileWithCFUButton().IsEnabled(m_afterWriteFile != nullptr);
@@ -38,7 +38,7 @@ namespace winrt::SDKTemplate::implementation
         GetFileFromFutureAccessListButton().IsEnabled(!m_faToken.empty());
     }
 
-    fire_and_forget Scenario5::CreateFileButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario5_TriggerCFU::CreateFileButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 
@@ -62,7 +62,7 @@ namespace winrt::SDKTemplate::implementation
         UpdateButtons();
     }
 
-    fire_and_forget Scenario5::WriteToFileButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario5_TriggerCFU::WriteToFileButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 
@@ -70,7 +70,7 @@ namespace winrt::SDKTemplate::implementation
         rootPage.NotifyUser(L"File write complete. If applicable, a WriteActivationMode.AfterWrite activation will occur in approximately 60 seconds on desktop.", NotifyType::StatusMessage);
     }
 
-    fire_and_forget Scenario5::WriteToFileWithExplicitCFUButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario5_TriggerCFU::WriteToFileWithExplicitCFUButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 
@@ -95,7 +95,7 @@ namespace winrt::SDKTemplate::implementation
         }
     }
 
-    fire_and_forget Scenario5::PickAFileButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario5_TriggerCFU::PickAFileButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 
@@ -119,7 +119,7 @@ namespace winrt::SDKTemplate::implementation
         UpdateButtons();
     }
 
-    void Scenario5::SaveToFutureAccessListButton_Click(IInspectable const&, RoutedEventArgs const&)
+    void Scenario5_TriggerCFU::SaveToFutureAccessListButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         m_faToken = StorageApplicationPermissions::FutureAccessList().Add(m_beforeReadFile);
         rootPage.NotifyUser(L"Saved to Future Access List", NotifyType::StatusMessage);
@@ -128,7 +128,7 @@ namespace winrt::SDKTemplate::implementation
 
     }
 
-    fire_and_forget Scenario5::GetFileFromFutureAccessListButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario5_TriggerCFU::GetFileFromFutureAccessListButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 

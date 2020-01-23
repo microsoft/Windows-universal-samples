@@ -10,8 +10,8 @@
 //*********************************************************
 
 #include "pch.h"
-#include "Scenario3.h"
-#include "Scenario3.g.cpp"
+#include "Scenario3_SingleFolder.h"
+#include "Scenario3_SingleFolder.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -22,12 +22,12 @@ using namespace Windows::UI::Xaml;
 
 namespace winrt::SDKTemplate::implementation
 {
-    Scenario3::Scenario3()
+    Scenario3_SingleFolder::Scenario3_SingleFolder()
     {
         InitializeComponent();
     }
 
-    fire_and_forget Scenario3::PickFolderButton_Click(IInspectable const&, RoutedEventArgs const&)
+    fire_and_forget Scenario3_SingleFolder::PickFolderButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         auto lifetime = get_strong();
 
