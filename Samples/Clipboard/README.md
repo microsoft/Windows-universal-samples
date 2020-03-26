@@ -3,8 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
-- vb
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -44,6 +43,7 @@ This sample covers the following:
 -   How to copy and paste text
 -   How to copy and paste an image
 -   How to copy and paste files
+-   How to control clipboard history and roaming
 -   How to get the formats on the Clipboard
 -   How to detect changes to the Clipboard
 
@@ -64,7 +64,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Related samples
 
-* [Clipboard sample](/archived/Clipboard/) for JavaScript (archived)
+* [Clipboard sample](/archived/Clipboard/) for JavaScript, C++/CX, and Visual Basic (archived)
 
 ## System requirements
 

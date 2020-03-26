@@ -1,6 +1,9 @@
 ---
 topic: sample
 languages:
+- cpp
+- cppcx
+- vb
 - js
 products:
 - windows

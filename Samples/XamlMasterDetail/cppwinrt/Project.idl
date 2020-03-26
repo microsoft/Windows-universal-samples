@@ -1,0 +1,57 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace MasterDetailApp
+{
+    [default_interface]
+    runtimeclass MasterDetailPage : Windows.UI.Xaml.Controls.Page
+    {
+        MasterDetailPage();
+
+        Windows.UI.Xaml.Controls.ListView MasterListView{ get; };
+    }
+
+    runtimeclass DetailPage : Windows.UI.Xaml.Controls.Page
+    {
+        DetailPage();
+
+        MasterDetailApp.ViewModels.ItemViewModel Item{ get; };
+
+        static Windows.UI.Xaml.DependencyProperty ItemProperty{ get; };
+    }
+}
+
+namespace MasterDetailApp.Data
+{
+    runtimeclass Item
+    {
+        Item(Int32 itemId, Windows.Foundation.DateTime dateCreated, String title, String text);
+
+        Int32 ItemId;
+        String Title;
+        String Text;
+        Windows.Foundation.DateTime DateCreated;
+    }
+}
+
+namespace MasterDetailApp.ViewModels
+{
+    runtimeclass ItemViewModel
+    {
+        Int32 ItemId { get; };
+        String DateCreatedHourMinute{ get; };
+        String Title{ get; };
+        String Text{ get; }; 
+        Windows.Foundation.DateTime DateCreated{ get; };
+
+        static ItemViewModel FromItem(MasterDetailApp.Data.Item item);
+    }
+}

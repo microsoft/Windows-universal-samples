@@ -438,7 +438,7 @@ namespace SDKTemplate
         /// <param name="args">Ignored</param>
         private async void openPrivacySettings_Click(Hyperlink sender, HyperlinkClickEventArgs args)
         {
-            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-speechtyping"));
+            await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-speech"));
         }
     }
 }

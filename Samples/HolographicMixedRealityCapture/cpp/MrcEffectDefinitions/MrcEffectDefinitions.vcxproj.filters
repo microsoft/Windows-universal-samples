@@ -8,12 +8,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="MRAudioEffectDefinition.cpp" />
-    <ClCompile Include="MRVideoEffectDefinition.cpp" />
+    <ClCompile Include="MrcAudioEffectDefinition.cpp" />
+    <ClCompile Include="MrcVideoEffectDefinition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="MRAudioEffectDefinition.h" />
-    <ClInclude Include="MRVideoEffectDefinition.h" />
+    <ClInclude Include="MrcAudioEffectDefinition.h" />
+    <ClInclude Include="MrcVideoEffectDefinition.h" />
   </ItemGroup>
 </Project>

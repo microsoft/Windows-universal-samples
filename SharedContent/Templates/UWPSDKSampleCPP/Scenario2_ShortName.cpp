@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario2_ShortName.h"
+#include "Scenario2_ShortName.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

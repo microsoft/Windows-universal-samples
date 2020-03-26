@@ -30,14 +30,6 @@ namespace SDKTemplate
         public CopyImage()
         {
             this.InitializeComponent();
-            this.Init();
-        }
-
-        void Init()
-        {
-            CopyButton.Click += new RoutedEventHandler(CopyButton_Click);
-            PasteButton.Click += new RoutedEventHandler(PasteButton_Click);
-            CopyWithDelayedRenderingButton.Click += new RoutedEventHandler(CopyWithDelayedRenderingButton_Click);
         }
 
         void CopyButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +47,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
             // Get the bitmap and display it.
-            var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
+            var dataPackageView = Clipboard.GetContent();
             if (dataPackageView.Contains(StandardDataFormats.Bitmap))
             {
                 IRandomAccessStreamReference imageReceived = null;
@@ -87,47 +79,42 @@ namespace SDKTemplate
             }
         }
 
-        async private void OnDeferredImageRequestedHandler(DataProviderRequest request, StorageFile imageFile)
+        async private static void OnDeferredImageRequestedHandler(DataProviderRequest request, StorageFile imageFile)
         {
-            if (imageFile != null)
+            // Since this method is using "await" prior to setting the data in DataPackage,
+            // deferral object must be used
+            var deferral = request.GetDeferral();
+
+            // Use try/finally to ensure that we always complete the deferral.
+            try
             {
-                // Since this method is using "await" prior to setting the data in DataPackage,
-                // deferral object must be used
-                var deferral = request.GetDeferral();
-
-                // Surround try catch to ensure that we always call Complete on defferal.
-                try
+                using (var imageStream = await imageFile.OpenAsync(FileAccessMode.Read))
                 {
-                    using (var imageStream = await imageFile.OpenAsync(FileAccessMode.Read))
-                    {
-                        // Decode the image
-                        var imageDecoder = await BitmapDecoder.CreateAsync(imageStream);
+                    // Decode the image
+                    var imageDecoder = await BitmapDecoder.CreateAsync(imageStream);
 
-                        // Re-encode the image at 50% width and height
-                        var inMemoryStream = new InMemoryRandomAccessStream();
-                        var imageEncoder = await BitmapEncoder.CreateForTranscodingAsync(inMemoryStream, imageDecoder);
-                        imageEncoder.BitmapTransform.ScaledWidth = (uint)(imageDecoder.OrientedPixelWidth * 0.5);
-                        imageEncoder.BitmapTransform.ScaledHeight = (uint)(imageDecoder.OrientedPixelHeight * 0.5);
-                        await imageEncoder.FlushAsync();
+                    // Re-encode the image at 50% width and height
+                    var inMemoryStream = new InMemoryRandomAccessStream();
+                    var imageEncoder = await BitmapEncoder.CreateForTranscodingAsync(inMemoryStream, imageDecoder);
+                    imageEncoder.BitmapTransform.ScaledWidth = (uint)(imageDecoder.OrientedPixelWidth * 0.5);
+                    imageEncoder.BitmapTransform.ScaledHeight = (uint)(imageDecoder.OrientedPixelHeight * 0.5);
+                    await imageEncoder.FlushAsync();
 
-                        request.SetData(RandomAccessStreamReference.CreateFromStream(inMemoryStream));
-                    }
+                    request.SetData(RandomAccessStreamReference.CreateFromStream(inMemoryStream));
                 }
-                finally
-                {
-                    deferral.Complete();
-                }
-
-                await log(OutputText, "Image has been set via deferral");
             }
-            else
+            finally
             {
-                await log(OutputText, "Error: imageFile is null");
+                deferral.Complete();
             }
+
+            MainPage.DisplayToast("Image has been set via deferral.");
         }
 
         async private void CopyBitmap(bool isDelayRendered)
         {
+            rootPage.NotifyUser("", NotifyType.StatusMessage);
+
             var imagePicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -140,42 +127,28 @@ namespace SDKTemplate
             {
                 var dataPackage = new DataPackage();
 
-                // Use one click handler for two operations: regular copy and copy using delayed rendering
-                // Differentiate the case by the button name
+                string message;
                 if (isDelayRendered)
                 {
                     dataPackage.SetDataProvider(StandardDataFormats.Bitmap, request => OnDeferredImageRequestedHandler(request, imageFile));
-                    OutputText.Text = "Image has been copied using delayed rendering";
+                    message = "Image has been copied using delayed rendering";
                 }
                 else
                 {
                     dataPackage.SetBitmap(RandomAccessStreamReference.CreateFromFile(imageFile));
-                    OutputText.Text = "Image has been copied";
+                    message = "Image has been copied";
                 }
 
-                try
+                if (Clipboard.SetContentWithOptions(dataPackage, null))
                 {
-                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+                    rootPage.NotifyUser(message, NotifyType.StatusMessage);
                 }
-                catch (Exception ex)
+                else
                 {
                     // Copying data to Clipboard can potentially fail - for example, if another application is holding Clipboard open
-                    rootPage.NotifyUser("Error copying content to Clipboard: " + ex.Message + ". Try again", NotifyType.ErrorMessage);
+                    rootPage.NotifyUser("Error copying content to clipboard.", NotifyType.ErrorMessage);
                 }
             }
-            else
-            {
-                OutputText.Text = "No image was selected.";
-            }
-        }
-
-        async private Task log(TextBlock textBlock, string msg)
-        {
-            // This function should be called when a back-ground thread tries to output log to the UI
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                textBlock.Text += Environment.NewLine + msg;
-            });
         }
     }
 }

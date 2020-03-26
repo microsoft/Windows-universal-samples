@@ -7,18 +7,45 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HolographicVoiceInput", "Ho
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|ARM.ActiveCfg = Debug|ARM
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|ARM.Build.0 = Debug|ARM
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|ARM.Deploy.0 = Debug|ARM
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|ARM64.Build.0 = Debug|ARM64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|x64.ActiveCfg = Debug|x64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|x64.Build.0 = Debug|x64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|x64.Deploy.0 = Debug|x64
 		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|x86.ActiveCfg = Debug|Win32
 		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|x86.Build.0 = Debug|Win32
 		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Debug|x86.Deploy.0 = Debug|Win32
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|ARM.ActiveCfg = Release|ARM
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|ARM.Build.0 = Release|ARM
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|ARM.Deploy.0 = Release|ARM
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|ARM64.ActiveCfg = Release|ARM64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|ARM64.Build.0 = Release|ARM64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|ARM64.Deploy.0 = Release|ARM64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|x64.ActiveCfg = Release|x64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|x64.Build.0 = Release|x64
+		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|x64.Deploy.0 = Release|x64
 		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|x86.ActiveCfg = Release|Win32
 		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|x86.Build.0 = Release|Win32
 		{401431B3-3E74-5B6E-B096-DE57E34EE423}.Release|x86.Deploy.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F2A56CB-FDD9-483F-A80D-4E374CE7AFB6}
 	EndGlobalSection
 EndGlobal

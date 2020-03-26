@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "$safeitemname$.h"
+#include "$safeitemname$.g.cpp"
 
 using namespace winrt;
 using namespace Windows::Foundation;

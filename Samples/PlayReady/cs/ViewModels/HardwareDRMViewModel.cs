@@ -88,7 +88,6 @@ namespace SDKTemplate.ViewModels
         {
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.CreateContainer("PlayReady", Windows.Storage.ApplicationDataCreateDisposition.Always);
-            localSettings.CreateContainer("PlayReady", Windows.Storage.ApplicationDataCreateDisposition.Always);
             localSettings.Containers["PlayReady"].Values["SoftwareOverride"] = 1;
             localSettings.Containers["PlayReady"].Values["HardwareOverride"] = 0;
             mediaElement.ProtectionManager.Properties.Remove("Windows.Media.Protection.UseHardwareProtectionLayer");

@@ -49,8 +49,8 @@ Secure Stop enables a service to better manage concurrent streams for an account
 **XBox One:**
 In order to use PlayReady DRM within a Universal Application on Xbox One, an additional <DeviceCapability> needs to be added to the app manifest. The capability will need to be added manually to the manifest as a setting is not yet available from within the App Manifest Designer. 
 
--	Right-click on the package.appxmanifest from Visual Studio and edit with the XML (text) Editor. 
--	Add the following <DeviceCapability> and save:
+- Right-click on the package.appxmanifest from Visual Studio and edit with the XML (text) Editor. 
+- Add the following <DeviceCapability> and save:
 
 ```xml
 <Capabilities>

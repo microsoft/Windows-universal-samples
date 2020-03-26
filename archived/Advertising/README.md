@@ -1,11 +1,26 @@
 ---
 topic: sample
 languages:
+- csharp
+- cpp
+- cppcx
 - js
 products:
 - windows
 - windows-uwp
+urlFragment: Advertising
+extendedZipContent:
+- path: SharedContent
+  target: SharedContent
+- path: LICENSE
+  target: LICENSE
+description: "Shows how to use the Microsoft Advertising SDK (Microsoft.Advertising) to show display ads and interstitial ads."
 ---
+
+<!---
+  category: NetworkingAndWebServices
+  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=722924
+--->
 
 # Advertising sample
 
@@ -40,7 +55,7 @@ for more details.
 
 ### Samples
 
-[Microsoft Store in-app purchase](/Samples/Store)  
+* [Microsoft Store in-app purchase](/Samples/Store)
 
 ## Reference
 
@@ -54,14 +69,12 @@ for more details.
 
 ## System requirements
 
-**Client:** Windows 10
-
-**Phone:** Windows 10
+* Windows 10
 
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
+2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**. (JavaScript project requires Visual Studio 2017.)
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 

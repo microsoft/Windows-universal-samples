@@ -118,8 +118,8 @@ concurrency::task<void> NV12VideoTexture::CreateDeviceDependentResourcesAsync()
         );
 
         // DirectX specifies the view format to be DXGI_FORMAT_R8G8_UNORM for NV12 chrominance channel.
-        // Chrominance has 4 bits for U and 4 bits for V per pixel. DirectX will handle converting 4-bit
-        // integers into normalized floats for use in the shader.
+        // Chrominance has 8 bits for U and 8 bits for V per sample (1 sample per 2x2 block of pixels).
+        //  DirectX will handle converting 8-bit integers into normalized floats for use in the shader.
         D3D11_SHADER_RESOURCE_VIEW_DESC const chrominancePlaneDesc = CD3D11_SHADER_RESOURCE_VIEW_DESC(
             m_texture.Get(),
             D3D11_SRV_DIMENSION_TEXTURE2D,

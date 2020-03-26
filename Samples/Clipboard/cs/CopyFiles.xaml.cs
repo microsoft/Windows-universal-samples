@@ -26,18 +26,12 @@ namespace SDKTemplate
         public CopyFiles()
         {
             this.InitializeComponent();
-            this.Init();
-        }
-
-        void Init()
-        {
-            CopyButton.Click += new RoutedEventHandler(CopyButton_Click);
-            PasteButton.Click += new RoutedEventHandler(PasteButton_Click);
         }
 
         async void CopyButton_Click(object sender, RoutedEventArgs e)
         {
-            OutputText.Text = "Storage Items: ";
+            rootPage.NotifyUser("", NotifyType.StatusMessage);
+
             var filePicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.List,
@@ -47,25 +41,20 @@ namespace SDKTemplate
             var storageItems = await filePicker.PickMultipleFilesAsync();
             if (storageItems.Count > 0)
             {
-                OutputText.Text += storageItems.Count + " file(s) are copied into clipboard";
                 var dataPackage = new DataPackage();
                 dataPackage.SetStorageItems(storageItems);
 
                 // Request a copy operation from targets that support different file operations, like File Explorer
                 dataPackage.RequestedOperation = DataPackageOperation.Copy;
-                try
+                if (Clipboard.SetContentWithOptions(dataPackage, null))
                 {
-                    Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
+                    rootPage.NotifyUser($"Storage Items: {storageItems.Count} file(s) are copied into clipboard.", NotifyType.StatusMessage);
                 }
-                catch (Exception ex)
+                else
                 {
                     // Copying data to Clipboard can potentially fail - for example, if another application is holding Clipboard open
-                    rootPage.NotifyUser("Error copying content to Clipboard: " + ex.Message + ". Try again", NotifyType.ErrorMessage);
+                    rootPage.NotifyUser("Error copying content to clipboard.", NotifyType.ErrorMessage);
                 }
-            }
-            else
-            {
-                OutputText.Text += "No file was selected.";
             }
         }
 

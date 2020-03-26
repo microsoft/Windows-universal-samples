@@ -109,6 +109,17 @@ void VideoRenderer::Render()
             0
         );
     }
+    else 
+    {
+        // Make sure that there is no geometry shader bound to the graphics
+        // pipeline on devices that do support the D3D11_FEATURE_D3D11_OPTIONS3::
+        // VPAndRTArrayIndexFromAnyShaderFeedingRasterizer optional feature.
+        context->GSSetShader(
+            nullptr,
+            nullptr,
+            0
+        );
+    }
 
     // Attach the pixel shader.
     context->PSSetShader(

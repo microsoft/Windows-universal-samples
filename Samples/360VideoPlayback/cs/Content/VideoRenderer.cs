@@ -119,6 +119,13 @@ namespace _360VideoPlayback.Content
                 // array index.
                 context.GeometryShader.SetShader(this.geometryShader, null, 0);
             }
+            else
+            {
+                // Make sure that there is no geometry shader bound to the graphics
+                // pipeline on devices that do support the D3D11_FEATURE_D3D11_OPTIONS3::
+                // VPAndRTArrayIndexFromAnyShaderFeedingRasterizer optional feature.
+                context.GeometryShader.SetShader(null, null, 0);
+            }
 
             // Attach the pixel shader.
             context.PixelShader.SetShader(this.pixelShader, null, 0);

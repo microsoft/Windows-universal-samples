@@ -28,7 +28,7 @@ namespace RadioManagerSample
         public RadioModel(Radio radio, UIElement parent)
         {
             this.radio = radio;
-            // Controlling the mobile broadband radio requires a restricted capability.
+            // Controlling the mobile broadband radio requires the cellularDeviceControl restricted capability, which we do not have.
             this.isEnabled = (radio.Kind != RadioKind.MobileBroadband);
             this.parent = parent;
             this.radio.StateChanged += Radio_StateChanged;
