@@ -95,8 +95,3 @@ hstring winrt::to_hstring(DeviceInformationKind kind)
     }
     return to_hstring(static_cast<uint32_t>(kind));
 }
-
-#ifdef __cpp_coroutines
-#error
-#endif
-

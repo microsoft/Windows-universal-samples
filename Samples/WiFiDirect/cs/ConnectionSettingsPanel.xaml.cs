@@ -48,7 +48,7 @@ namespace SDKTemplate
         private void btnAddConfigMethods_Click(object sender, RoutedEventArgs e)
         {
             // The configuration methods are added in the order of preference, most preferred first.
-            // Save the values here so we can apply them in OnConnectionRequested.
+            // Save the values here so we can apply them in RequestPairDeviceAsync.
             // In practice, most apps will have a hard-coded preference list.
             WiFiDirectConfigurationMethod method = Utils.GetSelectedItemTag<WiFiDirectConfigurationMethod>(cmbSupportedConfigMethods);
             _supportedConfigMethods.Add(method);
@@ -66,9 +66,10 @@ namespace SDKTemplate
             }
 
             DevicePairingKinds devicePairingKinds = DevicePairingKinds.None;
+
+            // If specific configuration methods were added, then use them.
             if (_supportedConfigMethods.Count > 0)
             {
-                // If specific configuration methods were added, then use them.
                 foreach (var configMethod in _supportedConfigMethods)
                 {
                     connectionParams.PreferenceOrderedConfigurationMethods.Add(configMethod);

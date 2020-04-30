@@ -37,7 +37,7 @@
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Style="{StaticResource BasicTextStyle}" Text="App Client ID: " VerticalAlignment="Center" Width="125"/>
-                        <TextBox x:Name="GoogleClientID" Height="14" Width="200" Text=""/>
+                        <TextBox x:Name="GoogleClientID" Width="200" Text=""/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                         <TextBlock Style="{StaticResource BasicTextStyle}" Text="Redirect URL:" VerticalAlignment="Center" Width="125"/>

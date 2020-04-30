@@ -315,16 +315,22 @@ namespace SDKTemplate
                 rootPage.NotifyUser("Connecting to remote side on L4 layer...", NotifyType.StatusMessage);
                 StreamSocket serverSocket = args.Socket;
 
+                // Look up the WiFiDirectDevice associated with this StreamSocketListener.
+                WiFiDirectDevice wfdDevice;
+                if (!_pendingConnections.TryRemove(sender, out wfdDevice))
+                {
+                    rootPage.NotifyUser("Unexpected connection ignored.", NotifyType.ErrorMessage);
+                    serverSocket.Dispose();
+                    return;
+                }
+
                 SocketReaderWriter socketRW = new SocketReaderWriter(serverSocket, rootPage);
+
                 // The first message sent is the name of the connection.
                 string message = await socketRW.ReadMessageAsync();
 
-                // Find the pending connection and add it to the list of active connections.
-                WiFiDirectDevice wfdDevice;
-                if (_pendingConnections.TryRemove(sender, out wfdDevice))
-                {
-                    ConnectedDevices.Add(new ConnectedDevice(message, wfdDevice, socketRW));
-                }
+                // Add this connection to the list of active connections.
+                ConnectedDevices.Add(new ConnectedDevice(message ?? "(unnamed)", wfdDevice, socketRW));
 
                 while (message != null)
                 {
@@ -348,11 +354,6 @@ namespace SDKTemplate
         {
             var connectedDevice = (ConnectedDevice)lvConnectedDevices.SelectedItem;
             await connectedDevice.SocketRW.WriteMessageAsync(txtSendMessage.Text);
-        }
-
-        private bool CanCloseDevice(object connectedDevice)
-        {
-            return connectedDevice != null;
         }
 
         private void btnCloseDevice_Click(object sender, RoutedEventArgs e)
