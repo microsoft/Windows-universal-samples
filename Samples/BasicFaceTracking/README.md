@@ -3,8 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
-- vb
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -56,13 +55,13 @@ The FaceTracker is intended to operate on a running video stream and is optimize
 
 ### Samples
 
+[BasicFaceTracking](/archived/BasicFaceTracking) for C++/CX and VB.NET (archived)
+
 [BasicFaceDetection](/Samples/BasicFaceDetection)
 
 [CameraStarterKit](/Samples/CameraStarterKit)
 
 [HolographicFaceTracking](/Samples/HolographicFaceTracking)
-
-[Media capture using capture device](https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622)
 
 ### Reference
 

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity
+    Name="Microsoft.SDKSamples.Simple3DGameDX.CPPWINRT"
+    Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+    Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="8b957756-ddb3-45fa-9ed9-82e91f62070f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Properties>
+    <DisplayName>DirectX first-person game C++ sample</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\storeLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.18362.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="DirectXApplication.App" Executable="$targetnametoken$.exe" EntryPoint="App">
+      <uap:VisualElements DisplayName="DirectX first-person game C++ sample" Square150x150Logo="Assets\squaretile-sdk.png" Square44x44Logo="Assets\smalltile-sdk.png" Description="DirectX first-person game C++ sample" BackgroundColor="#464646">
+        <uap:DefaultTile Wide310x150Logo="Assets\tile-sdk.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\splash-sdk.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+</Package>

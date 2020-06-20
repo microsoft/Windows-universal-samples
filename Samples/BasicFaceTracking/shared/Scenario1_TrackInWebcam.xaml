@@ -11,12 +11,20 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SDKTemplate.TrackFacesInWebcam"
+    x:Class="SDKTemplate.Scenario1_TrackInWebcam"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Name="HighlightedFaceBoxStyle" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent" />
+            <Setter Property="Stroke" Value="Yellow" />
+            <Setter Property="StrokeThickness" Value="2" />
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
@@ -45,10 +53,6 @@
                 <CaptureElement Name="CamPreview" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill" Margin="0,10,0,0" />
                 <Canvas Name="VisualizationCanvas" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10,0,0" />
             </Grid>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

@@ -126,11 +126,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="OcrFileImage.xaml">
+    <Page Include="..\shared\OcrFileImage.xaml">
+      <Link>OcrFileImage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="OcrCapturedImage.xaml">
+    <Page Include="..\shared\OcrCapturedImage.xaml">
+      <Link>OcrCapturedImage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

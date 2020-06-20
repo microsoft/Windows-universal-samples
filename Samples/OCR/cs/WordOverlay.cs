@@ -13,6 +13,7 @@ using System.ComponentModel;
 using Windows.Foundation;
 using Windows.Media.Ocr;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
@@ -24,21 +25,22 @@ namespace SDKTemplate
     class WordOverlay : INotifyPropertyChanged
     {
         private OcrWord word;
+        private Rect wordBoundingRect;
 
         /// <summary>
         /// Left and Right properties of Thickess define word box position.
         /// </summary>
-        public Thickness WordPosition { get; private set; }
+        public Thickness WordPosition => new Thickness(wordBoundingRect.Left, wordBoundingRect.Top, 0, 0);
 
         /// <summary>
         /// Scaled word box width.
         /// </summary>
-        public double WordWidth { get; private set; }
+        public double WordWidth => wordBoundingRect.Width;
 
         /// <summary>
         /// Scaled word box height.
         /// </summary>
-        public double WordHeight { get; private set; }
+        public double WordHeight => wordBoundingRect.Height;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -55,44 +57,27 @@ namespace SDKTemplate
             UpdateProps(scale.TransformBounds(word.BoundingRect));
         }
 
-        public Binding CreateWordPositionBinding()
+        public Border CreateBorder(Style style, UIElement child = null)
         {
-            Binding positionBinding = new Binding()
+            var overlay = new Border()
             {
-                Path = new PropertyPath("WordPosition"),
-                Source = this
+                Child = child,
+                Style = style
             };
 
-            return positionBinding;
+            // Bind word boxes to UI.
+            overlay.SetBinding(FrameworkElement.MarginProperty, CreateBinding("WordPosition"));
+            overlay.SetBinding(FrameworkElement.WidthProperty, CreateBinding("WordWidth"));
+            overlay.SetBinding(FrameworkElement.HeightProperty, CreateBinding("WordHeight"));
+
+            return overlay;
         }
 
-        public Binding CreateWordWidthBinding()
-        {
-            Binding widthBinding = new Binding()
-            {
-                Path = new PropertyPath("WordWidth"),
-                Source = this
-            };
-
-            return widthBinding;
-        }
-
-        public Binding CreateWordHeightBinding()
-        {
-            Binding heightBinding = new Binding()
-            {
-                Path = new PropertyPath("WordHeight"),
-                Source = this
-            };
-
-            return heightBinding;
-        }
+        Binding CreateBinding(string propertyName) => new Binding() { Path = new PropertyPath(propertyName), Source = this };
 
         private void UpdateProps(Rect wordBoundingBox)
         {
-            WordPosition = new Thickness(wordBoundingBox.Left, wordBoundingBox.Top, 0, 0);
-            WordWidth = wordBoundingBox.Width;
-            WordHeight = wordBoundingBox.Height;
+            wordBoundingRect = wordBoundingBox;
 
             OnPropertyChanged("WordPosition");
             OnPropertyChanged("WordWidth");
@@ -101,10 +86,7 @@ namespace SDKTemplate
 
         protected void OnPropertyChanged(string PropertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
     }
 }

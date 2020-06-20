@@ -253,9 +253,10 @@ String^ FrameRenderer::GetSubtypeForFrameReader(MediaFrameSourceKind kind, Media
     case MediaFrameSourceKind::Depth:
         return CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::D16->Data(), -1, TRUE) == CSTR_EQUAL ? subtype : nullptr;
 
-        // The only infrared formats we can render are L8 and L16.
+        // The only infrared formats we can render are NV12, L8, and L16.
     case MediaFrameSourceKind::Infrared:
-        return (CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::L8->Data(), -1, TRUE) == CSTR_EQUAL ||
+        return (CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::Nv12->Data(), -1, TRUE) == CSTR_EQUAL ||
+            CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::L8->Data(), -1, TRUE) == CSTR_EQUAL ||
             CompareStringOrdinal(subtype->Data(), -1, MediaEncodingSubtypes::L16->Data(), -1, TRUE) == CSTR_EQUAL) ? subtype : nullptr;
 
         // No other source kinds are supported by this class.
@@ -332,8 +333,11 @@ SoftwareBitmap^ FrameRenderer::ConvertToDisplayableImage(VideoMediaFrame^ inputF
             // Use pseudo color to render 16 bits frames.
             return TransformBitmap(inputBitmap, PseudoColorFor16BitInfrared);
 
+        case BitmapPixelFormat::Nv12:
+            return SoftwareBitmap::Convert(inputBitmap, BitmapPixelFormat::Bgra8, BitmapAlphaMode::Premultiplied);
+
         default:
-            OutputDebugStringW(L"Infrared format should have been Gray8 or Gray16.\r\n");
+            OutputDebugStringW(L"Infrared format should have been NV12, Gray8, or Gray16.\r\n");
             return nullptr;
         }
     }

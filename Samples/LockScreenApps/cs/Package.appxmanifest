@@ -8,7 +8,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.18362.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.16299.0" MaxVersionTested="10.0.18362.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -16,17 +16,10 @@
   <Applications>
     <Application Id="LockScreenApps.App" Executable="$targetnametoken$.exe" EntryPoint="LockScreenApps.App">
       <uap:VisualElements DisplayName="Lock Screen App C# Sample" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\SmallTile-sdk.png" Description="Lock Screen App C# Sample" BackgroundColor="#00b2f0">
-        <uap:LockScreen BadgeLogo="Images\squareTile-sdk.png" Notification="badgeAndTileText" />
+        <uap:LockScreen BadgeLogo="Assets\badgelogo-sdk.png" Notification="badgeAndTileText" />
         <uap:SplashScreen Image="Assets\Splash-sdk.png" />
-        <uap:DefaultTile Wide310x150Logo="Images\tile-sdk.png" ShortName="LockScreen CS" />
+        <uap:DefaultTile Wide310x150Logo="Assets\tile-sdk.png" ShortName="LockScreen CS" />
       </uap:VisualElements>
-      <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="LockScreenAppsAPI.MainPage">
-          <BackgroundTasks>
-            <Task Type="pushNotification" />
-          </BackgroundTasks>
-        </Extension>
-      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
