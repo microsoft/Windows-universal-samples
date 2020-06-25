@@ -41,7 +41,7 @@ String^ Scenario5_TimeZone::ReportCalendarData(Calendar^ calendar)
         "\n";
 }
 
-void Scenario5_TimeZone::ShowResults()
+void Scenario5_TimeZone::ShowResults_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario illustrates time zone support in Windows.Globalization.Calendar class
 

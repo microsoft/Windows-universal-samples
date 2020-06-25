@@ -20,7 +20,7 @@ namespace SDKTemplate
     {
     public:
         Scenario2_Lang();
-        void ShowResults();
+        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
     private:
         Platform::String^ ReportLanguageData(Windows::Globalization::Language^ lang);

@@ -32,7 +32,7 @@ Namespace Global.SDKTemplate
             Return results
         End Function
 
-        Private Sub ShowResults()
+        Private Sub ShowResults_Click(sender As Object, e As RoutedEventArgs)
             ' This scenario uses the Windows.Globalization.Calendar class to display the calendar
             ' system statistics.
             ' Create Calendar objects using different constructors.

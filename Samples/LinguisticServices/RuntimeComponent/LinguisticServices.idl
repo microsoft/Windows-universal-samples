@@ -1,0 +1,17 @@
+namespace Sample
+{
+    struct RecognizedTextRun
+    {
+        UInt32 First;
+        UInt32 Last;
+        String Script;
+    };
+
+    [default_interface]
+    static runtimeclass LinguisticServices
+    {
+        static Windows.Foundation.Collections.IVectorView<String> RecognizeTextLanguages(String text);
+        static Windows.Foundation.Collections.IVectorView<RecognizedTextRun> RecognizeTextScripts(String text);
+        static String TransliterateFromCyrillicToLatin(String text);
+    }
+}

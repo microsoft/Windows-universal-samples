@@ -1,0 +1,55 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_PercentPermilleFormatting : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_PercentPermilleFormatting();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_DecimalFormatting : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_DecimalFormatting();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_CurrencyFormatting : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_CurrencyFormatting();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_NumberParsing : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_NumberParsing();
+    }
+
+    [default_interface]
+    runtimeclass Scenario5_RoundingAndPadding : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_RoundingAndPadding();
+    }
+
+    [default_interface]
+    runtimeclass Scenario6_NumeralSystemTranslation : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario6_NumeralSystemTranslation();
+    }
+
+    [default_interface]
+    runtimeclass Scenario7_UsingUnicodeExtensions : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario7_UsingUnicodeExtensions();
+    }
+}

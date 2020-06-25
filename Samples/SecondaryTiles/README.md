@@ -2,6 +2,8 @@
 page_type: sample
 languages:
 - csharp
+- cpp
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -42,16 +44,10 @@ This sample demonstrates the following scenarios:
 - Determining whether a particular tile is currently pinned to the Start screen 
 - Processing arguments when the app is activated through a secondary tile 
 - Sending a local tile notification and badge notification to the secondary tile 
-- Using the app bar to pin and unpin tiles. (JavaScript and C# only) 
+- Using the app bar to pin and unpin tiles
 - Updating the secondary tile's default logo 
-- Selecting from among alternative secondary tile visuals (Windows only) 
-- Selecting from among alternative secondary tile visuals as an asynchronous operation (Windows only) 
 
 **Note**  Some functionality in the sample requires that the tile can receive notifications. Tile notifications can be disabled by a user for a single app or for all apps, or by a system administrator by using group policy.
-
-To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
-
-**Note**  For Windows 10 app samples, go to  [Windows 10 Samples](https://github.com/Microsoft/Windows-universal-samples). The samples for Windows 10 can be built and run using Windows developer [tools](https://developer.windows.com).
 
 ## Related topics
 
@@ -91,4 +87,3 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ##How to use the sample
 In some of the scenarios, you need to switch to the Start screen to see the effect of the scenario on the secondary tile. Click the sample tile to return to the main sample page or the secondary tile (in this sample, the secondary tile simply says "Windows SDK") to be taken into an area of the sample that confirms that you've launched it from a secondary tile.
 
-Note that the response to pinning a tile differs between Windows and Windows Phone. On Windows Phone, when you pin a secondary tile, you exit the app and are taken to the Start screen. In Windows, you must manually switch to the Start screen to see the secondary tile.
