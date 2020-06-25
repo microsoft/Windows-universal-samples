@@ -31,7 +31,7 @@ namespace SDKTemplate
                 "Codes: " + region.CodeTwoLetter + ", " + region.CodeThreeLetter + ", " + region.CodeThreeDigit + "\n\n";
         }
 
-        private void ShowResults()
+        private void ShowResults_Click(object sender, RoutedEventArgs e)
         {
             // This scenario uses the Windows.Globalization.GeographicRegion class to
             // obtain the geographic region characteristics.

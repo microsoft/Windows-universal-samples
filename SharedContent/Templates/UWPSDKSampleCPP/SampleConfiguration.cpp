@@ -15,8 +15,8 @@
 #include "SampleConfiguration.h"
 
 using namespace winrt;
-using namespace Windows::Foundation::Collections;
-using namespace SDKTemplate;
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::SDKTemplate;
 
 hstring implementation::MainPage::FEATURE_NAME()
 {

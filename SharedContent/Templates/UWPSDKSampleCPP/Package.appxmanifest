@@ -5,7 +5,7 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   IgnorableNamespaces="uap mp"
   >
-  <Identity Name="Microsoft.SDKSamples.$safeprojectname$.CPP" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
+  <Identity Name="Microsoft.SDKSamples.$safeprojectname$.CPPWINRT" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
   <mp:PhoneIdentity PhoneProductId="$guid1$" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
     <DisplayName>$safeprojectname$ C++/WinRT Sample</DisplayName>

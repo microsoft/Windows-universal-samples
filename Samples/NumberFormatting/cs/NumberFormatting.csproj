@@ -10,7 +10,7 @@
     <ProjectGuid>{1C49B844-B3B2-5D19-BCC9-223C831FFDB9}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NumberFormatting</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>NumberFormatting</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -141,31 +141,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_PercentPermilleFormatting.xaml">
+    <Page Include="..\shared\Scenario1_PercentPermilleFormatting.xaml">
+      <Link>Scenario1_PercentPermilleFormatting.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_DecimalFormatting.xaml">
+    <Page Include="..\shared\Scenario2_DecimalFormatting.xaml">
+      <Link>Scenario2_DecimalFormatting.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_CurrencyFormatting.xaml">
+    <Page Include="..\shared\Scenario3_CurrencyFormatting.xaml">
+      <Link>Scenario3_CurrencyFormatting.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_NumberParsing.xaml">
+    <Page Include="..\shared\Scenario4_NumberParsing.xaml">
+      <Link>Scenario4_NumberParsing.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario5_RoundingAndPadding.xaml">
+    <Page Include="..\shared\Scenario5_RoundingAndPadding.xaml">
+      <Link>Scenario5_RoundingAndPadding.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario6_NumeralSystemTranslation.xaml">
+    <Page Include="..\shared\Scenario6_NumeralSystemTranslation.xaml">
+      <Link>Scenario6_NumeralSystemTranslation.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario7_UsingUnicodeExtensions.xaml">
+    <Page Include="..\shared\Scenario7_UsingUnicodeExtensions.xaml">
+      <Link>Scenario7_UsingUnicodeExtensions.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

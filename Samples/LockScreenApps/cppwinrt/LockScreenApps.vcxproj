@@ -6,7 +6,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{BC0DE118-DB80-4E91-A212-0147977CB925}</ProjectGuid>
+    <ProjectGuid>{9416DBC1-A0DD-5DA3-A9EE-5F27A78E32B7}</ProjectGuid>
     <ProjectName>LockScreenApps</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>

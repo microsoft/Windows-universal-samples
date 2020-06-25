@@ -123,7 +123,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_FindId.xaml">
+    <Page Include="..\shared\Scenario1_FindId.xaml">
+      <Link>Scenario1_FindId.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

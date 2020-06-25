@@ -4,6 +4,7 @@ languages:
 - csharp
 - cpp
 - cppcx
+- cppwinrt
 - vb
 products:
 - windows

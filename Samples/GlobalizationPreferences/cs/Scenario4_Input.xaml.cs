@@ -23,7 +23,7 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
-        private void ShowResults()
+        private void ShowResults_Click(object sender, RoutedEventArgs e)
         {
             // This scenario uses the Windows.Globalization.Language class to obtain the user's current 
             // input language.  The language tag returned reflects the current input language specified 

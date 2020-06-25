@@ -20,7 +20,7 @@ namespace SDKTemplate
     {
     public:
         Scenario2_Stats();
-        void ShowResults();
+        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
     private:
         Platform::String^ ReportCalendarData(Windows::Globalization::Calendar^ calendar, Platform::String^ calendarLabel);

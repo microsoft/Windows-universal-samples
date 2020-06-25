@@ -1,0 +1,39 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************-->
+<Page
+    x:Class="SDKTemplate.Scenario1_UIFonts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+            This shows the use of the LanguageFontGroup to get fonts for a particular language for UI body text and heading elements.
+            This sample uses Japanese.
+        </TextBlock>
+        <Button Content="Apply Recommended Fonts" Margin="0,10" Click="ApplyFonts_Click"/>
+
+        <!-- A default/fallback font is used if no font is set, and it may happen to be the correct  
+        font, meaning that no apparent change will be seen by applying the recommended font. We explicitly set
+        a non-recommended font as a default in the markup so that the change is more evident. -->
+        <TextBlock x:Name="HeadingTextBlock" Style="{StaticResource SampleHeaderTextStyle}" TextWrapping="Wrap" FontFamily="Simsun">
+            䶧䧟みゅろ猪
+        </TextBlock>
+
+        <TextBlock x:Name="BodyTextBlock" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" FontFamily="Simsun">
+            訧焨を餯ダ 拣饵廦え尤 栧穃榞しゃぴゃ 餯ダ ら横襩 ペ覧へ 䨣禚詃ウォ榯 稣じ韩むにょ ぬ檧 みよ栣 グェ来げ毚廤 しゅ择れ苩㫣 スィ栩,
+            婧スぴゅ し짦さシャず  䥚にゃ槚じゅ谦 饟襧ッラ゜け 餯ダ 饟襧ッ 䩚埨 嫣婧スぴゅ椩 綩觚奤珣う
+        </TextBlock>
+    </StackPanel>
+</Page>

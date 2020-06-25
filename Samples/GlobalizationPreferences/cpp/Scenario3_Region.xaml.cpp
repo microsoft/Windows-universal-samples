@@ -33,7 +33,7 @@ String^ Scenario3_Region::ReportRegionData(GeographicRegion^ region)
         "Codes: " + region->CodeTwoLetter + ", " + region->CodeThreeLetter + ", " + region->CodeThreeDigit + "\n\n";
 }
 
-void Scenario3_Region::ShowResults()
+void Scenario3_Region::ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario uses the Windows.Globalization.GeographicRegion class to
     // obtain the geographic region characteristics.

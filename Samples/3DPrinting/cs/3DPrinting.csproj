@@ -125,11 +125,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_Print.xaml">
+    <Page Include="..\shared\Scenario1_Print.xaml">
+      <Link>Scenario1_Print.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_Launch.xaml">
+    <Page Include="..\shared\Scenario2_Launch.xaml">
+      <Link>Scenario2_Launch.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -164,7 +166,9 @@
     <Content Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Content>
-    <Content Include="Assets\msLogo.png" />
+    <Content Include="..\shared\msLogo.png">
+      <Link>Assets\msLogo.png</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">

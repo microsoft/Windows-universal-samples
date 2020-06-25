@@ -16,14 +16,14 @@
 #include "MainPage.h"
 
 using namespace winrt;
-using namespace Windows::ApplicationModel;
-using namespace Windows::ApplicationModel::Activation;
-using namespace Windows::Foundation;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Controls;
-using namespace Windows::UI::Xaml::Navigation;
-using namespace SDKTemplate;
-using namespace SDKTemplate::implementation;
+using namespace winrt::Windows::ApplicationModel;
+using namespace winrt::Windows::ApplicationModel::Activation;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::UI::Xaml;
+using namespace winrt::Windows::UI::Xaml::Controls;
+using namespace winrt::Windows::UI::Xaml::Navigation;
+using namespace winrt::SDKTemplate;
+using namespace winrt::SDKTemplate::implementation;
 
 // These placeholder functions are used if the sample does not
 // implement the corresponding methods. This allows us to simulate

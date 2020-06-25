@@ -21,7 +21,7 @@ namespace SDKTemplate
     {
     public:
         Scenario4_UnicodeExtensions();
-        void ShowResults();
+        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
     private:
         Platform::String^ ReportCalendarData(Windows::Globalization::Calendar^ calendar, Platform::String^ calendarLabel);

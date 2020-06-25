@@ -2,6 +2,8 @@
 topic: sample
 languages:
 - js
+- cpp
+- cppcx
 products:
 - windows
 - windows-uwp

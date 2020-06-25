@@ -26,7 +26,7 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
-        private void ShowResults()
+        private void ShowResults_Click(object sender, RoutedEventArgs e)
         {
             // This scenario uses the Windows.Globalization.Calendar class to enumerate through a calendar and
             // perform calendar math

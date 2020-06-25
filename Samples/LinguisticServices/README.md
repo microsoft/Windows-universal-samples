@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp

@@ -9,55 +9,24 @@
 //*********************************************************
 
 using System;
-using SDKTemplate;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
-namespace SecondaryTiles
+namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class LaunchedFromSecondaryTile : Page
+    public sealed partial class Scenario5_LaunchedFromSecondaryTile : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
         MainPage rootPage = MainPage.Current;
-        AppBar appBar;
 
-        public LaunchedFromSecondaryTile()
+        public Scenario5_LaunchedFromSecondaryTile()
         {
             this.InitializeComponent();
 
-            if (!String.IsNullOrEmpty(MainPage.Current.LaunchParam))
+            if (!String.IsNullOrEmpty(rootPage.LaunchParam))
             {
-                rootPage.NotifyUser("Application was activated from a Secondary Tile with the following Activation Arguments : " + MainPage.Current.LaunchParam, NotifyType.StatusMessage);
-                MainPage.Current.LaunchParam = null;
+                rootPage.NotifyUser("Application was activated from a Secondary Tile with the following Activation Arguments: " + MainPage.Current.LaunchParam, NotifyType.StatusMessage);
+                rootPage.LaunchParam = null;
             }
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            // Preserve the app bar
-            appBar = rootPage.BottomAppBar;
-            // this ensures the app bar is not shown in this scenario
-            rootPage.BottomAppBar = null;
-        }
-
-        /// <summary>
-        /// Invoked when this page is about to be navigated out in a Frame
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            // Restore the app bar
-            rootPage.BottomAppBar = appBar;
         }
     }
 }
+
