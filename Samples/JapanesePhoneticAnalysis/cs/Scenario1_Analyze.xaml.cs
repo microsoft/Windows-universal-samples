@@ -35,7 +35,6 @@ namespace SDKTemplate
             bool monoRuby = MonoRubyRadioButton.IsChecked == true;
 
             // Analyze the Japanese text according to the specified algorithm.
-            // The maximum length of the input string is 100 characters. 
             IReadOnlyList<JapanesePhoneme> words = JapanesePhoneticAnalyzer.GetWords(input, monoRuby);
             foreach (JapanesePhoneme word in words)
             {

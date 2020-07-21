@@ -23,7 +23,6 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace SDKTemplate
@@ -44,7 +43,7 @@ namespace SDKTemplate
             PrintButton.IsEnabled = true;
         }
 
-        private async void CreateProgrammatically_Click(object sender, RoutedEventArgs e)
+        private async void CreateProgrammatically()
         {
             currentPackage = await CreatePackageAsync();
             rootPage.NotifyUser("Package created programmatically.", NotifyType.StatusMessage);
@@ -326,7 +325,7 @@ namespace SDKTemplate
         #endregion
         #endregion
 
-        private async void CreateFromXml_Click(object sender, RoutedEventArgs e)
+        private async void CreateFromXml()
         {
             var rawXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
             "<model unit=\"millimeter\" xml:lang=\"en-US\" xmlns=\"http://schemas.microsoft.com/3dmanufacturing/2013/01\">" +
@@ -359,14 +358,14 @@ namespace SDKTemplate
             EnablePackageOperationButtons();
         }
 
-        private static async Task<Printing3D3MFPackage> CreatePackageFromXmlAsync(string rawXml)
+        private async Task<Printing3D3MFPackage> CreatePackageFromXmlAsync(string rawXml)
         {
             var package = new Printing3D3MFPackage();
             package.ModelPart = await StringToStreamAsync(rawXml);
             return package;
         }
 
-        private async void LoadPackageFromFile_Click(object sender, RoutedEventArgs e)
+        private async void LoadPackageFromFile()
         {
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
@@ -399,7 +398,7 @@ namespace SDKTemplate
             EnablePackageOperationButtons();
         }
 
-        private async void SavePackage_Click(object sender, RoutedEventArgs e)
+        private async void SavePackage()
         {
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 
@@ -427,7 +426,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Saved", NotifyType.StatusMessage);
         }
 
-        private async void PrintPackage_Click(object sender, RoutedEventArgs e)
+        private async void PrintPackage()
         {
             // register the PrintTaskRequest callback to get the Printing3D3MFPackage.
             var print3DManager = Print3DManager.GetForCurrentView();

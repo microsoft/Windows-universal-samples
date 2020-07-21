@@ -125,18 +125,15 @@
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\shared\App.xaml">
-      <Link>App.xaml</Link>
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\shared\MasterDetailPage.xaml">
-      <Link>MasterDetailPage.xaml</Link>
+    <Page Include="MasterDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="..\shared\DetailPage.xaml">
-      <Link>DetailPage.xaml</Link>
+    <Page Include="DetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

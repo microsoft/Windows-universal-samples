@@ -204,4 +204,3 @@ FakesAssemblies/
 # Custom ignores
 gallery.xml
 project.lock.json
-Samples/3DPrinting/cppwinrt/pch.cpp

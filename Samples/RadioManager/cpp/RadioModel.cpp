@@ -23,7 +23,7 @@ using namespace concurrency;
 RadioModel::RadioModel(Radio^ radio, UIElement^ parent)
 {
     this->radio = radio;
-    // Controlling the mobile broadband radio requires the cellularDeviceControl restricted capability, which we do not have.
+    // Controlling the mobile broadband radio requires a restricted capability.
     this->isEnabled = (radio->Kind != RadioKind::MobileBroadband);
     this->parent = parent;
     this->radio->StateChanged += ref new TypedEventHandler<Radio^, Object^>(this, &RadioModel::Radio_StateChanged);

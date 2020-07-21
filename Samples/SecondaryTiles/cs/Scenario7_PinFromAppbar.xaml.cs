@@ -8,65 +8,69 @@
 //
 //*********************************************************
 
+using SDKTemplate;
 using System;
-using Windows.UI.Core;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace SDKTemplate
+namespace SecondaryTiles
 {
-    public sealed partial class Scenario7_PinFromAppbar : Page
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class PinFromAppbar : Page
     {
-        // Don't use NotifyUser on this page because it conflicts with the AppBar.
+        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
+        // as NotifyUser()
+        MainPage rootPage = MainPage.Current;
 
-        public Scenario7_PinFromAppbar()
+        public PinFromAppbar()
         {
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Invoked when this page is about to be displayed in a Frame.
+        /// </summary>
+        /// <param name="e">Event data that describes how this page was reached.  The Parameter
+        /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // The appbar is open by default.
-            Message.Text = "Tap or click the Pin button to pin a tile.";
-            UpdateAppBarButton();
-
-            Window.Current.Activated += Window_Activated;
+            Init();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            Window.Current.Activated -= Window_Activated;
-        }
 
-        void Window_Activated(object sender, WindowActivatedEventArgs e)
+        // This toggles the Pin and unpin button in the app bar
+        private void ToggleAppBarButton(bool showPinButton)
         {
-            // When the window regains activation, refresh the pin/unpin button.
-            UpdateAppBarButton();
-        }
- 
-        // This updates the Pin/Unpin button in the app bar based on whether the
-        // secondary tile is already pinned.
-        private void UpdateAppBarButton()
-        {
-            if (SecondaryTile.Exists(MainPage.appbarTileId))
-            {
-                this.PinUnPinCommandButton.Label = "Unpin";
-                this.PinUnPinCommandButton.Icon = new SymbolIcon(Symbol.UnPin);
-            }
-            else
+            if (showPinButton)
             {
                 this.PinUnPinCommandButton.Label = "Pin";
                 this.PinUnPinCommandButton.Icon = new SymbolIcon(Symbol.Pin);
+            }
+            else
+            {
+                this.PinUnPinCommandButton.Label = "Unpin";
+                this.PinUnPinCommandButton.Icon = new SymbolIcon(Symbol.UnPin);
             }
 
             this.PinUnPinCommandButton.UpdateLayout();
         }
 
-        async void PinToAppBar_Click(object sender, RoutedEventArgs e)
+        void Init()
         {
-            this.SecondaryTileCommandBar.IsSticky = true;
+            // The appbar is open by default.
+            rootPage.NotifyUser("Tap or click the Pin button to pin a tile.", NotifyType.StatusMessage);
+            ToggleAppBarButton(!SecondaryTile.Exists(MainPage.appbarTileId));
+            this.PinUnPinCommandButton.Click += this.pinToAppBar_Click;
+        }
+
+        async void pinToAppBar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(Windows.Foundation.Metadata.ApiInformation.IsTypePresent(("Windows.Phone.UI.Input.HardwareButtons"))))
+                this.SecondaryTileCommandBar.IsSticky = true;
 
             // Let us first verify if we need to pin or unpin
             if (SecondaryTile.Exists(MainPage.appbarTileId))
@@ -78,22 +82,22 @@ namespace SDKTemplate
                 bool isUnpinned = await secondaryTile.RequestDeleteForSelectionAsync(MainPage.GetElementRect((FrameworkElement)sender), Windows.UI.Popups.Placement.Above);
                 if (isUnpinned)
                 {
-                    Message.Text = MainPage.appbarTileId + " was unpinned.";
+                    rootPage.NotifyUser(MainPage.appbarTileId + " unpinned.", NotifyType.StatusMessage);
                 }
                 else
                 {
-                    Message.Text = MainPage.appbarTileId + " was not unpinned.";
+                    rootPage.NotifyUser(MainPage.appbarTileId + " not unpinned.", NotifyType.ErrorMessage);
                 }
 
-                UpdateAppBarButton();
+                ToggleAppBarButton(isUnpinned);
             }
             else
             {
                 // Prepare package images for the medium tile size in our tile to be pinned
                 Uri square150x150Logo = new Uri("ms-appx:///Assets/square150x150Tile-sdk.png");
 
-                // During creation of secondary tile, an application may set additional arguments on the tile that will be passed in during activation,
-                // so that the app knows which tile the user is launching. In this sample, we'll pass in the date and time the secondary tile was pinned.
+                // During creation of secondary tile, an application may set additional arguments on the tile that will be passed in during activation.
+                // These arguments should be meaningful to the application. In this sample, we'll pass in the date and time the secondary tile was pinned.
                 string tileActivationArguments = MainPage.appbarTileId + " WasPinnedAt=" + DateTime.Now.ToLocalTime().ToString();
 
                 // Create a Secondary tile with all the required arguments.
@@ -115,26 +119,38 @@ namespace SDKTemplate
                 secondaryTile.VisualElements.ForegroundText = ForegroundText.Dark;
 
                 // OK, the tile is created and we can now attempt to pin the tile.
-                // Note that the status message is updated when the async operation to pin the tile completes.
-                bool isPinned = await secondaryTile.RequestCreateForSelectionAsync(MainPage.GetElementRect(sender), Windows.UI.Popups.Placement.Above);
-                if (isPinned)
+                if (!(Windows.Foundation.Metadata.ApiInformation.IsTypePresent(("Windows.Phone.UI.Input.HardwareButtons"))))
                 {
-                    Message.Text = MainPage.appbarTileId + " was successfully pinned.";
-                }
-                else
-                {
-                    Message.Text = MainPage.appbarTileId + " was not pinned.";
+                    // Note that the status message is updated when the async operation to pin the tile completes.
+                    bool isPinned = await secondaryTile.RequestCreateForSelectionAsync(MainPage.GetElementRect((FrameworkElement)sender), Windows.UI.Popups.Placement.Above);
+                    if (isPinned)
+                    {
+                        rootPage.NotifyUser(MainPage.appbarTileId + " successfully pinned.", NotifyType.StatusMessage);
+                    }
+                    else
+                    {
+                        rootPage.NotifyUser(MainPage.appbarTileId + " not pinned.", NotifyType.ErrorMessage);
+                    }
+
+                    ToggleAppBarButton(!isPinned);
                 }
 
-                UpdateAppBarButton();
+                if ((Windows.Foundation.Metadata.ApiInformation.IsTypePresent(("Windows.Phone.UI.Input.HardwareButtons"))))
+                {
+                    // Since pinning a secondary tile on Windows Phone will exit the app and take you to the start screen, any code after 
+                    // RequestCreateForSelectionAsync or RequestCreateAsync is not guaranteed to run.  For an example of how to use the OnSuspending event to do
+                    // work after RequestCreateForSelectionAsync or RequestCreateAsync returns, see Scenario9_PinTileAndUpdateOnSuspend in the SecondaryTiles.WindowsPhone project.
+                    await secondaryTile.RequestCreateAsync();
+                }
             }
 
-            this.BottomAppBar.IsSticky = false;
+            if (!(Windows.Foundation.Metadata.ApiInformation.IsTypePresent(("Windows.Phone.UI.Input.HardwareButtons"))))
+                this.BottomAppBar.IsSticky = false;
         }
 
         void BottomAppBar_Opened(object sender, object e)
         {
-            UpdateAppBarButton();
+            ToggleAppBarButton(!SecondaryTile.Exists(MainPage.appbarTileId));
         }
     }
 }

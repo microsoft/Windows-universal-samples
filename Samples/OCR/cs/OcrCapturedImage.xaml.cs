@@ -42,7 +42,7 @@ namespace SDKTemplate
         // Language for OCR.
         private Language ocrLanguage = new Language("en");
 
-        // Recognized words overlay boxes.
+        // Recognized words ovelay boxes.
         private List<WordOverlay> wordBoxes = new List<WordOverlay>();
 
         // Receive notifications about rotation of the UI and apply any necessary rotation to the preview stream.     
@@ -67,20 +67,20 @@ namespace SDKTemplate
         public OcrCapturedImage()
         {
             this.InitializeComponent();
+
+            // Useful to know when to initialize/clean up the camera
+            Application.Current.Suspending += Application_Suspending;
+            Application.Current.Resuming += Application_Resuming;
         }
 
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
-        /// Ckecks if English language is available for OCR on device and starts camera preview..
+        /// Ckecks if English language is avaiable for OCR on device and starts camera preview..
         /// </summary>
         /// <param name="e"></param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             displayInformation.OrientationChanged += DisplayInformation_OrientationChanged;
-
-            // Useful to know when to initialize/clean up the camera
-            Application.Current.Suspending += Application_Suspending;
-            Application.Current.Resuming += Application_Resuming;
 
             if (!OcrEngine.IsLanguageSupported(ocrLanguage))
             {
@@ -104,42 +104,48 @@ namespace SDKTemplate
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             displayInformation.OrientationChanged -= DisplayInformation_OrientationChanged;
-            Application.Current.Suspending -= Application_Suspending;
-            Application.Current.Resuming -= Application_Resuming;
 
             await CleanupCameraAsync();
         }
 
         /// <summary>
-        /// Occurs on app suspending. Stops camera if initialized.
+        /// Occures on app suspending. Stops camera if initialized.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void Application_Suspending(object sender, SuspendingEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            // Handle global application events only if this page is active.
+            if (Frame.CurrentSourcePageType == typeof(MainPage))
+            {
+                var deferral = e.SuspendingOperation.GetDeferral();
 
-            await CleanupCameraAsync();
+                await CleanupCameraAsync();
 
-            displayInformation.OrientationChanged -= DisplayInformation_OrientationChanged;
+                displayInformation.OrientationChanged -= DisplayInformation_OrientationChanged;
 
-            deferral.Complete();
+                deferral.Complete();
+            }
         }
 
         /// <summary>
-        /// Occurs on app resuming. Initializes camera if available.
+        /// Occures on app resuming. Initializes camera if available.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="o"></param>
         private async void Application_Resuming(object sender, object o)
         {
-            displayInformation.OrientationChanged += DisplayInformation_OrientationChanged;
+            // Handle global application events only if this page is active
+            if (Frame.CurrentSourcePageType == typeof(MainPage))
+            {
+                displayInformation.OrientationChanged += DisplayInformation_OrientationChanged;
 
-            await StartCameraAsync();
+                await StartCameraAsync();
+            }
         }
 
         /// <summary>
-        /// Occurs when display orientation changes.
+        /// Occures when display orientation changes.
         /// Sets camera rotation preview.
         /// </summary>
         /// <param name="sender"></param>
@@ -158,7 +164,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ExtractButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void ExtractButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             //Get information about the preview.
             var previewProperties = mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview) as VideoEncodingProperties;
@@ -224,18 +230,32 @@ namespace SDKTemplate
                     // Iterate over words in line.
                     foreach (var word in line.Words)
                     {
+                        // Define the TextBlock.
+                        var wordTextBlock = new TextBlock()
+                        {
+                            Text = word.Text,
+                            Style = (Style)this.Resources["ExtractedWordTextStyle"]
+                        };
+
                         WordOverlay wordBoxOverlay = new WordOverlay(word);
 
                         // Keep references to word boxes.
                         wordBoxes.Add(wordBoxOverlay);
 
-                        // Create a box with the word inside it.
-                        var textBlock = new TextBlock()
+                        // Define position, background, etc.
+                        var overlay = new Border()
                         {
-                            Text = word.Text,
-                            Style = ExtractedWordTextStyle
+                            Child = wordTextBlock,
+                            Style = (Style)this.Resources["HighlightedWordBoxHorizontalLine"]
                         };
-                        TextOverlay.Children.Add(wordBoxOverlay.CreateBorder(HighlightedWordBoxHorizontalLineStyle, textBlock));
+
+                        // Bind word boxes to UI.
+                        overlay.SetBinding(Border.MarginProperty, wordBoxOverlay.CreateWordPositionBinding());
+                        overlay.SetBinding(Border.WidthProperty, wordBoxOverlay.CreateWordWidthBinding());
+                        overlay.SetBinding(Border.HeightProperty, wordBoxOverlay.CreateWordHeightBinding());
+
+                        // Put the filled textblock in the results grid.
+                        TextOverlay.Children.Add(overlay);
                     }
                 }
 
@@ -256,7 +276,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void CameraButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void CameraButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             await StartCameraAsync();
         }
@@ -272,7 +292,7 @@ namespace SDKTemplate
             {
                 // Used for text overlay.
                 // Prepare scale transform for words since image is not displayed in original size.
-                ScaleTransform scaleTransform = new ScaleTransform
+                ScaleTransform scaleTrasform = new ScaleTransform
                 {
                     CenterX = 0,
                     CenterY = 0,
@@ -282,13 +302,13 @@ namespace SDKTemplate
 
                 foreach (var item in wordBoxes)
                 {
-                    item.Transform(scaleTransform);
+                    item.Transform(scaleTrasform);
                 }
             }
         }
 
         /// <summary>
-        /// Occurs when displayed image size changes.
+        /// Occures when displayed image size changes.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

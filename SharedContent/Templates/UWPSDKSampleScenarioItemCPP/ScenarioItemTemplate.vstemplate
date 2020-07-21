@@ -12,14 +12,8 @@
     <RequiredPlatformVersion>6.3.0</RequiredPlatformVersion>
   </TemplateData>
   <TemplateContent>
-<<<<<<< Updated upstream
       <ProjectItem SubType="Designer" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml">Scenario1_ShortName.xaml</ProjectItem>
       <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml.cpp">Scenario1_ShortName.xaml.cpp</ProjectItem>
       <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml.h">Scenario1_ShortName.xaml.h</ProjectItem>
-=======
-      <ProjectItem SubType="Designer" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml">Scenario3_ShortName.xaml</ProjectItem>
-      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.cpp">Scenario3_ShortName.cpp</ProjectItem>
-      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.h">Scenario3_ShortName.h</ProjectItem>
->>>>>>> Stashed changes
   </TemplateContent>
 </VSTemplate>

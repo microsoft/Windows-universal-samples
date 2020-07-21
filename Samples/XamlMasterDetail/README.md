@@ -3,10 +3,6 @@ topic: sample
 languages:
 - csharp
 - cpp
-<<<<<<< Updated upstream
-=======
-- cppwinrt
->>>>>>> Stashed changes
 products:
 - windows
 - windows-uwp
@@ -52,7 +48,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 [XAML Responsive Techniques](/Samples/XamlResponsiveTechniques)  
 [Tailored Multiple Views](/Samples/XamlTailoredMultipleViews/)  
 [RSS reader sample](https://github.com/Microsoft/Windows-appsample-rssreader)  
-[Master/detail sample](/archived/XamlMasterDetail/) for C++/CX (archived)  
 
 ### Reference
 
@@ -70,13 +65,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ## Build the sample
 
 1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
-<<<<<<< Updated upstream
 2. Start Microsoft Visual Studio 2017 and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
-=======
-2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
-3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for the programming language. Double-click the Visual Studio Solution (.sln) file.
->>>>>>> Stashed changes
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
 
 ## Run the sample

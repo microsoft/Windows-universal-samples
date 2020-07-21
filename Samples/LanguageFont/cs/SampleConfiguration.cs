@@ -11,9 +11,8 @@
 
 using System;
 using System.Collections.Generic;
-using Windows.Globalization.Fonts;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+using SDKTemplate;
 
 namespace SDKTemplate
 {
@@ -23,18 +22,9 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Fonts for UI", ClassType = typeof(Scenario1_UIFonts) },
-            new Scenario() { Title = "Fonts for Documents", ClassType = typeof(Scenario2_DocumentFonts) }
+            new Scenario() { Title = "Font For Document UI", ClassType = typeof(Scenario1) },
+            new Scenario() { Title = "Font  For Document", ClassType = typeof(Scenario2) }
         };
-
-        public static void ApplyLanguageFont(TextBlock textBlock, LanguageFont languageFont)
-        {
-            FontFamily fontFamily = new FontFamily(languageFont.FontFamily);
-            textBlock.FontFamily = fontFamily;
-            textBlock.FontWeight = languageFont.FontWeight;
-            textBlock.FontStyle = languageFont.FontStyle;
-            textBlock.FontStretch = languageFont.FontStretch;
-        }
     }
 
     public class Scenario

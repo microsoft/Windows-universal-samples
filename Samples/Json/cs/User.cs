@@ -98,8 +98,7 @@ namespace Json
             return jsonObject.Stringify();
         }
 
-        public string Id
-        {
+        public string Id {
             get
             {
                 return id;

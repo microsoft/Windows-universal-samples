@@ -17,7 +17,6 @@ using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace SDKTemplate
@@ -33,7 +32,7 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
-        private async void CheckIf3DBuilderIsInstalled_Click(object sender, RoutedEventArgs e)
+        private async void CheckIf3DBuilderIsInstalled()
         {
             IReadOnlyList<AppInfo> handlers = await Launcher.FindFileHandlersAsync(".3mf");
             if (handlers.Any(info => info.PackageFamilyName == PackageFamilyName3DBuilder))
@@ -46,7 +45,7 @@ namespace SDKTemplate
             }
         }
 
-        private async void LaunchFileIn3DBuilder_Click(object sender, RoutedEventArgs e)
+        private async void LaunchFileIn3DBuilder()
         {
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;

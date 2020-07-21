@@ -40,7 +40,7 @@ namespace SDKTemplate
                                  calendar.TimeZoneAsString(3));
         }
 
-        private void ShowResults_Click(object sender, RoutedEventArgs e)
+        private void ShowResults()
         {
             // This scenario illustrates time zone support in Windows.Globalization.Calendar class
 

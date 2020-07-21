@@ -8,14 +8,18 @@
 //
 //*********************************************************
 
-using System;
-using System.Text;
-using Windows.Globalization;
-using Windows.Globalization.NumberFormatting;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using SDKTemplate;
+using System;
+using System.Text;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Globalization;
+using Windows.Globalization.NumberFormatting;
 
-namespace SDKTemplate
+namespace NumberFormatting
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

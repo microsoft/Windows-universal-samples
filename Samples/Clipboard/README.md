@@ -3,12 +3,8 @@ topic: sample
 languages:
 - csharp
 - cpp
-<<<<<<< Updated upstream
 - js
 - vb
-=======
-- cppwinrt
->>>>>>> Stashed changes
 products:
 - windows
 - windows-uwp
@@ -39,7 +35,6 @@ This sample covers the following:
 -   How to copy and paste text
 -   How to copy and paste an image
 -   How to copy and paste files
--   How to control clipboard history and roaming
 -   How to get the formats on the Clipboard
 -   How to detect changes to the Clipboard
 
@@ -60,11 +55,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## System requirements
 
-<<<<<<< Updated upstream
 **Client:** Windows 10
-=======
-* [Clipboard sample](/archived/Clipboard/) for JavaScript, C++/CX, and Visual Basic (archived)
->>>>>>> Stashed changes
 
 **Server:** Windows Server 2016 Technical Preview
 

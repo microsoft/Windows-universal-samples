@@ -26,7 +26,7 @@ Scenario1_Prefs::Scenario1_Prefs()
     InitializeComponent();
 }
 
-void Scenario1_Prefs::ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void Scenario1_Prefs::ShowResults()
 {
     // This scenario uses the Windows.System.UserProfile.GlobalizationPreferences class to
     // obtain the user's globalization preferences.

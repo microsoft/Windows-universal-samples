@@ -23,7 +23,7 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
-        private void ShowResults_Click(object sender, RoutedEventArgs e)
+        private void ShowResults()
         {
             // This scenario uses the Windows.System.UserProfile.GlobalizationPreferences class to
             // obtain the user's globalization preferences.

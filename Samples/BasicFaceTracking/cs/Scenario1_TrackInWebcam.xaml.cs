@@ -32,17 +32,32 @@ namespace SDKTemplate
     /// <summary>
     /// Page for demonstrating FaceTracking.
     /// </summary>
-    public sealed partial class Scenario1_TrackInWebcam : Page
+    public sealed partial class TrackFacesInWebcam : Page
     {
+        /// <summary>
+        /// Brush for drawing the bounding box around each identified face.
+        /// </summary>
+        private readonly SolidColorBrush lineBrush = new SolidColorBrush(Windows.UI.Colors.Yellow);
+
+        /// <summary>
+        /// Thickness of the face bounding box lines.
+        /// </summary>
+        private readonly double lineThickness = 2.0;
+
+        /// <summary>
+        /// Transparent fill for the bounding box.
+        /// </summary>
+        private readonly SolidColorBrush fillBrush = new SolidColorBrush(Windows.UI.Colors.Transparent);
+
         /// <summary>
         /// Reference back to the "root" page of the app.
         /// </summary>
-        private MainPage rootPage = MainPage.Current;
+        private MainPage rootPage;
 
         /// <summary>
         /// Holds the current scenario state value.
         /// </summary>
-        private ScenarioState currentState = ScenarioState.Idle;
+        private ScenarioState currentState;
 
         /// <summary>
         /// References a MediaCapture instance; is null when not in Streaming state.
@@ -65,16 +80,19 @@ namespace SDKTemplate
         private ThreadPoolTimer frameProcessingTimer;
 
         /// <summary>
-        /// Flag to ensure FaceTracking logic only executes one at a time
+        /// Semaphore to ensure FaceTracking logic only executes one at a time
         /// </summary>
-        private int busy = 0;
+        private SemaphoreSlim frameProcessingSemaphore = new SemaphoreSlim(1);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Scenario1_TrackInWebcam"/> class.
+        /// Initializes a new instance of the <see cref="TrackFacesInWebcam"/> class.
         /// </summary>
-        public Scenario1_TrackInWebcam()
+        public TrackFacesInWebcam()
         {
             this.InitializeComponent();
+
+            this.currentState = ScenarioState.Idle;
+            App.Current.Suspending += this.OnSuspending;
         }
 
         /// <summary>
@@ -97,18 +115,16 @@ namespace SDKTemplate
         /// Responds when we navigate to this page.
         /// </summary>
         /// <param name="e">Event data</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            App.Current.Suspending += this.OnSuspending;
-        }
+            this.rootPage = MainPage.Current;
 
-        /// <summary>
-        /// Responds when we navigate away from this page.
-        /// </summary>
-        /// <param name="e">Event data</param>
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            App.Current.Suspending -= this.OnSuspending;
+            // The 'await' operation can only be used from within an async method but class constructors
+            // cannot be labeled as async, and so we'll initialize FaceTracker here.
+            if (this.faceTracker == null)
+            {
+                this.faceTracker = await FaceTracker.CreateAsync();
+            }
         }
 
         /// <summary>
@@ -116,14 +132,14 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender">The source of the Suspending event</param>
         /// <param name="e">Event data</param>
-        private async void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        private void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
         {
             if (this.currentState == ScenarioState.Streaming)
             {
                 var deferral = e.SuspendingOperation.GetDeferral();
                 try
                 {
-                    await this.ChangeScenarioStateAsync(ScenarioState.Idle);
+                    this.ChangeScenarioState(ScenarioState.Idle);
                 }
                 finally
                 {
@@ -133,15 +149,12 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Creates the FaceTracker object which we will use for face detection and tracking.
         /// Initializes a new MediaCapture instance and starts the Preview streaming to the CamPreview UI element.
         /// </summary>
         /// <returns>Async Task object returning true if initialization and streaming were successful and false if an exception occurred.</returns>
-        private async Task<bool> StartWebcamStreamingAsync()
+        private async Task<bool> StartWebcamStreaming()
         {
-            bool successful = false;
-
-            faceTracker = await FaceTracker.CreateAsync();
+            bool successful = true;
 
             try
             {
@@ -164,19 +177,20 @@ namespace SDKTemplate
                 this.CamPreview.Source = this.mediaCapture;
                 await this.mediaCapture.StartPreviewAsync();
 
-                // Run the timer at 66ms, which is approximately 15 frames per second.
+                // Use a 66 millisecond interval for our timer, i.e. 15 frames per second
                 TimeSpan timerInterval = TimeSpan.FromMilliseconds(66);
-                this.frameProcessingTimer = ThreadPoolTimer.CreatePeriodicTimer(ProcessCurrentVideoFrame, timerInterval);
-                successful = true;
+                this.frameProcessingTimer = Windows.System.Threading.ThreadPoolTimer.CreatePeriodicTimer(new Windows.System.Threading.TimerElapsedHandler(ProcessCurrentVideoFrame), timerInterval);
             }
             catch (System.UnauthorizedAccessException)
             {
                 // If the user has disabled their webcam this exception is thrown; provide a descriptive message to inform the user of this fact.
                 this.rootPage.NotifyUser("Webcam is disabled or access to the webcam is disabled for this app.\nEnsure Privacy Settings allow webcam usage.", NotifyType.ErrorMessage);
+                successful = false;
             }
             catch (Exception ex)
             {
                 this.rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
+                successful = false;
             }
 
             return successful;
@@ -185,7 +199,7 @@ namespace SDKTemplate
         /// <summary>
         /// Safely stops webcam streaming (if running) and releases MediaCapture object.
         /// </summary>
-        private async Task ShutdownWebcamAsync()
+        private async void ShutdownWebCam()
         {
             if(this.frameProcessingTimer != null)
             {
@@ -212,11 +226,17 @@ namespace SDKTemplate
             this.CamPreview.Source = null;
             this.mediaCapture = null;
             this.CameraStreamingButton.IsEnabled = true;
+
         }
 
         /// <summary>
-        /// This method is invoked by a ThreadPoolTimer to execute the FaceTracker and Visualization logic.
+        /// This method is invoked by a ThreadPoolTimer to execute the FaceTracker and Visualization logic at approximately 15 frames per second.
         /// </summary>
+        /// <remarks>
+        /// Keep in mind this method is called from a Timer and not synchronized with the camera stream. Also, the processing time of FaceTracker
+        /// will vary depending on the size of each frame and the number of faces being tracked. That is, a large image with several tracked faces may
+        /// take longer to process.
+        /// </remarks>
         /// <param name="timer">Timer object invoking this call</param>
         private async void ProcessCurrentVideoFrame(ThreadPoolTimer timer)
         {
@@ -225,73 +245,54 @@ namespace SDKTemplate
                 return;
             }
 
-            // If busy is already 1, then the previous frame is still being processed,
-            // in which case we skip the current frame.
-            if (Interlocked.CompareExchange(ref busy, 1, 0) != 0)
+            // If a lock is being held it means we're still waiting for processing work on the previous frame to complete.
+            // In this situation, don't wait on the semaphore but exit immediately.
+            if (!frameProcessingSemaphore.Wait(0))
             {
                 return;
             }
 
-            await ProcessCurrentVideoFrameAsync();
-            Interlocked.Exchange(ref busy, 0);
-        }
-
-        /// <summary>
-        /// This method is called to execute the FaceTracker and Visualization logic at each timer tick.
-        /// </summary>
-        /// <remarks>
-        /// Keep in mind this method is called from a Timer and not synchronized with the camera stream. Also, the processing time of FaceTracker
-        /// will vary depending on the size of each frame and the number of faces being tracked. That is, a large image with several tracked faces may
-        /// take longer to process.
-        /// </remarks>
-        private async Task ProcessCurrentVideoFrameAsync()
-        {
-            // Create a VideoFrame object specifying the pixel format we want our capture image to be (NV12 bitmap in this case).
-            // GetPreviewFrame will convert the native webcam frame into this format.
-            const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Nv12;
-            using (VideoFrame previewFrame = new VideoFrame(InputPixelFormat, (int)this.videoProperties.Width, (int)this.videoProperties.Height))
+            try
             {
-                try
+                IList<DetectedFace> faces = null;
+
+                // Create a VideoFrame object specifying the pixel format we want our capture image to be (NV12 bitmap in this case).
+                // GetPreviewFrame will convert the native webcam frame into this format.
+                const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Nv12;
+                using (VideoFrame previewFrame = new VideoFrame(InputPixelFormat, (int)this.videoProperties.Width, (int)this.videoProperties.Height))
                 {
                     await this.mediaCapture.GetPreviewFrameAsync(previewFrame);
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    // Lost access to the camera.
-                    AbandonStreaming();
-                    return;
-                }
-                catch (Exception)
-                {
-                    this.rootPage.NotifyUser($"PreviewFrame with format '{InputPixelFormat}' is not supported by your Webcam", NotifyType.ErrorMessage);
-                    return;
-                }
 
-                // The returned VideoFrame should be in the supported NV12 format but we need to verify this.
-                if (!FaceDetector.IsBitmapPixelFormatSupported(previewFrame.SoftwareBitmap.BitmapPixelFormat))
-                {
-                    this.rootPage.NotifyUser($"PixelFormat '{previewFrame.SoftwareBitmap.BitmapPixelFormat}' is not supported by FaceDetector", NotifyType.ErrorMessage);
-                    return;
-                }
+                    // The returned VideoFrame should be in the supported NV12 format but we need to verify this.
+                    if (FaceDetector.IsBitmapPixelFormatSupported(previewFrame.SoftwareBitmap.BitmapPixelFormat))
+                    {
+                        faces = await this.faceTracker.ProcessNextFrameAsync(previewFrame);
+                    }
+                    else
+                    {
+                        throw new System.NotSupportedException("PixelFormat '" + InputPixelFormat.ToString() + "' is not supported by FaceDetector");
+                    }
 
-                IList<DetectedFace> faces;
-                try
-                {
-                    faces = await this.faceTracker.ProcessNextFrameAsync(previewFrame);
+                    // Create our visualization using the frame dimensions and face results but run it on the UI thread.
+                    var previewFrameSize = new Windows.Foundation.Size(previewFrame.SoftwareBitmap.PixelWidth, previewFrame.SoftwareBitmap.PixelHeight);
+                    var ignored = this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    {
+                        this.SetupVisualization(previewFrameSize, faces);
+                    });
                 }
-                catch (Exception ex)
-                {
-                    this.rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-                    return;
-                }
-
-                // Create our visualization using the frame dimensions and face results but run it on the UI thread.
-                var previewFrameSize = new Windows.Foundation.Size(previewFrame.SoftwareBitmap.PixelWidth, previewFrame.SoftwareBitmap.PixelHeight);
+            }
+            catch (Exception ex)
+            {
                 var ignored = this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
-                    this.SetupVisualization(previewFrameSize, faces);
+                    this.rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
                 });
             }
+            finally
+            {
+                frameProcessingSemaphore.Release();
+            }
+
         }
 
         /// <summary>
@@ -299,26 +300,30 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="framePizelSize">Width and height (in pixels) of the video capture frame</param>
         /// <param name="foundFaces">List of detected faces; output from FaceTracker</param>
-        private void SetupVisualization(Windows.Foundation.Size framePixelSize, IList<DetectedFace> foundFaces)
+        private void SetupVisualization(Windows.Foundation.Size framePizelSize, IList<DetectedFace> foundFaces)
         {
             this.VisualizationCanvas.Children.Clear();
 
-            if (this.currentState == ScenarioState.Streaming && framePixelSize.Width != 0.0 && framePixelSize.Height != 0.0)
+            double actualWidth = this.VisualizationCanvas.ActualWidth;
+            double actualHeight = this.VisualizationCanvas.ActualHeight;
+
+            if (this.currentState == ScenarioState.Streaming && foundFaces != null && actualWidth != 0 && actualHeight != 0)
             {
-                double widthScale = this.VisualizationCanvas.ActualWidth / framePixelSize.Width;
-                double heightScale = this.VisualizationCanvas.ActualHeight / framePixelSize.Height;
+                double widthScale = framePizelSize.Width / actualWidth;
+                double heightScale = framePizelSize.Height / actualHeight;
 
                 foreach (DetectedFace face in foundFaces)
                 {
                     // Create a rectangle element for displaying the face box but since we're using a Canvas
                     // we must scale the rectangles according to the frames's actual size.
-                    Rectangle box = new Rectangle()
-                    {
-                        Width = face.FaceBox.Width * widthScale,
-                        Height = face.FaceBox.Height * heightScale,
-                        Margin = new Thickness(face.FaceBox.X * widthScale, face.FaceBox.Y * heightScale, 0, 0),
-                        Style = HighlightedFaceBoxStyle
-                    };
+                    Rectangle box = new Rectangle();
+                    box.Width = (uint)(face.FaceBox.Width / widthScale);
+                    box.Height = (uint)(face.FaceBox.Height / heightScale);
+                    box.Fill = this.fillBrush;
+                    box.Stroke = this.lineBrush;
+                    box.StrokeThickness = this.lineThickness;
+                    box.Margin = new Thickness((uint)(face.FaceBox.X / widthScale), (uint)(face.FaceBox.Y / heightScale), 0, 0);
+
                     this.VisualizationCanvas.Children.Add(box);
                 }
             }
@@ -329,7 +334,7 @@ namespace SDKTemplate
         /// passed in state value. Handles failures and resets the state if necessary.
         /// </summary>
         /// <param name="newState">State to switch to</param>
-        private async Task ChangeScenarioStateAsync(ScenarioState newState)
+        private async void ChangeScenarioState(ScenarioState newState)
         {
             // Disable UI while state change is in progress
             this.CameraStreamingButton.IsEnabled = false;
@@ -338,18 +343,18 @@ namespace SDKTemplate
             {
                 case ScenarioState.Idle:
 
-                    this.currentState = newState;
-                    await this.ShutdownWebcamAsync();
+                    this.ShutdownWebCam();
 
                     this.VisualizationCanvas.Children.Clear();
                     this.CameraStreamingButton.Content = "Start Streaming";
+                    this.currentState = newState;
                     break;
 
                 case ScenarioState.Streaming:
 
-                    if (!await this.StartWebcamStreamingAsync())
+                    if (!await this.StartWebcamStreaming())
                     {
-                        await this.ChangeScenarioStateAsync(ScenarioState.Idle);
+                        this.ChangeScenarioState(ScenarioState.Idle);
                         break;
                     }
 
@@ -361,16 +366,6 @@ namespace SDKTemplate
             }
         }
 
-        private void AbandonStreaming()
-        {
-            // MediaCapture is not Agile and so we cannot invoke its methods on this caller's thread
-            // and instead need to schedule the state change on the UI thread.
-            var ignored = this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
-            {
-                await ChangeScenarioStateAsync(ScenarioState.Idle);
-            });
-        }
-
         /// <summary>
         /// Handles MediaCapture stream failures by shutting down streaming and returning to Idle state.
         /// </summary>
@@ -378,7 +373,12 @@ namespace SDKTemplate
         /// <param name="args">Event data</param>
         private void MediaCapture_CameraStreamFailed(MediaCapture sender, object args)
         {
-            AbandonStreaming();
+            // MediaCapture is not Agile and so we cannot invoke its methods on this caller's thread
+            // and instead need to schedule the state change on the UI thread.
+            var ignored = this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                ChangeScenarioState(ScenarioState.Idle);
+            });
         }
 
         /// <summary>
@@ -386,17 +386,17 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender">Button user clicked</param>
         /// <param name="e">Event data</param>
-        private async void CameraStreamingButton_Click(object sender, RoutedEventArgs e)
+        private void CameraStreamingButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.currentState == ScenarioState.Streaming)
             {
                 this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                await this.ChangeScenarioStateAsync(ScenarioState.Idle);
+                this.ChangeScenarioState(ScenarioState.Idle);
             }
             else
             {
                 this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                await this.ChangeScenarioStateAsync(ScenarioState.Streaming);
+                this.ChangeScenarioState(ScenarioState.Streaming);
             }
         }
     }

@@ -20,6 +20,6 @@ namespace SDKTemplate
     {
     public:
         Scenario3_Enum();
-        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void ShowResults();
     };
 }

@@ -40,7 +40,6 @@ void Scenario1_Analyze::AnalyzeButton_Click(Platform::Object^ sender, Windows::U
     bool monoRuby = MonoRubyRadioButton->IsChecked->Value;
 
     // Analyze the Japanese text according to the specified algorithm.
-    // The maximum length of the input string is 100 characters. 
     IVectorView<JapanesePhoneme^>^ words = JapanesePhoneticAnalyzer::GetWords(input, monoRuby);
     for (JapanesePhoneme^ word : words)
     {

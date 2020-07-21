@@ -8,24 +8,16 @@
 //
 //*********************************************************
 
+using SDKTemplate.Common;
 using System;
 using Windows.UI.Xaml.Controls;
 using System.Collections.Generic;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using Windows.ApplicationModel.Activation;
 
 namespace SDKTemplate
 {
-    public partial class App
-    {
-        partial void LaunchCompleted(LaunchActivatedEventArgs e)
-        {
-            MainPage.Current.LaunchParam = e.Arguments;
-        }
-    }
-
     public partial class MainPage : Page
     {
         public const string FEATURE_NAME = "Secondary Tile C#";
@@ -38,58 +30,86 @@ namespace SDKTemplate
 
         #endregion
 
-        List<Scenario> scenarios = new List<Scenario>
+
+        List<Scenario> desktopscenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Pin Tile",                            ClassType = typeof(SDKTemplate.Scenario1_PinTile) },
-            new Scenario() { Title = "Unpin Tile",                          ClassType = typeof(SDKTemplate.Scenario2_UnpinTile) },
-            new Scenario() { Title = "Enumerate Tiles",                     ClassType = typeof(SDKTemplate.Scenario3_EnumerateTiles) },
-            new Scenario() { Title = "Is Tile Pinned?",                     ClassType = typeof(SDKTemplate.Scenario4_TilePinned) },
-            new Scenario() { Title = "Show Activation Arguments",           ClassType = typeof(SDKTemplate.Scenario5_LaunchedFromSecondaryTile) },
-            new Scenario() { Title = "Secondary Tile Notifications",        ClassType = typeof(SDKTemplate.Scenario6_SecondaryTileNotification) },
-            new Scenario() { Title = "Pin/Unpin Through Appbar",            ClassType = typeof(SDKTemplate.Scenario7_PinFromAppbar) },
-            new Scenario() { Title = "Update Secondary Tile Default Logo",  ClassType = typeof(SDKTemplate.Scenario8_UpdateAsync) },
+            new Scenario() { Title = "Pin Tile",                            ClassType = typeof(SecondaryTiles.PinTile) },
+            new Scenario() { Title = "Unpin Tile",                          ClassType = typeof(SecondaryTiles.UnpinTile) },
+            new Scenario() { Title = "Enumerate Tiles",                     ClassType = typeof(SecondaryTiles.EnumerateTiles) },
+            new Scenario() { Title = "Is Tile Pinned?",                     ClassType = typeof(SecondaryTiles.TilePinned) },
+            new Scenario() { Title = "Show Activation Arguments",           ClassType = typeof(SecondaryTiles.LaunchedFromSecondaryTile) },
+            new Scenario() { Title = "Secondary Tile Notifications",        ClassType = typeof(SecondaryTiles.SecondaryTileNotification) },
+            new Scenario() { Title = "Pin/Unpin Through Appbar",            ClassType = typeof(SecondaryTiles.PinFromAppbar) },
+            new Scenario() { Title = "Update Secondary Tile Default Logo",  ClassType = typeof(SecondaryTiles.UpdateAsync) },
+            new Scenario() { Title = "Pin Tile Alternate Visual Elements",  ClassType = typeof(SecondaryTiles.PinTileAlternateVisualElements) },
+            new Scenario() { Title = "Pin Tile Alternate Visual Elements Async",  ClassType = typeof(SecondaryTiles.PinTileAlternateVisualElementsAsync) }
         };
+
+        List<Scenario> mobilescenarios = new List<Scenario>
+        {
+            new Scenario() { Title = "Pin Tile",                            ClassType = typeof(SecondaryTiles.PinTile) },
+            new Scenario() { Title = "Unpin Tile",                          ClassType = typeof(SecondaryTiles.UnpinTile) },
+            new Scenario() { Title = "Enumerate Tiles",                     ClassType = typeof(SecondaryTiles.EnumerateTiles) },
+            new Scenario() { Title = "Is Tile Pinned?",                     ClassType = typeof(SecondaryTiles.TilePinned) },
+            new Scenario() { Title = "Show Activation Arguments",           ClassType = typeof(SecondaryTiles.LaunchedFromSecondaryTile) },
+            new Scenario() { Title = "Secondary Tile Notifications",        ClassType = typeof(SecondaryTiles.SecondaryTileNotification) },
+            new Scenario() { Title = "Pin/Unpin Through Appbar",            ClassType = typeof(SecondaryTiles.PinFromAppbar) },
+            new Scenario() { Title = "Update Secondary Tile Default Logo",  ClassType = typeof(SecondaryTiles.UpdateAsync) },
+            new Scenario() { Title = "Pin Tile and Update on Suspend",      ClassType = typeof(SecondaryTiles.PinTileAndUpdateOnSuspend) }
+        };
+
 
         #region Secondary Tile specific methods
 
         // Gets the rectangle of the element
-        public static Rect GetElementRect(object e)
+        public static Rect GetElementRect(FrameworkElement element)
         {
-            var element = (FrameworkElement)e;
             GeneralTransform buttonTransform = element.TransformToVisual(null);
-            return buttonTransform.TransformBounds(new Rect(0, 0, element.ActualWidth, element.ActualHeight));
+            Point point = buttonTransform.TransformPoint(new Point());
+            return new Rect(point, new Size(element.ActualWidth, element.ActualHeight));
         }
 
-        string launchParam;
-        public string LaunchParam
+        partial void GetScenarioIdForLaunch(string launchParam, ref int index)
         {
-            get => launchParam;
-            set
+            index = -1;
+            // Populate the ListBox with the list of scenarios as defined in Constants.cs.
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
             {
-                launchParam = value;
-                if (!string.IsNullOrEmpty(launchParam))
+                foreach (Scenario s in mobilescenarios)
                 {
-                    // Force a navigation to the secondary tile launch page.
-                    for (int index = 0; index < scenarios.Count; index++)
+                    index++;
+                    if (s.ClassType == typeof(SecondaryTiles.LaunchedFromSecondaryTile))
                     {
-                        if (scenarios[index].ClassType == typeof(SDKTemplate.Scenario5_LaunchedFromSecondaryTile))
-                        {
-                            if (ScenarioControl.SelectedIndex == index)
-                            {
-                                ScenarioControl.SelectedIndex = -1;
-                            }
-                            ScenarioControl.SelectedIndex = index;
-                        }
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Scenario s in desktopscenarios)
+                {
+                    index++;
+                    if (s.ClassType == typeof(SecondaryTiles.LaunchedFromSecondaryTile))
+                    {
+                        break;
                     }
                 }
             }
         }
+
         #endregion
+
     }
 
     public class Scenario
     {
         public string Title { get; set; }
+
         public Type ClassType { get; set; }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

@@ -12,6 +12,7 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
+using NumberFormatting;
 
 namespace SDKTemplate
 {

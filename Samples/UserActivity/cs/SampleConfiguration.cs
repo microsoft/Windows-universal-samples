@@ -30,7 +30,7 @@ namespace SDKTemplate
 
         public void NavigateToScenarioWithParameter(Scenario scenario, object parameter)
         {
-            ScenarioControl.SelectedIndex = scenarios.IndexOf(scenario);
+            ScenarioControl.SelectedItem = scenario;
             ScenarioFrame.Navigate(scenario.ClassType, parameter);
         }
     }
@@ -64,16 +64,11 @@ namespace SDKTemplate
 
                 // Look for a matching scenario page.
                 var protocolArgs = (IProtocolActivatedEventArgs)e;
-                var query = protocolArgs.Uri.Query;
-                if (query.StartsWith("?"))
+                foreach (var scenario in mainPage.Scenarios)
                 {
-                    var pageName = query.Substring(1);
-                    foreach (var scenario in mainPage.Scenarios)
+                    if (scenario.ClassType.Name == protocolArgs.Uri.Query)
                     {
-                        if (scenario.ClassType.Name == pageName)
-                        {
-                            destinationScenario = scenario;
-                        }
+                        destinationScenario = scenario;
                     }
                 }
 

@@ -25,17 +25,13 @@ Namespace Global.SDKTemplate
 
         Public Sub New()
             Me.InitializeComponent()
-<<<<<<< Updated upstream
             Me.Init()
-=======
->>>>>>> Stashed changes
         End Sub
 
         Protected Overrides Sub OnNavigatedTo(e As NavigationEventArgs)
             RegisterClipboardContentChanged.IsChecked = OtherScenarios.registerContentChanged
         End Sub
 
-<<<<<<< Updated upstream
         Sub Init()
             AddHandler ShowFormatButton.Click, New RoutedEventHandler(AddressOf ShowFormatButton_Click)
             AddHandler EmptyClipboardButton.Click, New RoutedEventHandler(AddressOf EmptyClipboardButton_Click)
@@ -43,8 +39,6 @@ Namespace Global.SDKTemplate
             AddHandler ClearOutputButton.Click, New RoutedEventHandler(AddressOf ClearOutputButton_Click)
         End Sub
 
-=======
->>>>>>> Stashed changes
         Sub ShowFormatButton_Click(sender As Object, e As RoutedEventArgs)
             Me.DisplayFormats()
         End Sub

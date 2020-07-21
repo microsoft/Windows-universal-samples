@@ -113,7 +113,7 @@
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="$(SharedContentDir)\cs\FrameRenderer.cs" />
+    <Compile Include="FrameRenderer.cs" />
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_DisplayDepthColorIR.xaml.cs">
       <DependentUpon>Scenario1_DisplayDepthColorIR.xaml</DependentUpon>

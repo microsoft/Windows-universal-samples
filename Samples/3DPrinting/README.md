@@ -2,8 +2,6 @@
 topic: sample
 languages:
 - csharp
-- cpp
-- cppwinrt
 products:
 - windows
 - windows-uwp

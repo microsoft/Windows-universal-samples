@@ -2,11 +2,6 @@
 topic: sample
 languages:
 - cpp
-<<<<<<< Updated upstream
-=======
-- cppcx
-- cppwinrt
->>>>>>> Stashed changes
 products:
 - windows
 - windows-uwp
@@ -55,7 +50,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 This sample is written in C++ and requires some experience with graphics programming. A code walkthrough for this sample is available here:
 
-- [Create a simple game with DirectX](https://docs.microsoft.com/windows/uwp/gaming/tutorial--create-your-first-uwp-directx-game)
+- [Create a simple  game with DirectX](https://msdn.microsoft.com/library/windows/apps/mt210793)
 
 These topics provide info about the APIs used in this sample:
 

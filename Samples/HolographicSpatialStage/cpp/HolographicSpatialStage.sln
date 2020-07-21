@@ -7,17 +7,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HolographicSpatialStage", "
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|ARM = Debug|ARM
-		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|ARM = Release|ARM
-		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-<<<<<<< Updated upstream
 		{FD7EF848-1795-5EB3-8BA4-132DBE129366}.Debug|x64.ActiveCfg = Debug|x64
 		{FD7EF848-1795-5EB3-8BA4-132DBE129366}.Debug|x64.Build.0 = Debug|x64
 		{FD7EF848-1795-5EB3-8BA4-132DBE129366}.Debug|x64.Deploy.0 = Debug|x64
@@ -30,37 +25,8 @@ Global
 		{FD7EF848-1795-5EB3-8BA4-132DBE129366}.Release|x86.ActiveCfg = Release|Win32
 		{FD7EF848-1795-5EB3-8BA4-132DBE129366}.Release|x86.Build.0 = Release|Win32
 		{FD7EF848-1795-5EB3-8BA4-132DBE129366}.Release|x86.Deploy.0 = Release|Win32
-=======
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|ARM.ActiveCfg = Debug|ARM
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|ARM.Build.0 = Debug|ARM
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|ARM.Deploy.0 = Debug|ARM
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|ARM64.Build.0 = Debug|ARM64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|ARM64.Deploy.0 = Debug|ARM64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|x64.ActiveCfg = Debug|x64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|x64.Build.0 = Debug|x64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|x64.Deploy.0 = Debug|x64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|x86.ActiveCfg = Debug|Win32
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|x86.Build.0 = Debug|Win32
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Debug|x86.Deploy.0 = Debug|Win32
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|ARM.ActiveCfg = Release|ARM
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|ARM.Build.0 = Release|ARM
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|ARM.Deploy.0 = Release|ARM
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|ARM64.ActiveCfg = Release|ARM64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|ARM64.Build.0 = Release|ARM64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|ARM64.Deploy.0 = Release|ARM64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|x64.ActiveCfg = Release|x64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|x64.Build.0 = Release|x64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|x64.Deploy.0 = Release|x64
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|x86.ActiveCfg = Release|Win32
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|x86.Build.0 = Release|Win32
-		{16D455CF-B58B-57EF-ACD7-6461464F9EBF}.Release|x86.Deploy.0 = Release|Win32
->>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C2A892DB-BAF6-4A48-93D4-ED423DA5F7E7}
 	EndGlobalSection
 EndGlobal

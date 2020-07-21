@@ -20,7 +20,7 @@ namespace SDKTemplate
     {
     public:
         Scenario3_Region();
-        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void ShowResults();
 
     private:
         Platform::String^ ReportRegionData(Windows::Globalization::GeographicRegion^ region);

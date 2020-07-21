@@ -40,7 +40,6 @@ Secure Stop enables a service to better manage concurrent streams for an account
 
 ***JavaScript Scenarios***
 
-<<<<<<< Updated upstream
 **Scenario 1: Reactive License Request(JS):**   
 This example shows the basics of configuring the MediaElement's MediaProtectionManager property to support PlayReady and reactively handle license service requests. License service requests are triggered automatically by when PlayReady does not have a media license available.
 
@@ -52,10 +51,6 @@ This example uses W3C standards based Encrypted Media Extensions (EME) to enable
 
 **Scenario 4: Secure Stop EME(JS):**   
 This example uses EME for requesting a license and sending a secure stop message. This sample could also be used to provide secure stop capabilities in a web application in Microsoft Edge.
-=======
-- Right-click on the package.appxmanifest from Visual Studio and edit with the XML (text) Editor. 
-- Add the following <DeviceCapability> and save:
->>>>>>> Stashed changes
 
 
 

@@ -87,27 +87,25 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(SharedContentDir)\cs\App.xaml.cs">
-      <Link>App.xaml.cs</Link>
+    <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(SharedContentDir)\cs\MainPage.xaml.cs">
-      <Link>MainPage.xaml.cs</Link>
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
     <Compile Include="NotificationsExtensions\BadgeContent.cs" />
     <Compile Include="NotificationsExtensions\Common.cs" />
     <Compile Include="NotificationsExtensions\ContentInterfaces.cs" />
     <Compile Include="NotificationsExtensions\TileContent.cs" />
     <Compile Include="NotificationsExtensions\ToastContent.cs" />
     <Compile Include="..\..\..\SharedContent\cs\AssemblyInfo.cs">
-=======
-    <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
->>>>>>> Stashed changes
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
+    <Compile Include="Scenario10_PinTileAlternateVisualElementsAsync.xaml.cs">
+      <DependentUpon>Scenario10_PinTileAlternateVisualElementsAsync.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Scenario1_PinTile.xaml.cs">
       <DependentUpon>Scenario1_PinTile.xaml</DependentUpon>
     </Compile>
@@ -132,6 +130,12 @@
     <Compile Include="Scenario8_UpdateAsync.xaml.cs">
       <DependentUpon>Scenario8_UpdateAsync.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario9_PinTileAlternateVisualElements.xaml.cs">
+      <DependentUpon>Scenario9_PinTileAlternateVisualElements.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario9_PinTileAndUpdateOnSuspend.xaml.cs">
+      <DependentUpon>Scenario9_PinTileAndUpdateOnSuspend.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -139,53 +143,55 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
-      <Link>App.xaml</Link>
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml">
-      <Link>MainPage.xaml</Link>
+    <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario1_PinTile.xaml">
-      <Link>Scenario1_PinTile.xaml</Link>
+    <Page Include="Scenario10_PinTileAlternateVisualElementsAsync.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario2_UnpinTile.xaml">
-      <Link>Scenario2_UnpinTile.xaml</Link>
+    <Page Include="Scenario1_PinTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario3_EnumerateTiles.xaml">
-      <Link>Scenario3_EnumerateTiles.xaml</Link>
+    <Page Include="Scenario2_UnpinTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario4_TilePinned.xaml">
-      <Link>Scenario4_TilePinned.xaml</Link>
+    <Page Include="Scenario3_EnumerateTiles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario5_LaunchedFromSecondaryTile.xaml">
-      <Link>Scenario5_LaunchedFromSecondaryTile.xaml</Link>
+    <Page Include="Scenario4_TilePinned.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario6_SecondaryTileNotification.xaml">
-      <Link>Scenario6_SecondaryTileNotification.xaml</Link>
+    <Page Include="Scenario5_LaunchedFromSecondaryTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario7_PinFromAppbar.xaml">
-      <Link>Scenario7_PinFromAppbar.xaml</Link>
+    <Page Include="Scenario6_SecondaryTileNotification.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario8_UpdateAsync.xaml">
-      <Link>Scenario8_UpdateAsync.xaml</Link>
+    <Page Include="Scenario7_PinFromAppbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario8_UpdateAsync.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario9_PinTileAlternateVisualElements.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Scenario9_PinTileAndUpdateOnSuspend.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -199,22 +205,8 @@
     <Content Include="..\..\..\SharedContent\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-<<<<<<< Updated upstream
     <Content Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
-=======
-    <Content Include="..\shared\square150x150Tile-sdk.png">
-      <Link>Assets\square150x150Tile-sdk.png</Link>
-    </Content>
-    <Content Include="..\shared\square310x310Tile-sdk.png">
-      <Link>Assets\square310x310Tile-sdk.png</Link>
-    </Content>
-    <Content Include="..\shared\squareTileLogoUpdate-sdk.png">
-      <Link>Assets\squareTileLogoUpdate-sdk.png</Link>
-    </Content>
-    <Content Include="..\shared\wide310x150Tile-sdk.png">
-      <Link>Assets\wide310x150Tile-sdk.png</Link>
->>>>>>> Stashed changes
     </Content>
     <Content Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smallTile-sdk.png</Link>
@@ -236,7 +228,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <SDKReference Include="WindowsDesktop, Version=10.0.17763.0">
       <Name>Microsoft Desktop Extension SDK for Universal App Platform</Name>
     </SDKReference>
@@ -245,13 +236,8 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-=======
->>>>>>> Stashed changes
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="NotificationsExtensions.Win10">
-      <Version>14332.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

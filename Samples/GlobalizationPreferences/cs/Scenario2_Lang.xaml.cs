@@ -31,7 +31,7 @@ namespace SDKTemplate
                 "Script Code: " + lang.Script + "\n\n";
         }
 
-        private void ShowResults_Click(object sender, RoutedEventArgs e)
+        private void ShowResults()
         {
             // This scenario uses the Windows.System.UserProfile.GlobalizationPreferences class to
             // obtain the user's preferred language characteristics.

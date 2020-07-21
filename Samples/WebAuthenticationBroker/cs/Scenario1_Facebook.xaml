@@ -31,7 +31,7 @@
             <TextBlock>Windows Phone Store SID: <Run x:Name="WindowsPhoneStoreSidTextBlock"/></TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Style="{StaticResource BasicTextStyle}" Text="App ID: " VerticalAlignment="Center" Width="85"/>
-                <TextBox x:Name="FacebookClientID" Width="200" Text=""/>
+                <TextBox x:Name="FacebookClientID" Height="14" Width="200" Text=""/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Style="{StaticResource BasicTextStyle}" Text="Site URL: " VerticalAlignment="Center" Width="85"/>

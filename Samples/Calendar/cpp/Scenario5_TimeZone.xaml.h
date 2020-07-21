@@ -21,7 +21,7 @@ namespace SDKTemplate
     {
     public:
         Scenario5_TimeZone();
-        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void ShowResults();
 
     private:
         Platform::String^ ReportCalendarData(Windows::Globalization::Calendar^ calendar);

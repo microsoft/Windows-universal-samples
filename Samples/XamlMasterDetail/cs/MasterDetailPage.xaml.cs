@@ -53,10 +53,6 @@ namespace MasterDetailApp
                 _lastSelectedItem =
                     items.Where((item) => item.ItemId == id).FirstOrDefault();
             }
-            else
-            {
-                _lastSelectedItem = null;
-            }
             
             UpdateForVisualState(AdaptiveStates.CurrentState);
 
