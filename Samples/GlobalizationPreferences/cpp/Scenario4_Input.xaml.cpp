@@ -24,7 +24,7 @@ Scenario4_Input::Scenario4_Input()
     InitializeComponent();
 }
 
-void Scenario4_Input::ShowResults()
+void Scenario4_Input::ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario uses the Windows.Globalization.Language class to obtain the user's current 
     // input language.  The language tag returned reflects the current input language specified 

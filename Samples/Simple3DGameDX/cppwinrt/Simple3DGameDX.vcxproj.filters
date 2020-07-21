@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Common\DeviceResources.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BasicLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\BasicReaderWriter.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\DDSTextureLoader.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\PersistentState.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\MediaReader.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\SoundEffect.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level1.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level2.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level3.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level4.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level5.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Level6.cpp">
+      <Filter>GameLevels</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\GameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\MeshObject.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Animate.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Face.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Cylinder.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Camera.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Sphere.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\MoveLookController.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\CylinderMesh.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\FaceMesh.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\SphereMesh.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\WorldMesh.cpp">
+      <Filter>Meshes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\Material.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\StereoProjection.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\TargetTexture.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameHud.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInfoOverlay.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameRenderer.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContent\GameTimer.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMain.cpp" />
+    <ClCompile Include="Simple3DGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Common\DeviceResources.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DirectXSample.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BasicMath.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BasicShapes.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BasicLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\BasicReaderWriter.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\DDSTextureLoader.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PersistentState.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameUIConstants.h" />
+    <ClInclude Include="GameUIControl.h" />
+    <ClInclude Include="GameContent\Audio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\MediaReader.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\SoundEffect.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level1.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level2.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level3.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level4.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level5.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Level6.h">
+      <Filter>GameLevels</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\GameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\MeshObject.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Animate.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\GameConstants.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Face.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Cylinder.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Camera.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Sphere.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\MoveLookController.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\CylinderMesh.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\FaceMesh.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\SphereMesh.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\WorldMesh.h">
+      <Filter>Meshes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\ConstantBuffers.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\Material.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\StereoProjection.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\TargetTexture.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHud.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInfoOverlay.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRenderer.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContent\GameTimer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMain.h" />
+    <ClInclude Include="Simple3DGame.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\bounce.wav">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\cellceiling.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\cellfloor.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\cellwall.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\hit.wav">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\metal_texture.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\seafloor.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="GameContent\ConstantBuffers.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{db9086fe-bacc-4437-8272-1aa6642082db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{a055afa4-1360-4549-bcf4-c72e4882f5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{74b58b3a-0f92-46e0-a450-de7c0a0b7958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLevels">
+      <UniqueIdentifier>{d3019dd5-dbd6-4ce2-aea3-9834ad7d9460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{6d8617ea-cd2c-4d9c-aef0-97277a646010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{5bb562ff-0b82-46bc-bab8-a8e2ac7b2ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{9e1882d6-9e1e-435b-9cea-18eafae8e73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Meshes">
+      <UniqueIdentifier>{4a3b3268-dab8-4bcf-b091-094ce97d117c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering">
+      <UniqueIdentifier>{66dcc3e2-f491-4ff4-a2ca-911c83328a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{bd0be42c-7ed9-4427-9b53-8b364aa90cce}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="GameContent\VertexShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="GameContent\VertexShaderFlat.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="GameContent\PixelShader.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="GameContent\PixelShaderFlat.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>

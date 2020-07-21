@@ -31,7 +31,7 @@ String^ Scenario2_Lang::ReportLanguageData(Windows::Globalization::Language^ lan
         "Script Code: " + lang->Script + "\n\n";
 
 }
-void Scenario2_Lang::ShowResults()
+void Scenario2_Lang::ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario uses the Windows.System.UserProfile.GlobalizationPreferences class to
     // obtain the user's preferred language characteristics.

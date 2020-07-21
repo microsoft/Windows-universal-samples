@@ -3,7 +3,11 @@ topic: sample
 languages:
 - csharp
 - cpp
+<<<<<<< Updated upstream
 - js
+=======
+- cppwinrt
+>>>>>>> Stashed changes
 products:
 - windows
 - windows-uwp

@@ -1,0 +1,41 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_DocumentFonts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+            This shows the use of the LanguageFontGroup to get fonts for a particular language
+            for document body text and heading elements.
+            This sample uses Hindi.
+        </TextBlock>
+        <Button Content="Apply Recommended Fonts" Margin="0,10" Click="ApplyFonts_Click "/>
+
+        <TextBlock x:Name="HeadingTextBlock" Style="{StaticResource SampleHeaderTextStyle}" FontFamily="Trebuchet MS" TextWrapping="Wrap">
+            है।अभी पत्रिका लाभान्वित
+        </TextBlock>
+        <TextBlock
+            x:Name="DocumentTextBlock" Style="{StaticResource BasicTextStyle}"
+            FontFamily="Camilar" FontWeight="Light" FontStretch="UltraExpanded" TextWrapping="Wrap">
+            है।अभी पत्रिका लाभान्वित सुना समजते संभव ध्वनि विभाजन वैश्विक बनाति संभव विकसित विचरविमर्श प्रोत्साहित जिम्मे वर्णित
+            प्रेरना सुचना जाता भाषाओ लिये दिनांक भेदनक्षमता सुचनाचलचित्र डाले। लिए। मुश्किल विभाजनक्षमता मुक्त दस्तावेज विचारशिलता
+            विचरविमर्श उसके नवंबर रचना उद्योग वातावरण पहोचाना समजते तकनिकल अंग्रेजी बनाए सभिसमज जानकारी संदेश
+            अधिक दुनिया अनुवाद सकती मुख्य रचना समजते उपलब्ध सभीकुछ देखने
+        </TextBlock>
+    </StackPanel>
+</Page>

@@ -35,7 +35,7 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
-        private async void LoadDocument()
+        private async void LoadDocument(object sender, RoutedEventArgs args)
         {
             LoadButton.IsEnabled = false;
 
@@ -91,7 +91,7 @@ namespace SDKTemplate
             LoadButton.IsEnabled = true;
         }
 
-        private async void ViewPage()
+        private async void ViewPage(object sender, RoutedEventArgs args)
         {
             rootPage.NotifyUser("", NotifyType.StatusMessage);
 

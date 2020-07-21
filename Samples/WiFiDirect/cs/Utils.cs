@@ -92,7 +92,13 @@ namespace SDKTemplate
                         break;
 
                     case DevicePairingKinds.ProvidePin:
-                        args.Accept(await GetPinFromUserAsync(dispatcher));
+                        {
+                            string pin = await GetPinFromUserAsync(dispatcher);
+                            if (String.IsNullOrEmpty(pin))
+                            {
+                                args.Accept(pin);
+                            }
+                        }
                         break;
                 }
             }

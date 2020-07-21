@@ -27,7 +27,7 @@
                 <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Margin="0,10,0,0">
                     Determines statistics for the current calendar date and time.
                 </TextBlock>
-                <Button Content="Show results" Margin="0,10,0,0" Click="{x:Bind ShowResults}"/>
+                <Button Content="Show results" Margin="0,10,0,0" Click="ShowResults_Click"/>
                 <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0"/>
             </StackPanel>
         </ScrollViewer>

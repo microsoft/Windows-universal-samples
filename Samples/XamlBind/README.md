@@ -28,7 +28,7 @@ which is faster and provides more developer feedback in the form of compile erro
 Specifically, this sample shows how to:
 
 - **Use x:Bind:** It includes a wide range of bindings that cover most usage patterns.
-- **Use x:Bind in Data Templates:** Data Templates need to have the model type that will be used in the bindings specified on the template definition using the x;DataType attribute
+- **Use x:Bind in Data Templates:** Data Templates need to have the model type that will be used in the bindings specified on the template definition using the x:DataType attribute
 - **Use x:Bind with x:Phase:** x:Phase can be used with x:Bind for list scenarios to enable incremental binding and rendering of data templates to improve the panning experience on low end devices.
 - **Use x:Bind to bind event handlers:** x:Bind can be used in markup to specify event handlers as part of the data model, rather than requiring them to be in the code behind. 
 

@@ -13,7 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Data.Xml.Dom;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -23,7 +25,7 @@ namespace SDKTemplate
     {
         public const string FEATURE_NAME = "Clipboard C# sample";
 
-        private EventHandler<object> clipboardContentChanged;
+        public bool IsClipboardContentChangedEnabled { get; private set; } = false;
         private bool needToPrintClipboardFormat;
         private bool isApplicationWindowActive = true;
 
@@ -32,22 +34,57 @@ namespace SDKTemplate
             new Scenario() { Title = "Copy and paste text",        ClassType = typeof(CopyText) },
             new Scenario() { Title = "Copy and paste an image",    ClassType = typeof(CopyImage) },
             new Scenario() { Title = "Copy and paste files",       ClassType = typeof(CopyFiles) },
+            new Scenario() { Title = "History and roaming",        ClassType = typeof(HistoryAndRoaming) },
             new Scenario() { Title = "Other Clipboard operations", ClassType = typeof(OtherScenarios) }
         };
 
-        public void EnableClipboardContentChangedNotifications(bool enable)
+        public static ToastNotification DisplayToast(string message)
         {
+            string xml = @"<toast activationType='foreground'>
+                                <visual>
+                                    <binding template='ToastGeneric'/>
+                                </visual>
+                            </toast>";
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+
+            var binding = doc.SelectSingleNode("//binding");
+
+            var el = doc.CreateElement("text");
+            el.InnerText = FEATURE_NAME;
+            binding.AppendChild(el);
+
+            el = doc.CreateElement("text");
+            el.InnerText = message;
+            binding.AppendChild(el);
+
+            var toast = new ToastNotification(doc);
+
+            ToastNotificationManager.CreateToastNotifier().Show(toast); //Show the toast
+
+            return toast;
+        }
+
+        public bool EnableClipboardContentChangedNotifications(bool enable)
+        {
+            if (IsClipboardContentChangedEnabled == enable)
+            {
+                return false;
+            }
+
+            IsClipboardContentChangedEnabled = enable;
             if (enable)
             {
-                clipboardContentChanged = new EventHandler<object>(OnClipboardChanged);
-                Windows.ApplicationModel.DataTransfer.Clipboard.ContentChanged += clipboardContentChanged;
-                Window.Current.Activated += new WindowActivatedEventHandler(OnWindowActivated);
+                Clipboard.ContentChanged += OnClipboardChanged;
+                Window.Current.Activated += OnWindowActivated;
             }
             else
             {
-                Windows.ApplicationModel.DataTransfer.Clipboard.ContentChanged -= clipboardContentChanged;
-                Window.Current.Activated -= new WindowActivatedEventHandler(OnWindowActivated);
+                Clipboard.ContentChanged -= OnClipboardChanged;
+                Window.Current.Activated -= OnWindowActivated;
             }
+            return true;
         }
 
         public string BuildClipboardFormatsOutputString()
@@ -104,6 +141,7 @@ namespace SDKTemplate
 
         private void OnClipboardChanged(Object sender, Object e)
         {
+            DisplayToast("Clipboard changed.");
             HandleClipboardChanged();
         }
     }

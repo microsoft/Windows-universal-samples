@@ -25,7 +25,7 @@ Namespace Global.SDKTemplate
             Me.InitializeComponent()
         End Sub
 
-        Private Sub ShowResults()
+        Private Sub ShowResults_Click(sender As Object, e As RoutedEventArgs)
             ' This scenario uses the Windows.Globalization.Calendar class to enumerate through a calendar and
             ' perform calendar math
             Dim results As New StringBuilder()

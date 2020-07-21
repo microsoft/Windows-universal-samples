@@ -49,23 +49,7 @@ namespace MasterDetailApp
             // Parameter is item ID
             Item = ItemViewModel.FromItem(ItemsDataSource.GetItemById((int)e.Parameter));
 
-            var backStack = Frame.BackStack;
-            var backStackCount = backStack.Count;
-
-            if (backStackCount > 0)
-            {
-                var masterPageEntry = backStack[backStackCount - 1];
-                backStack.RemoveAt(backStackCount - 1);
-
-                // Doctor the navigation parameter for the master page so it
-                // will show the correct item in the side-by-side view.
-                var modifiedEntry = new PageStackEntry(
-                    masterPageEntry.SourcePageType,
-                    Item.ItemId,
-                    masterPageEntry.NavigationTransitionInfo
-                    );
-                backStack.Add(modifiedEntry);
-            }
+            ReplaceLastBackStackEntryParameter(e.Parameter);
 
             // Register for hardware and software back request from the system
             SystemNavigationManager systemNavigationManager = SystemNavigationManager.GetForCurrentView();
@@ -86,8 +70,23 @@ namespace MasterDetailApp
         {
             // Page above us will be our master view.
             // Make sure we are using the "drill out" animation in this transition.
-            
+            ReplaceLastBackStackEntryParameter(null);
             Frame.GoBack(new DrillInNavigationTransitionInfo());
+        }
+
+        // Doctor the navigation parameter for the master page so it
+        // will show the correct item in the side-by-side view.
+        void ReplaceLastBackStackEntryParameter(object parameter)
+        {
+            var backStack = Frame.BackStack;
+            var backStackCount = backStack.Count;
+
+            if (backStackCount > 0)
+            {
+                var entry = backStack[backStackCount - 1];
+                backStack[backStackCount - 1] = new PageStackEntry(
+                    entry.SourcePageType, parameter, entry.NavigationTransitionInfo);
+            }
         }
 
         void NavigateBackForWideState(bool useTransition)

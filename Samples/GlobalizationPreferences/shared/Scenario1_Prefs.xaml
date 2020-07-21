@@ -30,7 +30,7 @@
                     but the user can customize them from Settings.
                     Note that the location returned may not reflect the current physical location of the user.
                 </TextBlock>
-                <Button Content="Show results" Margin="0,10,0,0" Click="{x:Bind ShowResults}"/>
+                <Button Content="Show results" Margin="0,10,0,0" Click="ShowResults_Click"/>
                 <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0"/>
             </StackPanel>
         </ScrollViewer>

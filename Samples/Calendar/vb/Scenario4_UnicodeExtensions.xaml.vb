@@ -36,7 +36,7 @@ Namespace Global.SDKTemplate
             Return results
         End Function
 
-        Private Sub ShowResults()
+        Private Sub ShowResults_Click(sender As Object, e As RoutedEventArgs)
             ' This scenario uses the Windows.Globalization.Calendar class to display the parts of a date.
             ' Create Calendar objects using different Unicode extensions for different languages.
             ' NOTE: Calendar (ca) and numeral system (nu) are the only supported extensions with any others being ignored.

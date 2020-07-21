@@ -38,7 +38,7 @@ String^ Scenario4_UnicodeExtensions::ReportCalendarData(Calendar^ calendar, Stri
     return results;
 }
 
-void Scenario4_UnicodeExtensions::ShowResults()
+void Scenario4_UnicodeExtensions::ShowResults_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario uses the Windows.Globalization.Calendar class to display the parts of a date.
 

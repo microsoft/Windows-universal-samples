@@ -26,7 +26,7 @@
                     Loading and rendering a PDF document
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button x:Name="LoadButton" Content="Load document" Click="{x:Bind LoadDocument}" Margin="5,0"/>
+                    <Button x:Name="LoadButton" Content="Load document" Click="LoadDocument" Margin="5,0"/>
                     <PasswordBox x:Name="PasswordBox" Width="200" PlaceholderText="Optional password"/>
                 </StackPanel>
                 
@@ -48,7 +48,7 @@
                             <ComboBoxItem>Half size on beige background</ComboBoxItem>
                             <ComboBoxItem>Crop to center of page</ComboBoxItem>
                         </ComboBox>
-                        <Button Click="{x:Bind ViewPage}" Content="View" Margin="10,0,0,0"/>
+                        <Button Click="ViewPage" Content="View" Margin="10,0,0,0"/>
                     </StackPanel>
 
                     <!-- Always give an Image a name that's accessible to screen reader, (unless the Image is purely decorative.) 

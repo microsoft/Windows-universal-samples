@@ -18,35 +18,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Margin="12,10,12,12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="Input" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel>
-                <TextBlock x:Name="Description"  Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" >
-                    The DataPackage can also hold files. Select files using the picker,
-                    copy them to the clipboard, and then paste the files. This will copy the files into this app's local state folder.
-                </TextBlock>
-                <StackPanel Margin="0,10,0,0">
-                    <Button x:Name="CopyButton" Content="Select file and copy" Margin="0,0,10,0"/>
-                    <Button x:Name="PasteButton" Content="Paste" Margin="10,0,10,0"/>
-                </StackPanel>
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" >
+                The DataPackage can also hold files. Select files using the picker,
+                copy them to the clipboard, and then paste the files. This will copy the files into this app's local state folder.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Click="CopyButton_Click" Content="Select file and copy" Margin="0,0,10,0"/>
+                <Button Click="PasteButton_Click" Content="Paste" Margin="10,0,10,0"/>
             </StackPanel>
-        </Grid>
-
-        <Grid x:Name="Output" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
             <TextBlock x:Name ="OutputText" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" />
-        </Grid>
-
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

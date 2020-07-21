@@ -30,7 +30,7 @@ Specifically, this sample covers the following scenarios:
 1. Synthesizing text to speech (TTS)
 2. Synthesizing Speech Synthesis Markup Language (SSML)
 3. One-shot recognition using the predefined dictation grammar
-4. One-shot recognition using the predefined webs search grammar
+4. One-shot recognition using the predefined web search grammar
 5. One-shot recognition using a custom list-based grammar
 6. One-shot recognition using a custom SRGS/GRXML grammar
 7. Continuous dictation
@@ -40,9 +40,11 @@ Specifically, this sample covers the following scenarios:
 
 In addition, translations are shown for speech recognition and text-to-speech for supported languages. Translations provided may not be using ideal phrasing and are provided for demonstration purposes only.
 
+Scenarios 3, 4, and 7 require internet connectivity because they use the [SpeechRecognitionTopicConstraint](https://docs.microsoft.com/uwp/api/windows.media.speechrecognition.speechrecognitiontopicconstraint) class, which use the pre-defined grammar provided by a web service.
+
 ## Privacy Policy
 
-Some speech recognition features require acceptance of the Microsoft Privacy Policy. Information about this privacy policy can be found in the Settings app, under Privacy -> Speech, Inking and Typing. You must view the privacy policy in order to accept it. To view the privacy policy, press the Privacy Policy link on the Speech, Inking and Typing settings page. 
+Web service-based speech recognition features require acceptance of the Microsoft Privacy Policy. Information about this privacy policy can be found in the Settings app, under Privacy -> Speech, Inking and Typing. You must view the privacy policy in order to accept it. To view the privacy policy, press the Privacy Policy link on the Speech, Inking and Typing settings page. 
 
 You can disable functionality that requires accepting this policy by turning off "Getting to know you" under Settings -> Privacy -> Speech, Inking and Typing. The samples will indicate to you if the privacy policy has not been accepted where necessary.
 
@@ -90,5 +92,4 @@ The next steps depend on whether you just want to deploy the sample or you want 
 ### Known Issues
 
  - The sample requires Media Player components to be available. If media player has been uninstalled, or when using an 'N' SKU of windows without media player components, the sample will not function. Note, however, that Speech Synthesis and Speech Recognition do not require media player directly, but other components of the samples do (Such as playback of synthesized text, or checking to see if a microphone is present and the app has permission to use it.) Developers should make sure their app is aware of it and handles this gracefully.
- 
  

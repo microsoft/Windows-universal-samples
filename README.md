@@ -132,11 +132,6 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 <table>
  <tr>
   <td><a href="Samples/BluetoothRfcommChat">Bluetooth RFCOMM chat</a></td>
-  <td><a href="Samples/CallerID">Caller ID</a></td>
-  <td><a href="Samples/CommunicationBlockAndFilter">Communication blocking and filtering</a></td>
- </tr>
- <tr>
-  <td><a href="Samples/PhoneCall">Phone call</a></td>
   <td><a href="Samples/SimpleCommunication">Real-time communication</a></td>
   <td><a href="Samples/SmsSendAndReceive">SMS send and receive</a></td>
  </tr>
@@ -327,26 +322,27 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/LightSensor">Light sensor</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/LineDisplay">Line display</a></td>
   <td><a href="Samples/Magnetometer">Magnetometer</a></td>
   <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
-  <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
   <td><a href="Samples/NfcProvisioner">NFC enterprise provisioner</a></td>
   <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
-  <td><a href="Samples/Pedometer">Pedometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Pedometer">Pedometer</a></td>
   <td><a href="Samples/PosPrinter">POS printer</a></td>
   <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
-  <td><a href="Samples/RadialController">Radial controller</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/RadialController">Radial controller</a></td>
   <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
   <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
-  <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
  </tr>
 </table>
@@ -521,31 +517,32 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
 
 <table>
  <tr>
-  <td><a href="Samples/Advertising">Advertising</a></td>
   <td><a href="Samples/BackgroundTransfer">Background transfer</a></td>
   <td><a href="Samples/DatagramSocket">DatagramSocket</a></td>
+  <td><a href="Samples/HttpClient">HttpClient</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/HttpClient">HttpClient</a></td>
   <td><a href="Samples/Json">JSON</a></td>
   <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
- </tr>
- <tr>
   <td><a href="Samples/RadioManager">Radios</a></td>
+<<<<<<< Updated upstream
   <td><a href="Samples/FeedReader">RSS reader end-to-end (JavaScript)</a></td>
   <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
+=======
+>>>>>>> Stashed changes
  </tr>
  <tr>
+  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
   <td><a href="Samples/StreamSocket">StreamSocket</a></td>
   <td><a href="Samples/Syndication">Syndication</a></td>
-  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
   <td><a href="Samples/WebSocket">WebSocket</a></td>
   <td><a href="Samples/WiFiDirect">Wi-Fi Direct</a></td>
-  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
   <td><a href="Samples/HotspotAuthentication">Wi-Fi hotspot authentication</a></td>
   <td><a href="Samples/WiFiScan">Wi-Fi scanning</a></td>
  </tr>

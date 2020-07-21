@@ -1,0 +1,55 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_Notifications"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Updating and clearing badge and tile notifications on the lock screen
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+              Lock screen apps can display up-to-date information through badge notifications and tile updates. Badge 
+              notifications are limited to an integer or glyph that is displayed next to a monochrome badge associated 
+              with the app. The badge displayed on the lock screen is the same badge that is displayed on the app's Start tile. 
+              Tile updates are sent in the same manner as updates sent to the tile on the Start screen, but are limited to text 
+              only and must be wide templates. The most recent wide tile update for the app will be displayed on the lock screen. 
+              If an image-only template or the default tile is set, then nothing will appear for the app in the detailed status 
+              slot on the lock screen. Users must manually select which app may show tile notifications on the lock screen. 
+              Please see the "Tiles" and "Push and Periodic Notifications" samples for more information on how an app can display 
+              update tile notifications.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="SendBadge" Content="Send badge notification" Click="SendBadge_Click" Margin="0,0,10,0"/>
+                <Button x:Name="ClearBadge" Content="Clear badge notification" Click="ClearBadge_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="SendTile" Content="Send tile notification" Click="SendTile_Click" Margin="0,0,10,0"/>
+                <Button x:Name="ClearTile" Content="Clear tile notification" Click="ClearTile_Click"/>
+            </StackPanel>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                    Above, the NotificationsExtensions library is used to create notifications. You can also create notifications with strings:
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="SendBadgeString" Content="Send badge notification" Click="SendBadgeWithStringManipulation_Click" Margin="0,0,10,0"/>
+                <Button x:Name="SendTileString" Content="Send tile notification" Click="SendTileWithStringManipulation_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -29,7 +29,7 @@
                     effect of the time zone change in the date and time time properties of
                     the calendar.
                 </TextBlock>
-                <Button Content="Show results" Margin="0,10,0,0" Click="{x:Bind ShowResults}"/>
+                <Button Content="Show results" Margin="0,10,0,0" Click="ShowResults_Click"/>
                 <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0"/>
             </StackPanel>
         </ScrollViewer>
