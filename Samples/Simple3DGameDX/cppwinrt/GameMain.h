@@ -1,0 +1,131 @@
+﻿//********************************************************* 
+// 
+// Copyright (c) Microsoft. All rights reserved. 
+// This code is licensed under the MIT License (MIT). 
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF 
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY 
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR 
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT. 
+// 
+//*********************************************************
+
+// GameMain:
+// This class is the main class required for Windows Runtime apps.
+// It it called on Launch activation and maintains the overall state of the game.
+// The GameMain class drives and maintains a state machine for the game. It can be in
+// one of seven major states defined by the UpdateEngineState enum class.
+// These are:
+//     WaitingForResources - the game has requested the game object or the renderer object
+//         to load resources asynchronously.
+//     ResourcesLoaded - the asynchronous loading of resources has been completed. This
+//         is a transient state.
+//     WaitingForPress - the game is waiting for the player to indicate they are ready to proceed.
+//         There are three possible actions from this state. This is controlled by m_pressResult.
+//         The possible outcomes are:
+//             LoadGame - The player is ready to start a new game and has acknowledged the status
+//                 information provided about the previous state.
+//             PlayLevel - The player is ready to play the next level. The level has already been
+//                 loaded so active game play will start.
+//             ContinueLevel - The player is ready to continue playing the current level. Part of the
+//                 current level has already been played.
+//     Dynamics - the game is active play mode.
+//     TooSmall - the window is currently too small to play the game.
+//     Suspended - the game was suspended by PLM.
+//     Deactivated - the game has lost focus.
+//
+// GameMain creates and maintains references to three major objects used for the game:
+//     MoveLookController (m_controller) - this object handles all the game specific user input and
+//         aggregates touch, mouse/keyboard and Xbox controller input into a unified input control.
+//     Simple3DGame (m_game) - this object handles all the game specific logic and game dynamics.
+//     GameRenderer (m_renderer) - This object handles all the graphics rendering for the game.
+//
+
+#pragma once
+
+#include "GameRenderer.h"
+
+namespace GameControl
+{
+    enum class UpdateEngineState
+    {
+        WaitingForResources,
+        ResourcesLoaded,
+        WaitingForPress,
+        Dynamics,
+        TooSmall,
+        Suspended,
+        Deactivated,
+    };
+
+    enum class PressResultState
+    {
+        LoadGame,
+        PlayLevel,
+        ContinueLevel,
+    };
+
+    enum class GameInfoOverlayState
+    {
+        Loading,
+        GameStats,
+        GameOverExpired,
+        GameOverCompleted,
+        LevelStart,
+        Pause,
+    };
+};
+
+class GameMain : public winrt::implements<GameMain, winrt::Windows::Foundation::IInspectable>, DX::IDeviceNotify
+{
+public:
+    GameMain(std::shared_ptr<DX::DeviceResources> const& deviceResources);
+    ~GameMain();
+    void CreateWindowSizeDependentResources();
+    void Run();
+    void Suspend();
+    void Resume();
+    void Visibility(bool visible);
+    void Close() { m_windowClosed = true; }
+
+    // IDeviceNotify
+    virtual void OnDeviceLost();
+    virtual void OnDeviceRestored();
+
+    void PauseRequested() { if (m_updateState == GameControl::UpdateEngineState::Dynamics) m_pauseRequested = true; };
+    void PressComplete() { if (m_updateState == GameControl::UpdateEngineState::WaitingForPress) m_pressComplete = true; };
+    void ResetGame();
+
+    void WindowActivationChanged(winrt::Windows::UI::Core::CoreWindowActivationState activationState);
+
+private:
+    winrt::fire_and_forget ConstructInBackground();
+    winrt::fire_and_forget HandleDeviceRestored();
+    void SetGameInfoOverlay(GameControl::GameInfoOverlayState state);
+    void InitializeGameState();
+    void UpdateLayoutState();
+    void Update();
+    winrt::fire_and_forget LoadAndFinalizeLevelInBackground(bool renderNeeded = false);
+    void WaitingForResourceLoading();
+
+private:
+    bool                                                m_windowClosed;
+    bool                                                m_pauseRequested;
+    bool                                                m_pressComplete;
+    bool                                                m_renderNeeded;
+    bool                                                m_haveFocus;
+    bool                                                m_visible;
+
+    std::shared_ptr<DX::DeviceResources>                m_deviceResources;
+    Simple3DGameDX::IGameUIControl* m_uiControl;
+
+    std::shared_ptr<MoveLookController>                 m_controller;
+    std::shared_ptr<GameRenderer>                       m_renderer;
+    std::shared_ptr<Simple3DGame>                       m_game;
+
+    GameControl::UpdateEngineState                      m_updateState;
+    GameControl::UpdateEngineState                      m_updateStateNext;
+    GameControl::PressResultState                       m_pressResult;
+    GameControl::GameInfoOverlayState                   m_gameInfoOverlayState;
+    Simple3DGameDX::GameInfoOverlayCommand              m_gameInfoOverlayCommand;
+    uint32_t                                            m_loadingCount;
+};

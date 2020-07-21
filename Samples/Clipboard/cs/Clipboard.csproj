@@ -109,8 +109,11 @@
     <Compile Include="CopyText.xaml.cs">
       <DependentUpon>CopyText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Others.xaml.cs">
-      <DependentUpon>Others.xaml</DependentUpon>
+    <Compile Include="HistoryAndRoaming.xaml.cs">
+      <DependentUpon>HistoryAndRoaming.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherScenarios.xaml.cs">
+      <DependentUpon>OtherScenarios.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -144,8 +147,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Others.xaml">
-      <Link>Others.xaml</Link>
+    <Page Include="..\shared\HistoryAndRoaming.xaml">
+      <Link>HistoryAndRoaming.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\OtherScenarios.xaml">
+      <Link>OtherScenarios.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

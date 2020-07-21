@@ -30,7 +30,7 @@
                     date and time. The details of the three example calendars are displayed
                     below.
                 </TextBlock>
-                <Button Content="Show results" Margin="0,10,0,0" Click="{x:Bind ShowResults}"/>
+                <Button Content="Show results" Margin="0,10,0,0" Click="ShowResults_Click"/>
                 <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0"/>
             </StackPanel>
         </ScrollViewer>

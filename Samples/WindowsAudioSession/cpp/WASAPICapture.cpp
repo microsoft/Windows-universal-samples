@@ -711,7 +711,7 @@ HRESULT WASAPICapture::OnAudioSampleRequested( Platform::Boolean IsSilence )
         m_AudioCaptureClient->ReleaseBuffer( FramesAvailable );
 
         // Update plotter data
-        ProcessScopeData( Data, cbBytesToCapture );
+        ProcessScopeData( dataByte->Data, dataByte->Length );
 
         // Write File and async store
         m_WAVDataWriter->WriteBytes( dataByte );

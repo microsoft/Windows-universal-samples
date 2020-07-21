@@ -28,7 +28,7 @@
                     Determines the current input language for a user.
                     This can be useful for optimizing an editing experience for a user based on their input language.
                 </TextBlock>
-                <Button Content="Show results" Margin="0,10,0,0" Click="{x:Bind ShowResults}"/>
+                <Button Content="Show results" Margin="0,10,0,0" Click="ShowResults_Click"/>
                 <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}" Margin="0,10,0,0"/>
             </StackPanel>
         </ScrollViewer>

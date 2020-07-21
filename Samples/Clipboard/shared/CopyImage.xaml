@@ -18,39 +18,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Margin="12,10,12,12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="Input" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel>
-                <TextBlock x:Name="Description" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
-                    The DataPackage can also hold a bitmap. Select image using
-                    item picker, copy it to the clipboard, and then paste it back into the application.
-                    Image can also be provided via delayed rendering, when source app doesn't want to supply data until
-                    target app requests it.               
-                </TextBlock>
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button x:Name="CopyButton" Click="CopyButton_Click" Content="Select image and copy" Margin="0,0,10,0"/>
-                    <Button x:Name="CopyWithDelayedRenderingButton" Click="CopyWithDelayedRenderingButton_Click" Content="Select image and copy using delayed rendering" Margin="0,0,10,0"/>
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button x:Name="PasteButton" Click="PasteButton_Click" Content="Paste" Margin="0,0,10,0"/>
-                </StackPanel>
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel>
+            <TextBlock Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap">
+                The DataPackage can also hold a bitmap. Select image using
+                item picker, copy it to the clipboard, and then paste it back into the application.
+                Image can also be provided via delayed rendering, when source app doesn't want to supply data until
+                target app requests it.
+            </TextBlock>
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Click="CopyButton_Click" Content="Select image and copy" Margin="0,0,10,0"/>
+                <Button Click="CopyWithDelayedRenderingButton_Click" Content="Select image and copy using delayed rendering" Margin="0,0,10,0"/>
             </StackPanel>
-        </Grid>
+            <Button Click="PasteButton_Click" Content="Paste" HorizontalAlignment="Left" Margin="0,10,10,0"/>
 
-        <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
-            <StackPanel Orientation="Vertical">
-                <TextBlock x:Name ="OutputText" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" />
-                <Image x:Name="OutputImage" HorizontalAlignment="Left" Visibility="Collapsed" MaxHeight="300" MaxWidth="400"/>
-            </StackPanel>
-        </Grid>
-
-    </Grid>
+            <TextBlock x:Name ="OutputText" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" />
+            <Image x:Name="OutputImage" HorizontalAlignment="Left" Visibility="Collapsed" MaxHeight="300" MaxWidth="400"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

@@ -32,7 +32,7 @@ Namespace Global.SDKTemplate
             Return results
         End Function
 
-        Private Sub ShowResults()
+        Private Sub ShowResults_Click(sender As Object, e As RoutedEventArgs)
             ' This scenario uses the Windows.Globalization.Calendar class to display the parts of a date.
             ' Create Calendar objects using different constructors.
             Dim calendar As Calendar = New Calendar()

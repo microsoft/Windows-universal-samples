@@ -1,0 +1,43 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass CopyText : Windows.UI.Xaml.Controls.Page
+    {
+        CopyText();
+    }
+
+    [default_interface]
+    runtimeclass CopyImage : Windows.UI.Xaml.Controls.Page
+    {
+        CopyImage();
+    }
+
+    [default_interface]
+    runtimeclass CopyFiles : Windows.UI.Xaml.Controls.Page
+    {
+        CopyFiles();
+    }
+
+    [default_interface]
+    runtimeclass HistoryAndRoaming : Windows.UI.Xaml.Controls.Page
+    {
+        HistoryAndRoaming();
+    }
+
+    [default_interface]
+    runtimeclass OtherScenarios : Windows.UI.Xaml.Controls.Page
+    {
+        OtherScenarios();
+    }
+}

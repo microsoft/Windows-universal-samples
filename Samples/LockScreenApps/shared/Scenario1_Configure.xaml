@@ -1,0 +1,52 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Configure"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Adding the app to the lock screen
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Lock screen apps are apps that can notify users when the users are not using their device.
+                Lock screen apps have the ability to show updates to the user
+                on the lock screen by updating badge counts and glyphs, showing toast notifications, or by allowing a text-only
+                version of their Start tile to appear on the lock screen.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                An app must set the appropriate information in the manifest in order to appear on the lock screen. In the Visual Studio 
+                manifest editor, under the Lock screen notifications option in the Application UI tab, set the value to either 
+                "Badge" or "Badge and Tile Text". For apps deployed to Windows 10 versions less than 1709 (16299), the app must
+                also specify a background task of type "Control channel", "Timer", or "Push notification" in the Declarations tab.
+                For more information, see the "Background Tasks" sample.
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Check that your application was configured so that is can show
+                lockscreen notification in the app-specific settings page.
+                To appear on the lock screen, the user must add it manually
+                through the Lockscreen personalization page in Settings.
+                When declared in the manifest as described above, the app will
+                appear in the list of allowable lock screen apps.
+            </TextBlock>
+            <Button Content="Go to App-specific Settings" Click="OpenAppSettings" Margin="0,10,0,0"/>
+            <Button Content="Go to Lockscreen Settings" Click="OpenLockscreenSettings" Margin="0,10,0,0"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

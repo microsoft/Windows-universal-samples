@@ -13,7 +13,13 @@
 #include "MainPage.xaml.h"
 #include "SampleConfiguration.h"
 
+<<<<<<< Updated upstream
 using namespace SDKTemplate;
+=======
+using namespace winrt;
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::SDKTemplate;
+>>>>>>> Stashed changes
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {

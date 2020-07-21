@@ -7,18 +7,54 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HolographicTagAlong", "Holo
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<< Updated upstream
 		{FE19F729-6158-5047-BFB6-4AFC2D80BC82}.Debug|x86.ActiveCfg = Debug|Win32
 		{FE19F729-6158-5047-BFB6-4AFC2D80BC82}.Debug|x86.Build.0 = Debug|Win32
 		{FE19F729-6158-5047-BFB6-4AFC2D80BC82}.Debug|x86.Deploy.0 = Debug|Win32
 		{FE19F729-6158-5047-BFB6-4AFC2D80BC82}.Release|x86.ActiveCfg = Release|Win32
 		{FE19F729-6158-5047-BFB6-4AFC2D80BC82}.Release|x86.Build.0 = Release|Win32
 		{FE19F729-6158-5047-BFB6-4AFC2D80BC82}.Release|x86.Deploy.0 = Release|Win32
+=======
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|ARM.Build.0 = Debug|ARM
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|ARM.Deploy.0 = Debug|ARM
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|ARM64.Build.0 = Debug|ARM64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|x64.ActiveCfg = Debug|x64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|x64.Build.0 = Debug|x64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|x64.Deploy.0 = Debug|x64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|x86.ActiveCfg = Debug|Win32
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|x86.Build.0 = Debug|Win32
+		{C619F633-3281-5614-A25B-0B761FB58595}.Debug|x86.Deploy.0 = Debug|Win32
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|ARM.ActiveCfg = Release|ARM
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|ARM.Build.0 = Release|ARM
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|ARM.Deploy.0 = Release|ARM
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|ARM64.ActiveCfg = Release|ARM64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|ARM64.Build.0 = Release|ARM64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|ARM64.Deploy.0 = Release|ARM64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|x64.ActiveCfg = Release|x64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|x64.Build.0 = Release|x64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|x64.Deploy.0 = Release|x64
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|x86.ActiveCfg = Release|Win32
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|x86.Build.0 = Release|Win32
+		{C619F633-3281-5614-A25B-0B761FB58595}.Release|x86.Deploy.0 = Release|Win32
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A4B9232-E52D-43BC-A1F5-1EE3E199DFA0}
 	EndGlobalSection
 EndGlobal

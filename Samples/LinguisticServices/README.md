@@ -2,6 +2,10 @@
 topic: sample
 languages:
 - cpp
+<<<<<<< Updated upstream
+=======
+- cppwinrt
+>>>>>>> Stashed changes
 products:
 - windows
 - windows-uwp

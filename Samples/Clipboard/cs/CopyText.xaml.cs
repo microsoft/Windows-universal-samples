@@ -26,13 +26,6 @@ namespace SDKTemplate
         public CopyText()
         {
             this.InitializeComponent();
-            this.Init();
-        }
-
-        void Init()
-        {
-            CopyButton.Click += new RoutedEventHandler(CopyButton_Click);
-            PasteButton.Click += new RoutedEventHandler(PasteButton_Click);
             Description.NavigateToString(this.htmlFragment);
         }
 
@@ -56,27 +49,26 @@ namespace SDKTemplate
             var imgRef = RandomAccessStreamReference.CreateFromUri(imgUri);
             dataPackage.ResourceMap[imgSrc] = imgRef;
 
-            try
+            // Set the DataPackage to clipboard.
+            if (Clipboard.SetContentWithOptions(dataPackage, null))
             {
-                // Set the DataPackage to clipboard.
-                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(dataPackage);
-                OutputText.Text = "Text and HTML formats have been copied to clipboard. ";
+                rootPage.NotifyUser("Text and HTML formats have been copied to clipboard.", NotifyType.StatusMessage);
             }
-            catch (Exception ex)
+            else
             {
                 // Copying data to Clipboard can potentially fail - for example, if another application is holding Clipboard open
-                rootPage.NotifyUser("Error copying content to Clipboard: " + ex.Message + ". Try again", NotifyType.ErrorMessage);
+                rootPage.NotifyUser("Error copying content to clipboard.", NotifyType.ErrorMessage);
             }
         }
 
         async void PasteButton_Click(object sender, RoutedEventArgs e)
         {
             rootPage.NotifyUser("", NotifyType.StatusMessage);
-            OutputText.Text = "Content in the clipboard: ";
+            OutputText.Text = "";
             OutputResourceMapKeys.Text = "";
             OutputHtml.NavigateToString("<HTML></HTML>");
 
-            var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.GetContent();
+            var dataPackageView = Clipboard.GetContent();
             if (dataPackageView.Contains(StandardDataFormats.Text))
             {
                 try

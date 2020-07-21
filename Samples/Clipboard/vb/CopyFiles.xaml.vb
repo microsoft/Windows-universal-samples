@@ -25,12 +25,15 @@ Namespace Global.SDKTemplate
 
         Public Sub New()
             Me.InitializeComponent()
+<<<<<<< Updated upstream
             Me.Init()
         End Sub
 
         Sub Init()
             AddHandler CopyButton.Click, New RoutedEventHandler(AddressOf CopyButton_Click)
             AddHandler PasteButton.Click, New RoutedEventHandler(AddressOf PasteButton_Click)
+=======
+>>>>>>> Stashed changes
         End Sub
 
         Async Sub CopyButton_Click(sender As Object, e As RoutedEventArgs)

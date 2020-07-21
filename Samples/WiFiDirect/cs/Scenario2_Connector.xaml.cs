@@ -25,6 +25,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,7 +37,7 @@ namespace SDKTemplate
     public sealed partial class Scenario2_Connector : Page
     {
         private MainPage rootPage = MainPage.Current;
-        DeviceWatcher _deviceWatcher;
+        DeviceWatcher _deviceWatcher = null;
         bool _fWatcherStarted = false;
         WiFiDirectAdvertisementPublisher _publisher = new WiFiDirectAdvertisementPublisher();
 
@@ -48,9 +49,30 @@ namespace SDKTemplate
             this.InitializeComponent();
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            if (_deviceWatcher != null)
+            {
+                StopWatcher();
+            }
+        }
+
+        private void StopWatcher()
+        {
+            _deviceWatcher.Added -= OnDeviceAdded;
+            _deviceWatcher.Removed -= OnDeviceRemoved;
+            _deviceWatcher.Updated -= OnDeviceUpdated;
+            _deviceWatcher.EnumerationCompleted -= OnEnumerationCompleted;
+            _deviceWatcher.Stopped -= OnStopped;
+
+            _deviceWatcher.Stop();
+
+            _deviceWatcher = null;
+        }
+
         private void btnWatcher_Click(object sender, RoutedEventArgs e)
         {
-            if (_fWatcherStarted == false)
+            if (_deviceWatcher == null)
             {
                 _publisher.Start();
 
@@ -84,15 +106,8 @@ namespace SDKTemplate
                 _publisher.Stop();
 
                 btnWatcher.Content = "Start Watcher";
-                _fWatcherStarted = false;
 
-                _deviceWatcher.Added -= OnDeviceAdded;
-                _deviceWatcher.Removed -= OnDeviceRemoved;
-                _deviceWatcher.Updated -= OnDeviceUpdated;
-                _deviceWatcher.EnumerationCompleted -= OnEnumerationCompleted;
-                _deviceWatcher.Stopped -= OnStopped;
-
-                _deviceWatcher.Stop();
+                StopWatcher();
 
                 rootPage.NotifyUser("Device watcher stopped.", NotifyType.StatusMessage);
             }
@@ -151,12 +166,6 @@ namespace SDKTemplate
         private void btnIe_Click(object sender, RoutedEventArgs e)
         {
             var discoveredDevice = (DiscoveredDevice)lvDiscoveredDevices.SelectedItem;
-
-            if (discoveredDevice == null)
-            {
-                rootPage.NotifyUser("No device selected, please select one.", NotifyType.ErrorMessage);
-                return;
-            }
 
             IList<WiFiDirectInformationElement> informationElements = null;
             try
@@ -242,50 +251,55 @@ namespace SDKTemplate
                 }
             }
 
+            WiFiDirectDevice wfdDevice = null;
             try
             {
                 // IMPORTANT: FromIdAsync needs to be called from the UI thread
-                var wfdDevice = await WiFiDirectDevice.FromIdAsync(discoveredDevice.DeviceInfo.Id);
-
-                // Register for the ConnectionStatusChanged event handler
-                wfdDevice.ConnectionStatusChanged += OnConnectionStatusChanged;
-
-                IReadOnlyList<EndpointPair> endpointPairs = wfdDevice.GetConnectionEndpointPairs();
-                HostName remoteHostName = endpointPairs[0].RemoteHostName;
-
-                rootPage.NotifyUser($"Devices connected on L2 layer, connecting to IP Address: {remoteHostName} Port: {Globals.strServerPort}",
-                    NotifyType.StatusMessage);
-
-                // Wait for server to start listening on a socket
-                await Task.Delay(2000);
-
-                // Connect to Advertiser on L4 layer
-                StreamSocket clientSocket = new StreamSocket();
-                await clientSocket.ConnectAsync(remoteHostName, Globals.strServerPort);
-                rootPage.NotifyUser("Connected with remote side on L4 layer", NotifyType.StatusMessage);
-
-                SocketReaderWriter socketRW = new SocketReaderWriter(clientSocket, rootPage);
-
-                string sessionId = Path.GetRandomFileName();
-                ConnectedDevice connectedDevice = new ConnectedDevice(sessionId, wfdDevice, socketRW);
-                ConnectedDevices.Add(connectedDevice);
-
-                // The first message sent over the socket is the name of the connection.
-                await socketRW.WriteMessageAsync(sessionId);
-
-                while (await socketRW.ReadMessageAsync() != null)
-                {
-                    // Keep reading messages
-                }
-
+                wfdDevice = await WiFiDirectDevice.FromIdAsync(discoveredDevice.DeviceInfo.Id);
             }
             catch (TaskCanceledException)
             {
                 rootPage.NotifyUser("FromIdAsync was canceled by user", NotifyType.ErrorMessage);
+                return;
+            }
+
+            // Register for the ConnectionStatusChanged event handler
+            wfdDevice.ConnectionStatusChanged += OnConnectionStatusChanged;
+
+            IReadOnlyList<EndpointPair> endpointPairs = wfdDevice.GetConnectionEndpointPairs();
+            HostName remoteHostName = endpointPairs[0].RemoteHostName;
+
+            rootPage.NotifyUser($"Devices connected on L2 layer, connecting to IP Address: {remoteHostName} Port: {Globals.strServerPort}",
+                NotifyType.StatusMessage);
+
+            // Wait for server to start listening on a socket
+            await Task.Delay(2000);
+
+            // Connect to Advertiser on L4 layer
+            StreamSocket clientSocket = new StreamSocket();
+            try
+{
+                await clientSocket.ConnectAsync(remoteHostName, Globals.strServerPort);
+                rootPage.NotifyUser("Connected with remote side on L4 layer", NotifyType.StatusMessage);
             }
             catch (Exception ex)
             {
                 rootPage.NotifyUser($"Connect operation threw an exception: {ex.Message}", NotifyType.ErrorMessage);
+                return;
+            }
+
+            SocketReaderWriter socketRW = new SocketReaderWriter(clientSocket, rootPage);
+
+            string sessionId = Path.GetRandomFileName();
+            ConnectedDevice connectedDevice = new ConnectedDevice(sessionId, wfdDevice, socketRW);
+            ConnectedDevices.Add(connectedDevice);
+
+            // The first message sent over the socket is the name of the connection.
+            await socketRW.WriteMessageAsync(sessionId);
+
+            while (await socketRW.ReadMessageAsync() != null)
+            {
+                // Keep reading messages
             }
         }
 
@@ -312,12 +326,6 @@ namespace SDKTemplate
         private async void btnUnpair_Click(object sender, RoutedEventArgs e)
         {
             var discoveredDevice = (DiscoveredDevice)lvDiscoveredDevices.SelectedItem;
-
-            if (discoveredDevice == null)
-            {
-                rootPage.NotifyUser("No device selected, please select one.", NotifyType.ErrorMessage);
-                return;
-            }
 
             DeviceUnpairingResult result = await discoveredDevice.DeviceInfo.Pairing.UnpairAsync();
             rootPage.NotifyUser($"Unpair result: {result.Status}", NotifyType.StatusMessage);

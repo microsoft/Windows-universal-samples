@@ -26,19 +26,14 @@ namespace SDKTemplate
         public Scenario1_FindId()
         {
             this.InitializeComponent();
-            TextInput.Text =
-                "Hello, how are you?  I hope you are ok!\n" +
-                "-->id<--\n" +
-                "1id 2id 3id\n" +
-                "id1 id2 id3\n" +
-                "\uD840\uDC00_CJK_B_1 \uD840\uDC01_CJK_B_2 \uD840\uDC02_CJK_B_3";
         }
 
         /// <summary>
         // This is a helper method that an app could create to find one or all available 
-        // ids within a string. 
+        // ids within a string.  An id begins with a character for which IsIdStart,
+        // and continues with characters that are IsIdContinue. Invalid sequences are ignored.
         /// </summary>
-        /// <param name="inputString">String that contains one or more ids</param>
+        /// <param name="inputString">String from which to extract ids</param>
         /// <returns>List of individual ids found in the input string</returns>
         private List<String> FindIdsInString(String inputString)
         {
@@ -49,33 +44,42 @@ namespace SDKTemplate
             int indexIdStart = -1;
 
             // Iterate through each of the characters in the string
-            for (int i = 0; i < inputString.Length; i++) 
+            int i = 0;
+            while (i < inputString.Length)
             {
+                int nextIndex;
                 uint codepoint = inputString[i];         
                 
-                // If the character is a high surrogate, then we need to read the next character to make
-                // sure it is a low surrogate.  If we are at the last character in the input string, then
-                // we have an error, since a high surrogate must be matched by a low surrogate.  Update
-                // the code point with the surrogate pair.
                 if (UnicodeCharacters.IsHighSurrogate(codepoint))         
                 {
-                    if (++i >= inputString.Length)             
+                    // If the character is a high surrogate, then the next characters must be a low surrogate.
+                    if ((i < inputString.Length) && (UnicodeCharacters.IsLowSurrogate(inputString[i+1])))
                     {
-                        throw new ArgumentException("Bad trailing surrogate at end of string");
+                        // Update the code point with the surrogate pair.
+                        codepoint = UnicodeCharacters.GetCodepointFromSurrogatePair(codepoint, inputString[i+1]);
+                        nextIndex = i + 2;
                     }
-                    codepoint = UnicodeCharacters.GetCodepointFromSurrogatePair(inputString[i - 1], inputString[i]);
-                }  
+                    else
+                    {
+                        // Warning: High surrogate not followed by low surrogate.
+                        codepoint = 0;
+                        nextIndex = i + 1;
+                    }
+                }
+                else
+                {
+                    // Not a surrogate pair.
+                    nextIndex = i + 1;
+                }
                 
-                // Have we found an id start?
                 if (indexIdStart == -1)         
                 {
+                    // Not in an id. Have we found an id start?
                     if (UnicodeCharacters.IsIdStart(codepoint))
                     {
-                        // We found a character that is an id start.  In case we had a suplemmentary
-                        // character (high and low surrogate), then the index needs to offset by 1.
-                        indexIdStart = UnicodeCharacters.IsSupplementary(codepoint) ? i - 1 : i;
+                        indexIdStart = i;
                     }
-                }             
+                }
                 else if (!UnicodeCharacters.IsIdContinue(codepoint))         
                 {             
                     // We have not found an id continue, so the id is complete.  We need to 
@@ -85,15 +89,16 @@ namespace SDKTemplate
                     // Reset back the index start and re-examine the current code point 
                     // in next iteration
                     indexIdStart = -1;
-                    i--;
-                }     
+                    nextIndex = i;
+                }
+                i = nextIndex;
             }
 
             // Do we have a pending id at the end of the string?
             if (indexIdStart != -1)
             {
                 //  We need to create the identifier string
-                idList.Add(inputString.Substring(indexIdStart));
+                idList.Add(inputString.Substring(indexIdStart, i - indexIdStart));
             }
 
             // Return the list of identifiers found in the string
@@ -109,7 +114,7 @@ namespace SDKTemplate
         private void Default_Click(object sender, RoutedEventArgs e)
         {
             var results = FindIdsInString(TextInput.Text);
-            TextOutput.Text = String.Join(" ", results);
+            TextOutput.Text = String.Join(", ", results);
         }
 
     }

@@ -20,6 +20,6 @@ namespace SDKTemplate
     {
     public:
         Scenario4_Input();
-        void ShowResults();
+        void ShowResults_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
     };
 }

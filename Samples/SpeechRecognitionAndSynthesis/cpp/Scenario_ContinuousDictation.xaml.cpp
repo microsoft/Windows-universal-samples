@@ -455,5 +455,5 @@ void Scenario_ContinuousDictation::cbLanguageSelection_SelectionChanged(Object^ 
 /// <param name="args">Ignored</param>
 void Scenario_ContinuousDictation::openPrivacySettings_Click(Hyperlink^ sender, HyperlinkClickEventArgs^ args)
 {
-    create_task(Windows::System::Launcher::LaunchUriAsync(ref new Uri(L"ms-settings:privacy-speechtyping")));
+    create_task(Windows::System::Launcher::LaunchUriAsync(ref new Uri(L"ms-settings:privacy-speech")));
 }

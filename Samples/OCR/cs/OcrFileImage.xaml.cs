@@ -53,7 +53,7 @@ namespace SDKTemplate
         {
             UpdateAvailableLanguages();
 
-            await LoadSampleImage();
+            await LoadSampleImageAsync();
         }
 
         /// <summary>
@@ -66,6 +66,7 @@ namespace SDKTemplate
                 // Check if any OCR language is available on device.
                 if (OcrEngine.AvailableRecognizerLanguages.Count > 0)
                 {
+                    LanguageList.DisplayMemberPath = "DisplayName";
                     LanguageList.ItemsSource = OcrEngine.AvailableRecognizerLanguages;
                     LanguageList.SelectedIndex = 0;
                     LanguageList.IsEnabled = true;
@@ -96,7 +97,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private async Task LoadImage(StorageFile file)
+        private async Task LoadImageAsync(StorageFile file)
         {
             using (var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
             {
@@ -110,11 +111,10 @@ namespace SDKTemplate
             }
         }
 
-        private async Task LoadSampleImage()
+        private async Task LoadSampleImageAsync()
         {
-            // Load sample "Hello World" image.
             var file = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync("Assets\\splash-sdk.png");
-            await LoadImage(file);
+            await LoadImageAsync(file);
         }
 
         /// <summary>
@@ -155,11 +155,11 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ExtractButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void ExtractButton_Click(object sender, RoutedEventArgs e)
         {
             ClearResults();
 
-            // Check if OcrEngine supports image resoulution.
+            // Check if OcrEngine supports image resolution.
             if (bitmap.PixelWidth > OcrEngine.MaxImageDimension || bitmap.PixelHeight > OcrEngine.MaxImageDimension)
             {
                 rootPage.NotifyUser(
@@ -208,15 +208,15 @@ namespace SDKTemplate
                 // Create overlay boxes over recognized words.
                 foreach (var line in ocrResult.Lines)
                 {
+                    // Determine if line is horizontal or vertical.
+                    // Vertical lines are supported only in Chinese Traditional and Japanese languages.
                     Rect lineRect = Rect.Empty;
                     foreach (var word in line.Words)
                     {
                         lineRect.Union(word.BoundingRect);
                     }
-
-                    // Determine if line is horizontal or vertical.
-                    // Vertical lines are supported only in Chinese Traditional and Japanese languages.
                     bool isVerticalLine = lineRect.Height > lineRect.Width;
+                    var style = isVerticalLine ? HighlightedWordBoxVerticalLineStyle : HighlightedWordBoxHorizontalLineStyle;
 
                     foreach (var word in line.Words)
                     {
@@ -225,21 +225,8 @@ namespace SDKTemplate
                         // Keep references to word boxes.
                         wordBoxes.Add(wordBoxOverlay);
 
-                        // Define overlay style.
-                        var overlay = new Border()
-                        {
-                            Style = isVerticalLine ?
-                                        (Style)this.Resources["HighlightedWordBoxVerticalLine"] :
-                                        (Style)this.Resources["HighlightedWordBoxHorizontalLine"]
-                        };
-
-                        // Bind word boxes to UI.
-                        overlay.SetBinding(Border.MarginProperty, wordBoxOverlay.CreateWordPositionBinding());
-                        overlay.SetBinding(Border.WidthProperty, wordBoxOverlay.CreateWordWidthBinding());
-                        overlay.SetBinding(Border.HeightProperty, wordBoxOverlay.CreateWordHeightBinding());
-
-                        // Put the filled textblock in the results grid.
-                        TextOverlay.Children.Add(overlay);
+                        // Create a box to highlight the word.
+                        TextOverlay.Children.Add(wordBoxOverlay.CreateBorder(style));
                     }
                 }
 
@@ -257,7 +244,7 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Occures when user language toogle state is changed.
+        /// Occurs when user language toggle state is changed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -268,16 +255,15 @@ namespace SDKTemplate
 
         /// <summary>
         /// This is event handler for 'Sample' button.
-        /// It loads image with 'Hello World' text and displays it in UI.
+        /// It loads sample image and displays it in UI.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void SampleButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void SampleButton_Click(object sender, RoutedEventArgs e)
         {
             ClearResults();
 
-            // Load sample "Hello World" image.
-            await LoadSampleImage();
+            await LoadSampleImageAsync();
 
             rootPage.NotifyUser("Loaded sample image.", NotifyType.StatusMessage);
         }
@@ -288,7 +274,7 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void LoadButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void LoadButton_Click(object sender, RoutedEventArgs e)
         {
             var picker = new FileOpenPicker()
             {
@@ -301,7 +287,7 @@ namespace SDKTemplate
             {
                 ClearResults();
 
-                await LoadImage(file);
+                await LoadImageAsync(file);
 
                 rootPage.NotifyUser(
                     String.Format("Loaded image from file: {0} ({1}x{2}).", file.Name, bitmap.PixelWidth, bitmap.PixelHeight),
@@ -310,23 +296,13 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Occures when selected language is changed in available languages combo box.
+        /// Occurs when selected language is changed in available languages combo box.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LanguageList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ClearResults();
-
-            var lang = LanguageList.SelectedValue as Language;
-            if (lang != null)
-            {
-                rootPage.NotifyUser(
-                    "Selected OCR language is " + lang.DisplayName + ". " +
-                        OcrEngine.AvailableRecognizerLanguages.Count + " OCR language(s) are available. " +
-                        "Check combo box for full list.",
-                    NotifyType.StatusMessage);
-            }
         }
 
         /// <summary>

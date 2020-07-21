@@ -13,13 +13,16 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<< Updated upstream
 		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|ARM.ActiveCfg = Debug|Win32
 		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|x64.ActiveCfg = Debug|Win32
 		{F22713D5-0C23-5ACD-A1DC-694F5C381BC6}.Debug|x86.ActiveCfg = Debug|Win32
@@ -42,8 +45,53 @@ Global
 		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x64.Build.0 = Release|x64
 		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x86.ActiveCfg = Release|Win32
 		{25987888-33CA-5DE9-BB85-9D54A8431B73}.Release|x86.Build.0 = Release|Win32
+=======
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|ARM.ActiveCfg = Debug|ARM
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|ARM.Build.0 = Debug|ARM
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|ARM.Deploy.0 = Debug|ARM
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|ARM64.Build.0 = Debug|ARM64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|x64.ActiveCfg = Debug|x64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|x64.Build.0 = Debug|x64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|x64.Deploy.0 = Debug|x64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|x86.ActiveCfg = Debug|Win32
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|x86.Build.0 = Debug|Win32
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Debug|x86.Deploy.0 = Debug|Win32
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|ARM.ActiveCfg = Release|ARM
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|ARM.Build.0 = Release|ARM
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|ARM.Deploy.0 = Release|ARM
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|ARM64.ActiveCfg = Release|ARM64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|ARM64.Build.0 = Release|ARM64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|ARM64.Deploy.0 = Release|ARM64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|x64.ActiveCfg = Release|x64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|x64.Build.0 = Release|x64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|x64.Deploy.0 = Release|x64
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|x86.ActiveCfg = Release|Win32
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|x86.Build.0 = Release|Win32
+		{42DA6B92-47E5-5C30-AA73-39A2BC9771EB}.Release|x86.Deploy.0 = Release|Win32
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|ARM.ActiveCfg = Debug|ARM
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|ARM.Build.0 = Debug|ARM
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|ARM64.Build.0 = Debug|ARM64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|x64.ActiveCfg = Debug|x64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|x64.Build.0 = Debug|x64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|x86.ActiveCfg = Debug|Win32
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Debug|x86.Build.0 = Debug|Win32
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|ARM.ActiveCfg = Release|ARM
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|ARM.Build.0 = Release|ARM
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|ARM64.ActiveCfg = Release|ARM64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|ARM64.Build.0 = Release|ARM64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|x64.ActiveCfg = Release|x64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|x64.Build.0 = Release|x64
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|x86.ActiveCfg = Release|Win32
+		{7E56455C-4136-56B3-A892-ED2A5D84B43B}.Release|x86.Build.0 = Release|Win32
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC6B318E-C508-4402-9839-42CB6A09BBBC}
 	EndGlobalSection
 EndGlobal

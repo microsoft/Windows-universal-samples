@@ -24,7 +24,7 @@ Scenario3_Enum::Scenario3_Enum()
 {
     InitializeComponent();
 }
-void Scenario3_Enum::ShowResults()
+void Scenario3_Enum::ShowResults_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario uses the Windows.Globalization.Calendar class to enumerate through a calendar and
     // perform calendar math

@@ -1,0 +1,62 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    runtimeclass Scenario1_Advertiser : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_Advertiser();
+        Windows.Foundation.Collections.IObservableVector<ConnectedDevice> ConnectedDevices{ get; };
+
+        Windows.UI.Xaml.Controls.CheckBox chkPreferGroupOwnerMode{ get; };
+        Windows.UI.Xaml.Controls.CheckBox chkLegacySetting{ get; };
+        Windows.UI.Xaml.Controls.ListView lvConnectedDevices{ get; };
+        Windows.UI.Xaml.Controls.TextBox txtSendMessage{ get; };
+        Windows.UI.Xaml.Controls.TextBox txtInformationElement{ get; };
+    }
+
+    runtimeclass Scenario2_Connector : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Connector();
+        Windows.Foundation.Collections.IObservableVector<DiscoveredDevice> DiscoveredDevices{ get; };
+        Windows.Foundation.Collections.IObservableVector<ConnectedDevice> ConnectedDevices{ get; };
+
+        Windows.UI.Xaml.Controls.ListView lvConnectedDevices{ get; };
+        Windows.UI.Xaml.Controls.ListView lvDiscoveredDevices{ get; };
+        Windows.UI.Xaml.Controls.TextBox txtSendMessage{ get; };
+    }
+
+    runtimeclass ConnectionSettingsPanel : Windows.UI.Xaml.Controls.UserControl
+    {
+        ConnectionSettingsPanel();
+        void Reset();
+        Windows.Foundation.IAsyncOperation<Boolean> RequestPairDeviceAsync(Windows.Devices.Enumeration.DeviceInformationPairing pairing);
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass DiscoveredDevice : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        String DisplayName{ get; };
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass ConnectedDevice : Windows.Foundation.IClosable
+    {
+        String DisplayName{ get; };
+    }
+
+    static runtimeclass Utils
+    {
+        static Boolean CanSendMessage(String message, Object connectedDevice);
+        static Boolean IsNonNull(Object value);
+        static Boolean IsNonEmptyString(String value);
+    }
+}

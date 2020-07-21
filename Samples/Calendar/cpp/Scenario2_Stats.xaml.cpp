@@ -36,7 +36,7 @@ String^ Scenario2_Stats::ReportCalendarData(Calendar^ calendar, String^ calendar
 }
 
 
-void Scenario2_Stats::ShowResults()
+void Scenario2_Stats::ShowResults_Click(Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
     // This scenario uses the Windows.Globalization.Calendar class to display the parts of a date.
 

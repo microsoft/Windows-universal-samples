@@ -21,7 +21,7 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Track Faces in Webcam", ClassType=typeof(TrackFacesInWebcam)},
+            new Scenario() { Title="Track Faces in Webcam", ClassType=typeof(Scenario1_TrackInWebcam)},
         };
     }
 

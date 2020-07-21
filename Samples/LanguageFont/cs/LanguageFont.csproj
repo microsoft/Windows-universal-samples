@@ -6,7 +6,7 @@
     <ProjectGuid>{B0347AC0-6CFB-5694-A629-A04C6D5702B1}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LanguageFont</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>LanguageFont</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -91,8 +91,12 @@
       <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
     <Compile Include="localfontinfo.cs" />
     <Compile Include="..\..\..\SharedContent\cs\MainPage.xaml.cs">
+=======
+    <Compile Include="$(SharedContentDir)\cs\MainPage.xaml.cs">
+>>>>>>> Stashed changes
       <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -100,11 +104,11 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="scenario1.xaml.cs">
-      <DependentUpon>scenario1.xaml</DependentUpon>
+    <Compile Include="Scenario1_UIFonts.xaml.cs">
+      <DependentUpon>Scenario1_UIFonts.xaml</DependentUpon>
     </Compile>
-    <Compile Include="scenario2.xaml.cs">
-      <DependentUpon>scenario2.xaml</DependentUpon>
+    <Compile Include="Scenario2_DocumentFonts.xaml.cs">
+      <DependentUpon>Scenario2_DocumentFonts.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -123,15 +127,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="scenario1.xaml">
+    <Page Include="..\shared\Scenario1_UIFonts.xaml">
+      <Link>Scenario1_UIFonts.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="scenario2.xaml">
+    <Page Include="..\shared\Scenario2_DocumentFonts.xaml">
+      <Link>Scenario2_DocumentFonts.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Styles.xaml">
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
+      <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

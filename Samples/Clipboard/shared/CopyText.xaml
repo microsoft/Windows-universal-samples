@@ -18,32 +18,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Margin="12,10,12,12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="Input" Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel>
-                <WebView x:Name="Description" Height="260" Width="500" HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button x:Name="CopyButton" Click="CopyButton_Click" Content="Copy text above" Margin="0,0,10,0"/>
-                    <Button x:Name="PasteButton" Click="PasteButton_Click" Content="Paste Clipboard contents" Margin="0,0,10,0"/>
-                </StackPanel>
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel>
+            <WebView x:Name="Description" Height="260" Width="500" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Click="CopyButton_Click" Content="Copy text above" Margin="0,0,10,0"/>
+                <Button Click="PasteButton_Click" Content="Paste Clipboard contents" Margin="0,0,10,0"/>
             </StackPanel>
-        </Grid>
 
-        <Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
             <StackPanel HorizontalAlignment="Left" Width="800" >
                 <TextBlock x:Name ="OutputText" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" />
                 <TextBlock x:Name ="OutputResourceMapKeys" Style="{StaticResource BasicTextStyle}" TextWrapping="Wrap" Text="" />
                 <WebView x:Name="OutputHtml" HorizontalAlignment="Left" Height="160" Width="800" />
             </StackPanel>
-        </Grid>
-
-    </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

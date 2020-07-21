@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="SDKTemplate.Scenario4_CharacterGrouping"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <StackPanel>
+            <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}">
+                The CharacterGroupings class provides a list of character groups,
+                that can be used for headers in grouped views or
+                for zoomed-out SemanticZoom views. The Lookup method finds the group
+                for a string.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0,5,10,0">Choose a language:</TextBlock>
+                <ComboBox x:Name="LanguageText" IsEditable="True" Margin="0,0,10,0">
+                    <ComboBoxItem Content="Default" IsSelected="True"/>
+                    <ComboBoxItem Content="en-US"/>
+                    <ComboBoxItem Content="sv-SE"/>
+                    <ComboBoxItem Content="zh-CN"/>
+                    <ComboBoxItem Content="zh-HK"/>
+                </ComboBox>
+                <Button Content="Get groups" Click="GetGroups_Click"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Margin="0,5,10,0">Text:</TextBlock>
+                <ComboBox x:Name="CandidateText" IsEditable="True" Margin="0,0,10,0">
+                    <ComboBoxItem Content="Hello" IsSelected="True"/>
+                    <ComboBoxItem Content="Ångström"/>
+                    <ComboBoxItem Content="你好"/>
+                </ComboBox>
+                <Button Content="Assign group" Click="AssignGroup_Click"/>
+                <TextBlock x:Name="GroupingResult" Margin="10,5,10,0"/>
+            </StackPanel>
+
+            <GridView x:Name="GroupingsGrid" Margin="0,10" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

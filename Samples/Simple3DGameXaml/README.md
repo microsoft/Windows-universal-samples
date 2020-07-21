@@ -52,7 +52,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 This sample is written in C++ and requires some experience with graphics programming. A code walkthrough for the Direct3D-specific version of this sample is available here:
 
-- [Create a simple  game with DirectX](https://msdn.microsoft.com/library/windows/apps/mt210793)
+- [Create a simple game with DirectX](https://docs.microsoft.com/windows/uwp/gaming/tutorial--create-your-first-uwp-directx-game)
 
 These topics provide info about the APIs used in this sample:
 

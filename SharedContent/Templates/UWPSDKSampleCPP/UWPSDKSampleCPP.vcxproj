@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<<<<<<< Updated upstream
   <PropertyGroup Label="Globals">
     <ProjectGuid>{f710b9fd-4e6b-42d7-a99a-6d48888d48b0}</ProjectGuid>
+=======
+  <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <PropertyGroup>
+    <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <MinimalCoreWin>true</MinimalCoreWin>
+    <ProjectGuid>$guid1$</ProjectGuid>
+    <ProjectName>$safeprojectname$</ProjectName>
+>>>>>>> Stashed changes
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+<<<<<<< Updated upstream
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
+=======
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>$(WindowsTargetPlatformVersion)</WindowsTargetPlatformMinVersion>
+>>>>>>> Stashed changes
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -40,6 +56,7 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+<<<<<<< Updated upstream
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
@@ -47,6 +64,9 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
+=======
+    <CharacterSet>Unicode</CharacterSet>
+>>>>>>> Stashed changes
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -94,7 +114,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
+<<<<<<< Updated upstream
     <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);..\..\..\SharedContent\cpp</IncludePath>
+=======
+    <IncludePath>$(VC_IncludePath);$(UniversalCRT_IncludePath);$(WindowsSDK_IncludePath);$(SharedContentDir)\cppwinrt</IncludePath>
+    <CppWinRTOptimized>true</CppWinRTOptimized>
+>>>>>>> Stashed changes
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -133,12 +158,20 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ClInclude Include="pch.h" />
     <ClInclude Include="..\..\..\SharedContent\cpp\App.xaml.h">
       <DependentUpon>..\..\..\SharedContent\xaml\App.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="..\..\..\SharedContent\cpp\MainPage.xaml.h">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+=======
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\App.h">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\MainPage.h">
+      <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
+>>>>>>> Stashed changes
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_ShortName.xaml.h">
@@ -152,20 +185,29 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\..\..\SharedContent\xaml\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< Updated upstream
     <Page Include="..\..\..\SharedContent\cpp\MainPage.xaml">
+=======
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml">
+>>>>>>> Stashed changes
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Scenario1_ShortName.xaml" />
     <Page Include="Scenario2_ShortName.xaml" />
+<<<<<<< Updated upstream
     <Page Include="Scenario3_ShortName.xaml" />
     <Page Include="..\..\..\SharedContent\xaml\Styles.xaml">
+=======
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
+>>>>>>> Stashed changes
       <Link>Styles\Styles.xaml</Link>
     </Page>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
@@ -176,6 +218,13 @@
     </ClCompile>
     <ClCompile Include="..\..\..\SharedContent\cpp\MainPage.xaml.cpp">
       <DependentUpon>..\..\..\SharedContent\cpp\MainPage.xaml</DependentUpon>
+=======
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\App.cpp">
+      <DependentUpon>$(SharedContentDir)\xaml\App.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\MainPage.cpp">
+      <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
+>>>>>>> Stashed changes
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -197,29 +246,69 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <Image Include="..\..\..\SharedContent\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Image>
     <Image Include="..\..\..\SharedContent\media\smalltile-sdk.png">
       <Link>Assets\smalltile-sdk.png</Link>
+=======
+    <Midl Include="$(SharedContentDir)\cppwinrt\MainPage.idl">
+      <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
+      <Link>Assets\microsoft-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\splash-sdk.png">
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
+      <Link>Assets\smallTile-sdk.png</Link>
+>>>>>>> Stashed changes
+    </Image>
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
       <Link>Assets\splash-sdk.png</Link>
     </Image>
+<<<<<<< Updated upstream
     <Image Include="..\..\..\SharedContent\media\squaretile-sdk.png">
       <Link>Assets\squaretile-sdk.png</Link>
     </Image>
     <Image Include="..\..\..\SharedContent\media\storelogo-sdk.png">
       <Link>Assets\storelogo-sdk.png</Link>
+=======
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
+      <Link>Assets\squareTile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\tile-sdk.png">
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
+      <Link>Assets\storeLogo-sdk.png</Link>
+>>>>>>> Stashed changes
+    </Image>
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
       <Link>Assets\tile-sdk.png</Link>
     </Image>
-    <Image Include="..\..\..\SharedContent\media\windows-sdk.png">
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
     </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+<<<<<<< Updated upstream
   </ImportGroup>
+=======
+    <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.2.0.190404.8\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
+>>>>>>> Stashed changes
 </Project>

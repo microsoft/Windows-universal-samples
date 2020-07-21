@@ -21,6 +21,7 @@
     <Project File="UWPSDKSampleCPP.vcxproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="pch.h">pch.h</ProjectItem>
+<<<<<<< Updated upstream
       <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="SampleConfiguration.h">SampleConfiguration.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="SampleConfiguration.cpp">SampleConfiguration.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.xaml">Scenario1_ShortName.xaml</ProjectItem>
@@ -32,6 +33,17 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml">Scenario3_ShortName.xaml</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml.cpp">Scenario3_ShortName.xaml.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario3_ShortName.xaml.h">Scenario3_ShortName.xaml.h</ProjectItem>
+=======
+      <ProjectItem ReplaceParameters="true" TargetFileName="Project.idl">Project.idl</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="SampleConfiguration.h">SampleConfiguration.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" TargetFileName="SampleConfiguration.cpp">SampleConfiguration.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.xaml">Scenario1_ShortName.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.cpp">Scenario1_ShortName.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario1_ShortName.h">Scenario1_ShortName.h</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.xaml">Scenario2_ShortName.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.cpp">Scenario2_ShortName.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.h">Scenario2_ShortName.h</ProjectItem>
+>>>>>>> Stashed changes
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package.appxmanifest</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">UWPSDKSampleCPP.vcxproj.filters</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="README.md">README.md</ProjectItem>

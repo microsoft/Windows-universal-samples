@@ -34,7 +34,7 @@ namespace SDKTemplate
             return results;
         }
 
-        private void ShowResults()
+        private void ShowResults_Click(object sender, RoutedEventArgs e)
         {
             // This scenario uses the Windows.Globalization.Calendar class to display the parts of a date.
 

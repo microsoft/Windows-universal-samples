@@ -363,5 +363,5 @@ void Scenario_PredefinedWebSearchGrammar::cbLanguageSelection_SelectionChanged(O
 /// <param name="args">Ignored</param>
 void Scenario_PredefinedWebSearchGrammar::openPrivacySettings_Click(Hyperlink^ sender, HyperlinkClickEventArgs^ args)
 {
-    create_task(Windows::System::Launcher::LaunchUriAsync(ref new Uri(L"ms-settings:privacy-speechtyping")));
+    create_task(Windows::System::Launcher::LaunchUriAsync(ref new Uri(L"ms-settings:privacy-speech")));
 }

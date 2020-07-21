@@ -8,18 +8,13 @@
 //
 //*********************************************************
 
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 using System;
 using System.Text;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Globalization;
 using Windows.Globalization.NumberFormatting;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
-namespace NumberFormatting
+namespace SDKTemplate
 {
     public sealed partial class Scenario1_PercentPermilleFormatting : Page
     {

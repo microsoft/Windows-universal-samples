@@ -3,7 +3,11 @@ topic: sample
 languages:
 - csharp
 - cpp
+<<<<<<< Updated upstream
 - js
+=======
+- cppwinrt
+>>>>>>> Stashed changes
 products:
 - windows
 - windows-uwp
@@ -50,7 +54,11 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## System requirements
 
+<<<<<<< Updated upstream
 **Client:** Windows 10
+=======
+* [LanguageFont sample](/archived/LanguageFont/) for C++/CX and JavaScript (archived)
+>>>>>>> Stashed changes
 
 **Server:** Windows Server 2016 Technical Preview
 

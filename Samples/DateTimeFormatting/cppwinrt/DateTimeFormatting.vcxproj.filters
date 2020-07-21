@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>4416d50a-7676-4d0a-9b2c-91ff70c6047f</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
+    <Page Include="Scenario3_ParameterizedTemplate.xaml" />
+    <Page Include="Scenario4_Override.xaml" />
+    <Page Include="Scenario5_UnicodeExtensions.xaml" />
+    <Page Include="Scenario6_TimeZone.xaml" />
+    <Page Include="Scenario1_LongAndShortFormats.xaml" />
+    <Page Include="Scenario2_StringTemplate.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Scenario1_ShortName.cpp" />
+    <ClCompile Include="Scenario2_ShortName.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Scenario3_ParameterizedTemplate.cpp" />
+    <ClCompile Include="Scenario4_Override.cpp" />
+    <ClCompile Include="Scenario5_UnicodeExtensions.cpp" />
+    <ClCompile Include="Scenario6_TimeZone.cpp" />
+    <ClCompile Include="Scenario1_LongAndShortFormats.cpp" />
+    <ClCompile Include="Scenario2_StringTemplate.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Scenario1_ShortName.h" />
+    <ClInclude Include="Scenario2_ShortName.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Scenario3_ParameterizedTemplate.h" />
+    <ClInclude Include="Scenario4_Override.h" />
+    <ClInclude Include="Scenario5_UnicodeExtensions.h" />
+    <ClInclude Include="Scenario6_TimeZone.h" />
+    <ClInclude Include="Scenario1_LongAndShortFormats.h" />
+    <ClInclude Include="Scenario2_StringTemplate.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
+  </ItemGroup>
+</Project>

@@ -27,7 +27,7 @@ Namespace Global.SDKTemplate
             Return String.Format("In {0} time zone:   {1}   {2} {3}, {4}   {5}:{6}:{7} {8}  {9}", calendar.GetTimeZone(), calendar.DayOfWeekAsSoloString(), calendar.MonthAsSoloString(), calendar.DayAsPaddedString(2), calendar.YearAsString(), calendar.HourAsPaddedString(2), calendar.MinuteAsPaddedString(2), calendar.SecondAsPaddedString(2), calendar.PeriodAsString(), calendar.TimeZoneAsString(3))
         End Function
 
-        Private Sub ShowResults()
+        Private Sub ShowResults_Click(sender As Object, e As RoutedEventArgs)
             ' This scenario illustrates time zone support in Windows.Globalization.Calendar class
             ' Displayed time zones in addition to the local time zone.
             Dim timeZones As String() = {"UTC", "America/New_York", "Asia/Kolkata"}

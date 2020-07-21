@@ -109,9 +109,10 @@ namespace SDKTemplate
                 case MediaFrameSourceKind.Depth:
                     return String.Equals(subtype, MediaEncodingSubtypes.D16, StringComparison.OrdinalIgnoreCase) ? subtype : null;
 
-                // The only infrared formats we can render are L8 and L16.
+                // The only infrared formats we can render are Nv12, L8, and L16.
                 case MediaFrameSourceKind.Infrared:
-                    return (String.Equals(subtype, MediaEncodingSubtypes.L8, StringComparison.OrdinalIgnoreCase) ||
+                    return (String.Equals(subtype, MediaEncodingSubtypes.Nv12, StringComparison.OrdinalIgnoreCase) ||
+                        String.Equals(subtype, MediaEncodingSubtypes.L8, StringComparison.OrdinalIgnoreCase) ||
                         String.Equals(subtype, MediaEncodingSubtypes.L16, StringComparison.OrdinalIgnoreCase)) ? subtype : null;
 
                 // No other source kinds are supported by this class.
@@ -184,6 +185,10 @@ namespace SDKTemplate
 
                                     // Use pseudo color to render 8 bits frames.
                                     result = TransformBitmap(inputBitmap, PseudoColorHelper.PseudoColorFor8BitInfrared);
+                                    break;
+
+                                case BitmapPixelFormat.Nv12:
+                                    result = SoftwareBitmap.Convert(inputBitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
                                     break;
 
                                 default:
