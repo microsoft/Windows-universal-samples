@@ -84,7 +84,7 @@ Microsoft Visual Studio and the Microsoft HoloLens Emulator, go to
 
 [BasicFaceTracking](/Samples/BasicFaceTracking)
 
-[CameraFrames](/Sample/CameraFrames)
+[CameraFrames](/Samples/CameraFrames)
 
 ### Reference
 
