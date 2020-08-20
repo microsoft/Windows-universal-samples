@@ -49,6 +49,10 @@ The scenarios demonstrate the use of the these services:
 
     Enter a selection of text in Cyrillic. This returns the input text transliterated to Latin.
 
+-   Character grouping
+
+    Character groups can be used for headers in grouped views or for zoomed-out SemanticZoom views.
+
 **Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
 To obtain information about Windows 10 development, go to the [Windows Dev Center](http://go.microsoft.com/fwlink/?LinkID=532421)

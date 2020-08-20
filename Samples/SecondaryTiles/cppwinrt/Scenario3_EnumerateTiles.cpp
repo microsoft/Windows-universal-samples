@@ -29,6 +29,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario3_EnumerateTiles::EnumerateSecondaryTiles_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         // Get secondary tile ids for this package
         IVectorView<SecondaryTile> tilelist = co_await SecondaryTile::FindAllAsync();
         if (tilelist.Size() > 0)

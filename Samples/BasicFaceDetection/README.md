@@ -3,8 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
-- vb
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -55,6 +54,8 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 The FaceDetector is intended to operate on a static image or a single frame of video and is not optimized for video playback or live camera streams. In order to track human faces in real-time, either through a live stream or a video clip, use the FaceTracker API instead.
 
 ### Samples
+
+[BasicFaceDetection](/archived/BasicFaceTracking) for C++/CX and VB (archived)
 
 [BasicFaceTracking](/Samples/BasicFaceTracking)
 

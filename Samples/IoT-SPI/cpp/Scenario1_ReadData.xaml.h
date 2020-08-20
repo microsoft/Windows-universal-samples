@@ -24,7 +24,7 @@ namespace SDKTemplate
     {
     public:
         Scenario1_ReadData();
-        void StartStopScenario();
+        void StartStopScenario_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
     protected:
         void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;

@@ -111,7 +111,7 @@ namespace SDKTemplate
             }
         }
 
-        async void StartStopScenario()
+        async void StartStopScenario_Click(object sender, RoutedEventArgs e)
         {
             if (timer != null)
             {

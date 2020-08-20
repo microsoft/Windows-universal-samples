@@ -70,6 +70,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario7_PinFromAppbar::PinToAppBar_Click(IInspectable sender, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         SecondaryTileCommandBar().IsSticky(true);
 
         // Let us first verify if we need to pin or unpin

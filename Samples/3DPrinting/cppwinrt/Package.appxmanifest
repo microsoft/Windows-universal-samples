@@ -8,7 +8,7 @@
   <Identity Name="Microsoft.SDKSamples.3DPrinting.CPPWINRT" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0"/>
   <mp:PhoneIdentity PhoneProductId="33a5dc7a-1df4-459c-94de-1623f37aaedf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
   <Properties>
-    <DisplayName>_3DPrinting C++/WinRT Sample</DisplayName>
+    <DisplayName>3DPrinting C++/WinRT Sample</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\storelogo-sdk.png</Logo>
   </Properties>
@@ -21,10 +21,10 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="App">
       <uap:VisualElements
-        DisplayName="_3DPrinting C++/WinRT Sample"
+        DisplayName="3DPrinting C++/WinRT Sample"
         Square150x150Logo="Assets\squareTile-sdk.png"
         Square44x44Logo="Assets\smallTile-sdk.png"
-        Description="_3DPrinting C++/WinRT Sample"
+        Description="3DPrinting C++/WinRT Sample"
         BackgroundColor="#00B2F0"
         >
         <uap:SplashScreen Image="Assets\splash-sdk.png"/>

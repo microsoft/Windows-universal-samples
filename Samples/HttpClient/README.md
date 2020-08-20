@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -100,16 +100,6 @@ For more information on network capabilities, see [How to set network capabiliti
 [Networking basics](https://msdn.microsoft.com/library/windows/apps/mt280233)  
 [Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)  
 
-### Other - JavaScript and HTML
-
-[Adding support for networking (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452752)  
-[Connecting to network services (HTML)](http://msdn.microsoft.com/library/windows/apps/hh452977)  
-[Connecting with WebSockets (HTML)](http://msdn.microsoft.com/library/windows/apps/hh761442)  
-[How to connect to an HTTP server using Windows.Web.Http (HTML)](http://msdn.microsoft.com/library/windows/apps/dn469430)  
-[How to set background connectivity options (HTML)](http://msdn.microsoft.com/library/windows/apps/hh771189)  
-[How to set network capabilities (HTML)](http://msdn.microsoft.com/library/windows/apps/hh770532)  
-[Troubleshooting and debugging network connections](http://msdn.microsoft.com/library/windows/apps/hh770534)  
-
 ### Other resources
 
 [Adding support for networking](http://msdn.microsoft.com/library/windows/apps/hh452752)  
@@ -117,6 +107,10 @@ For more information on network capabilities, see [How to set network capabiliti
 [How to configure network isolation capabilities](http://msdn.microsoft.com/library/windows/apps/hh770532)  
 [How to secure HttpClient connections](http://msdn.microsoft.com/library/windows/apps/hh781240)  
 [Quickstart: Connecting using HttpClient](http://msdn.microsoft.com/library/windows/apps/hh781239)  
+
+### Other samples
+
+[HttpClient](/archived/HttpClient/) for C++/CX and VB (archived)
 
 ### Reference
 
@@ -127,11 +121,9 @@ For more information on network capabilities, see [How to set network capabiliti
 
 ## System requirements
 
-**Client:** Windows 10 version 1604 preview
+**Client:** Windows 10 version 1903
 
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10 version 1604 preview
+**Server:** Windows Server Version 1903
 
 ## Build the sample
 

@@ -21,7 +21,6 @@
 #include <winrt/Windows.System.Threading.h>
 #include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.Input.h>
-#include <robuffer.h>
 
 #include <d3d11_3.h>
 #include <d2d1_3.h>

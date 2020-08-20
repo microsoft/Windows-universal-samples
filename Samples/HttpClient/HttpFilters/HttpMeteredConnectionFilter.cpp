@@ -11,125 +11,108 @@
 
 #include "pch.h"
 #include "HttpMeteredConnectionFilter.h"
-#include <ppltasks.h>
-#include <winerror.h>
+#include "HttpMeteredConnectionFilter.g.cpp"
 
-using namespace Concurrency;
-using namespace HttpFilters;
-using namespace Platform;
-using namespace Windows::Foundation;
-using namespace Windows::Networking::Connectivity;
-using namespace Windows::Web::Http;
-using namespace Windows::Web::Http::Filters;
+using namespace winrt;
+using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation::Collections;
+using namespace winrt::Windows::Networking::Connectivity;
+using namespace winrt::Windows::Web::Http;
+using namespace winrt::Windows::Web::Http::Filters;
 
-String^ HttpMeteredConnectionFilter::PriorityPropertyName = ref new String(L"meteredConnectionPriority");
-
-HttpMeteredConnectionFilter::HttpMeteredConnectionFilter(IHttpFilter^ innerFilter)
+namespace winrt::HttpFilters::implementation
 {
-    if (innerFilter == nullptr)
+    HttpMeteredConnectionFilter::HttpMeteredConnectionFilter(IHttpFilter const& innerFilter) : m_innerFilter(innerFilter)
     {
-        throw ref new Exception(E_INVALIDARG, "innerFilter cannot be null.");
-    }
-    this->innerFilter = innerFilter;
-}
-
-HttpMeteredConnectionFilter::~HttpMeteredConnectionFilter()
-{
-}
-
-IAsyncOperationWithProgress<HttpResponseMessage^, HttpProgress>^ HttpMeteredConnectionFilter::SendRequestAsync(
-    HttpRequestMessage^ request)
-{
-    MeteredConnectionPriority priority = MeteredConnectionPriority::Low;
-    if (request->Properties->HasKey(PriorityPropertyName))
-    {
-        Object^ value = request->Properties->Lookup(PriorityPropertyName);
-        IPropertyValue^ propertyValue = static_cast<IPropertyValue^>(value);
-
-        if (propertyValue->Type == PropertyType::Double)
+        if (!m_innerFilter)
         {
-            // Enum values in JS are stored as double values.
-            unsigned int intValue = static_cast<unsigned int>(propertyValue->GetDouble());
-            priority = static_cast<MeteredConnectionPriority>(intValue) ;
-        }
-        else
-        {
-            // A static cast is enough when value comes from C# or C++.
-            priority = static_cast<MeteredConnectionPriority>(value);
+            throw hresult_invalid_argument(L"innerFilter cannot be null.");
         }
     }
 
-    if (!ValidatePriority(priority))
+    IAsyncOperationWithProgress<HttpResponseMessage, HttpProgress> HttpMeteredConnectionFilter::SendRequestAsync(HttpRequestMessage request)
     {
-        throw ref new Exception(E_ACCESSDENIED, "The request priority is not allowed under the current connection behavior.");
-    }
+        auto lifetime = get_strong();
 
-    return innerFilter->SendRequestAsync(request);
-}
-
-bool HttpMeteredConnectionFilter::OptIn::get()
-{
-    return optIn;
-}
-
-void HttpMeteredConnectionFilter::OptIn::set(bool value)
-{
-    optIn = value;
-}
-
-bool HttpMeteredConnectionFilter::ValidatePriority(MeteredConnectionPriority priority)
-{
-    MeteredConnectionBehavior behavior = GetBehavior();
-
-    switch (behavior)
-    {
-    case MeteredConnectionBehavior::Normal:
-        // Under normal behavior all requests are allowed.
-        return true;
-    case MeteredConnectionBehavior::Conservative:
-        // Under conservative behavior all requests except low priority requests are allowed.
-        if (priority != MeteredConnectionPriority::Low)
+        MeteredConnectionPriority priority = MeteredConnectionPriority::Low;
+        auto value = request.Properties().TryLookup(MeteredConnectionPriorityPropertyNameLiteral).try_as<IPropertyValue>();
+        if (value)
         {
-            return true;
+            if (value.Type() == PropertyType::Double)
+            {
+                // Numeric values in JavaScript are represented as doubles.
+                priority = static_cast<MeteredConnectionPriority>(value.GetDouble());
+            }
+            else
+            {
+                priority = unbox_value_or(value, MeteredConnectionPriority::Low);
+            }
         }
-        break;
-    case MeteredConnectionBehavior::OptIn:
-        // Under opt-in only high priority requests are allowed and only if user opted in.
-        if (priority == MeteredConnectionPriority::High && OptIn)
+
+        CheckPriority(priority);
+
+        return m_innerFilter.SendRequestAsync(request);
+    }
+
+    void HttpMeteredConnectionFilter::CheckPriority(MeteredConnectionPriority priority)
+    {
+        MeteredConnectionBehavior behavior = GetBehavior();
+
+        switch (behavior)
         {
-            return true;
+        case MeteredConnectionBehavior::Normal:
+            // Under normal behavior all requests are allowed.
+            return;
+
+        case MeteredConnectionBehavior::Conservative:
+            // Under conservative behavior all requests except low priority requests are allowed.
+            if (priority != MeteredConnectionPriority::Low)
+            {
+                return;
+            }
+            break;
+
+        case MeteredConnectionBehavior::OptIn:
+            // Under opt-in only high priority requests are allowed and only if user opted in.
+            if (priority == MeteredConnectionPriority::High && OptIn())
+            {
+                return;
+            }
+            break;
         }
-        break;
+
+        // Everything else is not allowed.
+        throw hresult_access_denied(L"The request priority is not allowed under the current connection behavior.");
     }
 
-    // Everything else is not allowed.
-    return false;
-}
-
-MeteredConnectionBehavior HttpMeteredConnectionFilter::GetBehavior()
-{
-    ConnectionProfile^ connectionProfile = NetworkInformation::GetInternetConnectionProfile();
-
-    if (connectionProfile == nullptr)
+    HttpMeteredConnectionFilter::MeteredConnectionBehavior HttpMeteredConnectionFilter::GetBehavior()
     {
-        return MeteredConnectionBehavior::None;
+        ConnectionProfile connectionProfile = NetworkInformation::GetInternetConnectionProfile();
+
+        if (connectionProfile == nullptr)
+        {
+            return MeteredConnectionBehavior::None;
+        }
+
+        ConnectionCost connectionCost = connectionProfile.GetConnectionCost();
+
+        if (connectionCost.Roaming())
+        {
+            return MeteredConnectionBehavior::OptIn;
+        }
+
+        NetworkCostType type = connectionCost.NetworkCostType();
+        if (type == NetworkCostType::Unrestricted || type == NetworkCostType::Unknown)
+        {
+            return MeteredConnectionBehavior::Normal;
+        }
+
+        else if (!connectionCost.OverDataLimit() && (type == NetworkCostType::Fixed || type == NetworkCostType::Variable))
+        {
+            return MeteredConnectionBehavior::Conservative;
+        }
+
+        return MeteredConnectionBehavior::OptIn;
     }
 
-    ConnectionCost^ connectionCost = connectionProfile->GetConnectionCost();
-
-    if (!connectionCost->Roaming && 
-        (connectionCost->NetworkCostType == NetworkCostType::Unrestricted ||
-        connectionCost->NetworkCostType == NetworkCostType::Unknown))
-    {
-        return MeteredConnectionBehavior::Normal;
-    }
-    else  if (!connectionCost->Roaming && 
-        !connectionCost->OverDataLimit &&
-        (connectionCost->NetworkCostType == NetworkCostType::Fixed ||
-        connectionCost->NetworkCostType == NetworkCostType::Variable))
-    {
-        return MeteredConnectionBehavior::Conservative;
-    }
-
-    return MeteredConnectionBehavior::OptIn;
 }

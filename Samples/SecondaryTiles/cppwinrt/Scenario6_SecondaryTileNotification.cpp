@@ -42,6 +42,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario6_SecondaryTileNotification::PinLiveTile_Click(IInspectable sender, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         // Prepare the images for our tile to be pinned.
         Uri square150x150Logo(L"ms-appx:///Assets/square150x150Tile-sdk.png");
         Uri wide310x150Logo(L"ms-appx:///Assets/wide310x150Tile-sdk.png");

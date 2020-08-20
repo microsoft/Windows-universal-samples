@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="Scenario2_ShowHideEvents.xaml.cs" />
     <Compile Include="Scenario3_ShowHideMethods.xaml.cs" />
+    <Compile Include="Scenario4_ShowView.xaml.cs">
+      <DependentUpon>Scenario4_ShowView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -144,6 +147,11 @@
       <Link>Styles\Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario4_ShowView.xaml">
+      <Link>Scenario4_ShowView.xaml</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

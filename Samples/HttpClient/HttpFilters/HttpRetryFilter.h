@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
@@ -10,30 +10,27 @@
 //*********************************************************
 
 #pragma once
+#include "HttpRetryFilter.g.h"
 
-#include <ppltasks.h>
-
-namespace HttpFilters
+namespace winrt::HttpFilters::implementation
 {
-    public ref class HttpRetryFilter sealed : public Windows::Web::Http::Filters::IHttpFilter
+    struct HttpRetryFilter : HttpRetryFilterT<HttpRetryFilter>
     {
-    public:
-        HttpRetryFilter(Windows::Web::Http::Filters::IHttpFilter^ innerFilter);
-        virtual ~HttpRetryFilter();
-        virtual Windows::Foundation::IAsyncOperationWithProgress<
-            Windows::Web::Http::HttpResponseMessage^,
-            Windows::Web::Http::HttpProgress>^ SendRequestAsync(Windows::Web::Http::HttpRequestMessage^ request);
+        HttpRetryFilter(Windows::Web::Http::Filters::IHttpFilter const& innerFilter);
+        void Close() {}
+        Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress> SendRequestAsync(Windows::Web::Http::HttpRequestMessage request);
 
     private:
-        Concurrency::task<Windows::Web::Http::HttpResponseMessage^> DelayAsync(
-            unsigned int deltaSeconds, 
-            Windows::Web::Http::HttpResponseMessage^ response);
-        Windows::Foundation::DateTime GetCurrentUtcDateTime();
-        Windows::Web::Http::HttpRequestMessage^ CopyRequestMessage(Windows::Web::Http::HttpRequestMessage^ request);
-        unsigned int GetRetriesProperty(Windows::Web::Http::HttpRequestMessage^ request);
+        Windows::Web::Http::Filters::IHttpFilter m_innerFilter;
 
-        Windows::Web::Http::Filters::IHttpFilter^ innerFilter;
-        static Platform::String^ RetriesPropertyName;
-        static long long const TicksPerSecond;
+        static constexpr wchar_t RetriesPropertyName[] = L"HttpFilters.HttpRetryFilter.Retries";
+        static uint32_t GetRetriesValue(Windows::Web::Http::HttpRequestMessage const& request);
+        static Windows::Web::Http::HttpRequestMessage CopyRequestMessage(Windows::Web::Http::HttpRequestMessage const& message);
+    };
+}
+namespace winrt::HttpFilters::factory_implementation
+{
+    struct HttpRetryFilter : HttpRetryFilterT<HttpRetryFilter, implementation::HttpRetryFilter>
+    {
     };
 }

@@ -21,20 +21,15 @@ using Windows.Web.Http.Filters;
 
 namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Scenario14 : Page, IDisposable
+    public sealed partial class Scenario14_MeteredConnectionFilter : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
         MainPage rootPage = MainPage.Current;
 
         private HttpMeteredConnectionFilter meteredConnectionFilter;
         private HttpClient httpClient;
         private CancellationTokenSource cts;
 
-        public Scenario14()
+        public Scenario14_MeteredConnectionFilter()
         {
             this.InitializeComponent();
         }
@@ -49,24 +44,18 @@ namespace SDKTemplate
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            // If the navigation is external to the app do not clean up.
-            // This can occur on Phone when suspending the app.
-            if (e.NavigationMode == NavigationMode.Forward && e.Uri == null)
-            {
-                return;
-            }
-
-            base.OnNavigatedFrom(e);
-            Dispose();
+            cts.Cancel();
+            cts.Dispose();
+            httpClient.Dispose();
+            meteredConnectionFilter.Dispose();
         }
 
         private async void Start_Click(object sender, RoutedEventArgs e)
         {
-            Uri resourceAddress;
-
             // The value of 'AddressField' is set by the user and is therefore untrusted input. If we can't create a
             // valid, absolute URI, we'll notify the user about the incorrect input.
-            if (!Helpers.TryGetUri(AddressField.Text, out resourceAddress))
+            Uri resourceUri = Helpers.TryParseHttpUri(AddressField.Text);
+            if (resourceUri == null)
             {
                 rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
                 return;
@@ -75,23 +64,23 @@ namespace SDKTemplate
             Helpers.ScenarioStarted(StartButton, CancelButton, OutputField);
             rootPage.NotifyUser("In progress", NotifyType.StatusMessage);
 
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceUri);
+
+            MeteredConnectionPriority priority = MeteredConnectionPriority.Low;
+            if (MediumRadio.IsChecked.Value)
+            {
+                priority = MeteredConnectionPriority.Medium;
+            }
+            else if (HighRadio.IsChecked.Value)
+            {
+                priority = MeteredConnectionPriority.High;
+            }
+            request.Properties[HttpMeteredConnectionFilter.MeteredConnectionPriorityPropertyName] = priority;
+
             // This sample uses a "try" in order to support TaskCanceledException.
             // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, resourceAddress);
-
-                MeteredConnectionPriority priority = MeteredConnectionPriority.Low;
-                if (MediumRadio.IsChecked.Value)
-                {
-                    priority = MeteredConnectionPriority.Medium;
-                }
-                else if (HighRadio.IsChecked.Value)
-                {
-                    priority = MeteredConnectionPriority.High;
-                }
-                request.Properties["meteredConnectionPriority"] = priority;
-
                 HttpRequestResult result = await httpClient.TrySendRequestAsync(request).AsTask(cts.Token);
 
                 if (result.Succeeded)
@@ -120,26 +109,6 @@ namespace SDKTemplate
 
             // Re-create the CancellationTokenSource.
             cts = new CancellationTokenSource();
-        }
-
-        public void Dispose()
-        {
-            if (meteredConnectionFilter != null)
-            {
-                meteredConnectionFilter.Dispose();
-                meteredConnectionFilter = null;
-            }
-            if (httpClient != null)
-            {
-                httpClient.Dispose();
-                httpClient = null;
-            }
-
-            if (cts != null)
-            {
-                cts.Dispose();
-                cts = null;
-            }
         }
 
         private void OptInSwitch_Toggled(object sender, RoutedEventArgs e)

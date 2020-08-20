@@ -173,6 +173,4 @@ private:
         _Out_opt_ uint32_t* indexCount,
         _In_opt_ winrt::hstring const& debugName
         );
-
-    static winrt::array_view<byte> GetBufferView(winrt::Windows::Storage::Streams::IBuffer const& buffer);
 };

@@ -12,7 +12,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Media;
 using Windows.Media.Capture;
@@ -23,34 +23,18 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
 
 namespace SDKTemplate
 {
     /// <summary>
     /// Page for demonstrating FaceDetection on a webcam snapshot.
     /// </summary>
-    public sealed partial class DetectFacesInWebcam : Page
+    public sealed partial class Scenario2_DetectInWebcam : Page
     {
-        /// <summary>
-        /// Brush for drawing the bounding box around each detected face.
-        /// </summary>
-        private readonly SolidColorBrush lineBrush = new SolidColorBrush(Windows.UI.Colors.Yellow);
-
-        /// <summary>
-        /// Thickness of the face bounding box lines.
-        /// </summary>
-        private readonly double lineThickness = 2.0;
-
-        /// <summary>
-        /// Transparent fill for the bounding box.
-        /// </summary>
-        private readonly SolidColorBrush fillBrush = new SolidColorBrush(Windows.UI.Colors.Transparent);
-
         /// <summary>
         /// Reference back to the "root" page of the app.
         /// </summary>
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
         /// <summary>
         /// Holds the current scenario state value.
@@ -73,14 +57,13 @@ namespace SDKTemplate
         private FaceDetector faceDetector;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DetectFacesInWebcam"/> class.
+        /// Initializes a new instance of the <see cref="Scenario2_DetectInWebcam"/> class.
         /// </summary>
-        public DetectFacesInWebcam()
+        public Scenario2_DetectInWebcam()
         {
             this.InitializeComponent();
 
             this.currentState = ScenarioState.Idle;
-            App.Current.Suspending += this.OnSuspending;
         }
 
         /// <summary>
@@ -105,19 +88,21 @@ namespace SDKTemplate
         }
 
         /// <summary>
-        /// Responds when we navigate to this page.
+        /// Called when we navigate to this page.
         /// </summary>
         /// <param name="e">Event data</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.rootPage = MainPage.Current;
+            App.Current.Suspending += this.OnSuspending;
+        }
 
-            // The 'await' operation can only be used from within an async method but class constructors
-            // cannot be labeled as async, and so we'll initialize FaceDetector here.
-            if (this.faceDetector == null)
-            {
-                this.faceDetector = await FaceDetector.CreateAsync();
-            }
+        /// <summary>
+        /// Called when we navigate away from this page.
+        /// </summary>
+        /// <param name="e">Event data</param>
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            App.Current.Suspending -= this.OnSuspending;
         }
 
         /// <summary>
@@ -125,14 +110,14 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender">The source of the Suspending event</param>
         /// <param name="e">Event data</param>
-        private void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+        private async void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
         {
             if (this.currentState == ScenarioState.Streaming)
             {
                 var deferral = e.SuspendingOperation.GetDeferral();
                 try
                 {
-                    this.ChangeScenarioState(ScenarioState.Idle);
+                    await this.ChangeScenarioStateAsync(ScenarioState.Idle);
                 }
                 finally
                 {
@@ -145,9 +130,11 @@ namespace SDKTemplate
         /// Initializes a new MediaCapture instance and starts the Preview streaming to the CamPreview UI element.
         /// </summary>
         /// <returns>Async Task object returning true if initialization and streaming were successful and false if an exception occurred.</returns>
-        private async Task<bool> StartWebcamStreaming()
+        private async Task<bool> StartWebcamStreamingAsync()
         {
-            bool successful = true;
+            bool successful = false;
+
+            this.faceDetector = await FaceDetector.CreateAsync();
 
             try
             {
@@ -169,17 +156,17 @@ namespace SDKTemplate
                 // NOTE: CaptureElement's Source must be set before streaming is started.
                 this.CamPreview.Source = this.mediaCapture;
                 await this.mediaCapture.StartPreviewAsync();
+
+                successful = true;
             }
             catch (System.UnauthorizedAccessException)
             {
                 // If the user has disabled their webcam this exception is thrown; provide a descriptive message to inform the user of this fact.
                 this.rootPage.NotifyUser("Webcam is disabled or access to the webcam is disabled for this app.\nEnsure Privacy Settings allow webcam usage.", NotifyType.ErrorMessage);
-                successful = false;
             }
             catch (Exception ex)
             {
                 this.rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
-                successful = false;
             }
 
             return successful;
@@ -188,7 +175,7 @@ namespace SDKTemplate
         /// <summary>
         /// Safely stops webcam streaming (if running) and releases MediaCapture object.
         /// </summary>
-        private async void ShutdownWebCam()
+        private async Task ShutdownWebcamAsync()
         {
             if (this.mediaCapture != null)
             {
@@ -208,20 +195,17 @@ namespace SDKTemplate
         /// Captures a single frame from the running webcam stream and executes the FaceDetector on the image. If successful calls SetupVisualization to display the results.
         /// </summary>
         /// <returns>Async Task object returning true if the capture was successful and false if an exception occurred.</returns>
-        private async Task<bool> TakeSnapshotAndFindFaces()
+        private async Task<bool> TakeSnapshotAndFindFacesAsync()
         {
-            bool successful = true;
+            if (this.currentState != ScenarioState.Streaming)
+            {
+                return false;
+            }
+
+            bool successful = false;
 
             try
             {
-                if (this.currentState != ScenarioState.Streaming)
-                {
-                    return false;
-                }
-
-                WriteableBitmap displaySource = null;
-                IList<DetectedFace> faces = null;
-
                 // Create a VideoFrame object specifying the pixel format we want our capture image to be (NV12 bitmap in this case).
                 // GetPreviewFrame will convert the native webcam frame into this format.
                 const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Nv12;
@@ -232,23 +216,26 @@ namespace SDKTemplate
                     // The returned VideoFrame should be in the supported NV12 format but we need to verify this.
                     if (FaceDetector.IsBitmapPixelFormatSupported(previewFrame.SoftwareBitmap.BitmapPixelFormat))
                     {
-                        faces = await this.faceDetector.DetectFacesAsync(previewFrame.SoftwareBitmap);
+                        IList<DetectedFace> faces = await this.faceDetector.DetectFacesAsync(previewFrame.SoftwareBitmap);
+
+                        // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to wb's buffer.
+                        // Note that WriteableBitmap doesn't support NV12 and we have to convert it to 32-bit BGRA.
+                        WriteableBitmap displaySource;
+                        using (SoftwareBitmap convertedSource = SoftwareBitmap.Convert(previewFrame.SoftwareBitmap, BitmapPixelFormat.Bgra8))
+                        {
+                            displaySource = new WriteableBitmap(convertedSource.PixelWidth, convertedSource.PixelHeight);
+                            convertedSource.CopyToBuffer(displaySource.PixelBuffer);
+                        }
+
+                        // Create our display using the available image and face results.
+                        this.SetupVisualization(displaySource, faces);
+
+                        successful = true;
                     }
                     else
                     {
                         this.rootPage.NotifyUser("PixelFormat '" + InputPixelFormat.ToString() + "' is not supported by FaceDetector", NotifyType.ErrorMessage);
                     }
-
-                    // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to wb's buffer.
-                    // Note that WriteableBitmap doesn't support NV12 and we have to convert it to 32-bit BGRA.
-                    using (SoftwareBitmap convertedSource = SoftwareBitmap.Convert(previewFrame.SoftwareBitmap, BitmapPixelFormat.Bgra8))
-                    {
-                        displaySource = new WriteableBitmap(convertedSource.PixelWidth, convertedSource.PixelHeight);
-                        convertedSource.CopyToBuffer(displaySource.PixelBuffer);
-                    }
-
-                    // Create our display using the available image and face results.
-                    this.SetupVisualization(displaySource, faces);
                 }
             }
             catch (Exception ex)
@@ -267,50 +254,8 @@ namespace SDKTemplate
         /// <param name="foundFaces">List of detected faces; output from FaceDetector</param>
         private void SetupVisualization(WriteableBitmap displaySource, IList<DetectedFace> foundFaces)
         {
-            ImageBrush brush = new ImageBrush();
-            brush.ImageSource = displaySource;
-            brush.Stretch = Stretch.Fill;
-            this.SnapshotCanvas.Background = brush;
-
-            if (foundFaces != null)
-            {
-                double widthScale = displaySource.PixelWidth / this.SnapshotCanvas.ActualWidth;
-                double heightScale = displaySource.PixelHeight / this.SnapshotCanvas.ActualHeight;
-
-                foreach (DetectedFace face in foundFaces)
-                {
-                    // Create a rectangle element for displaying the face box but since we're using a Canvas
-                    // we must scale the rectangles according to the image's actual size.
-                    // The original FaceBox values are saved in the Rectangle's Tag field so we can update the
-                    // boxes when the Canvas is resized.
-                    Rectangle box = new Rectangle();
-                    box.Tag = face.FaceBox;
-                    box.Width = (uint)(face.FaceBox.Width / widthScale);
-                    box.Height = (uint)(face.FaceBox.Height / heightScale);
-                    box.Fill = this.fillBrush;
-                    box.Stroke = this.lineBrush;
-                    box.StrokeThickness = this.lineThickness;
-                    box.Margin = new Thickness((uint)(face.FaceBox.X / widthScale), (uint)(face.FaceBox.Y / heightScale), 0, 0);
-
-                    this.SnapshotCanvas.Children.Add(box);
-                }
-            }
-
-            string message;
-            if (foundFaces == null || foundFaces.Count == 0)
-            {
-                message = "Didn't find any human faces in the image";
-            }
-            else if (foundFaces.Count == 1)
-            {
-                message = "Found a human face in the image";
-            }
-            else
-            {
-                message = "Found " + foundFaces.Count + " human faces in the image";
-            }
-
-            this.rootPage.NotifyUser(message, NotifyType.StatusMessage);
+            this.SnapshotCanvas.Background = new ImageBrush() { ImageSource = displaySource, Stretch = Stretch.Fill };
+            MainPage.HighlightFaces(displaySource, foundFaces, this.SnapshotCanvas, this.HighlightedFaceBox);
         }
 
         /// <summary>
@@ -318,17 +263,17 @@ namespace SDKTemplate
         /// passed in state value. Handles failures and resets the state if necessary.
         /// </summary>
         /// <param name="newState">State to switch to</param>
-        private async void ChangeScenarioState(ScenarioState newState)
+        private async Task ChangeScenarioStateAsync(ScenarioState newState)
         {
             switch (newState)
             {
                 case ScenarioState.Idle:
 
-                    this.ShutdownWebCam();
+                    this.CameraSnapshotButton.IsEnabled = false;
+                    await this.ShutdownWebcamAsync();
 
                     this.SnapshotCanvas.Background = null;
                     this.SnapshotCanvas.Children.Clear();
-                    this.CameraSnapshotButton.IsEnabled = false;
                     this.CameraStreamingButton.Content = "Start Streaming";
                     this.CameraSnapshotButton.Content = "Take Snapshot";
                     this.currentState = newState;
@@ -336,9 +281,9 @@ namespace SDKTemplate
 
                 case ScenarioState.Streaming:
 
-                    if (!await this.StartWebcamStreaming())
+                    if (!await this.StartWebcamStreamingAsync())
                     {
-                        this.ChangeScenarioState(ScenarioState.Idle);
+                        await this.ChangeScenarioStateAsync(ScenarioState.Idle);
                         break;
                     }
 
@@ -352,13 +297,13 @@ namespace SDKTemplate
 
                 case ScenarioState.Snapshot:
 
-                    if (!await this.TakeSnapshotAndFindFaces())
+                    if (!await this.TakeSnapshotAndFindFacesAsync())
                     {
-                        this.ChangeScenarioState(ScenarioState.Idle);
+                        await this.ChangeScenarioStateAsync(ScenarioState.Idle);
                         break;
                     }
 
-                    this.ShutdownWebCam();
+                    await this.ShutdownWebcamAsync();
 
                     this.CameraSnapshotButton.IsEnabled = true;
                     this.CameraStreamingButton.Content = "Start Streaming";
@@ -373,13 +318,13 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender">The source of the event, i.e. our MediaCapture object</param>
         /// <param name="args">Event data</param>
-        private void MediaCapture_CameraStreamStateChanged(MediaCapture sender, object args)
+        private async void MediaCapture_CameraStreamStateChanged(MediaCapture sender, object args)
         {
-            // MediaCapture is not Agile and so we cannot invoke it's methods on this caller's thread
+            // MediaCapture is not Agile and so we cannot invoke its methods on this caller's thread
             // and instead need to schedule the state change on the UI thread.
-            var ignored = this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            await this.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
             {
-                ChangeScenarioState(ScenarioState.Idle);
+                await ChangeScenarioStateAsync(ScenarioState.Idle);
             });
         }
 
@@ -388,17 +333,16 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender">Button user clicked</param>
         /// <param name="e">Event data</param>
-        private void CameraStreamingButton_Click(object sender, RoutedEventArgs e)
+        private async void CameraStreamingButton_Click(object sender, RoutedEventArgs e)
         {
+            this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
             if (this.currentState == ScenarioState.Streaming)
             {
-                this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                this.ChangeScenarioState(ScenarioState.Idle);
+                await this.ChangeScenarioStateAsync(ScenarioState.Idle);
             }
             else
             {
-                this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                this.ChangeScenarioState(ScenarioState.Streaming);
+                await this.ChangeScenarioStateAsync(ScenarioState.Streaming);
             }
         }
 
@@ -407,17 +351,16 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender">Button user clicked</param>
         /// <param name="e">Event data</param>
-        private void CameraSnapshotButton_Click(object sender, RoutedEventArgs e)
+        private async void CameraSnapshotButton_Click(object sender, RoutedEventArgs e)
         {
+            this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
             if (this.currentState == ScenarioState.Streaming)
             {
-                this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                this.ChangeScenarioState(ScenarioState.Snapshot);
+                await this.ChangeScenarioStateAsync(ScenarioState.Snapshot);
             }
             else
             {
-                this.rootPage.NotifyUser(string.Empty, NotifyType.StatusMessage);
-                this.ChangeScenarioState(ScenarioState.Idle);
+                await this.ChangeScenarioStateAsync(ScenarioState.Idle);
             }
         }
 
@@ -428,37 +371,12 @@ namespace SDKTemplate
         /// <param name="e">Event data</param>
         private void SnapshotCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            try
+            // If the Canvas is resized we must recompute a new scaling factor and
+            // apply it to each face box.
+            ImageBrush brush = (ImageBrush)this.SnapshotCanvas.Background;
+            if (brush != null)
             {
-                // If the Canvas is resized we must recompute a new scaling factor and
-                // apply it to each face box.
-                if (this.currentState == ScenarioState.Snapshot && this.SnapshotCanvas.Background != null)
-                {
-                    WriteableBitmap displaySource = (this.SnapshotCanvas.Background as ImageBrush).ImageSource as WriteableBitmap;
-
-                    double widthScale = displaySource.PixelWidth / this.SnapshotCanvas.ActualWidth;
-                    double heightScale = displaySource.PixelHeight / this.SnapshotCanvas.ActualHeight;
-
-                    foreach (var item in this.SnapshotCanvas.Children)
-                    {
-                        Rectangle box = item as Rectangle;
-                        if (box == null)
-                        {
-                            continue;
-                        }
-
-                        // We saved the original size of the face box in the rectangles Tag field.
-                        BitmapBounds faceBounds = (BitmapBounds)box.Tag;
-                        box.Width = (uint)(faceBounds.Width / widthScale);
-                        box.Height = (uint)(faceBounds.Height / heightScale);
-
-                        box.Margin = new Thickness((uint)(faceBounds.X / widthScale), (uint)(faceBounds.Y / heightScale), 0, 0);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                this.rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
+                MainPage.RepositionFaces((WriteableBitmap)brush.ImageSource, this.SnapshotCanvas);
             }
         }
     }

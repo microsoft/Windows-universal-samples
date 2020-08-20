@@ -135,9 +135,6 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/SimpleCommunication">Real-time communication</a></td>
   <td><a href="Samples/SmsSendAndReceive">SMS send and receive</a></td>
  </tr>
- <tr>
-  <td><a href="Samples/VoIP">Voice over IP (VoIP)</a></td>
- </tr>
 </table>
 
 ### Contacts and calendar

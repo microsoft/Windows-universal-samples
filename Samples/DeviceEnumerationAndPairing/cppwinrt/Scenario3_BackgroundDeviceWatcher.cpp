@@ -140,6 +140,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario3_BackgroundDeviceWatcher::OnTaskCompleted(BackgroundTaskRegistration const&, BackgroundTaskCompletedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         co_await resume_foreground(Dispatcher());
 
         rootPage.NotifyUser(L"Background task completed", NotifyType::StatusMessage);

@@ -11,10 +11,9 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SDKTemplate.Scenario12"
+    x:Class="SDKTemplate.Scenario12_DisableCookies"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -47,23 +46,9 @@
                         <Button Content="Cancel" x:Name="CancelButton" IsEnabled="False" Click="Cancel_Click"/>
                     </StackPanel>
                 </StackPanel>
-                <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the input section -->
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup>
-                        <VisualState x:Name="InputDefaultLayout"/>
-                        <VisualState x:Name="InputBelow768Layout"/>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
             </Grid>
             <Grid x:Name="Output" Grid.Row="1">
                 <TextBox x:Name="OutputField" Margin="0" AcceptsReturn="True" TextWrapping="Wrap"/>
-                <!-- Add Storyboards to the visual states below as necessary for supporting the various layouts for the output section -->
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup>
-                        <VisualState x:Name="OutputDefaultLayout"/>
-                        <VisualState x:Name="OutputBelow768Layout"/>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
             </Grid>
         </Grid>
     </ScrollViewer>

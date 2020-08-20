@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -40,6 +40,7 @@ Specifically, this sample shows how:
 * Controls derived from XAML text controls display the touch keyboard by default.
 * Apps can subscribe to events indicating when the touch keyboard is shown and hidden.
 * Apps can request that the touch keyboard be shown or hidden.
+* Apps can request that the touch keyboard be shown with a particular view.
 
 **Note** The touch keyboard does not automatically display if a hardware keyboard is connected,
 or the device is in Desktop mode and "Show the touch keyboard when not in tablet mode and there's no keyboard attached" is set to "Off" in **Settings -> Devices -> Typing**.
@@ -57,8 +58,6 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 **Client:** Windows 10
 
 **Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10. (KeyboardEnabledTextBox not supported; see remarks above.)
 
 ## Build the sample
 

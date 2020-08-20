@@ -10,7 +10,7 @@
     <ProjectGuid>{2179AD9B-235E-54D6-BDAD-9B749A65EF83}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TextSegmentation</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>TextSegmentation</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
@@ -126,11 +126,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ExtractTextSegments.xaml">
+    <Page Include="..\shared\Scenario1_ExtractTextSegments.xaml">
+      <Link>Scenario1_ExtractTextSegments.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_GetCurrentTextSegmentFromIndex.xaml">
+    <Page Include="..\shared\Scenario2_GetCurrentTextSegmentFromIndex.xaml">
+      <Link>Scenario2_GetCurrentTextSegmentFromIndex.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

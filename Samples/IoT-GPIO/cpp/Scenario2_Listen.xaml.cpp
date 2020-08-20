@@ -85,7 +85,7 @@ void Scenario2_Listen::StopScenario()
     }
 }
 
-void Scenario2_Listen::StartStopScenario()
+void Scenario2_Listen::StartStopScenario_Click(Object^ sender, RoutedEventArgs^ e)
 {
     if (timer != nullptr)
     {

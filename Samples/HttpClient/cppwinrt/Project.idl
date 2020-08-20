@@ -1,0 +1,118 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario01_GetText : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario01_GetText();
+    }
+
+    [default_interface]
+    runtimeclass Scenario02_GetStream : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario02_GetStream();
+    }
+
+    [default_interface]
+    runtimeclass Scenario03_GetList : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario03_GetList();
+    }
+
+    [default_interface]
+    runtimeclass Scenario04_PostText : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario04_PostText();
+    }
+
+    [default_interface]
+    runtimeclass Scenario05_PostStream : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario05_PostStream();
+    }
+
+    [default_interface]
+    runtimeclass Scenario06_PostMultipart : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario06_PostMultipart();
+    }
+
+    [default_interface]
+    runtimeclass Scenario07_PostStreamWithProgress : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario07_PostStreamWithProgress();
+    }
+
+    [default_interface]
+    runtimeclass Scenario08_PostCustomContent : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario08_PostCustomContent();
+    }
+
+    [default_interface]
+    runtimeclass Scenario09_GetCookie : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario09_GetCookie();
+    }
+
+    [default_interface]
+    runtimeclass Scenario10_SetCookie : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario10_SetCookie();
+    }
+
+    [default_interface]
+    runtimeclass Scenario11_DeleteCookie : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario11_DeleteCookie();
+    }
+
+    [default_interface]
+    runtimeclass Scenario12_DisableCookies : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario12_DisableCookies();
+    }
+
+    [default_interface]
+    runtimeclass Scenario13_RetryFilter : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario13_RetryFilter();
+    }
+
+    [default_interface]
+    runtimeclass Scenario14_MeteredConnectionFilter : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario14_MeteredConnectionFilter();
+    }
+
+    [default_interface]
+    runtimeclass Scenario15_ServerCertificateValidation : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario15_ServerCertificateValidation();
+    }
+
+    runtimeclass PlugInFilter : [default] Windows.Web.Http.Filters.IHttpFilter
+    {
+        PlugInFilter(Windows.Web.Http.Filters.IHttpFilter innerFilter);
+    }
+
+    runtimeclass SlowInputStream : [default] Windows.Storage.Streams.IInputStream
+    {
+        SlowInputStream(UInt32 length);
+    }
+
+    runtimeclass HttpJsonContent : [default] Windows.Web.Http.IHttpContent
+    {
+        HttpJsonContent(Windows.Data.Json.IJsonValue jsonValue);
+    }
+}

@@ -23,7 +23,8 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Display touch keyboard automatically", ClassType=typeof(Scenario1_Launch)},
             new Scenario() { Title="Listen for Show/Hide events", ClassType=typeof(Scenario2_ShowHideEvents)},
-            new Scenario() { Title="Programmatically Show/Hide\nthe touch keyboard", ClassType=typeof(Scenario3_ShowHideMethods)}
+            new Scenario() { Title="Programmatically Show/Hide\nthe touch keyboard", ClassType=typeof(Scenario3_ShowHideMethods)},
+            new Scenario() { Title="Showing the Emoji keyboard", ClassType=typeof(Scenario4_ShowView)}
         };
     }
 

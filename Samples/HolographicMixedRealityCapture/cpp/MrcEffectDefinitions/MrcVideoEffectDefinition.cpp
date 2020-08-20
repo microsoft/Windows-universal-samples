@@ -11,4 +11,8 @@ MrcVideoEffectDefinition::MrcVideoEffectDefinition()
     VideoStabilizationEnabled = DefaultVideoStabilizationEnabled;
     VideoStabilizationBufferLength = DefaultVideoStabilizationBufferLength;
     GlobalOpacityCoefficient = DefaultGlobalOpacityCoefficient;
+    BlankOnProtectedContent = DefaultBlankOnProtectedContent;
+    ShowHiddenMesh = DefaultShowHiddenMesh;
+    OutputSize = DefaultOutputSize;
+    PreferredHologramPerspective = DefaultPreferredHologramPerspective;
 }

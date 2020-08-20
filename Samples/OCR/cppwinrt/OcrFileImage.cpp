@@ -32,6 +32,8 @@ namespace winrt::SDKTemplate::implementation
        /// <param name="e"></param>
     fire_and_forget OcrFileImage::OnNavigatedTo(NavigationEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         UpdateAvailableLanguages();
 
         co_await LoadSampleImageAsync();
@@ -87,6 +89,8 @@ namespace winrt::SDKTemplate::implementation
     /// <returns></returns>
     IAsyncAction OcrFileImage::LoadImageAsync(StorageFile const& file)
     {
+        auto lifetime = get_strong();
+
         auto stream = co_await file.OpenAsync(winrt::Windows::Storage::FileAccessMode::Read);
 
         auto decoder = co_await BitmapDecoder::CreateAsync(stream);
@@ -100,6 +104,8 @@ namespace winrt::SDKTemplate::implementation
 
     IAsyncAction OcrFileImage::LoadSampleImageAsync()
     {
+        auto lifetime = get_strong();
+
         StorageFile file = co_await Windows::ApplicationModel::Package::Current().InstalledLocation().GetFileAsync(L"Assets\\splash-sdk.png");
         co_await LoadImageAsync(file);
     }
@@ -141,6 +147,8 @@ namespace winrt::SDKTemplate::implementation
     /// <param name="e"></param>
     fire_and_forget OcrFileImage::ExtractButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         ClearResults();
 
         // Check if OcrEngine supports image resolution.
@@ -251,6 +259,8 @@ namespace winrt::SDKTemplate::implementation
     /// <param name="e"></param>
     fire_and_forget OcrFileImage::SampleButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         ClearResults();
 
         co_await LoadSampleImageAsync();
@@ -266,6 +276,8 @@ namespace winrt::SDKTemplate::implementation
     /// <param name="e"></param>
     IAsyncAction OcrFileImage::LoadButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         FileOpenPicker picker;
         picker.SuggestedStartLocation(PickerLocationId::PicturesLibrary);
         picker.FileTypeFilter().ReplaceAll({ L".jpg", L".jpeg", L".png" });

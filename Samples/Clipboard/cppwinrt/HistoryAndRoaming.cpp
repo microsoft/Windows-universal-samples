@@ -46,6 +46,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget HistoryAndRoaming::CopyButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         // Generate a bitmap for our clipboard content.
         RenderTargetBitmap target;
         co_await target.RenderAsync(ClipboardContent());

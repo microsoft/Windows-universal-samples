@@ -28,6 +28,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario8_UpdateAsync::UpdateDefaultLogo_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();          
+
         if (SecondaryTile::Exists(SampleHelpers::LogoSecondaryTileId))
         {
             // Add the properties we want to update (logo in this example)

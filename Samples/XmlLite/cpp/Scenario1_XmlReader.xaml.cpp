@@ -92,6 +92,7 @@ HRESULT Scenario1::ReadXml(IRandomAccessStream^ randomAccessReadStream)
             {
                 XmlTextbox->Text += L"Element: ";
                 ChkHr(ConcatToOutput(prefix, prefixSize));
+                XmlTextbox->Text += L":";
                 ChkHr(ConcatToOutput(localName, localNameSize));
                 XmlTextbox->Text += L"\n";
             }

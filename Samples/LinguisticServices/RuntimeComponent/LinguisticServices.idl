@@ -7,7 +7,6 @@ namespace Sample
         String Script;
     };
 
-    [default_interface]
     static runtimeclass LinguisticServices
     {
         static Windows.Foundation.Collections.IVectorView<String> RecognizeTextLanguages(String text);

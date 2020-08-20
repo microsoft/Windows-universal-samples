@@ -21,28 +21,18 @@ using Windows.Web.Http.Filters;
 
 namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Scenario13 : Page, IDisposable
+    public sealed partial class Scenario13_RetryFilter : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
         MainPage rootPage = MainPage.Current;
 
         private HttpClient httpClient;
         private CancellationTokenSource cts;
 
-        public Scenario13()
+        public Scenario13_RetryFilter()
         {
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             HttpBaseProtocolFilter baseProtocolFilter = new HttpBaseProtocolFilter();
@@ -54,14 +44,9 @@ namespace SDKTemplate
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            // If the navigation is external to the app do not clean up.
-            // This can occur on Phone when suspending the app.
-            if (e.NavigationMode == NavigationMode.Forward && e.Uri == null)
-            {
-                return;
-            }
-
-            Dispose();
+            cts.Cancel();
+            cts.Dispose();
+            httpClient.Dispose();
         }
 
         private void UpdateAddressField()
@@ -87,11 +72,11 @@ namespace SDKTemplate
 
         private async void Start_Click(object sender, RoutedEventArgs e)
         {
-            Uri resourceAddress;
+            Uri resourceUri = Helpers.TryParseHttpUri(AddressField.Text);
 
             // The value of 'AddressField' is set by the user and is therefore untrusted input. If we can't create a
             // valid, absolute URI, we'll notify the user about the incorrect input.
-            if (!Helpers.TryGetUri(AddressField.Text, out resourceAddress))
+            if (resourceUri == null)
             {
                 rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
                 return;
@@ -104,7 +89,7 @@ namespace SDKTemplate
             // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                HttpRequestResult result = await httpClient.TryGetAsync(resourceAddress).AsTask(cts.Token);
+                HttpRequestResult result = await httpClient.TryGetAsync(resourceUri).AsTask(cts.Token);
 
                 if (result.Succeeded)
                 {
@@ -132,21 +117,6 @@ namespace SDKTemplate
 
             // Re-create the CancellationTokenSource.
             cts = new CancellationTokenSource();
-        }
-
-        public void Dispose()
-        {
-            if (httpClient != null)
-            {
-                httpClient.Dispose();
-                httpClient = null;
-            }
-
-            if (cts != null)
-            {
-                cts.Dispose();
-                cts = null;
-            }
         }
     }
 }

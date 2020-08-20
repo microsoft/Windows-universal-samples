@@ -430,6 +430,8 @@ void GameRenderer::FinalizeCreateGameDeviceResources()
 
 IAsyncAction GameRenderer::LoadLevelResourcesAsync()
 {
+    auto lifetime = shared_from_this();
+
     m_levelResourcesLoaded = false;
 
     // This is where additional async loading of level specific resources

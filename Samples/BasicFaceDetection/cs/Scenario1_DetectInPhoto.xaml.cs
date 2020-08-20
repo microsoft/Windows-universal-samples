@@ -22,14 +22,13 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Shapes;
 
 namespace SDKTemplate
 {
     /// <summary>
     /// Page for demonstrating FaceDetection on an image file.
     /// </summary>
-    public sealed partial class DetectFacesInPhoto : Page
+    public sealed partial class Scenario1_DetectInPhoto : Page
     {
         /// <summary>
         /// Brush for drawing the bounding box around each detected face.
@@ -63,9 +62,9 @@ namespace SDKTemplate
         private MainPage rootPage;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DetectFacesInPhoto" /> class.
+        /// Initializes a new instance of the <see cref="Scenario1_DetectInPhoto" /> class.
         /// </summary>
-        public DetectFacesInPhoto()
+        public Scenario1_DetectInPhoto()
         {
             this.InitializeComponent();
         }
@@ -86,50 +85,8 @@ namespace SDKTemplate
         /// <param name="foundFaces">List of detected faces; output from FaceDetector</param>
         private void SetupVisualization(WriteableBitmap displaySource, IList<DetectedFace> foundFaces)
         {
-            ImageBrush brush = new ImageBrush();
-            brush.ImageSource = displaySource;
-            brush.Stretch = Stretch.Fill;
-            this.PhotoCanvas.Background = brush;
-
-            if (foundFaces != null)
-            {
-                double widthScale = displaySource.PixelWidth / this.PhotoCanvas.ActualWidth;
-                double heightScale = displaySource.PixelHeight / this.PhotoCanvas.ActualHeight;
-
-                foreach (DetectedFace face in foundFaces)
-                {
-                    // Create a rectangle element for displaying the face box but since we're using a Canvas
-                    // we must scale the rectangles according to the image’s actual size.
-                    // The original FaceBox values are saved in the Rectangle's Tag field so we can update the
-                    // boxes when the Canvas is resized.
-                    Rectangle box = new Rectangle();
-                    box.Tag = face.FaceBox;
-                    box.Width = (uint)(face.FaceBox.Width / widthScale);
-                    box.Height = (uint)(face.FaceBox.Height / heightScale);
-                    box.Fill = this.fillBrush;
-                    box.Stroke = this.lineBrush;
-                    box.StrokeThickness = this.lineThickness;
-                    box.Margin = new Thickness((uint)(face.FaceBox.X / widthScale), (uint)(face.FaceBox.Y / heightScale), 0, 0);
-
-                    this.PhotoCanvas.Children.Add(box);
-                }
-            }
-
-            string message;
-            if (foundFaces == null || foundFaces.Count == 0)
-            {
-                message = "Didn't find any human faces in the image";
-            }
-            else if (foundFaces.Count == 1)
-            {
-                message = "Found a human face in the image";
-            }
-            else
-            {
-                message = "Found " + foundFaces.Count + " human faces in the image";
-            }
-
-            this.rootPage.NotifyUser(message, NotifyType.StatusMessage);
+            this.PhotoCanvas.Background = new ImageBrush() { ImageSource = displaySource, Stretch = Stretch.Fill };
+            MainPage.HighlightFaces(displaySource, foundFaces, this.PhotoCanvas, this.HighlightedFaceBox);
         }
 
         /// <summary>
@@ -173,36 +130,31 @@ namespace SDKTemplate
         /// <param name="e">Event data</param>
         private async void OpenFile_Click(object sender, RoutedEventArgs e)
         {
-            IList<DetectedFace> faces = null;
-            SoftwareBitmap detectorInput = null;
-            WriteableBitmap displaySource = null;
+            FileOpenPicker photoPicker = new FileOpenPicker();
+            photoPicker.ViewMode = PickerViewMode.Thumbnail;
+            photoPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            photoPicker.FileTypeFilter.Add(".jpg");
+            photoPicker.FileTypeFilter.Add(".jpeg");
+            photoPicker.FileTypeFilter.Add(".png");
+            photoPicker.FileTypeFilter.Add(".bmp");
+
+            StorageFile photoFile = await photoPicker.PickSingleFileAsync();
+            if (photoFile == null)
+            {
+                return;
+            }
+
+            this.ClearVisualization();
+            this.rootPage.NotifyUser("Opening...", NotifyType.StatusMessage);
 
             try
             {
-                FileOpenPicker photoPicker = new FileOpenPicker();
-                photoPicker.ViewMode = PickerViewMode.Thumbnail;
-                photoPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-                photoPicker.FileTypeFilter.Add(".jpg");
-                photoPicker.FileTypeFilter.Add(".jpeg");
-                photoPicker.FileTypeFilter.Add(".png");
-                photoPicker.FileTypeFilter.Add(".bmp");
-
-                StorageFile photoFile = await photoPicker.PickSingleFileAsync();
-                if (photoFile == null)
-                {
-                    return;
-                }
-
-                this.ClearVisualization();
-                this.rootPage.NotifyUser("Opening...", NotifyType.StatusMessage);
-
                 // Open the image file and decode the bitmap into memory.
                 // We'll need to make 2 bitmap copies: one for the FaceDetector and another to display.
                 using (IRandomAccessStream fileStream = await photoFile.OpenAsync(Windows.Storage.FileAccessMode.Read))
                 {
                     BitmapDecoder decoder = await BitmapDecoder.CreateAsync(fileStream);
                     BitmapTransform transform = this.ComputeScalingTransformForSourceImage(decoder);
-
                     using (SoftwareBitmap originalBitmap = await decoder.GetSoftwareBitmapAsync(decoder.BitmapPixelFormat, BitmapAlphaMode.Ignore, transform, ExifOrientationMode.IgnoreExifOrientation, ColorManagementMode.DoNotColorManage))
                     {
                         // We need to convert the image into a format that's compatible with FaceDetector.
@@ -210,10 +162,10 @@ namespace SDKTemplate
                         const BitmapPixelFormat InputPixelFormat = BitmapPixelFormat.Gray8;
                         if (FaceDetector.IsBitmapPixelFormatSupported(InputPixelFormat))
                         {
-                            using (detectorInput = SoftwareBitmap.Convert(originalBitmap, InputPixelFormat))
+                            using (SoftwareBitmap detectorInput = SoftwareBitmap.Convert(originalBitmap, InputPixelFormat))
                             {
-                                // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to wb's buffer.
-                                displaySource = new WriteableBitmap(originalBitmap.PixelWidth, originalBitmap.PixelHeight);
+                                // Create a WritableBitmap for our visualization display; copy the original bitmap pixels to WriteableBitmap's buffer.
+                                WriteableBitmap displaySource = new WriteableBitmap(originalBitmap.PixelWidth, originalBitmap.PixelHeight);
                                 originalBitmap.CopyToBuffer(displaySource.PixelBuffer);
 
                                 this.rootPage.NotifyUser("Detecting...", NotifyType.StatusMessage);
@@ -223,7 +175,7 @@ namespace SDKTemplate
                                 // you should create a member variable and reuse the object.
                                 // However, for simplicity in this scenario we instantiate a new instance each time.
                                 FaceDetector detector = await FaceDetector.CreateAsync();
-                                faces = await detector.DetectFacesAsync(detectorInput);
+                                IList<DetectedFace> faces = await detector.DetectFacesAsync(detectorInput);
 
                                 // Create our display using the available image and face results.
                                 this.SetupVisualization(displaySource, faces);
@@ -250,37 +202,12 @@ namespace SDKTemplate
         /// <param name="e">Event data</param>
         private void PhotoCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            try
+            // If the Canvas is resized we must recompute a new scaling factor and
+            // apply it to each face box.
+            ImageBrush brush = (ImageBrush)this.PhotoCanvas.Background;
+            if (brush != null)
             {
-                // If the Canvas is resized we must recompute a new scaling factor and
-                // apply it to each face box.
-                if (this.PhotoCanvas.Background != null)
-                {
-                    WriteableBitmap displaySource = (this.PhotoCanvas.Background as ImageBrush).ImageSource as WriteableBitmap;
-
-                    double widthScale = displaySource.PixelWidth / this.PhotoCanvas.ActualWidth;
-                    double heightScale = displaySource.PixelHeight / this.PhotoCanvas.ActualHeight;
-
-                    foreach (var item in PhotoCanvas.Children)
-                    {
-                        Rectangle box = item as Rectangle;
-                        if (box == null)
-                        {
-                            continue;
-                        }
-
-                        // We saved the original size of the face box in the rectangles Tag field.
-                        BitmapBounds faceBounds = (BitmapBounds)box.Tag;
-                        box.Width = (uint)(faceBounds.Width / widthScale);
-                        box.Height = (uint)(faceBounds.Height / heightScale);
-
-                        box.Margin = new Thickness((uint)(faceBounds.X / widthScale), (uint)(faceBounds.Y / heightScale), 0, 0);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                this.rootPage.NotifyUser(ex.ToString(), NotifyType.ErrorMessage);
+                MainPage.RepositionFaces((WriteableBitmap)brush.ImageSource, this.PhotoCanvas);
             }
         }
     }

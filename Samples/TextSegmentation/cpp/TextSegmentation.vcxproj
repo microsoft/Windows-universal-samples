@@ -143,10 +143,10 @@
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="Scenario1_ExtractTextSegments.xaml.h">
-      <DependentUpon>Scenario1_ExtractTextSegments.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_ExtractTextSegments.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="Scenario2_GetCurrentTextSegmentFromIndex.xaml.h">
-      <DependentUpon>Scenario2_GetCurrentTextSegmentFromIndex.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_GetCurrentTextSegmentFromIndex.xaml</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,8 +156,8 @@
     <Page Include="$(SharedContentDir)\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ExtractTextSegments.xaml" />
-    <Page Include="Scenario2_GetCurrentTextSegmentFromIndex.xaml" />
+    <Page Include="..\shared\Scenario1_ExtractTextSegments.xaml" />
+    <Page Include="..\shared\Scenario2_GetCurrentTextSegmentFromIndex.xaml" />
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -184,10 +184,10 @@
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="Scenario1_ExtractTextSegments.xaml.cpp">
-      <DependentUpon>Scenario1_ExtractTextSegments.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario1_ExtractTextSegments.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="Scenario2_GetCurrentTextSegmentFromIndex.xaml.cpp">
-      <DependentUpon>Scenario2_GetCurrentTextSegmentFromIndex.xaml</DependentUpon>
+      <DependentUpon>..\shared\Scenario2_GetCurrentTextSegmentFromIndex.xaml</DependentUpon>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

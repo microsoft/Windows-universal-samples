@@ -31,6 +31,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario2_Launch::CheckIf3DBuilderIsInstalled_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         IVectorView<AppInfo> handlers = co_await Launcher::FindFileHandlersAsync(L".3mf");
         auto found = std::find_if(begin(handlers), end(handlers),
             [](auto&& info) { return info.PackageFamilyName() == PackageFamilyName3DBuilder; });

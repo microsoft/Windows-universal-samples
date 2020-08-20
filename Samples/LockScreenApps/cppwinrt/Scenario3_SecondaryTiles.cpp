@@ -32,7 +32,10 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario3_SecondaryTiles::CreateBadgeTile_Click(IInspectable const& sender, RoutedEventArgs const&)
     {
-        if (!SecondaryTile::Exists(BADGE_TILE_ID)) {
+        auto lifetime = get_strong();
+
+        if (!SecondaryTile::Exists(BADGE_TILE_ID))
+        {
             SecondaryTile secondTile(
                 BADGE_TILE_ID,
                 L"LockScreen C++/WinRT - Badge only",
@@ -54,13 +57,16 @@ namespace winrt::SDKTemplate::implementation
                 rootPage.NotifyUser(L"Tile not created.", NotifyType::ErrorMessage);
             }
         }
-        else {
+        else
+        {
             rootPage.NotifyUser(L"Badge secondary tile already exists.", NotifyType::ErrorMessage);
         }
     }
 
     fire_and_forget Scenario3_SecondaryTiles::CreateBadgeAndTextTile_Click(IInspectable const& sender, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         if (!SecondaryTile::Exists(TEXT_TILE_ID))
         {
             SecondaryTile secondTile(

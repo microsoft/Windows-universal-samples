@@ -23,6 +23,7 @@ namespace SDKTemplate
         {
             new Scenario() { Title="Enabling screen capture", ClassType=typeof(Scenario1_Enable) },
             new Scenario() { Title="Disabling screen capture", ClassType=typeof(Scenario2_Disable) },
+            new Scenario() { Title="Managing AppCapture", ClassType=typeof(Scenario3_AppCapture) },
         };
     }
 

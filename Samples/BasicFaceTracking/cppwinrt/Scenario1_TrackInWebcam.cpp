@@ -51,6 +51,8 @@ namespace winrt::SDKTemplate::implementation
     // Responds to App Suspend event to stop/release MediaCapture object if it's running and return to Idle state.
     fire_and_forget Scenario1_TrackInWebcam::OnSuspending(IInspectable const&, SuspendingEventArgs const& e)
     {
+        auto lifetime = get_strong();
+
         if (currentState == ScenarioState::Streaming)
         {
             auto deferral = e.SuspendingOperation().GetDeferral();
@@ -116,6 +118,8 @@ namespace winrt::SDKTemplate::implementation
     // Safely stops webcam streaming (if running) and releases MediaCapture object.
     IAsyncAction Scenario1_TrackInWebcam::ShutdownWebcamAsync()
     {
+        auto lifetime = get_strong();
+
         if (frameProcessingTimer != nullptr)
         {
             frameProcessingTimer.Cancel();
@@ -171,6 +175,8 @@ namespace winrt::SDKTemplate::implementation
 
     IAsyncAction Scenario1_TrackInWebcam::ProcessCurrentVideoFrameAsync()
     {
+        auto lifetime = get_strong();
+
         // Create a VideoFrame object specifying the pixel format we want our capture image to be (NV12 bitmap in this case).
         // GetPreviewFrame will convert the native webcam frame into this format.
         static constexpr BitmapPixelFormat InputPixelFormat = BitmapPixelFormat::Nv12;
@@ -245,6 +251,8 @@ namespace winrt::SDKTemplate::implementation
 
     IAsyncAction Scenario1_TrackInWebcam::ChangeScenarioStateAsync(ScenarioState newState)
     {
+        auto lifetime = get_strong();
+
         // Disable UI while state change is in progress
         CameraStreamingButton().IsEnabled(false);
 
@@ -277,6 +285,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario1_TrackInWebcam::AbandonStreaming()
     {
+        auto lifetime = get_strong();
+
         // MediaCapture is not Agile and so we cannot invoke its methods on this caller's thread
         // and instead need to schedule the state change on the UI thread.
         co_await resume_foreground(Dispatcher());
@@ -291,6 +301,8 @@ namespace winrt::SDKTemplate::implementation
     // Handles "streaming" button clicks to start/stop webcam streaming.
     fire_and_forget Scenario1_TrackInWebcam::CameraStreamingButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         rootPage.NotifyUser({}, NotifyType::StatusMessage);
         if (currentState == ScenarioState::Streaming)
         {

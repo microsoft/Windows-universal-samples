@@ -33,7 +33,6 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario1_Render::LoadDocument(IInspectable const&, RoutedEventArgs const&)
     {
-        
         auto lifetime = get_strong();
 
         LoadButton().IsEnabled(false);
@@ -94,6 +93,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario1_Render::ViewPage(IInspectable const&, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         rootPage.NotifyUser(L"", NotifyType::StatusMessage);
 
         // If the text is not a valid number, then wcstoul returns 0, which is an invalid

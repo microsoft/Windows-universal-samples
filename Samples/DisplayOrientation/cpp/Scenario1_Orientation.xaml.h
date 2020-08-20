@@ -21,7 +21,6 @@ namespace SDKTemplate
     {
     public:
         Scenario1_Orientation();
-        void ApplyRotationLock();
 
     protected:
         void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs^ e) override;
@@ -33,6 +32,7 @@ namespace SDKTemplate
         void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation^ sender, Platform::Object^ e);
         static Platform::String^ OrientationsToString(Windows::Graphics::Display::DisplayOrientations orientations);
         void UpdateContent();
+        void ApplyRotationLock_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
         Windows::Foundation::EventRegistrationToken orientationChangedToken;
     };

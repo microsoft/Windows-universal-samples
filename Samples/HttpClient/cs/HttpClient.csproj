@@ -124,32 +124,32 @@
     <Compile Include="Scenario15_ServerCertificateValidation.xaml.cs">
       <DependentUpon>..\shared\Scenario15_ServerCertificateValidation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario1_GetText.xaml.cs">
-      <DependentUpon>..\shared\Scenario1_GetText.xaml</DependentUpon>
+    <Compile Include="Scenario01_GetText.xaml.cs">
+      <DependentUpon>..\shared\Scenario01_GetText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario2_GetStream.xaml.cs">
-      <DependentUpon>..\shared\Scenario2_GetStream.xaml</DependentUpon>
+    <Compile Include="Scenario02_GetStream.xaml.cs">
+      <DependentUpon>..\shared\Scenario02_GetStream.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario3_GetList.xaml.cs">
-      <DependentUpon>..\shared\Scenario3_GetList.xaml</DependentUpon>
+    <Compile Include="Scenario03_GetList.xaml.cs">
+      <DependentUpon>..\shared\Scenario03_GetList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario4_PostText.xaml.cs">
-      <DependentUpon>..\shared\Scenario4_PostText.xaml</DependentUpon>
+    <Compile Include="Scenario04_PostText.xaml.cs">
+      <DependentUpon>..\shared\Scenario04_PostText.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario5_PostStream.xaml.cs">
-      <DependentUpon>..\shared\Scenario5_PostStream.xaml</DependentUpon>
+    <Compile Include="Scenario05_PostStream.xaml.cs">
+      <DependentUpon>..\shared\Scenario05_PostStream.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario6_PostMultipart.xaml.cs">
-      <DependentUpon>..\shared\Scenario6_PostMultipart.xaml</DependentUpon>
+    <Compile Include="Scenario06_PostMultipart.xaml.cs">
+      <DependentUpon>..\shared\Scenario06_PostMultipart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario7_PostStreamWithProgress.xaml.cs">
-      <DependentUpon>..\shared\Scenario7_PostStreamWithProgress.xaml</DependentUpon>
+    <Compile Include="Scenario07_PostStreamWithProgress.xaml.cs">
+      <DependentUpon>..\shared\Scenario07_PostStreamWithProgress.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario8_PostCustomContent.xaml.cs">
-      <DependentUpon>..\shared\Scenario8_PostCustomContent.xaml</DependentUpon>
+    <Compile Include="Scenario08_PostCustomContent.xaml.cs">
+      <DependentUpon>..\shared\Scenario08_PostCustomContent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario9_GetCookie.xaml.cs">
-      <DependentUpon>..\shared\Scenario9_GetCookie.xaml</DependentUpon>
+    <Compile Include="Scenario09_GetCookie.xaml.cs">
+      <DependentUpon>..\shared\Scenario09_GetCookie.xaml</DependentUpon>
     </Compile>
     <Compile Include="SlowInputStream.cs" />
   </ItemGroup>
@@ -204,48 +204,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario1_GetText.xaml">
-      <Link>Scenario1_GetText.xaml</Link>
+    <Page Include="..\shared\Scenario01_GetText.xaml">
+      <Link>Scenario01_GetText.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario2_GetStream.xaml">
-      <Link>Scenario2_GetStream.xaml</Link>
+    <Page Include="..\shared\Scenario02_GetStream.xaml">
+      <Link>Scenario02_GetStream.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario3_GetList.xaml">
-      <Link>Scenario3_GetList.xaml</Link>
+    <Page Include="..\shared\Scenario03_GetList.xaml">
+      <Link>Scenario03_GetList.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario4_PostText.xaml">
-      <Link>Scenario4_PostText.xaml</Link>
+    <Page Include="..\shared\Scenario04_PostText.xaml">
+      <Link>Scenario04_PostText.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario5_PostStream.xaml">
-      <Link>Scenario5_PostStream.xaml</Link>
+    <Page Include="..\shared\Scenario05_PostStream.xaml">
+      <Link>Scenario05_PostStream.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario6_PostMultipart.xaml">
-      <Link>Scenario6_PostMultipart.xaml</Link>
+    <Page Include="..\shared\Scenario06_PostMultipart.xaml">
+      <Link>Scenario06_PostMultipart.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario7_PostStreamWithProgress.xaml">
-      <Link>Scenario7_PostStreamWithProgress.xaml</Link>
+    <Page Include="..\shared\Scenario07_PostStreamWithProgress.xaml">
+      <Link>Scenario07_PostStreamWithProgress.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario8_PostCustomContent.xaml">
-      <Link>Scenario8_PostCustomContent.xaml</Link>
+    <Page Include="..\shared\Scenario08_PostCustomContent.xaml">
+      <Link>Scenario08_PostCustomContent.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario9_GetCookie.xaml">
-      <Link>Scenario9_GetCookie.xaml</Link>
+    <Page Include="..\shared\Scenario09_GetCookie.xaml">
+      <Link>Scenario09_GetCookie.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

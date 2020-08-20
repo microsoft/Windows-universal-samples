@@ -94,7 +94,7 @@ namespace SDKTemplate
                     case DevicePairingKinds.ProvidePin:
                         {
                             string pin = await GetPinFromUserAsync(dispatcher);
-                            if (String.IsNullOrEmpty(pin))
+                            if (!String.IsNullOrEmpty(pin))
                             {
                                 args.Accept(pin);
                             }

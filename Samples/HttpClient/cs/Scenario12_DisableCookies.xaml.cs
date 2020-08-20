@@ -18,24 +18,17 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 using Windows.Web.Http.Filters;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class Scenario12 : Page, IDisposable
+    public sealed partial class Scenario12_DisableCookies : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
         MainPage rootPage = MainPage.Current;
 
         private HttpBaseProtocolFilter filter;
         private HttpClient httpClient;
         private CancellationTokenSource cts;
 
-        public Scenario12()
+        public Scenario12_DisableCookies()
         {
             this.InitializeComponent();
         }
@@ -49,22 +42,18 @@ namespace SDKTemplate
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            // If the navigation is external to the app do not clean up.
-            // This can occur on Phone when suspending the app.
-            if (e.NavigationMode == NavigationMode.Forward && e.Uri == null)
-            {
-                return;
-            }
-
-            Dispose();
+            cts.Cancel();
+            cts.Dispose();
+            httpClient.Dispose();
+            filter.Dispose();
         }
+
         private async void SendInitialGetButton_Click(object sender, RoutedEventArgs e)
         {
-            Uri resourceAddress;
-
             // The value of 'AddressField' is set by the user and is therefore untrusted input. If we can't create a
             // valid, absolute URI, we'll notify the user about the incorrect input.
-            if (!Helpers.TryGetUri(AddressField.Text, out resourceAddress))
+            Uri resourceUri = Helpers.TryParseHttpUri(AddressField.Text);
+            if (resourceUri == null)
             {
                 rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
                 return;
@@ -75,11 +64,11 @@ namespace SDKTemplate
 
             try
             {
-                HttpRequestResult result = await httpClient.TryGetAsync(resourceAddress).AsTask(cts.Token);
+                HttpRequestResult result = await httpClient.TryGetAsync(resourceUri).AsTask(cts.Token);
 
                 if (result.Succeeded)
                 {
-                    HttpCookieCollection cookieCollection = filter.CookieManager.GetCookies(resourceAddress);
+                    HttpCookieCollection cookieCollection = filter.CookieManager.GetCookies(resourceUri);
                     OutputField.Text = cookieCollection.Count + " cookies found.\r\n";
                     foreach (HttpCookie cookie in cookieCollection)
                     {
@@ -111,11 +100,11 @@ namespace SDKTemplate
 
         private async void SendNextRequestButton_Click(object sender, RoutedEventArgs e)
         {
-            Uri resourceAddress;
+            Uri resourceUri = Helpers.TryParseHttpUri(AddressField.Text);
 
             // The value of 'AddressField' is set by the user and is therefore untrusted input. If we can't create a
             // valid, absolute URI, we'll notify the user about the incorrect input.
-            if (!Helpers.TryGetUri(AddressField.Text, out resourceAddress))
+            if (resourceUri == null)
             {
                 rootPage.NotifyUser("Invalid URI.", NotifyType.ErrorMessage);
                 return;
@@ -138,7 +127,7 @@ namespace SDKTemplate
             // If you don't need to support cancellation, then the "try" is not needed.
             try
             {
-                HttpRequestResult result = await httpClient.TryGetAsync(resourceAddress).AsTask(cts.Token);
+                HttpRequestResult result = await httpClient.TryGetAsync(resourceUri).AsTask(cts.Token);
 
                 if (result.Succeeded)
                 {
@@ -170,23 +159,6 @@ namespace SDKTemplate
 
         public void Dispose()
         {
-            if (httpClient != null)
-            {
-                httpClient.Dispose();
-                httpClient = null;
-            }
-
-            if (cts != null)
-            {
-                cts.Dispose();
-                cts = null;
-            }
-
-            if(filter != null)
-            {
-                filter.Dispose();
-                filter = null;
-            }
         }
     }
 }

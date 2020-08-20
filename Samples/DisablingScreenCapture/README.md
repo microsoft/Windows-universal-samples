@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -27,7 +27,10 @@ Shows how to disable screen capture by setting the
 [IsScreenCaptureEnabled](http://msdn.microsoft.com/library/windows/apps/dn281123)
 property of the
 [ApplicationView](http://msdn.microsoft.com/library/windows/apps/hh701658)
-object.
+object,
+and by using methods of the
+[AppCapture](https://docs.microsoft.com/uwp/api/Windows.Media.Capture.AppCapture)
+class.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > You can download this sample as a standalone ZIP file
@@ -44,6 +47,7 @@ The sample consists of the following scenarios:
 - Blocking screen capture for a specific page
   by setting [IsScreenCaptureEnabled](http://msdn.microsoft.com/library/windows/apps/dn281123)
   to **false** when the user navigates to the page, then setting it back to **true** when the user navigates away.
+- Allowing and blocking system-initiated app capture such as Xbox Game Bar.
 
 **Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
@@ -56,10 +60,11 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ### Reference
 
 [ApplicationView class](https://msdn.microsoft.com/library/windows/apps/windows.ui.viewmanagement.applicationview.aspx)  
+[Capture game audio, video, screenshots, and metadata](https://docs.microsoft.com/windows/uwp/gaming/capture-game-audio-video-screenshots-and-metadata)  
 
 ### Related samples
 
-* [DisablingScreenCapture sample](/archived/DisablingScreenCapture/) for JavaScript (archived)
+* [DisablingScreenCapture sample](/archived/DisablingScreenCapture/) for C++/CX and JavaScript (archived)
 
 ## System requirements
 

@@ -2,6 +2,8 @@
 topic: sample
 languages:
 - js
+- cpp
+- cppcx
 products:
 - windows
 - windows-uwp
@@ -44,11 +46,9 @@ the app must have the sharedUserCertificate capability.
 
 ## System requirements
 
-**Client:** Windows 10 build 14295
+**Client:** Windows 10 Version 1607
 
-**Server:** Windows Server 2016 Technical Preview
-
-**Phone:** Windows 10 build 14295
+**Server:** Windows Server 2016
 
 ## Build the sample
 

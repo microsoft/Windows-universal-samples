@@ -10,46 +10,43 @@
 //*********************************************************
 
 #pragma once
+#include "HttpMeteredConnectionFilter.g.h"
 
+using namespace winrt;
 
-namespace HttpFilters
+namespace winrt::HttpFilters::implementation
 {
-    public enum class MeteredConnectionPriority 
+    struct HttpMeteredConnectionFilter : HttpMeteredConnectionFilterT<HttpMeteredConnectionFilter>
     {
-        Low = 0,
-        Medium,
-        High
-    };
+        HttpMeteredConnectionFilter(Windows::Web::Http::Filters::IHttpFilter const& innerFilter);
+        bool OptIn() { return m_optIn; }
+        void OptIn(bool value) { m_optIn = value; }
+        void Close() { }
+        Windows::Foundation::IAsyncOperationWithProgress<Windows::Web::Http::HttpResponseMessage, Windows::Web::Http::HttpProgress> SendRequestAsync(Windows::Web::Http::HttpRequestMessage request);
 
-    private enum  class MeteredConnectionBehavior
-    {
-        None = 0, // Used when there is no Internet profile available.
-        Normal,
-        Conservative,
-        OptIn
-    };
+        static hstring MeteredConnectionPriorityPropertyName() { return MeteredConnectionPriorityPropertyNameLiteral; }
 
-    public ref class HttpMeteredConnectionFilter sealed : public Windows::Web::Http::Filters::IHttpFilter
-    {
-    public:
-        HttpMeteredConnectionFilter(Windows::Web::Http::Filters::IHttpFilter^ innerFilter);
-        virtual ~HttpMeteredConnectionFilter();
-        virtual Windows::Foundation::IAsyncOperationWithProgress<
-            Windows::Web::Http::HttpResponseMessage^,
-            Windows::Web::Http::HttpProgress>^ SendRequestAsync(Windows::Web::Http::HttpRequestMessage^ request);
-
-        property bool OptIn
+    private:
+        enum class MeteredConnectionBehavior
         {
-            bool get();
-            void set(bool value);
-        }
+            None = 0, // Used when there is no Internet profile available.
+            Normal,
+            Conservative,
+            OptIn
+        };
 
-        private:
-            Windows::Web::Http::Filters::IHttpFilter^ innerFilter;
-            bool ValidatePriority(MeteredConnectionPriority priority);
-            MeteredConnectionBehavior GetBehavior();
+        static constexpr wchar_t MeteredConnectionPriorityPropertyNameLiteral[] = L"HttpFilters.HttpMeteredConnectionFilter.MeteredConnectionPriority";
 
-            bool optIn;
-            static Platform::String^ PriorityPropertyName;
+        Windows::Web::Http::Filters::IHttpFilter m_innerFilter;
+        bool m_optIn;
+
+        static MeteredConnectionBehavior GetBehavior();
+        void CheckPriority(MeteredConnectionPriority priority);
+    };
+}
+namespace winrt::HttpFilters::factory_implementation
+{
+    struct HttpMeteredConnectionFilter : HttpMeteredConnectionFilterT<HttpMeteredConnectionFilter, implementation::HttpMeteredConnectionFilter>
+    {
     };
 }

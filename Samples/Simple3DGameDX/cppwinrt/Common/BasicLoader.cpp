@@ -373,12 +373,11 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadTextureAsync(
     _Out_opt_ ID3D11ShaderResourceView** textureView
     )
 {
-    auto textureBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto textureData = GetBufferView(textureBuffer);
+    auto textureData = co_await m_basicReaderWriter.ReadDataAsync(filename);
     CreateTexture(
         GetExtension(filename) == L"dds",
         textureData.data(),
-        textureData.size(),
+        textureData.Length(),
         texture,
         textureView,
         filename
@@ -449,12 +448,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
         }
     }
 
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
+
     winrt::check_hresult(
         m_d3dDevice->CreateVertexShader(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             nullptr,
             shader
             )
@@ -466,7 +465,7 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
     {
         CreateInputLayout(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             layoutDesc == nullptr ? nullptr : layoutDescCopy.data(),
             layoutDescNumElements,
             layout
@@ -500,12 +499,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
     _Out_ ID3D11PixelShader** shader
     )
 {
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
+
     winrt::check_hresult(
         m_d3dDevice->CreatePixelShader(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             nullptr,
             shader
             )
@@ -538,13 +537,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
     _Out_ ID3D11ComputeShader** shader
     )
 {
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
 
     winrt::check_hresult(
         m_d3dDevice->CreateComputeShader(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             nullptr,
             shader
             )
@@ -577,13 +575,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
     _Out_ ID3D11GeometryShader** shader
     )
 {
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
 
     winrt::check_hresult(
         m_d3dDevice->CreateGeometryShader(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             nullptr,
             shader
             )
@@ -660,13 +657,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
         bufferStridesCopy = { bufferStrides, bufferStrides + numStrides };
     }
 
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
 
     winrt::check_hresult(
         m_d3dDevice->CreateGeometryShaderWithStreamOutput(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             streamOutDeclaration == nullptr ? nullptr : streamOutDeclarationCopy.data(),
             numEntries,
             bufferStrides == nullptr ? nullptr : bufferStridesCopy.data(),
@@ -704,13 +700,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
     _Out_ ID3D11HullShader** shader
     )
 {
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
 
     winrt::check_hresult(
         m_d3dDevice->CreateHullShader(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             nullptr,
             shader
             )
@@ -743,13 +738,12 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadShaderAsync(
     _Out_ ID3D11DomainShader** shader
     )
 {
-    auto bytecodeBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto bytecode = GetBufferView(bytecodeBuffer);
+    auto bytecode = co_await m_basicReaderWriter.ReadDataAsync(filename);
 
     winrt::check_hresult(
         m_d3dDevice->CreateDomainShader(
             bytecode.data(),
-            bytecode.size(),
+            bytecode.Length(),
             nullptr,
             shader
             )
@@ -786,8 +780,7 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadMeshAsync(
     _Out_opt_ uint32_t* indexCount
     )
 {
-    auto meshBuffer = co_await m_basicReaderWriter.ReadDataAsync(filename);
-    auto meshData = GetBufferView(meshBuffer);
+    auto meshData = co_await m_basicReaderWriter.ReadDataAsync(filename);
 
     CreateMesh(
         meshData.data(),
@@ -798,12 +791,3 @@ winrt::Windows::Foundation::IAsyncAction BasicLoader::LoadMeshAsync(
         filename
         );
 }
-
-winrt::array_view<byte> BasicLoader::GetBufferView(winrt::Windows::Storage::Streams::IBuffer const& buffer)
-{
-    byte* bytes;
-    auto byteAccess = buffer.as<Windows::Storage::Streams::IBufferByteAccess>();
-    winrt::check_hresult(byteAccess->Buffer(&bytes));
-    return { bytes, bytes + buffer.Length() };
-}
-

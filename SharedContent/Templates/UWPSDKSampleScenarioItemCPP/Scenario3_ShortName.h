@@ -12,7 +12,6 @@
 #pragma once
 
 #include "$safeitemname$.g.h"
-#include "MainPage.h"
 
 namespace winrt::SDKTemplate::implementation
 {

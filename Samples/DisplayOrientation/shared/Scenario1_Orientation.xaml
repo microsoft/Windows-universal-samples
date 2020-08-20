@@ -23,6 +23,8 @@
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
                     Reports the native display orientation, current display orientation,
                     and sets auto-rotation preferences.
+                    Note that the operating system is not obligated to honor auto-rotation preferences.
+                    In particular, the preferences are not respected in overlapped windowing mode.
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <TextBlock Text="Native orientation: " Style="{StaticResource BaseMessageStyle}"/>
@@ -41,7 +43,7 @@
                     <CheckBox x:Name="PreferPortrait" Content="Prefer portrait"/>
                     <CheckBox x:Name="PreferLandscapeFlipped" Content="Prefer landscape flipped"/>
                     <CheckBox x:Name="PreferPortraitFlipped" Content="Prefer portrait flipped"/>
-                    <Button Content="Apply preferences" Click="{x:Bind ApplyRotationLock}" />
+                    <Button Content="Apply preferences" Click="ApplyRotationLock_Click" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

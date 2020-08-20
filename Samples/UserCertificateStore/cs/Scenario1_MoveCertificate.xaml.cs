@@ -21,13 +21,6 @@ using Windows.Security.Cryptography;
 
 namespace SDKTemplate
 {
-    // These items are shown in the ListView controls.
-    class CertificateItem
-    {
-        public string Name { get; set; }
-        public Certificate Certificate { get; set; }
-    }
-
     public sealed partial class Scenario1_MoveCertificate : Page
     {
         CertificateStore appStore = CertificateStores.GetStoreByName(StandardCertificateStoreNames.Personal);
@@ -40,17 +33,17 @@ namespace SDKTemplate
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            IReadOnlyList<Certificate> certs = await CertificateStores.FindAllAsync();
+            IReadOnlyList<Certificate> certificates = await CertificateStores.FindAllAsync();
 
-            foreach (Certificate cert in certs)
+            foreach (Certificate certificate in certificates)
             {
-                var item = new CertificateItem
+                var item = new ListViewItem
                 {
-                    Name = $"Subject: {cert.Subject}, Serial Number: {CryptographicBuffer.EncodeToHexString(CryptographicBuffer.CreateFromByteArray(cert.SerialNumber))}",
-                    Certificate = cert
+                    Content = $"Subject: {certificate.Subject}, Serial Number: {CryptographicBuffer.EncodeToHexString(CryptographicBuffer.CreateFromByteArray(certificate.SerialNumber))}",
+                    Tag = certificate
                 };
 
-                if (cert.IsPerUser)
+                if (certificate.IsPerUser)
                 {
                     UserCertificateListView.Items.Add(item);
                 }
@@ -61,41 +54,44 @@ namespace SDKTemplate
             }
         }
 
-        private async void MoveUserCertificateToAppCertificateStore()
+        static void MoveItemBetweenListViews(ListViewItem item, ListView source, ListView destination)
         {
-            var item = (CertificateItem)UserCertificateListView.SelectedItem;
+            source.Items.Remove(item);
+
+            destination.Items.Add(item);
+            destination.SelectedItem = item;
+            destination.ScrollIntoView(item);
+        }
+
+        private async void MoveUserCertificateToAppCertificateStore(object sender, RoutedEventArgs e)
+        {
+            var item = (ListViewItem)UserCertificateListView.SelectedItem;
             if (item != null)
             {
-                appStore.Add(item.Certificate);
+                var certificate = (Certificate)item.Tag;
+                appStore.Add(certificate);
 
-                if (await userStore.RequestDeleteAsync(item.Certificate))
+                if (await userStore.RequestDeleteAsync(certificate))
                 {
-                    UserCertificateListView.Items.Remove(item);
-
-                    AppCertificateListView.Items.Add(item);
-                    AppCertificateListView.SelectedItem = item;
-                    AppCertificateListView.ScrollIntoView(item);
+                    MoveItemBetweenListViews(item, UserCertificateListView, AppCertificateListView);
                 }
                 else
                 {
-                    appStore.Delete(item.Certificate);
+                    appStore.Delete(certificate);
                 }
             }
         }
 
-        private async void MoveAppCertificateToUserCertificateStore()
+        private async void MoveAppCertificateToUserCertificateStore(object sender, RoutedEventArgs e)
         {
-            var item = (CertificateItem)AppCertificateListView.SelectedItem;
+            var item = (ListViewItem)AppCertificateListView.SelectedItem;
             if (item != null)
             {
-                if (await userStore.RequestAddAsync(item.Certificate))
+                var certificate = (Certificate)item.Tag;
+                if (await userStore.RequestAddAsync(certificate))
                 {
-                    appStore.Delete(item.Certificate);
-                    AppCertificateListView.Items.Remove(item);
-
-                    UserCertificateListView.Items.Add(item);
-                    UserCertificateListView.SelectedItem = item;
-                    UserCertificateListView.ScrollIntoView(item);
+                    appStore.Delete(certificate);
+                    MoveItemBetweenListViews(item, AppCertificateListView, UserCertificateListView);
                 }
             }
         }

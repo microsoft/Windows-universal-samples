@@ -15,6 +15,7 @@
 using namespace SDKTemplate;
 
 using namespace Windows::Devices::Gpio;
+using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Navigation;
 
 Scenario1_GetAndSetPin::Scenario1_GetAndSetPin()
@@ -47,7 +48,7 @@ void Scenario1_GetAndSetPin::StopScenario()
     pin = nullptr;
 }
 
-void Scenario1_GetAndSetPin::StartStopScenario()
+void Scenario1_GetAndSetPin::StartStopScenario_Click(Object^ sender, RoutedEventArgs^ e)
 {
     if (pin != nullptr)
     {
@@ -63,19 +64,19 @@ void Scenario1_GetAndSetPin::StartStopScenario()
     }
 }
 
-void Scenario1_GetAndSetPin::SetPinHigh()
+void Scenario1_GetAndSetPin::SetPinHigh_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Set the GPIO pin to High.
     pin->Write(GpioPinValue::High);
 }
 
-void Scenario1_GetAndSetPin::SetPinLow()
+void Scenario1_GetAndSetPin::SetPinLow_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Set the GPIO pin to Low.
     pin->Write(GpioPinValue::Low);
 }
 
-void Scenario1_GetAndSetPin::GetPinValue()
+void Scenario1_GetAndSetPin::GetPinValue_Click(Object^ sender, RoutedEventArgs^ e)
 {
     // Change the GUI to reflect the current pin value.
     CurrentPinValue->Text = pin->Read().ToString();

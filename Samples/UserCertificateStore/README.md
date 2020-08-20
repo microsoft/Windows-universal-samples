@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -60,7 +60,7 @@ the app must have the sharedUserCertificate capability.
 
 ### Related samples
 
-* [UserCertificateStore sample](/archived/UserCertificateStore/) for JavaScript (archived)
+* [UserCertificateStore sample](/archived/UserCertificateStore/) for C++/CX and JavaScript (archived)
 
 ## System requirements
 

@@ -15,6 +15,20 @@
 //
 #define PROPERTY_MIXERMODE  L"MixerMode"
 
+//
+// LoopbackGain: Gain to apply to system audio volume.
+// Type : double (0.0 to 5.0)
+// Default: 1.0
+//
+#define PROPERTY_LOOPBACKGAIN  L"LoopbackGain"
+
+//
+// MicrophoneGain: Gain to apply to mic volume.
+// Type : double (0.0 to 5.0)
+// Default: 1.0
+//
+#define PROPERTY_MICROPHONEGAIN  L"MicrophoneGain"
+
 namespace MrcEffectDefinitions
 {
     public enum class AudioMixerMode
@@ -64,8 +78,36 @@ namespace MrcEffectDefinitions
             }
         }
 
+        property double LoopbackGain
+        {
+            double get()
+            {
+                return GetValueFromPropertySet<double>(m_propertySet, PROPERTY_LOOPBACKGAIN, DefaultLoopBackGain);
+            }
+
+            void set(double newValue)
+            {
+                m_propertySet->Insert(PROPERTY_LOOPBACKGAIN, static_cast<double>(newValue));
+            }
+        }
+
+        property double MicrophoneGain
+        {
+            double get()
+            {
+                return GetValueFromPropertySet<double>(m_propertySet, PROPERTY_MICROPHONEGAIN, DefaultMicrophoneGain);
+            }
+
+            void set(double newValue)
+            {
+                m_propertySet->Insert(PROPERTY_MICROPHONEGAIN, static_cast<double>(newValue));
+            }
+        }
+
     private:
         static constexpr AudioMixerMode DefaultAudioMixerMode = AudioMixerMode::MicAndLoopback;
+        static constexpr double DefaultLoopBackGain = 1.0f;
+        static constexpr double DefaultMicrophoneGain = 1.0f;
     private:
         Platform::String^ m_activatableClassId = ref new Platform::String(RUNTIMECLASS_MIXEDREALITYCAPTURE_AUDIO_EFFECT);
         Windows::Foundation::Collections::PropertySet^ m_propertySet = ref new Windows::Foundation::Collections::PropertySet();

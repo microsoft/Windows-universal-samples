@@ -56,7 +56,7 @@ namespace SDKTemplate
             }
         }
 
-        void StartStopScenario()
+        void StartStopScenario_Click(object sender, RoutedEventArgs e)
         {
             if (pin != null)
             {
@@ -72,19 +72,19 @@ namespace SDKTemplate
             }
         }
 
-        private void SetPinHigh()
+        private void SetPinHigh_Click(object sender, RoutedEventArgs e)
         {
             // Set the pin value to High.
             pin.Write(GpioPinValue.High);
         }
 
-        private void SetPinLow()
+        private void SetPinLow_Click(object sender, RoutedEventArgs e)
         {
             // Set the pin value to Low.
             pin.Write(GpioPinValue.Low);
         }
 
-        private void GetPinValue()
+        private void GetPinValue_Click(object sender, RoutedEventArgs e)
         {
             // Change the GUI to reflect the current pin value.
             CurrentPinValue.Text = pin.Read().ToString();

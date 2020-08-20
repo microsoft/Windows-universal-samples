@@ -31,13 +31,13 @@
                 <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
                     <Image Source="Assets/gpio_sample_bb.jpg" Stretch="None" Margin="2,10,2,0" />
                 </ScrollViewer>
-                <Button x:Name="StartStopButton" Content="Start" Margin="0,10,0,0" Click="{x:Bind StartStopScenario}"/>
+                <Button x:Name="StartStopButton" Content="Start" Margin="0,10,0,0" Click="StartStopScenario_Click"/>
                 <StackPanel x:Name="ScenarioControls" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="SetPinHighButton" Content="Set pin 5 high" Margin="0,10,10,0" Click="{x:Bind SetPinHigh}"/>
-                        <Button x:Name="SetPinLowButton" Content="Set pin 5 low" Margin="0,10,10,0" Click="{x:Bind SetPinLow}"/>
+                        <Button x:Name="SetPinHighButton" Content="Set pin 5 high" Margin="0,10,10,0" Click="SetPinHigh_Click"/>
+                        <Button x:Name="SetPinLowButton" Content="Set pin 5 low" Margin="0,10,10,0" Click="SetPinLow_Click"/>
                     </StackPanel>
-                    <Button x:Name="ReadPinButton" Content="Get pin 5 value" Margin="0,10,10,0" Click="{x:Bind GetPinValue}"/>
+                    <Button x:Name="ReadPinButton" Content="Get pin 5 value" Margin="0,10,10,0" Click="GetPinValue_Click"/>
                     <TextBlock Margin="0,10,0,0">
                         Pin value: <Run x:Name="CurrentPinValue" />
                     </TextBlock>

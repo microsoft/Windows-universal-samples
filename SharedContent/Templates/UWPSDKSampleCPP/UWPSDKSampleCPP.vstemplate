@@ -19,7 +19,6 @@
   </TemplateData>
   <TemplateContent>
     <Project File="UWPSDKSampleCPP.vcxproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="pch.h">pch.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Project.idl">Project.idl</ProjectItem>
@@ -36,4 +35,13 @@
       <ProjectItem ReplaceParameters="false" TargetFileName="README.md">README.md</ProjectItem>
     </Project>
   </TemplateContent>
+  <WizardExtension>
+    <Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages repository="extension" repositoryId="Microsoft.Windows.CppWinRT">
+      <package id="Microsoft.Windows.CppWinRT" version="2.0.200615.7" />
+    </packages>
+  </WizardData>
 </VSTemplate>

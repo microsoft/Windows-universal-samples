@@ -23,21 +23,21 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "GET Text With Cache Control", ClassType = typeof(Scenario1) },
-            new Scenario() { Title = "GET Stream", ClassType = typeof(Scenario2) },
-            new Scenario() { Title = "GET List", ClassType = typeof(Scenario3) },
-            new Scenario() { Title = "POST Text", ClassType = typeof(Scenario4) },
-            new Scenario() { Title = "POST Stream", ClassType = typeof(Scenario5) },
-            new Scenario() { Title = "POST Multipart", ClassType = typeof(Scenario6) },
-            new Scenario() { Title = "POST Stream With Progress", ClassType = typeof(Scenario7) },
-            new Scenario() { Title = "POST Custom Content", ClassType = typeof(Scenario8) },
-            new Scenario() { Title = "Get Cookies", ClassType = typeof(Scenario9) },
-            new Scenario() { Title = "Set Cookie", ClassType = typeof(Scenario10) },
-            new Scenario() { Title = "Delete Cookie", ClassType = typeof(Scenario11) },
-            new Scenario() { Title = "Disable Cookies", ClassType = typeof(Scenario12) },
-            new Scenario() { Title = "Retry Filter", ClassType = typeof(Scenario13) },
-            new Scenario() { Title = "Metered Connection Filter", ClassType = typeof(Scenario14) },
-            new Scenario() { Title = "Server Certificate Validation", ClassType = typeof(Scenario15) },
+            new Scenario() { Title = "GET Text With Cache Control", ClassType = typeof(Scenario01_GetText) },
+            new Scenario() { Title = "GET Stream", ClassType = typeof(Scenario02_GetStream) },
+            new Scenario() { Title = "GET List", ClassType = typeof(Scenario03_GetList) },
+            new Scenario() { Title = "POST Text", ClassType = typeof(Scenario04_PostText) },
+            new Scenario() { Title = "POST Stream", ClassType = typeof(Scenario05_PostStream) },
+            new Scenario() { Title = "POST Multipart", ClassType = typeof(Scenario06_PostMultipart) },
+            new Scenario() { Title = "POST Stream With Progress", ClassType = typeof(Scenario07_PostStreamWithProgress) },
+            new Scenario() { Title = "POST Custom Content", ClassType = typeof(Scenario08_PostCustomContent) },
+            new Scenario() { Title = "Get Cookies", ClassType = typeof(Scenario09_GetCookie) },
+            new Scenario() { Title = "Set Cookie", ClassType = typeof(Scenario10_SetCookie) },
+            new Scenario() { Title = "Delete Cookie", ClassType = typeof(Scenario11_DeleteCookie) },
+            new Scenario() { Title = "Disable Cookies", ClassType = typeof(Scenario12_DisableCookies) },
+            new Scenario() { Title = "Retry Filter", ClassType = typeof(Scenario13_RetryFilter) },
+            new Scenario() { Title = "Metered Connection Filter", ClassType = typeof(Scenario14_MeteredConnectionFilter) },
+            new Scenario() { Title = "Server Certificate Validation", ClassType = typeof(Scenario15_ServerCertificateValidation) },
         };
     }
 

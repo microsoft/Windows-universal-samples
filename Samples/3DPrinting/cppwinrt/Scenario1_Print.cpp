@@ -30,10 +30,7 @@ namespace
 #pragma region Buffer, stream, and string helpers
     void SetBufferBytes(IBuffer const& buffer, void const* data, uint32_t size)
     {
-        byte* bytes;
-        auto byteAccess = buffer.as<::Windows::Storage::Streams::IBufferByteAccess>();
-        winrt::check_hresult(byteAccess->Buffer(&bytes));
-        memcpy_s(bytes, buffer.Length(), data, size);
+        memcpy_s(buffer.data(), buffer.Length(), data, size);
     }
 
     IAsyncOperation<hstring> StreamToStringAsync(IRandomAccessStream stream)

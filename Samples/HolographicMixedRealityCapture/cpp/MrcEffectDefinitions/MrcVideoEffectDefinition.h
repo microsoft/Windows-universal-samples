@@ -50,6 +50,38 @@
 #define PROPERTY_GLOBALOPACITYCOEFFICIENT L"GlobalOpacityCoefficient"
 
 //
+// BlankOnProtectedContent: Flag to enable or disable returning an empty frame if there is a 2d UWP app showing protected content.
+//                          If this flag is false and a 2d UWP app is showing protected content, the 2d UWP app will be replaced by
+//                          a protected content texture in the mixed reality capture.
+// Type : bool
+// Default: false
+//
+#define PROPERTY_BLANKONPROTECTEDCONTENT L"BlankOnProtectedContent"
+
+//
+// ShowHiddenMesh: Flag to enable or disable showing the holographic camera's hidden area mesh and neighboring content.
+// Type : bool
+// Default: false
+//
+#define PROPERTY_SHOWHIDDENMESH L"ShowHiddenMesh"
+
+//
+// OutputSize: Set the desired output size after cropping for video stabilization. A default crop size is chosen if 0 or an invalid output size is specified.
+// Type : Windows.Foundation.Size
+// Default: (0,0)
+//
+#define PROPERTY_OUTPUTSIZE L"OutputSize"
+
+//
+// PreferredHologramPerspective: Enum used to indicate which holographic camera view configuration should be captured
+// Type: MixedRealityCapturePerspective as UINT32
+// 0: App won't be asked to render from the photo/video camera
+// 1: App is rendered from the photo/video camera
+// Default: 1
+//
+#define PROPERTY_PREFERREDHOLOGRAMPERSPECTIVE L"PreferredHologramPerspective"
+
+//
 // Maximum value of VideoStabilizationBufferLength
 // This number is defined and used in MixedRealityCaptureVideoEffect
 //
@@ -57,6 +89,12 @@
 
 namespace MrcEffectDefinitions
 {
+    public enum class MixedRealityCapturePerspective
+    {
+        Display = 0,
+        PhotoVideoCamera = 1,
+    };
+
     public ref class MrcVideoEffectDefinition sealed : public Windows::Media::Effects::IVideoEffectDefinition
     {
     public:
@@ -162,12 +200,63 @@ namespace MrcEffectDefinitions
             }
         }
 
-
         property uint32_t VideoStabilizationMaximumBufferLength
         {
             uint32_t get()
             {
                 return PROPERTY_MAX_VSBUFFER;
+            }
+        }
+
+        property bool BlankOnProtectedContent
+        {
+            bool get()
+            {
+                return GetValueFromPropertySet<bool>(m_propertySet, PROPERTY_BLANKONPROTECTEDCONTENT, DefaultBlankOnProtectedContent);
+            }
+
+            void set(bool newValue)
+            {
+                m_propertySet->Insert(PROPERTY_BLANKONPROTECTEDCONTENT, newValue);
+            }
+        }
+
+        property bool ShowHiddenMesh
+        {
+            bool get()
+            {
+                return GetValueFromPropertySet<bool>(m_propertySet, PROPERTY_SHOWHIDDENMESH, DefaultShowHiddenMesh);
+            }
+
+            void set(bool newValue)
+            {
+                m_propertySet->Insert(PROPERTY_SHOWHIDDENMESH, newValue);
+            }
+        }
+
+        property Windows::Foundation::Size OutputSize
+        {
+            Windows::Foundation::Size get()
+            {
+                return GetValueFromPropertySet<Windows::Foundation::Size>(m_propertySet, PROPERTY_OUTPUTSIZE, DefaultOutputSize);
+            }
+
+            void set(Windows::Foundation::Size newValue)
+            {
+                m_propertySet->Insert(PROPERTY_OUTPUTSIZE, static_cast<Windows::Foundation::Size>(newValue));
+            }
+        }
+
+        property MixedRealityCapturePerspective PreferredHologramPerspective
+        {
+            MixedRealityCapturePerspective get()
+            {
+                return GetValueFromPropertySet<uint32_t>(m_propertySet, PROPERTY_PREFERREDHOLOGRAMPERSPECTIVE, DefaultPreferredHologramPerspective);
+            }
+
+            void set(MixedRealityCapturePerspective newValue)
+            {
+                m_propertySet->Insert(PROPERTY_PREFERREDHOLOGRAMPERSPECTIVE, static_cast<uint32_t>(newValue));
             }
         }
 
@@ -178,8 +267,12 @@ namespace MrcEffectDefinitions
         static constexpr bool DefaultVideoStabilizationEnabled = false;
         static constexpr uint32_t DefaultVideoStabilizationBufferLength = 0U;
         static constexpr float DefaultGlobalOpacityCoefficient = 0.9f;
+        static constexpr bool DefaultBlankOnProtectedContent = false;
+        static constexpr bool DefaultShowHiddenMesh = false;
+        static constexpr MixedRealityCapturePerspective DefaultPreferredHologramPerspective = MixedRealityCapturePerspective::PhotoVideoCamera;
     private:
         Platform::String^ m_activatableClassId = ref new Platform::String(RUNTIMECLASS_MIXEDREALITYCAPTURE_VIDEO_EFFECT);
         Windows::Foundation::Collections::PropertySet^ m_propertySet = ref new Windows::Foundation::Collections::PropertySet();
+        Windows::Foundation::Size DefaultOutputSize = { 0,0 };
     };
 }

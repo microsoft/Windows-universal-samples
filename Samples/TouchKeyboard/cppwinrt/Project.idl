@@ -1,0 +1,43 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_Launch : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_Launch();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_ShowHideEvents : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_ShowHideEvents();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_ShowHideMethods : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_ShowHideMethods();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_ShowView : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_ShowView();
+    }
+
+    [default_interface]
+    runtimeclass CustomTextBox : Windows.UI.Xaml.Controls.TextBox
+    {
+        CustomTextBox();
+    }
+}

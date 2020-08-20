@@ -24,10 +24,10 @@ namespace SDKTemplate
     {
     public:
         Scenario1_GetAndSetPin();
-        void StartStopScenario();
-        void SetPinHigh();
-        void SetPinLow();
-        void GetPinValue();
+        void StartStopScenario_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void SetPinHigh_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void SetPinLow_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+        void GetPinValue_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
 
     protected:
         void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs ^e) override;

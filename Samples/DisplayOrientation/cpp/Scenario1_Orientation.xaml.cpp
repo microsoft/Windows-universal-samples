@@ -79,7 +79,7 @@ void Scenario1_Orientation::UpdateContent()
     AutoRotationPreferencesTextBlock->Text = OrientationsToString(DisplayInformation::AutoRotationPreferences);
 }
 
-void Scenario1_Orientation::ApplyRotationLock()
+void Scenario1_Orientation::ApplyRotationLock_Click(Object^ sender, RoutedEventArgs^ e)
 {
     DisplayOrientations orientations = DisplayOrientations::None;
 

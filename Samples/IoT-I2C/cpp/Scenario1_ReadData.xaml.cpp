@@ -85,7 +85,7 @@ void Scenario1_ReadData::StopScenario()
     htu21dSensor = nullptr;
 }
 
-void Scenario1_ReadData::StartStopScenario()
+void Scenario1_ReadData::StartStopScenario_Click(Object^ sender, RoutedEventArgs^ e)
 {
     if (timer != nullptr)
     {

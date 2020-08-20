@@ -80,22 +80,20 @@ namespace SDKTemplate
             }
         }
 
-        internal static void CreateHttpClient(ref HttpClient httpClient)
+        internal static HttpClient CreateHttpClientWithPlugIn()
         {
-            if (httpClient != null)
-            {
-                httpClient.Dispose();
-            }
 
             // HttpClient functionality can be extended by plugging multiple filters together and providing
             // HttpClient with the configured filter pipeline.
             IHttpFilter filter = new HttpBaseProtocolFilter();
             filter = new PlugInFilter(filter); // Adds a custom header to every request and response message.
-            httpClient = new HttpClient(filter);
+            HttpClient httpClient = new HttpClient(filter);
 
             // The following line sets a "User-Agent" request header as a default header on the HttpClient instance.
             // Default headers will be sent with every request sent from this HttpClient instance.
             httpClient.DefaultRequestHeaders.UserAgent.Add(new HttpProductInfoHeaderValue("Sample", "v8"));
+
+            return httpClient;
         }
 
         internal static void ScenarioStarted(Button startButton, Button cancelButton, TextBox outputField)
@@ -128,24 +126,25 @@ namespace SDKTemplate
             addressField.Text = resourceAddress + newQueryString;
         }
 
-        internal static bool TryGetUri(string uriString, out Uri uri)
+        internal static Uri TryParseHttpUri(string uriString)
         {
             // Note that this app has both "Internet (Client)" and "Home and Work Networking" capabilities set,
             // since the user may provide URIs for servers located on the internet or intranet. If apps only
             // communicate with servers on the internet, only the "Internet (Client)" capability should be set.
             // Similarly if an app is only intended to communicate on the intranet, only the "Home and Work
             // Networking" capability should be set.
+            Uri uri;
             if (!Uri.TryCreate(uriString.Trim(), UriKind.Absolute, out uri))
             {
-                return false;
+                return null;
             }
 
             if (uri.Scheme != "http" && uri.Scheme != "https")
             {
-                return false;
+                return null;
             }
 
-            return true;
+            return uri;
         }
     }
 }

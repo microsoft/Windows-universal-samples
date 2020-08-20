@@ -28,6 +28,8 @@ namespace winrt::SDKTemplate::implementation
 
     fire_and_forget Scenario2_UnpinTile::UnpinSecondaryTile_Click(IInspectable sender, RoutedEventArgs const&)
     {
+        auto lifetime = get_strong();
+
         if (SecondaryTile::Exists(SampleHelpers::LogoSecondaryTileId))
         {
             // First prepare the tile to be unpinned

@@ -1,0 +1,56 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Launch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock TextWrapping="Wrap">
+                The touch keyboard displays
+                when touch or pen is used to set focus on a XAML text control
+                (such as TextBox, RichTextBox, and PasswordBox)
+                or a control derived from a XAML text control,
+                subject to the note below.
+            </TextBlock>
+            <VariableSizedWrapGrid Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBox Header="TextBox control" PlaceholderText="The keyboard displays when you tap here." Margin="0,0,10,0"/>
+                <local:CustomTextBox Header="Custom control derived from TextBox" PlaceholderText="The keyboard displays when you tap here." Margin="0,0,10,0"/>
+                <StackPanel>
+                    <TextBlock Margin="0,0,0,5">The keyboard hides when you tap the button.</TextBlock>
+                    <Button Content="Button"/>
+                </StackPanel>
+            </VariableSizedWrapGrid>
+
+
+            <TextBlock Text="Note" Style="{StaticResource SampleHeaderTextStyle}" Margin="0,30,0,0"/>
+            <TextBlock TextWrapping="Wrap">
+                The touch keyboard displays automatically when
+                <LineBreak/><Bold>1.</Bold> A hardware keyboard is not active, and
+                <LineBreak/><Bold>2.</Bold> Either of the following is true:
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="20,0,0,0">
+                <Bold>2a.</Bold> Tablet mode is turned on, or
+                <LineBreak/><Bold>2b.</Bold> "Show the touch keyboard when not in tablet mode
+                and there's no keyboard attached" is enabled in
+                <Bold>Settings &#8594; Devices &#8594; Typing</Bold>.
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

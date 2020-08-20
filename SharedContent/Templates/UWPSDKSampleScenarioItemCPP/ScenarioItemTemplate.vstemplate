@@ -13,7 +13,7 @@
   </TemplateData>
   <TemplateContent>
       <ProjectItem SubType="Designer" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml">Scenario3_ShortName.xaml</ProjectItem>
-      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.cpp">Scenario3_ShortName.cpp</ProjectItem>
-      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.h">Scenario3_ShortName.h</ProjectItem>
+      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml\$fileinputname$.cpp">Scenario3_ShortName.cpp</ProjectItem>
+      <ProjectItem SubType="Code" ReplaceParameters="true" TargetFileName="$fileinputname$.xaml\$fileinputname$.h">Scenario3_ShortName.h</ProjectItem>
   </TemplateContent>
 </VSTemplate>

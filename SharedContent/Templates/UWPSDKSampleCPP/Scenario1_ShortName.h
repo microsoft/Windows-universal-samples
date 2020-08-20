@@ -12,7 +12,6 @@
 #pragma once
 
 #include "Scenario1_ShortName.g.h"
-#include "MainPage.h"
 
 namespace winrt::SDKTemplate::implementation
 {
@@ -20,7 +19,6 @@ namespace winrt::SDKTemplate::implementation
     {
         Scenario1_ShortName();
 
-        // These methods are public so they can be called by binding.
         void StatusMessage_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
         void ErrorMessage_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
         void ClearMessage_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);

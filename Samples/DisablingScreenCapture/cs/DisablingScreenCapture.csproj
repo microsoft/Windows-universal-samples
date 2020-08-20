@@ -108,6 +108,9 @@
     <Compile Include="Scenario2_Disable.xaml.cs">
       <DependentUpon>Scenario2_Disable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario3_AppCapture.xaml.cs">
+      <DependentUpon>Scenario3_AppCapture.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -132,6 +135,11 @@
     </Page>
     <Page Include="..\shared\Scenario2_Disable.xaml">
       <Link>Scenario2_Disable.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3_AppCapture.xaml">
+      <Link>Scenario3_AppCapture.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -165,6 +173,9 @@
     </Content>
     <Content Include="$(SharedContentDir)\media\windows-sdk.png">
       <Link>Assets\windows-sdk.png</Link>
+    </Content>
+    <Content Include="$(SharedContentDir)\media\Samples\ladybug.wmv">
+      <Link>Assets\ladybug.wmv</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>

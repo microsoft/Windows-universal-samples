@@ -1,0 +1,21 @@
+namespace HttpFilters
+{
+    enum MeteredConnectionPriority
+    {
+        Low = 0,
+        Medium,
+        High
+    };
+
+    runtimeclass HttpRetryFilter : [default] Windows.Web.Http.Filters.IHttpFilter
+    {
+        HttpRetryFilter(Windows.Web.Http.Filters.IHttpFilter innerFilter);
+    }
+
+    runtimeclass HttpMeteredConnectionFilter : [default] Windows.Web.Http.Filters.IHttpFilter
+    {
+        HttpMeteredConnectionFilter(Windows.Web.Http.Filters.IHttpFilter innerFilter);
+        Boolean OptIn;
+        static String MeteredConnectionPriorityPropertyName{ get; };
+    }
+}

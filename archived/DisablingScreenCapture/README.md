@@ -1,6 +1,8 @@
 ---
 topic: sample
 languages:
+- cpp
+- cppcx
 - js
 products:
 - windows

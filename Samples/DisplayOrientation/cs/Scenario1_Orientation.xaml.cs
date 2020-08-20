@@ -52,7 +52,7 @@ namespace SDKTemplate
             AutoRotationPreferencesTextBlock.Text = DisplayInformation.AutoRotationPreferences.ToString();
         }
 
-        private void ApplyRotationLock()
+        private void ApplyRotationLock_Click(object sender, RoutedEventArgs e)
         {
             DisplayOrientations orientations = DisplayOrientations.None;
             if (PreferLandscape.IsChecked.Value)

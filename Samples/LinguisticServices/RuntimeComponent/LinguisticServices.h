@@ -4,7 +4,7 @@
 
 namespace winrt::Sample::implementation
 {
-    struct LinguisticServices : LinguisticServicesT<LinguisticServices>
+    struct LinguisticServices
     {
         static Windows::Foundation::Collections::IVectorView<hstring> RecognizeTextLanguages(hstring const& text);
         static Windows::Foundation::Collections::IVectorView<RecognizedTextRun> RecognizeTextScripts(hstring const& text);
