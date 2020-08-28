@@ -234,7 +234,6 @@
                 previewVidTag.addEventListener("playing", function () {
                     isPreviewing = true;
                     updateCaptureControls();
-                    setPreviewRotationAsync();
                 });
             });
     }
@@ -565,11 +564,29 @@
 
     function mediaCapture_failed(errorEventArgs) {
         console.log("MediaCapture_Failed: 0x" + errorEventArgs.code + ": " + errorEventArgs.message);
+        showErrorMessage(errorEventArgs.message);
 
         cleanupCameraAsync()
         .done(function() {
             updateCaptureControls();
         });    
+    }
+    
+    /// <summary>
+    /// Show error message when media capture failed
+    /// Click on try again button will re-initialize and have another try
+    /// </summary>
+    function showErrorMessage(errormessage) {
+        var msg = new Windows.UI.Popups.MessageDialog(
+            "Looks like your camera is being used by another app! If you need it, here's the error message: "
+            + errormessage);
+        msg.commands.append(new Windows.UI.Popups.UICommand(
+            "Try again",
+            function () {
+                initializeCameraAsync();
+            })
+        );
+        msg.showAsync();
     }
 
     app.start();
