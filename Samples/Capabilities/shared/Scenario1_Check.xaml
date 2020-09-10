@@ -1,0 +1,37 @@
+﻿<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Check"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
+        <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+        <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Checking capabilities
+        </TextBlock>
+        <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+            An app can check whether a capability has already been granted.
+            This permits it to take advantage of granted capabilities
+            without triggering a prompt
+            if the capability has not yet been granted.
+        </TextBlock>
+        <StackPanel Margin="0,10,0,0">
+            <TextBlock x:Name="LocationTextBlock"></TextBlock>
+            <Button x:Name="RequestAccessButton" Visibility="Collapsed" Click="RequestAccessButton_Click">Click to enable location tracking</Button>
+        </StackPanel>
+    </StackPanel>
+</Page>

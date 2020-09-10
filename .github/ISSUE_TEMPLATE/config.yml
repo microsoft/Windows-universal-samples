@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Bug in the OS
+    url: https://developer.microsoft.com/windows/support/
+    about: In Windows Dev Center, click "Forums & community" to see your options
+  - name: OS feature request
+    url: https://aka.ms/feedback-hub/support
+    about: Use Feedback Hub to request OS features

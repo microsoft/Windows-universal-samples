@@ -50,6 +50,18 @@ namespace SDKTemplate
                 completionSource.TrySetResult(null);
             };
 
+            watcher.Removed += (DeviceWatcher sender, DeviceInformationUpdate args) =>
+            {
+                // We don't do anything here, but this event needs to be handled to enable realtime updates.
+                // See https://aka.ms/devicewatcher_added.
+            };
+
+            watcher.Updated += (DeviceWatcher sender, DeviceInformationUpdate args) =>
+            {
+                // We don't do anything here, but this event needs to be handled to enable realtime updates.
+                // See https://aka.ms/devicewatcher_added.
+            };
+
             watcher.Start();
 
             // Wait for enumeration to complete or for a device to be found.

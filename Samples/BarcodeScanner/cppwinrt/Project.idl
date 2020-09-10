@@ -1,0 +1,73 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_BasicFunctionality : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_BasicFunctionality();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_MultipleScanners : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_MultipleScanners();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_ActiveSymbologies : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_ActiveSymbologies();
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass SymbologyListEntry
+    {
+        SymbologyListEntry(UInt32 symbologyId);
+        SymbologyListEntry(UInt32 symbologyId, Boolean symbologyEnabled);
+
+        UInt32 Id{ get; };
+        Boolean IsEnabled;
+        String Name{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_SymbologyAttributes : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_SymbologyAttributes();
+    }
+
+    runtimeclass Scenario5_DisplayingBarcodePreview :
+        Windows.UI.Xaml.Controls.Page, Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        Scenario5_DisplayingBarcodePreview();
+
+        Boolean IsScannerClaimed;
+        Boolean ScannerSupportsPreview;
+        Boolean IsPreviewing;
+        Boolean SoftwareTriggerStarted;
+    }
+
+    static runtimeclass BindingHelpers
+    {
+        static Windows.UI.Xaml.Visibility CollapsedIf(Boolean value);
+        static Boolean Not(Boolean value);
+    }
+
+    runtimeclass BarcodeScannerInfo
+    {
+        BarcodeScannerInfo(String name, String deviceId);
+
+        String Name{ get; };
+        String DeviceId{ get; };
+    }
+}

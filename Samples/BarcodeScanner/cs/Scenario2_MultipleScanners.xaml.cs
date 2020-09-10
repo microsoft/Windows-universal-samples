@@ -117,7 +117,7 @@ namespace SDKTemplate
         /// <returns></returns>
         async void claimedBarcodeScannerInstance1_ReleaseDeviceRequested(object sender, ClaimedBarcodeScanner e)
         {
-            await MainPage.Current.Dispatcher.RunAsync(
+            await Dispatcher.RunAsync(
                 Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
@@ -197,7 +197,7 @@ namespace SDKTemplate
         /// <returns></returns>
         async void claimedBarcodeScannerInstance2_ReleaseDeviceRequested(object sender, ClaimedBarcodeScanner e)
         {
-            await MainPage.Current.Dispatcher.RunAsync(
+            await Dispatcher.RunAsync(
                 Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
@@ -211,7 +211,7 @@ namespace SDKTemplate
                         }
                         catch (Exception exception)
                         {
-                            rootPage.NotifyUser("Retain instance 1 failed: " + exception.Message, NotifyType.ErrorMessage);
+                            rootPage.NotifyUser("Retain instance 2 failed: " + exception.Message, NotifyType.ErrorMessage);
                         }
                     }
                     //Release the device
@@ -437,7 +437,7 @@ namespace SDKTemplate
         /// Sets the UI elements to a state corresponding to the current active Instance.
         /// </summary>
         /// <param name="instance">Corresponds to the current active instance</param>
-        private async void SetUI(BarcodeScannerInstance instance)
+        private void SetUI(BarcodeScannerInstance instance)
         {
             Instance1Border.BorderBrush = new SolidColorBrush(Colors.Gray);
             Instance2Border.BorderBrush = new SolidColorBrush(Colors.Gray);
@@ -445,30 +445,19 @@ namespace SDKTemplate
             switch (instance)
             {
                 case BarcodeScannerInstance.Instance1:
-                    await rootPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                        () =>
-                        {
-                            ScenarioStartScanningInstance1.IsEnabled = false;
-                            ScenarioStartScanningInstance2.IsEnabled = true;
-                            ScenarioEndScanningInstance1.IsEnabled = true;
-                            ScenarioEndScanningInstance2.IsEnabled = false;
-                            Instance1Border.BorderBrush = new SolidColorBrush(Colors.DarkBlue);
-                        }
-                    );
-
+                    ScenarioStartScanningInstance1.IsEnabled = false;
+                    ScenarioStartScanningInstance2.IsEnabled = true;
+                    ScenarioEndScanningInstance1.IsEnabled = true;
+                    ScenarioEndScanningInstance2.IsEnabled = false;
+                    Instance1Border.BorderBrush = new SolidColorBrush(Colors.DarkBlue);
                     break;
 
                 case BarcodeScannerInstance.Instance2:
-                    await rootPage.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                        () =>
-                        {
-                            ScenarioStartScanningInstance1.IsEnabled = true;
-                            ScenarioStartScanningInstance2.IsEnabled = false;
-                            ScenarioEndScanningInstance1.IsEnabled = false;
-                            ScenarioEndScanningInstance2.IsEnabled = true;
-                            Instance2Border.BorderBrush = new SolidColorBrush(Colors.DarkBlue);
-                        }
-                    );
+                    ScenarioStartScanningInstance1.IsEnabled = true;
+                    ScenarioStartScanningInstance2.IsEnabled = false;
+                    ScenarioEndScanningInstance1.IsEnabled = false;
+                    ScenarioEndScanningInstance2.IsEnabled = true;
+                    Instance2Border.BorderBrush = new SolidColorBrush(Colors.DarkBlue);
                     break;
             }
         }

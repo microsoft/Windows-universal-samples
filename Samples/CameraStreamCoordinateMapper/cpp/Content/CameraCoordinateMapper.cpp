@@ -293,8 +293,15 @@ bool CameraCoordinateMapper::TryAcquireLatestFrameData() try {
 
     if (depthToColorRef)
     {
-        m_rasterizeFrameBlob.depthToSource = depthToColorRef->Value;
-        m_rasterizeFrameBlob.depthToTarget = depthToColorRef->Value;
+        static const float4x4 leftToRight = make_float4x4_scale(1, 1, -1);
+        static const float4x4 rightToLeft = leftToRight; // inverse is the same
+
+        // Camera coordinate systems are right-handed with -Z pointing forward out from the camera,
+        // but camera intrinsics are left-handed with +Z pointing forward out from the camera.
+        // Therefore we need to transform left-handed 3D coordinates from the intrinsics to right-handed
+        // and back again when applying the coordinate system transforms which expect right-handed coordinates.
+        m_rasterizeFrameBlob.depthToSource = leftToRight * depthToColorRef->Value * rightToLeft;
+        m_rasterizeFrameBlob.depthToTarget = leftToRight * depthToColorRef->Value * rightToLeft;
     }
     else
     {

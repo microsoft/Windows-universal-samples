@@ -5,6 +5,7 @@ languages:
 - cpp
 - cppcx
 - vb
+- cppwinrt
 products:
 - windows
 - windows-uwp

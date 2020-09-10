@@ -80,20 +80,21 @@ void QuadRenderer::Update(const DX::StepTimer& timer)
     const float oneOverDeltaTime = 1.f / deltaTime;
 
     // Create a direction normal from the hologram's position to the origin of person space.
-    // This is the z-axis rotation.
+    // This is the z-axis of our rotated coordinate system in unrotated space.
     XMVECTOR facingNormal = XMVector3Normalize(-XMLoadFloat3(&m_position));
 
     // Rotate the x-axis around the y-axis.
-    // This is a 90-degree angle from the normal, in the xz-plane.
-    // This is the x-axis rotation.
+    // This rotation is achieved by projecting the normal into the xz-plane.
+    // This is the x-axis of our rotated coordinate system in unrotated space.
     XMVECTOR xAxisRotation = XMVector3Normalize(XMVectorSet(XMVectorGetZ(facingNormal), 0.f, -XMVectorGetX(facingNormal), 0.f));
 
     // Create a third normal to satisfy the conditions of a rotation matrix.
-    // The cross product  of the other two normals is at a 90-degree angle to 
-    // both normals. (Normalize the cross product to avoid floating-point math
-    // errors.)
-    // Note how the cross product will never be a zero-matrix because the two normals
-    // are always at a 90-degree angle from one another.
+    // The cross product of the other two normals is at a 90-degree angle to 
+    // both normals. The cross product is normalized to avoid floating-point
+    // math errors.
+    // Note how the cross product will never be null because the two axis
+    // normals we generated above will always be at a 90-degree angle from 
+    // one another.
     XMVECTOR yAxisRotation = XMVector3Normalize(XMVector3Cross(facingNormal, xAxisRotation));
     
     // Construct the 4x4 rotation matrix.

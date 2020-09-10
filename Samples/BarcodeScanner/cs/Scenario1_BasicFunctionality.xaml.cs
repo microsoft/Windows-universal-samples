@@ -79,7 +79,7 @@ namespace SDKTemplate
                 if (claimedScanner != null)
                 {
                     // It is always a good idea to have a release device requested event handler. If this event is not handled, there are chances of another app can
-                    // claim ownsership of the barcode scanner.
+                    // claim ownership of the barcode scanner.
                     claimedScanner.ReleaseDeviceRequested += claimedScanner_ReleaseDeviceRequested;
 
                     // after successfully claiming, attach the datareceived event handler.
@@ -90,8 +90,7 @@ namespace SDKTemplate
                     claimedScanner.IsDecodeDataEnabled = true;
 
                     // enable the scanner.
-                    // Note: If the scanner is not enabled (i.e. EnableAsync not called), attaching the event handler will not be any useful because the API will not fire the event
-                    // if the claimedScanner has not beed Enabled
+                    // The scanner must be enabled in order to receive the DataReceived event.
                     await claimedScanner.EnableAsync();
 
                     rootPage.NotifyUser("Ready to scan. Device ID: " + claimedScanner.DeviceId, NotifyType.StatusMessage);
@@ -115,15 +114,12 @@ namespace SDKTemplate
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"> Contains the ClamiedBarcodeScanner that is sending this request</param>
-        async void claimedScanner_ReleaseDeviceRequested(object sender, ClaimedBarcodeScanner e)
+        void claimedScanner_ReleaseDeviceRequested(object sender, ClaimedBarcodeScanner e)
         {
             // always retain the device
             e.RetainDevice();
 
-            await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-            {
-                rootPage.NotifyUser("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", NotifyType.StatusMessage);
-            });
+            rootPage.NotifyUser("Event ReleaseDeviceRequested received. Retaining the barcode scanner.", NotifyType.StatusMessage);
         }
 
         /// <summary>
