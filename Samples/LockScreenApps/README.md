@@ -53,6 +53,7 @@ In Microsoft Visual Studio 2013, this value is set in the **Declarations** page 
 
 For an app to send a toast notification, the developer must have declared that the app is toast-capable in its app manifest file (package.appxmanifest) as has been done in this sample app. Normally, you do this by using the Visual Studio 2013 manifest editor, where you'll find the setting in the **Application UI** tab, under the **Notifications** section. For more info, see [How to opt in for toast notifications](http://msdn.microsoft.com/library/windows/apps/hh781238).
 
+**Note** If the lock screen settings app is open when the sample is deployed the sample app will not appear in detailed status or quick status list. To correct this, relaunch the lock screen settings page (navigate to a different settings page then re-open lock screen settings). 
 
 To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windows.com). 
 
