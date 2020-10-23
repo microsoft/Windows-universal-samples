@@ -126,7 +126,7 @@ namespace MobileBroadband
                     try
                     {
                         message += args.NetworkAccountId + ", (network = " + args.HasNetworkChanged + "; deviceinformation = " + args.HasDeviceInformationChanged + ")" + Environment.NewLine;
-                        message += DumpPropertyData(args.NetworkAccountId, args.HasNetworkChanged, args.HasDeviceInformationChanged);
+                        message += DumpPropertyData(args.NetworkAccountId, args.HasDeviceInformationChanged, args.HasNetworkChanged);
                     }
                     catch (Exception ex)
                     {
