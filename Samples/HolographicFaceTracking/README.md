@@ -80,11 +80,11 @@ Microsoft Visual Studio and the Microsoft HoloLens Emulator, go to
 
 ### Samples
 
-[BasicFaceDetection](/Samples/BasicFaceDetection)
+[BasicFaceDetection](/samples/microsoft/windows-universal-samples/basicfacedetection/)
 
-[BasicFaceTracking](/Samples/BasicFaceTracking)
+[BasicFaceTracking](/samples/microsoft/windows-universal-samples/basicfacetracking)
 
-[CameraFrames](/Sample/CameraFrames)
+[CameraFrames](/samples/microsoft/windows-universal-samples/cameraframes)
 
 ### Reference
 
