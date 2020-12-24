@@ -84,7 +84,7 @@ Microsoft Visual Studio and the Microsoft HoloLens Emulator, go to
 
 [BasicFaceTracking](/Samples/BasicFaceTracking)
 
-[CameraFrames](/Sample/CameraFrames)
+[CameraFrames](/Samples/CameraFrames)
 
 ### Reference
 
@@ -132,8 +132,7 @@ run it.
 
 ### Deploying the sample to a Microsoft HoloLens
 
-- Developer unlock your Microsoft HoloLens. For instructions, go to [Enable your device for development]
-  (https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
+- Developer unlock your Microsoft HoloLens. For instructions, go to [Enable your device for development](https://msdn.microsoft.com/windows/uwp/get-started/enable-your-device-for-development#enable-your-windows-10-devices).
 - Find the IP address of your Microsoft HoloLens. The IP address can be found in **Settings**
   \> **Network & Internet** \> **Wi-Fi** \> **Advanced options**. Or, you can ask Cortana for this
   information by saying: "Hey Cortana, what's my IP address?"

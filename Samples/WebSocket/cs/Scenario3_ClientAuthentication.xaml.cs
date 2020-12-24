@@ -23,14 +23,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
-    public sealed partial class Scenario3 : Page
+    public sealed partial class Scenario3_ClientAuthentication : Page
     {
         private static readonly string ClientCertUriPath = "ms-appx:///Assets/clientCert.pfx";
         private static readonly string ClientCertPassword = "1234";
         private static readonly string ClientCertFriendlyName = "WebSocketSampleClientCert";
         private static readonly string ClientCertIssuerName = "www.contoso.com";
 
-        public Scenario3()
+        public Scenario3_ClientAuthentication()
         {
             this.InitializeComponent();
             UpdateVisualState();
@@ -64,7 +64,7 @@ namespace SDKTemplate
             UpdateVisualState();
         }
 
-        private async void OnConnect()
+        private async void OnConnect(object sender, RoutedEventArgs e)
         {
             SetBusy(true);
             await ConnectWebSocketAsync();
@@ -134,13 +134,13 @@ namespace SDKTemplate
 
                 AppendOutputLine("Installing certificate succeeded.");
 
-                // Return the certificate we just instaled.
+                // Return the certificate we just installed.
                 return await FindCertificateFromStoreAsync();
             }
             catch (Exception ex)
             {
                 // This can happen if the certificate has already expired.
-                AppendOutputLine("Installing certificate failed with" + ex.Message);
+                AppendOutputLine("Installing certificate failed with " + ex.Message);
                 return null;
             }
         }
@@ -162,7 +162,7 @@ namespace SDKTemplate
         private async Task ConnectWebSocketAsync()
         {
             // Validating the URI is required since it was received from an untrusted source (user input).
-            // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
+            // The URI is validated by calling TryGetUri() that will return null for strings that are not
             // valid WebSocket URIs.
             // Note that when enabling the text box users may provide URIs to machines on the intrAnet
             // or intErnet. In these cases the app requires the "Home or Work Networking" or
@@ -217,7 +217,7 @@ namespace SDKTemplate
             AppendOutputLine("Connected to WebSocket Server.");
         }
 
-        private void OnDisconnect()
+        private void OnDisconnect(object sender, RoutedEventArgs e)
         {
             SetBusy(true);
             rootPage.NotifyUser("Closing", NotifyType.StatusMessage);

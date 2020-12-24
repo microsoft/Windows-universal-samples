@@ -104,6 +104,7 @@
     <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="MediaFoundationConstants.cs" />
     <Compile Include="SampleConfiguration.cs" />
     <Compile Include="Scenario1_Default.xaml.cs">
       <DependentUpon>Scenario1_Default.xaml</DependentUpon>

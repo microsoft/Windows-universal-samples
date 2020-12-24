@@ -14,29 +14,6 @@
 
 namespace winrt::SDKTemplate::Helpers
 {
-    // This helper function is a convenience wrapper to make it
-    // easier to allow a coroutine to propagate cancel
-    // requests into asynchronous operations that it is awaiting.
-    //
-    // Without this helper function, you write
-    //
-    // auto cancellation = co_await get_cancellation_token();
-    // auto operation = SomethingAsync();
-    // cancellation.callback([operation] { operation.Cancel(); });
-    // auto result = co_await operation;
-    //
-    // With this helper, you write
-    //
-    // auto cancellation = co_await get_cancellation_token();
-    // auto result = co_await AddCancellation(SomethingAsync(), cancellation);
-    //
-    template<typename Async, typename Token>
-    auto AddCancellation(Async&& async, Token&& token)
-    {
-        token.callback([async] { async.Cancel(); });
-        return std::forward<Async>(async);
-    }
-
     hstring ToSimpleString(Windows::Foundation::DateTime time);
 
     Windows::Foundation::IAsyncAction DisplayTextResultAsync(

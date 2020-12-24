@@ -26,7 +26,7 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario4 : Page
+    public sealed partial class Scenario4_PartialReadWrite : Page
     {
         // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
         // as NotifyUser()
@@ -35,7 +35,7 @@ namespace SDKTemplate
         private MessageWebSocket messageWebSocket;
         private bool busy;
 
-        public Scenario4()
+        public Scenario4_PartialReadWrite()
         {
             this.InitializeComponent();
             UpdateVisualState();
@@ -65,7 +65,7 @@ namespace SDKTemplate
             UpdateVisualState();
         }
 
-        private async void OnConnect()
+        private async void OnConnect(object sender, RoutedEventArgs e)
         {
             SetBusy(true);
             await ConnectAsync();
@@ -81,7 +81,7 @@ namespace SDKTemplate
             }
 
             // Validating the URI is required since it was received from an untrusted source (user input).
-            // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
+            // The URI is validated by calling TryGetUri() that will return null for strings that are not
             // valid WebSocket URIs.
             // Note that when enabling the text box users may provide URIs to machines on the intrAnet
             // or intErnet. In these cases the app requires the "Private Networks (Client and Server)" or
@@ -135,7 +135,7 @@ namespace SDKTemplate
             rootPage.NotifyUser("Connected", NotifyType.StatusMessage);
         }
 
-        async void OnSend()
+        async void OnSend(object sender, RoutedEventArgs e)
         {
             SetBusy(true);
             await SendAsync();
@@ -213,7 +213,7 @@ namespace SDKTemplate
             });
         }
 
-        private void OnDisconnect()
+        private void OnDisconnect(object sender, RoutedEventArgs e)
         {
             SetBusy(true);
             rootPage.NotifyUser("Closing", NotifyType.StatusMessage);

@@ -82,6 +82,7 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
 
         HttpRequestMessage request(HttpMethod::Get(), resourceUri);
 
@@ -96,11 +97,11 @@ namespace winrt::SDKTemplate::implementation
         }
         request.Properties().Insert(HttpMeteredConnectionFilter::MeteredConnectionPriorityPropertyName(), box_value(priority));
 
-        HttpRequestResult result = co_await Helpers::AddCancellation(httpClient.TrySendRequestAsync(request), cancellation);
+        HttpRequestResult result = co_await httpClient.TrySendRequestAsync(request);
 
         if (result.Succeeded())
         {
-            co_await Helpers::AddCancellation(Helpers::DisplayTextResultAsync(result.ResponseMessage(), OutputField()), cancellation);
+            co_await Helpers::DisplayTextResultAsync(result.ResponseMessage(), OutputField());
 
             rootPage.NotifyUser(L"Completed", NotifyType::StatusMessage);
         }

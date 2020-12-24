@@ -44,6 +44,8 @@
                 through the Lockscreen personalization page in Settings.
                 When declared in the manifest as described above, the app will
                 appear in the list of allowable lock screen apps.
+                (If the app doesn't appear, then exit the Settings app,
+                and then click &quot;Go to Lockscreen Settings&quot; again.)
             </TextBlock>
             <Button Content="Go to App-specific Settings" Click="OpenAppSettings" Margin="0,10,0,0"/>
             <Button Content="Go to Lockscreen Settings" Click="OpenLockscreenSettings" Margin="0,10,0,0"/>

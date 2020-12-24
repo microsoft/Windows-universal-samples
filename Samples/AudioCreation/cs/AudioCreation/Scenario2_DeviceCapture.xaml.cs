@@ -44,6 +44,7 @@ namespace AudioCreation
         private AudioDeviceOutputNode deviceOutputNode;
         private AudioDeviceInputNode deviceInputNode;
         private DeviceInformationCollection outputDevices;
+        private DeviceInformationCollection inputDevices;
 
         public Scenario2_DeviceCapture()
         {
@@ -53,7 +54,8 @@ namespace AudioCreation
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             rootPage = MainPage.Current;
-            await PopulateDeviceList();
+            await PopulateOutputDeviceList();
+            await PopulateInputDeviceList();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -165,7 +167,7 @@ namespace AudioCreation
             }
         }
 
-        private async Task PopulateDeviceList()
+        private async Task PopulateOutputDeviceList()
         {
             outputDevicesListBox.Items.Clear();
             outputDevices = await DeviceInformation.FindAllAsync(MediaDevice.GetAudioRenderSelector());
@@ -173,6 +175,17 @@ namespace AudioCreation
             foreach (var device in outputDevices)
             {
                 outputDevicesListBox.Items.Add(device.Name);
+            }
+        }
+
+        private async Task PopulateInputDeviceList()
+        {
+            inputDevicesListBox.Items.Clear();
+            inputDevices = await DeviceInformation.FindAllAsync(MediaDevice.GetAudioCaptureSelector());
+            inputDevicesListBox.Items.Add("-- Pick input device --");
+            foreach (var device in inputDevices)
+            {
+                inputDevicesListBox.Items.Add(device.Name);
             }
         }
 
@@ -209,7 +222,7 @@ namespace AudioCreation
             outputDeviceContainer.Background = new SolidColorBrush(Colors.Green);
 
             // Create a device input node using the default audio input device
-            CreateAudioDeviceInputNodeResult deviceInputNodeResult = await graph.CreateDeviceInputNodeAsync(MediaCategory.Other);
+            CreateAudioDeviceInputNodeResult deviceInputNodeResult = await graph.CreateDeviceInputNodeAsync(MediaCategory.Other, graph.EncodingProperties, inputDevices[inputDevicesListBox.SelectedIndex - 1]);
 
             if (deviceInputNodeResult.Status != AudioDeviceNodeCreationStatus.Success)
             {
@@ -240,7 +253,8 @@ namespace AudioCreation
             {
                 sender.Dispose();
                 // Re-query for devices
-                await PopulateDeviceList();
+                await PopulateOutputDeviceList();
+                await PopulateInputDeviceList();
                 // Reset UI
                 fileButton.IsEnabled = false;
                 recordStopButton.IsEnabled = false;
@@ -273,6 +287,28 @@ namespace AudioCreation
             {
                 createGraphButton.IsEnabled = true;
                 outputDevice.Foreground = new SolidColorBrush(Colors.White);
+            }
+        }
+
+        private void inputDevicesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (inputDevicesListBox.SelectedIndex == 0)
+            {
+                createGraphButton.IsEnabled = false;
+                fileButton.IsEnabled = false;
+                fileButton.Background = new SolidColorBrush(Color.FromArgb(255, 74, 74, 74));
+                inputDeviceContainer.Background = new SolidColorBrush(Color.FromArgb(255, 74, 74, 74));
+
+                // Destroy graph
+                if (graph != null)
+                {
+                    graph.Dispose();
+                    graph = null;
+                }
+            }
+            else
+            {
+                createGraphButton.IsEnabled = true;
             }
         }
     }

@@ -27,7 +27,7 @@ namespace SDKTemplate
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Scenario2 : Page
+    public sealed partial class Scenario2_Binary : Page
     {
         // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
         // as NotifyUser()
@@ -36,7 +36,7 @@ namespace SDKTemplate
         private StreamWebSocket streamWebSocket;
         private bool busy;
 
-        public Scenario2()
+        public Scenario2_Binary()
         {
             this.InitializeComponent();
             UpdateVisualState();
@@ -66,7 +66,7 @@ namespace SDKTemplate
             UpdateVisualState();
         }
 
-        private async void OnStart()
+        private async void OnStart(object sender, RoutedEventArgs args)
         {
             SetBusy(true);
             await StartAsync();
@@ -76,7 +76,7 @@ namespace SDKTemplate
         private async Task StartAsync()
         {
             // Validating the URI is required since it was received from an untrusted source (user input).
-            // The URI is validated by calling TryGetUri() that will return 'false' for strings that are not
+            // The URI is validated by calling TryGetUri() that will return null for strings that are not
             // valid WebSocket URIs.
             // Note that when enabling the text box users may provide URIs to machines on the intrAnet
             // or intErnet. In these cases the app requires the "Home or Work Networking" or
@@ -268,7 +268,7 @@ namespace SDKTemplate
             }
         }
 
-        private void OnStop()
+        private void OnStop(object sender, RoutedEventArgs args)
         {
             SetBusy(true);
             rootPage.NotifyUser("Stopping", NotifyType.StatusMessage);

@@ -160,6 +160,26 @@ namespace SDKTemplate
                 _Profile.Audio.ChannelCount = UInt32.Parse(AudioCC.Text);
                 _Profile.Audio.Bitrate = UInt32.Parse(AudioBR.Text);
                 _Profile.Audio.SampleRate = UInt32.Parse(AudioSR.Text);
+
+                // Video sources providing more than about 250 megapixels per second require the
+                // H.264 encoder to be set to level 5.2. Information about H.264 encoding levels:
+                // https://en.wikipedia.org/wiki/Advanced_Video_Coding#Levels
+                // Windows doesn't always set the higher level automatically so it should be set
+                // explicitly to avoid encoding failures. Constants needed to set the encoding level:
+                // https://docs.microsoft.com/en-us/windows/win32/medfound/mf-mt-video-level
+                // https://docs.microsoft.com/en-us/windows/win32/api/codecapi/ne-codecapi-eavench264vlevel
+                if (_UseMp4)
+                {
+                    const int c_PixelsPerSecondRequiringLevel52 = 250000000;
+                    if (_Profile.Video.Width * _Profile.Video.Height *
+                        _Profile.Video.FrameRate.Numerator / _Profile.Video.FrameRate.Denominator >
+                        c_PixelsPerSecondRequiringLevel52)
+                    {
+                        _Profile.Video.Properties[MediaFoundationConstants.MF_MT_VIDEO_LEVEL] = 
+                            (UInt32)MediaFoundationConstants.eAVEncH264VLevel.eAVEncH264VLevel5_2;
+                    }
+                }
+
             }
             catch (Exception exception)
             {

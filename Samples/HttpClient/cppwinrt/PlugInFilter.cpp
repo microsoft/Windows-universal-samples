@@ -33,6 +33,7 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
         auto progress = co_await get_progress_token();
 
         request.Headers().Append(L"Custom-Header", L"CustomRequestValue");
@@ -42,7 +43,7 @@ namespace winrt::SDKTemplate::implementation
             {
                 progress(data);
             });
-        HttpResponseMessage response = co_await Helpers::AddCancellation(operation, cancellation);
+        HttpResponseMessage response = co_await operation;
 
         response.Headers().Append(L"Custom-Header", L"CustomResponseValue");
         co_return response;

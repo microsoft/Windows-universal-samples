@@ -25,10 +25,10 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "UTF-8 text messages", ClassType = typeof(Scenario1) },
-            new Scenario() { Title = "Binary data stream", ClassType = typeof(Scenario2) },
-            new Scenario() { Title = "Client authentication", ClassType = typeof(Scenario3) },
-            new Scenario() { Title = "Partial and Complete Messages", ClassType = typeof(Scenario4) },
+            new Scenario() { Title = "UTF-8 text messages", ClassType = typeof(Scenario1_UTF8) },
+            new Scenario() { Title = "Binary data stream", ClassType = typeof(Scenario2_Binary) },
+            new Scenario() { Title = "Client authentication", ClassType = typeof(Scenario3_ClientAuthentication) },
+            new Scenario() { Title = "Partial and Complete Messages", ClassType = typeof(Scenario4_PartialReadWrite) },
         };
 
         public Uri TryGetUri(string uriString)

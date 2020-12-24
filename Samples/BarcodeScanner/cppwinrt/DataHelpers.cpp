@@ -79,6 +79,6 @@ winrt::hstring GetDataLabelString(winrt::IBuffer const& data, uint32_t scanDataT
     {
         // Some other symbologies (typically 2-D symbologies) contain binary data that
         //  should not be converted to text.
-        return hstring{ L"Decoded data unavailable. Raw label data: " + GetDataString(data) };
+        return winrt::hstring{ L"Decoded data unavailable. Raw label data: " + GetDataString(data) };
     }
 }

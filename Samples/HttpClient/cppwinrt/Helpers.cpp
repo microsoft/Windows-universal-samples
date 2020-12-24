@@ -40,9 +40,9 @@ namespace winrt::SDKTemplate::Helpers
         output.Text(output.Text() + SerializeHeaders(response));
 
         auto cancellation = co_await get_cancellation_token();
-        auto operation = response.Content().ReadAsStringAsync();
-        cancellation.callback([operation] { operation.Cancel(); });
-        std::wstring text{ co_await operation };
+        cancellation.enable_propagation();
+
+        std::wstring text{ co_await response.Content().ReadAsStringAsync() };
 
         // Change <BR> to newlines.
         for (auto pos = text.find(L"<br>"); pos != std::wstring::npos; pos = text.find(L"<br>", pos + 1))

@@ -68,6 +68,9 @@
     <ClInclude Include="Scenario14_MeteredConnectionFilter.h" />
     <ClInclude Include="Scenario15_ServerCertificateValidation.h" />
     <ClInclude Include="PlugInFilter.h" />
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="HttpJsonContent.h" />
+    <ClInclude Include="SlowInputStream.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />

@@ -77,13 +77,14 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
 
-        HttpRequestResult result = co_await Helpers::AddCancellation(httpClient.TryGetAsync(resourceUri), cancellation);
+        HttpRequestResult result = co_await httpClient.TryGetAsync(resourceUri);
 
         if (result.Succeeded())
         {
-            co_await Helpers::AddCancellation(Helpers::DisplayTextResultAsync(result.ResponseMessage(), OutputField()), cancellation);
-            hstring contentString = co_await Helpers::AddCancellation(result.ResponseMessage().Content().ReadAsStringAsync(), cancellation);
+            co_await Helpers::DisplayTextResultAsync(result.ResponseMessage(), OutputField());
+            hstring contentString = co_await result.ResponseMessage().Content().ReadAsStringAsync();
 
             XmlDocument xmlDocument;
             try

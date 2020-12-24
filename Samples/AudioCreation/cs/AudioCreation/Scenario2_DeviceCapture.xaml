@@ -27,14 +27,14 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="inputDeviceContainer.(RelativePanel.Below)" Value="outputDevicesListBox" />
+                        <Setter Target="inputDeviceContainer.(RelativePanel.Below)" Value="inputDevicesListBox" />
                         <Setter Target="audioPipe1.(RelativePanel.RightOf)" Value="inputDeviceContainer" />
                         <Setter Target="audioPipe2.(RelativePanel.RightOf)" Value="inputDeviceContainer" />
                         <Setter Target="audioPipe1.(RelativePanel.AlignVerticalCenterWith)" Value="inputDeviceContainer" />
                         <Setter Target="audioPipe2.(RelativePanel.AlignVerticalCenterWith)" Value="inputDeviceContainer" />
 
                         <Setter Target="outputDeviceContainer.(RelativePanel.RightOf)" Value="audioPipe1" />
-                        <Setter Target="fileButton.(RelativePanel.RightOf)" Value="audioPipe1" />
+                        <Setter Target="fileButton.(RelativePanel.RightOf)" Value="audioPipe2" />
 
                         <Setter Target="fileButton.(RelativePanel.Below)" Value="outputDeviceContainer" />
                         <Setter Target="fileButton.(RelativePanel.AlignLeftWith)" Value="outputDeviceContainer" />
@@ -61,7 +61,8 @@
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <RelativePanel HorizontalAlignment="Stretch">
                     <ListBox x:Name="outputDevicesListBox" IsEnabled="True" Margin="0,20,15,20" HorizontalAlignment="Stretch" MaxWidth="600" SelectionChanged="outputDevicesListBox_SelectionChanged"/>
-                    <Border x:Name="inputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="0,67,0,0" MinWidth="120" MinHeight="45">
+                    <ListBox x:Name="inputDevicesListBox" IsEnabled="True" Margin="0,20,15,20" HorizontalAlignment="Stretch" MaxWidth="600" SelectionChanged="inputDevicesListBox_SelectionChanged" RelativePanel.Below="outputDevicesListBox"/>
+                    <Border x:Name="inputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="0,67,0,0" MinWidth="120" MinHeight="45" RelativePanel.Below="inputDevicesListBox">
                         <TextBlock Text="Input Device" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Border>
                     <Rectangle x:Name="audioPipe1" Margin="0,67,0,0" Height="10" MinWidth="150" Fill="#313131" HorizontalAlignment="Stretch">
@@ -81,11 +82,11 @@
                         </Rectangle.RenderTransform>
                     </Rectangle>
 
-                    <Border x:Name="outputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="8,150,0,0" MinWidth="120" MinHeight="45">
+                    <Border x:Name="outputDeviceContainer" BorderThickness="0" Background="#4A4A4A" Margin="8,0,0,0" MinWidth="120" MinHeight="45" RelativePanel.RightOf="audioPipe1" RelativePanel.AlignTopWith="" RelativePanel.AlignBottomWith="" RelativePanel.AlignVerticalCenterWith="audioPipe1">
                         <TextBlock x:Name="outputDevice" Text="Output Device" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#6E6E6E" />
                     </Border>
                     <!--<Button x:Name="deviceButton" Content="Output Device" Margin="8,150,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>-->
-                    <Button x:Name="fileButton" Content="Pick Output File" Margin="8,45,0,0" MinWidth="120" MinHeight="45" IsEnabled="False" Click="FileButton_Click" />
+                    <Button x:Name="fileButton" Content="Pick Output File" Margin="8,45,0,0" MinWidth="120" MinHeight="45" IsEnabled="False" Click="FileButton_Click" RelativePanel.RightOf="audioPipe2" />
                     <Button x:Name="recordStopButton" Content="Record" Click="RecordStopButton_Click" Margin="0,75,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
                     <Button x:Name="createGraphButton" Content="Create Graph" Click="CreateGraphButton_Click" Margin="0,30,0,0" MinWidth="120" MinHeight="45" IsEnabled="False"/>
                 </RelativePanel>

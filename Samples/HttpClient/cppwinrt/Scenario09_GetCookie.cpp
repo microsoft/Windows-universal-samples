@@ -114,13 +114,13 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
 
-        HttpRequestResult result = co_await Helpers::AddCancellation(
-            httpClient.TryGetAsync(resourceUri), cancellation);
+        HttpRequestResult result = co_await httpClient.TryGetAsync(resourceUri);
 
         if (result.Succeeded())
         {
-            co_await Helpers::AddCancellation(Helpers::DisplayTextResultAsync(result.ResponseMessage(), OutputField()), cancellation);
+            co_await Helpers::DisplayTextResultAsync(result.ResponseMessage(), OutputField());
 
             rootPage.NotifyUser(L"Completed", NotifyType::StatusMessage);
         }

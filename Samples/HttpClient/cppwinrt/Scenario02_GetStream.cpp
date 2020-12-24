@@ -76,22 +76,22 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
 
         // Do not buffer the response.
-        HttpRequestResult result = co_await Helpers::AddCancellation(
-            httpClient.TrySendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead), cancellation);
+        HttpRequestResult result = co_await httpClient.TrySendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
 
         if (result.Succeeded())
         {
             OutputField().Text(OutputField().Text() + Helpers::SerializeHeaders(result.ResponseMessage()));
 
             std::wostringstream responseBody;
-            IInputStream responseStream = co_await Helpers::AddCancellation(result.ResponseMessage().Content().ReadAsInputStreamAsync(), cancellation);
+            IInputStream responseStream = co_await result.ResponseMessage().Content().ReadAsInputStreamAsync();
             Buffer readBuffer(1000);
             IBuffer resultBuffer;
             do
             {
-                resultBuffer = co_await Helpers::AddCancellation(responseStream.ReadAsync(readBuffer, readBuffer.Capacity(), InputStreamOptions::Partial), cancellation);
+                resultBuffer = co_await responseStream.ReadAsync(readBuffer, readBuffer.Capacity(), InputStreamOptions::Partial);
 
                 responseBody << L"Bytes read from stream: " << resultBuffer.Length() << L"\n";
 

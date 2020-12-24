@@ -118,9 +118,9 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
 
-        HttpRequestResult result = co_await Helpers::AddCancellation(
-            httpClient.TrySendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead), cancellation);
+        HttpRequestResult result = co_await httpClient.TrySendRequestAsync(request, HttpCompletionOption::ResponseHeadersRead);
 
         if (result.Succeeded())
         {

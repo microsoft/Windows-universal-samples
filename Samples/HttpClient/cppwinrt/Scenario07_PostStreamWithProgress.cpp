@@ -100,11 +100,12 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
         auto cancellation = co_await get_cancellation_token();
+        cancellation.enable_propagation();
 
         IAsyncOperationWithProgress<HttpRequestResult, HttpProgress> operation = httpClient.TryPostAsync(resourceUri, content);
         operation.Progress({ get_weak(), &Scenario07_PostStreamWithProgress::ProgressHandler });
 
-        HttpRequestResult result = co_await Helpers::AddCancellation(operation, cancellation);
+        HttpRequestResult result = co_await operation;
 
         if (result.Succeeded())
         {
