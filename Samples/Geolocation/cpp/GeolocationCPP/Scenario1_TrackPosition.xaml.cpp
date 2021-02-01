@@ -135,6 +135,7 @@ void Scenario1::OnPositionChanged(Geolocator^ sender, PositionChangedEventArgs^ 
         ScenarioOutput_Latitude->Text = coordinate->Point->Position.Latitude.ToString();
         ScenarioOutput_Longitude->Text = coordinate->Point->Position.Longitude.ToString();
         ScenarioOutput_Accuracy->Text = coordinate->Accuracy.ToString();
+        ScenarioOutput_IsRemoteSource->Text = coordinate->IsRemoteSource.ToString();
     },
         CallbackContext::Any
         )
@@ -178,6 +179,7 @@ void Scenario1::OnStatusChanged(Geolocator^ sender, StatusChangedEventArgs^ e)
             ScenarioOutput_Latitude->Text = "No data";
             ScenarioOutput_Longitude->Text = "No data";
             ScenarioOutput_Accuracy->Text = "No data";
+            ScenarioOutput_IsRemoteSource->Text = "No data";
             break;
 
         case Windows::Devices::Geolocation::PositionStatus::NotInitialized:

@@ -89,6 +89,7 @@ void Scenario6::UpdateLastVisit(Geovisit^ visit)
         ScenarioOutput_Latitude->Text = "No data";
         ScenarioOutput_Longitude->Text = "No data";
         ScenarioOutput_Accuracy->Text = "No data";
+        ScenarioOutput_IsRemoteSource->Text = "No data";
         ScenarioOutput_Timestamp->Text = "No data";
         ScenarioOutput_VisitStateChange->Text = "No data";
     }
@@ -106,12 +107,14 @@ void Scenario6::UpdateLastVisit(Geovisit^ visit)
             ScenarioOutput_Latitude->Text = "No data";
             ScenarioOutput_Longitude->Text = "No data";
             ScenarioOutput_Accuracy->Text = "No data";
+            ScenarioOutput_IsRemoteSource->Text = "No data";
         }
         else
         {
             ScenarioOutput_Latitude->Text = visit->Position->Coordinate->Point->Position.Latitude.ToString();
             ScenarioOutput_Longitude->Text = visit->Position->Coordinate->Point->Position.Longitude.ToString();
             ScenarioOutput_Accuracy->Text = visit->Position->Coordinate->Accuracy.ToString();
+            ScenarioOutput_IsRemoteSource->Text = visit->Position->Coordinate->IsRemoteSource.ToString();
         }
     }
 }

@@ -46,11 +46,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="0" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Latitude: " />
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="1" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Longitude: " />
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="2" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Accuracy: " />
                 <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="3" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Source: " />
+                <TextBlock TextWrapping="Wrap" Margin="0,0,10,0" Grid.Row="4" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="IsRemoteSource: " />
                 <TextBlock x:Name="Label_DilutionOfPrecision" Margin="0,0,10,0" Visibility="{Binding Visibility, ElementName=ScenarioOutput_PosPrecision}"  TextWrapping="Wrap" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Dilution Of Precision (DOP): " />
                 <TextBlock x:Name="Label_PosPrecision" Margin="20,0,10,0" Visibility="{Binding Visibility, ElementName=ScenarioOutput_PosPrecision}"  TextWrapping="Wrap" Grid.Row="6" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Position DOP: " />
                 <TextBlock x:Name="Label_HorzPrecision" Margin="20,0,10,0" Visibility="{Binding Visibility, ElementName=ScenarioOutput_HorzPrecision}" TextWrapping="Wrap" Grid.Row="7" Grid.Column="0" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="Horizontal DOP: " />
@@ -59,6 +61,7 @@
                 <TextBlock x:Name="ScenarioOutput_Longitude" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_Accuracy" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_Source" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
+                <TextBlock x:Name="ScenarioOutput_IsRemoteSource" Margin="0,0,10,0" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_PosPrecision" Margin="0,0,10,0" Visibility="Collapsed" TextWrapping="Wrap" Grid.Row="6" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_HorzPrecision" Margin="0,0,10,0" Visibility="Collapsed" TextWrapping="Wrap" Grid.Row="7" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
                 <TextBlock x:Name="ScenarioOutput_VertPrecision" Margin="0,0,10,0" Visibility="Collapsed" TextWrapping="Wrap" Grid.Row="8" Grid.Column="1" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Left" Text="No data" />
