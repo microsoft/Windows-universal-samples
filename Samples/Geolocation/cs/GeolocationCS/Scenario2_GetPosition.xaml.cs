@@ -186,6 +186,7 @@ namespace GeolocationCS
                 ScenarioOutput_Longitude.Text = "No data";
                 ScenarioOutput_Accuracy.Text = "No data";
                 ScenarioOutput_Source.Text = "No data";
+                ScenarioOutput_IsRemoteSource.Text = "No data";
                 ShowSatalliteData(false);
             }
             else
@@ -194,7 +195,8 @@ namespace GeolocationCS
                 ScenarioOutput_Longitude.Text = position.Coordinate.Point.Position.Longitude.ToString();
                 ScenarioOutput_Accuracy.Text = position.Coordinate.Accuracy.ToString();
                 ScenarioOutput_Source.Text = position.Coordinate.PositionSource.ToString();
-                
+                ScenarioOutput_IsRemoteSource.Text = position.Coordinate.IsRemoteSource.ToString();
+
                 if (position.Coordinate.PositionSource == PositionSource.Satellite)
                 {
                     // Show labels and satellite data when available
