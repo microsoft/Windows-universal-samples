@@ -5,7 +5,8 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
   xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
-  IgnorableNamespaces="uap mp uap2 uap3"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  IgnorableNamespaces="uap mp uap2 uap3 uap10"
   >
   <Identity Name="Microsoft.SDKSamples.AssociationLaunching.VB" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="4b4a5960-161a-4aa8-b8cf-eadcbc68a208" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
@@ -15,7 +16,7 @@
     <Logo>Assets\StoreLogo-sdk.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.18362.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.19041.0" />
   </Dependencies>
   <Resources>
     <Resource Language="x-generate" />
@@ -30,6 +31,7 @@
           <uap:FileTypeAssociation Name=".alsdkvb" DesiredView="useLess">
             <uap:SupportedFileTypes>
               <uap:FileType>.alsdkvb</uap:FileType>
+              <uap10:FileType>*</uap10:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
