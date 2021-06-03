@@ -40,7 +40,8 @@ namespace winrt::SDKTemplate::implementation
         StorageFolder folder = co_await folderPicker.PickSingleFolderAsync();
         if (folder != nullptr)
         {
-            // Application now has read/write access to all contents in the picked folder (including other sub-folder contents)
+            // The StorageFolder has read/write access to all contents in the picked folder (including other sub-folder contents).
+            // See the FileAccess sample for code that obtains a StorageFile from a StorageFolder to read and write.
             StorageApplicationPermissions::FutureAccessList().AddOrReplace(L"PickedFolderToken", folder);
             OutputTextBlock().Text(L"Picked folder: " + folder.Name());
         }

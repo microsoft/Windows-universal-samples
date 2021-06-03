@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -57,7 +57,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ### Related samples
 
 * [Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)
-* [UserInfo sample](/archived/UserInfo/) for JavaScript (archived)
+* [UserInfo sample](/archived/UserInfo/) for JavaScript and C++/CX (archived)
 
 ## System requirements
 
