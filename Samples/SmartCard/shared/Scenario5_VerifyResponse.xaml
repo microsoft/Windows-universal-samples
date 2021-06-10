@@ -11,10 +11,10 @@
 //*********************************************************
 -->
 <Page
-    x:Class="Smartcard.Scenario4_ChangeAdminKey"
+    x:Class="SDKTemplate.Scenario5_VerifyResponse"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Smartcard"
+    xmlns:local="using:SDKTemplate"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -29,20 +29,15 @@
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                 <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    To change the admin key of the smart card, click Change Admin Key.
+                    To generate a smart card challenge and verify the response with the admin key, click Verify Response.
                 </TextBlock>
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                    <Button x:Name="ChangeAdminKey" Content="Change Admin Key" Margin="0,0,10,0" Click="ChangeAdminKey_Click"/>
+                    <Button x:Name="VerifyResponse" Content="Verify Response" Margin="0,0,10,0" Click="VerifyResponse_Click"/>
                 </StackPanel>
             </ScrollViewer>
-
-            <!-- Status Block for providing messages to the user.  Use the
-             NotifyUser() method to populate the message -->
-            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="2"/>
-            <TextBlock x:Name="StatusBlock" Grid.Row="2" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 </Page>

@@ -9,7 +9,6 @@
 //
 //*********************************************************
 
-using SDKTemplate;
 using System;
 using System.Threading;
 using Windows.Devices.SmartCards;
@@ -18,7 +17,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Smartcard
+namespace SDKTemplate
 {
     public sealed partial class Scenario1_ProvisionTPM : Page
     {
@@ -32,18 +31,10 @@ namespace Smartcard
         private const String pinPolicyRequireOne = "Require At Least One";
 
         private SmartCardReader reader = null;
-        private SynchronizationContext uiContext = null;
 
         public Scenario1_ProvisionTPM()
         {
             this.InitializeComponent();
-
-            // Since this class is a page, it will be instantiated on the UI
-            // thread.  We need to keep a reference to the UI thread's
-            // synchronization context as a member so that we can access it
-            // from other threads for event handlers.  See the
-            // HandleCardAdded method for more information.
-            uiContext = SynchronizationContext.Current;
         }
 
         /// <summary>
@@ -147,15 +138,9 @@ namespace Smartcard
 
         void HandleCardAdded(SmartCardReader sender, CardAddedEventArgs args)
         {
-            // This event handler will not be invoked on the UI thread.  Hence,
-            // to perform UI operations we need to post a lambda to be executed
-            // back on the UI thread; otherwise we may access objects which
-            // are not marshalled for the current thread, which will result in an
-            // exception due to RPC_E_WRONG_THREAD.
-            uiContext.Post((object ignore) =>
-            {
-                rootPage.NotifyUser("Card added to reader " + reader.Name + ".", NotifyType.StatusMessage);
-            }, null);
+            // Note that this event is raised from a background thread.
+            // However, the NotifyUser method is safe to call from background threads.
+            rootPage.NotifyUser("Card added to reader " + reader.Name + ".", NotifyType.StatusMessage);
         }
 
         private SmartCardPinPolicy ParsePinPolicy()

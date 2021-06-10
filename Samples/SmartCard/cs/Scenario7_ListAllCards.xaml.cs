@@ -1,12 +1,11 @@
-﻿using SDKTemplate;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Windows.Devices.Enumeration;
 using Windows.Devices.SmartCards;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Smartcard
+namespace SDKTemplate
 {
     public class SmartCardListItem
     {
