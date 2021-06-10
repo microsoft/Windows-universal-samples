@@ -1,0 +1,70 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_ProvisionTPM : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_ProvisionTPM();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_ChangePIN : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_ChangePIN();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_ResetPIN : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_ResetPIN();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_ChangeAdminKey : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_ChangeAdminKey();
+    }
+
+    [default_interface]
+    runtimeclass Scenario5_VerifyResponse : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_VerifyResponse();
+    }
+
+    [default_interface]
+    runtimeclass Scenario6_DeleteTPM : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario6_DeleteTPM();
+    }
+
+    [default_interface]
+    runtimeclass Scenario7_ListAllCards : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario7_ListAllCards();
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass SmartCardListItem
+    {
+        SmartCardListItem(String readerName, String cardName);
+
+        String ReaderName { get; };
+        String CardName{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Scenario8_TransmitAPDU : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario8_TransmitAPDU();
+    }
+}

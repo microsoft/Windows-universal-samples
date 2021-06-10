@@ -1,11 +1,10 @@
-﻿using SDKTemplate;
-using System;
+﻿using System;
 using System.Threading;
 using Windows.Devices.SmartCards;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Smartcard
+namespace SDKTemplate
 {
     public sealed partial class Scenario6_DeleteTPM : Page
     {
