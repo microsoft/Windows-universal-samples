@@ -43,6 +43,7 @@ namespace SDKTemplate
                 ["InkContinuous"] = KnownSimpleHapticsControllerWaveforms.InkContinuous,
                 ["MarkerContinuous"] = KnownSimpleHapticsControllerWaveforms.MarkerContinuous,
                 ["PencilContinuous"] = KnownSimpleHapticsControllerWaveforms.PencilContinuous,
+                ["Press"] = KnownSimpleHapticsControllerWaveforms.Press,
                 ["Release"] = KnownSimpleHapticsControllerWaveforms.Release,
                 ["RumbleContinuous"] = KnownSimpleHapticsControllerWaveforms.RumbleContinuous,
                 ["Success"] = KnownSimpleHapticsControllerWaveforms.Success,

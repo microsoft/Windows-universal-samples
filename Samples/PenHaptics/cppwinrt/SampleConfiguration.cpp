@@ -48,6 +48,7 @@ std::map<hstring, uint16_t> const& SDKTemplate::WaveformNamesMap()
         { L"InkContinuous", KnownSimpleHapticsControllerWaveforms::InkContinuous() },
         { L"MarkerContinuous", KnownSimpleHapticsControllerWaveforms::MarkerContinuous() },
         { L"PencilContinuous", KnownSimpleHapticsControllerWaveforms::PencilContinuous() },
+        { L"Press", KnownSimpleHapticsControllerWaveforms::Press() },
         { L"Release", KnownSimpleHapticsControllerWaveforms::Release() },
         { L"RumbleContinuous", KnownSimpleHapticsControllerWaveforms::RumbleContinuous() },
         { L"Success", KnownSimpleHapticsControllerWaveforms::Success() },
