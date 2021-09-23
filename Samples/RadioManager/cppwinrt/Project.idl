@@ -9,26 +9,19 @@
 //
 //*********************************************************
 
-using System;
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-using SDKTemplate;
-
 namespace SDKTemplate
 {
-    public partial class MainPage : Page
+    [default_interface]
+    runtimeclass Scenario1_Toggle : Windows.UI.Xaml.Controls.Page
     {
-        public const string FEATURE_NAME = "RadioManager C# Sample";
-
-        List<Scenario> scenarios = new List<Scenario>
-        {
-            new Scenario() { Title="Toggle Radios", ClassType=typeof(Scenario1_Toggle)}
-        };
+        Scenario1_Toggle();
     }
 
-    public class Scenario
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass RadioModel : Windows.UI.Xaml.Data.INotifyPropertyChanged
     {
-        public string Title { get; set; }
-        public Type ClassType { get; set; }
+        String Name { get; };
+        Boolean IsEnabled{ get; };
+        Boolean IsRadioOn;
     }
 }

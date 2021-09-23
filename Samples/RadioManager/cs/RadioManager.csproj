@@ -104,8 +104,8 @@
     </Compile>
     <Compile Include="RadioModel.cs" />
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1.xaml.cs">
-      <DependentUpon>Scenario1.xaml</DependentUpon>
+    <Compile Include="Scenario1_Toggle.xaml.cs">
+      <DependentUpon>Scenario1_Toggle.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +124,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1.xaml">
+    <Page Include="..\shared\Scenario1_Toggle.xaml">
+      <Link>Scenario1_Toggle.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

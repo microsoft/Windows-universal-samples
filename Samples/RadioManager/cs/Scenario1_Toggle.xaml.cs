@@ -15,21 +15,19 @@ using SDKTemplate;
 using Windows.Devices.Radios;
 using System;
 
-namespace RadioManagerSample
+namespace SDKTemplate
 {
-    public sealed partial class Scenario1 : Page
+    public sealed partial class Scenario1_Toggle : Page
     {
-        private MainPage rootPage;
+        private MainPage rootPage = MainPage.Current;
 
-        public Scenario1()
+        public Scenario1_Toggle()
         {
             this.InitializeComponent();
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            rootPage = MainPage.Current;
-
             // RequestAccessAsync must be called at least once from the UI thread
             var accessLevel = await Radio.RequestAccessAsync();
             if (accessLevel != RadioAccessStatus.Allowed)
@@ -38,18 +36,12 @@ namespace RadioManagerSample
             }
             else
             {
-                InitializeRadios();
-            }
-        }
-
-        private async void InitializeRadios()
-        {
-            // An alternative to Radio.GetRadiosAsync is to use the Windows.Devices.Enumeration pattern,
-            // passing Radio.GetDeviceSelector as the AQS string
-            var radios = await Radio.GetRadiosAsync();
-            foreach (var radio in radios)
-            {
-                RadioSwitchList.Items.Add(new RadioModel(radio, this));
+                // An alternative to Radio.GetRadiosAsync is to use the Windows.Devices.Enumeration pattern,
+                // passing Radio.GetDeviceSelector as the AQS string
+                foreach (var radio in await Radio.GetRadiosAsync())
+                {
+                    RadioSwitchList.Items.Add(new RadioModel(radio, this.Dispatcher));
+                }
             }
         }
     }
