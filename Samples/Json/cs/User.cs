@@ -10,14 +10,10 @@
 //*********************************************************
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using Windows.Data.Json;
 
-namespace Json
+namespace SDKTemplate
 {
     class User
     {
@@ -28,17 +24,8 @@ namespace Json
         private const string timezoneKey = "timezone";
         private const string verifiedKey = "verified";
 
-        private string id;
-        private string phone;
-        private string name;
-        private ObservableCollection<School> education;
-
         public User()
         {
-            Id = "";
-            Phone = null;
-            Name = "";
-            education = new ObservableCollection<School>();
         }
 
         public User(string jsonString) : this()
@@ -62,21 +49,12 @@ namespace Json
 
             foreach (IJsonValue jsonValue in jsonObject.GetNamedArray(educationKey, new JsonArray()))
             {
-                if (jsonValue.ValueType == JsonValueType.Object)
-                {
-                    Education.Add(new School(jsonValue.GetObject()));
-                }
+                Education.Add(new School(jsonValue.GetObject()));
             }
         }
 
         public string Stringify()
         {
-            JsonArray jsonArray = new JsonArray();
-            foreach (School school in Education)
-            {
-                jsonArray.Add(school.ToJsonObject());
-            }
-
             JsonObject jsonObject = new JsonObject();
             jsonObject[idKey] = JsonValue.CreateStringValue(Id);
 
@@ -91,66 +69,29 @@ namespace Json
             }
 
             jsonObject[nameKey] = JsonValue.CreateStringValue(Name);
-            jsonObject[educationKey] = jsonArray;
+
             jsonObject[timezoneKey] = JsonValue.CreateNumberValue(Timezone);
             jsonObject[verifiedKey] = JsonValue.CreateBooleanValue(Verified);
+
+            JsonArray jsonArray = new JsonArray();
+            foreach (School school in Education)
+            {
+                jsonArray.Add(school.ToJsonObject());
+            }
+            jsonObject[educationKey] = jsonArray;
 
             return jsonObject.Stringify();
         }
 
-        public string Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                id = value;
-            }
-        }
+        public string Id { get; set; } = "";
 
-        public string Phone
-        {
-            get
-            {
-                return phone;
-            }
-            set
-            {
-                phone = value;
-            }
-        }
+        public string Phone { get; set; } = null;
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                name = value;
-            }
-        }
+        public string Name { get; set; } = "";
 
-        public ObservableCollection<School> Education
-        {
-            get
-            {
-                return education;
-            }
-        }
+        public ObservableCollection<School> Education { get; } = new ObservableCollection<School>();
 
-        public double Timezone { get; set; }
-        public bool Verified { get; set; }
+        public double Timezone { get; set; } = 0.0;
+        public bool Verified { get; set; } = false;
     }
 }

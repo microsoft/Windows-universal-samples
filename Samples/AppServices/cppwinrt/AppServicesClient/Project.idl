@@ -9,25 +9,17 @@
 //
 //*********************************************************
 
-using System;
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-
 namespace SDKTemplate
 {
-    public partial class MainPage : Page
+    [default_interface]
+    runtimeclass OpenCloseConnectionScenario : Windows.UI.Xaml.Controls.Page
     {
-        public const string FEATURE_NAME = "Json";
-
-        List<Scenario> scenarios = new List<Scenario>
-        {
-            new Scenario() { Title="Parse and Stringify", ClassType=typeof(Scenario1_ParseAndStringify)}
-        };
+        OpenCloseConnectionScenario();
     }
 
-    public class Scenario
+    [default_interface]
+    runtimeclass KeepConnectionOpenScenario : Windows.UI.Xaml.Controls.Page
     {
-        public string Title { get; set; }
-        public Type ClassType { get; set; }
+        KeepConnectionOpenScenario();
     }
 }

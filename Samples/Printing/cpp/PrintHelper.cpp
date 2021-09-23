@@ -41,6 +41,8 @@ void PrintHelper::RegisterForPrinting()
 
 void PrintHelper::UnregisterForPrinting()
 {
+    m_printDocument = nullptr;
+
     // Remove the handler for printing initialization.
     PrintManager^ printMan = PrintManager::GetForCurrentView();
     printMan->PrintTaskRequested -= m_printTaskRequestedEventToken;

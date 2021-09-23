@@ -30,17 +30,17 @@ namespace RandomNumberService
 
         private void OnTaskCanceled(IBackgroundTaskInstance sender, BackgroundTaskCancellationReason reason)
         {
+            if (connection != null)
+            {
+                connection.Dispose();
+                connection = null;
+            }
+
             if (serviceDeferral != null)
             {
                 //Complete the service deferral
                 serviceDeferral.Complete();
                 serviceDeferral = null;
-            }
-
-            if (connection != null)
-            {
-                connection.Dispose();
-                connection = null;
             }
         }
 

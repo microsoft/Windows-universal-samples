@@ -125,7 +125,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ParseAndStringify.xaml">
+    <Page Include="..\shared\Scenario1_ParseAndStringify.xaml">
+      <Link>Scenario1_ParseAndStringify.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

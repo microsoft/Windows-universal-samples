@@ -1,25 +1,13 @@
 ---
-page_type: sample
+topic: sample
 languages:
-- csharp
 - cpp
-- cppwinrt
+- cppcx
+- vb
 products:
 - windows
 - windows-uwp
-urlFragment: AppServices
-extendedZipContent:
-- path: SharedContent
-  target: SharedContent
-- path: LICENSE
-  target: LICENSE
-description: "Shows how an app can provide a service that other apps or other computers can consume."
 ---
-
-<!---
-  category: DeepLinksAndAppToAppCommunication
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620489
---->
 
 # App services sample
 
@@ -52,8 +40,7 @@ To obtain an insider copy of Windows 10, go to [Windows 10](http://insider.windo
 
 ## Samples
 
-* [RemoteSystems](/Samples/RemoteSystems)
-* [AppServices sample](/archived/AppServices/) for C++/CX and Visual Basic (archived)
+[RemoteSystems](/Samples/RemoteSystems)
 
 ## Reference
 
