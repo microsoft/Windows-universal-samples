@@ -173,12 +173,14 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Latitude().Text(L"No data");
             ScenarioOutput_Longitude().Text(L"No data");
             ScenarioOutput_Accuracy().Text(L"No data");
+            ScenarioOutput_IsRemoteSource().Text(L"No data");
         }
         else
         {
             ScenarioOutput_Latitude().Text(to_hstring(position.Coordinate().Point().Position().Latitude));
             ScenarioOutput_Longitude().Text(to_hstring(position.Coordinate().Point().Position().Longitude));
             ScenarioOutput_Accuracy().Text(to_hstring(position.Coordinate().Accuracy()));
+            ScenarioOutput_IsRemoteSource().Text(to_hstring(position.Coordinate().IsRemoteSource()));
         }
     }
 }

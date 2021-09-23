@@ -225,10 +225,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
  <tr>
   <td><a href="Samples/LowLatencyInput">Low latency input</a></td>
+  <td><a href="Samples/PenHaptics">Pen haptics</a></td>
   <td><a href="Samples/SimpleInk">Simple inking</a></td>
-  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/TouchKeyboard">Touch keyboard</a></td>
   <td><a href="Samples/TouchKeyboardTextInput">Touch keyboard text input</a></td>
  </tr>
 </table>

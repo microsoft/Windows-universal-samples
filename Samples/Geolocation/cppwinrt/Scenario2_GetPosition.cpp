@@ -118,6 +118,7 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Longitude().Text(L"No data");
             ScenarioOutput_Accuracy().Text(L"No data");
             ScenarioOutput_Source().Text(L"No data");
+            ScenarioOutput_IsRemoteSource().Text(L"No data");
             ShowSatelliteData(false);
         }
         else
@@ -126,6 +127,7 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Longitude().Text(to_hstring(position.Coordinate().Point().Position().Longitude));
             ScenarioOutput_Accuracy().Text(to_hstring(position.Coordinate().Accuracy()));
             ScenarioOutput_Source().Text(to_hstring(position.Coordinate().PositionSource()));
+            ScenarioOutput_IsRemoteSource().Text(to_hstring(position.Coordinate().IsRemoteSource()));
 
             if (position.Coordinate().PositionSource() == PositionSource::Satellite)
             {

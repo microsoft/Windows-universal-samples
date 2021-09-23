@@ -51,6 +51,11 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## Related topics
 
+### Samples
+
+* [ComplexInk](/Samples/ComplexInk)
+* [Pen haptics](/Samples/PenHaptics)
+
 ### Reference
 
 [PointerPoint](https://msdn.microsoft.com/library/windows/apps/windows.ui.input.pointerpoint.aspx)

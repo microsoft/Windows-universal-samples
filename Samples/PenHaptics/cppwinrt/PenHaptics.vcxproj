@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup>
     <SharedContentDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), LICENSE))\SharedContent</SharedContentDir>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{21C18BA0-582C-4264-B0DD-7F2867D8E3D6}</ProjectGuid>
-    <ProjectName>Geolocation</ProjectName>
+    <ProjectGuid>{2E3ED2B8-4564-4318-85F1-68BD8F29D560}</ProjectGuid>
+    <ProjectName>PenHaptics</ProjectName>
     <RootNamespace>SDKTemplate</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
@@ -94,37 +94,22 @@
       <DependentUpon>$(SharedContentDir)\xaml\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_TrackPosition.h">
-      <DependentUpon>..\shared\Scenario1_TrackPosition.xaml</DependentUpon>
+    <ClInclude Include="Scenario1_InkCanvasTactileFeedback.h">
+      <DependentUpon>..\shared\Scenario1_InkCanvasTactileFeedback.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scenario2_GetPosition.h">
-      <DependentUpon>..\shared\Scenario2_GetPosition.xaml</DependentUpon>
+    <ClInclude Include="Scenario2_SupportedTactileFeedback.h">
+      <DependentUpon>..\shared\Scenario2_SupportedTactileFeedback.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario3_InkingFeedback.h">
+      <DependentUpon>..\shared\Scenario3_InkingFeedback.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario4_InteractionFeedback.h">
+      <DependentUpon>..\shared\Scenario4_InteractionFeedback.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Scenario5_InkingAndInteractionFeedback.h">
+      <DependentUpon>..\shared\Scenario5_InkingAndInteractionFeedback.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Scenario3_BackgroundTask.h">
-      <DependentUpon>..\shared\Scenario3_BackgroundTask.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="Scenario4_ForegroundGeofence.h">
-      <DependentUpon>..\shared\Scenario4_ForegroundGeofence.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="Scenario5_GeofenceBackgroundTask.h">
-      <DependentUpon>..\shared\Scenario5_GeofenceBackgroundTask.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="Scenario6_GetLastVisit.h">
-      <DependentUpon>..\shared\Scenario6_GetLastVisit.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="Scenario7_ForegroundVisits.h">
-      <DependentUpon>..\shared\Scenario7_ForegroundVisits.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="Scenario8_VisitsBackgroundTask.h">
-      <DependentUpon>..\shared\Scenario8_VisitsBackgroundTask.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
@@ -133,28 +118,13 @@
     <Page Include="$(SharedContentDir)\xaml\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario1_TrackPosition.xaml" />
-    <Page Include="..\shared\Scenario2_GetPosition.xaml" />
+    <Page Include="..\shared\Scenario1_InkCanvasTactileFeedback.xaml" />
+    <Page Include="..\shared\Scenario2_SupportedTactileFeedback.xaml" />
+    <Page Include="..\shared\Scenario3_InkingFeedback.xaml" />
+    <Page Include="..\shared\Scenario4_InteractionFeedback.xaml" />
+    <Page Include="..\shared\Scenario5_InkingAndInteractionFeedback.xaml" />
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
-    </Page>
-    <Page Include="..\shared\Scenario3_BackgroundTask.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario4_ForegroundGeofence.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario5_GeofenceBackgroundTask.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario6_GetLastVisit.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario7_ForegroundVisits.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario8_VisitsBackgroundTask.xaml">
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -167,11 +137,20 @@
     <ClCompile Include="SampleConfiguration.cpp">
       <DependentUpon>SampleConfiguration.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario1_TrackPosition.cpp">
-      <DependentUpon>..\shared\Scenario1_TrackPosition.xaml</DependentUpon>
+    <ClCompile Include="Scenario1_InkCanvasTactileFeedback.cpp">
+      <DependentUpon>..\shared\Scenario1_InkCanvasTactileFeedback.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Scenario2_GetPosition.cpp">
-      <DependentUpon>..\shared\Scenario2_GetPosition.xaml</DependentUpon>
+    <ClCompile Include="Scenario2_SupportedTactileFeedback.cpp">
+      <DependentUpon>..\shared\Scenario2_SupportedTactileFeedback.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario3_InkingFeedback.cpp">
+      <DependentUpon>..\shared\Scenario3_InkingFeedback.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario4_InteractionFeedback.cpp">
+      <DependentUpon>..\shared\Scenario4_InteractionFeedback.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario5_InkingAndInteractionFeedback.cpp">
+      <DependentUpon>..\shared\Scenario5_InkingAndInteractionFeedback.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -179,30 +158,6 @@
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
       <DependentUpon>Project.idl</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="Scenario3_BackgroundTask.cpp">
-      <DependentUpon>..\shared\Scenario3_BackgroundTask.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="Scenario4_ForegroundGeofence.cpp">
-      <DependentUpon>..\shared\Scenario4_ForegroundGeofence.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="Scenario5_GeofenceBackgroundTask.cpp">
-      <DependentUpon>..\shared\Scenario5_GeofenceBackgroundTask.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="Scenario6_GetLastVisit.cpp">
-      <DependentUpon>..\shared\Scenario6_GetLastVisit.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="Scenario7_ForegroundVisits.cpp">
-      <DependentUpon>..\shared\Scenario7_ForegroundVisits.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="Scenario8_VisitsBackgroundTask.cpp">
-      <DependentUpon>..\shared\Scenario8_VisitsBackgroundTask.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +170,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
@@ -241,19 +195,17 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Tasks\Tasks.vcxproj">
-      <Project>{6310adc7-3868-5423-ae2b-b5edb4aa4f70}</Project>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
+    <Import Project="packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.props'))" />
-    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.2.0.210211.2\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Windows.CppWinRT.2.0.210913.7\build\native\Microsoft.Windows.CppWinRT.targets'))" />
   </Target>
 </Project>
