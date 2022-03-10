@@ -48,8 +48,8 @@ namespace Microsoft { namespace Samples { namespace SimpleCommunication {
         Windows::Media::IMediaExtension ^GetMFExtensions();
 
         Windows::Foundation::IAsyncOperation<Windows::Media::IMediaExtension^>^ InitializeAsync(
-            Windows::Media::MediaProperties::IMediaEncodingProperties ^videoEncodingProperties,
-            Windows::Media::MediaProperties::IMediaEncodingProperties ^audioEncodingProperties
+            Windows::Media::MediaProperties::IMediaEncodingProperties ^audioEncodingProperties,
+            Windows::Media::MediaProperties::IMediaEncodingProperties ^videoEncodingProperties
             );
 
         event Windows::Foundation::EventHandler<Object^>^ IncomingConnectionEvent;

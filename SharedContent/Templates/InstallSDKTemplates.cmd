@@ -3,9 +3,6 @@ IF /I "%1"=="-UNINSTALL" GOTO Uninstall
 	call :directory "ProjectTemplates\Visual C#\Windows Universal" UWPSDKSampleCS Shared\Project\*
 	call :directory "ItemTemplates\Visual C#\Windows Universal" UWPSDKSampleScenarioItemCS Shared\Item\*
 
-	call :directory "ProjectTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleCX Shared\Project\*
-	call :directory "ItemTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleScenarioItemCX Shared\Item\*
-
 	call :directory "ProjectTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleCPP Shared\Project\*
 	call :directory "ItemTemplates\Visual C++ Project\Windows Universal" UWPSDKSampleScenarioItemCPP Shared\Item\*
 
@@ -35,5 +32,5 @@ IF /I "%1"=="-UNINSTALL" GOTO Uninstall
 	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCX"
 	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCX"
 
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCPPWINRT"
-	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCPPWINRT"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ProjectTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleCPP"
+	rd /s/q "%USERPROFILE%\Documents\Visual Studio 2019\Templates\ItemTemplates\Visual C++ Project\Windows Universal\UWPSDKSampleScenarioItemCPP"
