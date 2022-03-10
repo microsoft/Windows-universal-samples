@@ -52,7 +52,7 @@ namespace winrt::SDKTemplate::implementation
 
         // Configure pin for input and add ValueChanged listener.
         listenPin.SetDriveMode(GpioPinDriveMode::Input);
-        listenPin.ValueChanged({ get_weak(), &Scenario2_Listen::Pin_ValueChanged });
+        valueChangedEventToken = listenPin.ValueChanged({ get_weak(), &Scenario2_Listen::Pin_ValueChanged });
 
         // Start toggling the pin value every 500ms.
         timer = DispatcherTimer();

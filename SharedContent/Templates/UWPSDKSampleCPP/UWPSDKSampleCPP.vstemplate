@@ -19,6 +19,7 @@
   </TemplateData>
   <TemplateContent>
     <Project File="UWPSDKSampleCPP.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="pch.cpp">pch.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="pch.h">pch.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Project.idl">Project.idl</ProjectItem>
@@ -31,6 +32,7 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.cpp">Scenario2_ShortName.cpp</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Scenario2_ShortName.h">Scenario2_ShortName.h</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Package.appxmanifest">Package.appxmanifest</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj">UWPSDKSampleCPP.vcxproj</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">UWPSDKSampleCPP.vcxproj.filters</ProjectItem>
       <ProjectItem ReplaceParameters="false" TargetFileName="README.md">README.md</ProjectItem>
     </Project>
@@ -40,8 +42,10 @@
     <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
   </WizardExtension>
   <WizardData>
+    <!--
     <packages repository="extension" repositoryId="Microsoft.Windows.CppWinRT">
-      <package id="Microsoft.Windows.CppWinRT" version="2.0.200615.7" />
+      <package id="Microsoft.Windows.CppWinRT" version="2.0.210922.5" />
     </packages>
+    -->
   </WizardData>
 </VSTemplate>

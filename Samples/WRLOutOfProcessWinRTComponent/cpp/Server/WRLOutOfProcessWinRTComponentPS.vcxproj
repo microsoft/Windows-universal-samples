@@ -37,8 +37,8 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.22000.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetName>Microsoft.SDKSamples.Kitchen.Proxies</TargetName>
@@ -175,9 +175,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dlldata.c" />
-    <ClCompile Include="Microsoft.SDKSamples.Kitchen_i.c" />
-    <ClCompile Include="Microsoft.SDKSamples.Kitchen_p.c" />
+    <ClCompile Include="$(OutDir)..\WRLOutOfProcessWinRTComponent_server\dlldata.c" />
+    <ClCompile Include="$(OutDir)..\WRLOutOfProcessWinRTComponent_server\Microsoft.SDKSamples.Kitchen_i.c" />
+    <ClCompile Include="$(OutDir)..\WRLOutOfProcessWinRTComponent_server\Microsoft.SDKSamples.Kitchen_p.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OvenServerPS.def" />

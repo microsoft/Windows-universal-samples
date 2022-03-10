@@ -31,82 +31,43 @@
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{90863f14-2e68-5464-bfe6-72ed72d369f8}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
+    <Keyword>WindowsRuntimeComponent</Keyword>
     <RootNamespace>WRLOutOfProcessWinRTComponent</RootNamespace>
     <ProjectName>WRLOutOfProcessWinRTComponent_server</ProjectName>
     <TargetName>Microsoft.SDKSamples.Kitchen</TargetName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
     <PublishableProject>false</PublishableProject>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.22000.0</WindowsTargetPlatformMinVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <CustomBuildAfterTargets>Midl</CustomBuildAfterTargets>
+    <WindowsAppContainer>false</WindowsAppContainer>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
-    <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <WindowsAppContainer>true</WindowsAppContainer>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <WindowsAppContainer>true</WindowsAppContainer>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WindowsAppContainer>true</WindowsAppContainer>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WindowsAppContainer>true</WindowsAppContainer>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WindowsAppContainer>true</WindowsAppContainer>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="PropertySheets">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup>
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(OutDir);$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
@@ -117,124 +78,27 @@
     <Midl>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <AdditionalOptions>/sal</AdditionalOptions>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataPath)\..\unionmetadata</AdditionalMetadataDirectories>
+      <OutputDirectory>$(OutDir)</OutputDirectory>
     </Midl>
     <CustomBuildStep>
-      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataPath)\..\unionmetadata" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
+      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataFoundationPath)" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
       <Outputs>$(OutDir)%(TargetName).winmd</Outputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OutDir);$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>false</CompileAsWinRT>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;runtimeobject.lib;mincore.lib</AdditionalDependencies>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
-    <Midl>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <AdditionalOptions>/sal</AdditionalOptions>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataPath)\..\unionmetadata</AdditionalMetadataDirectories>
-    </Midl>
-    <CustomBuildStep>
-      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataPath)\..\unionmetadata" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
-      <Outputs>$(OutDir)%(TargetName).winmd</Outputs>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OutDir);$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>false</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;runtimeobject.lib;mincore.lib</AdditionalDependencies>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
-    <Midl>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <AdditionalOptions>/sal</AdditionalOptions>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataPath)\..\unionmetadata</AdditionalMetadataDirectories>
-    </Midl>
-    <CustomBuildStep>
-      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataPath)\..\unionmetadata" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
-      <Outputs>$(OutDir)%(TargetName).winmd</Outputs>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OutDir);$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>false</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;runtimeobject.lib;mincore.lib</AdditionalDependencies>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
-    <Midl>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <AdditionalOptions>/sal</AdditionalOptions>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataPath)\..\unionmetadata</AdditionalMetadataDirectories>
-    </Midl>
-    <CustomBuildStep>
-      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataPath)\..\unionmetadata" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
-      <Outputs>$(OutDir)%(TargetName).winmd</Outputs>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;WIN32;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OutDir);$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>false</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;runtimeobject.lib;mincore.lib</AdditionalDependencies>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
-    <Midl>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <AdditionalOptions>/sal</AdditionalOptions>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataPath)\..\unionmetadata</AdditionalMetadataDirectories>
-    </Midl>
-    <CustomBuildStep>
-      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataPath)\..\unionmetadata" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
-      <Outputs>$(OutDir)%(TargetName).winmd</Outputs>
-    </CustomBuildStep>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>_WINRT_DLL;WIN32;_WINDOWS;WINAPI_FAMILY=WINAPI_FAMILY_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OutDir);$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsWinRT>false</CompileAsWinRT>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>kernel32.lib;runtimeobject.lib;mincore.lib</AdditionalDependencies>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
-    </Link>
-    <Midl>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <AdditionalOptions>/sal</AdditionalOptions>
-      <AdditionalMetadataDirectories>$(WindowsSDK_MetadataPath)\..\unionmetadata</AdditionalMetadataDirectories>
-    </Midl>
-    <CustomBuildStep>
-      <Command>mdmerge -partial -i "$(OutDir)." -o "$(OutDir)Output" -metadata_dir "$(WindowsSDK_MetadataPath)\..\unionmetadata" &amp;&amp; copy /y "$(OutDir)Output\*" "$(OutDir)"</Command>
-      <Outputs>$(OutDir)%(TargetName).winmd</Outputs>
-    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Microsoft.SDKSamples.Kitchen.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="module.cpp" />
     <ClCompile Include="OvenServer.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="Microsoft.SDKSamples.Kitchen.idl" />
