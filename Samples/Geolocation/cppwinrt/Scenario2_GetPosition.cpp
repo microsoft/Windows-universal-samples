@@ -136,6 +136,8 @@ namespace winrt::SDKTemplate::implementation
                 ScenarioOutput_PosPrecision().Text(to_hstring(satelliteData.PositionDilutionOfPrecision()));
                 ScenarioOutput_HorzPrecision().Text(to_hstring(satelliteData.HorizontalDilutionOfPrecision()));
                 ScenarioOutput_VertPrecision().Text(to_hstring(satelliteData.VerticalDilutionOfPrecision()));;
+                ScenarioOutput_GeomPrecision().Text(to_hstring(satelliteData.GeometricDilutionOfPrecision()));;
+                ScenarioOutput_TimePrecision().Text(to_hstring(satelliteData.TimeDilutionOfPrecision()));;
                 ShowSatelliteData(true);
             }
             else
@@ -152,6 +154,8 @@ namespace winrt::SDKTemplate::implementation
         ScenarioOutput_PosPrecision().Visibility(visibility);
         ScenarioOutput_HorzPrecision().Visibility(visibility);
         ScenarioOutput_VertPrecision().Visibility(visibility);
+        ScenarioOutput_GeomPrecision().Visibility(visibility);
+        ScenarioOutput_TimePrecision().Visibility(visibility);
     }
 
 }

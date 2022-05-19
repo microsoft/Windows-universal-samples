@@ -33,23 +33,8 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
 
-        // Populate the list of users.
-        IVectorView<User> users = co_await User::FindAllAsync();
-        auto observableUsers = single_threaded_observable_vector<UserViewModel>();
-        int userNumber = 1;
-        for (auto&& user : users)
-        {
-            hstring displayName = unbox_value<hstring>(co_await user.GetPropertyAsync(KnownUserProperties::DisplayName()));
-
-            // Choose a generic name if we do not have access to the actual name.
-            if (displayName.empty())
-            {
-                displayName = L"User #" + to_hstring(userNumber);
-                userNumber++;
-            }
-            observableUsers.Append({ user.NonRoamableId(), displayName });
-        }
-        UserList().DataContext(observableUsers);
+        auto users = co_await Helpers::GetUserViewModelsAsync();
+        UserList().DataContext(users);
         if (users.Size() > 0)
         {
             UserList().SelectedIndex(0);
@@ -60,7 +45,7 @@ namespace winrt::SDKTemplate::implementation
     {
         auto lifetime = get_strong();
 
-        auto selectedUser = UserList().SelectedValue().as<UserViewModel>();
+        auto selectedUser = UserList().SelectedValue().as<SDKTemplate::UserViewModel>();
         if (selectedUser != nullptr)
         {
             ResultsText().Text(L"");

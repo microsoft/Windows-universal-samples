@@ -53,10 +53,6 @@ WASAPICapture::WASAPICapture() :
     }
 
     m_DeviceStateChanged = ref new DeviceStateChangedEvent();
-    if (nullptr == m_DeviceStateChanged)
-    {
-        ThrowIfFailed( E_OUTOFMEMORY );
-    }
 
     // Register MMCSS work queue
     HRESULT hr = S_OK;
@@ -88,6 +84,7 @@ WASAPICapture::~WASAPICapture()
     }
 
     MFUnlockWorkQueue( m_dwQueueID );
+    CoTaskMemFree( m_MixFormat );
 
     m_DeviceStateChanged = nullptr;
     m_ContentStream = nullptr;
@@ -224,7 +221,7 @@ HRESULT WASAPICapture::ActivateCompleted( IActivateAudioInterfaceAsyncOperation 
     hr = m_AudioClient->GetSharedModeEnginePeriod(m_MixFormat, &m_DefaultPeriodInFrames, &m_FundamentalPeriodInFrames, &m_MinPeriodInFrames, &m_MaxPeriodInFrames);
     if (FAILED(hr))
     {
-        return hr;
+        goto exit;
     }
 
     // Initialize the AudioClient in Shared Mode with the user specified buffer
@@ -318,32 +315,18 @@ HRESULT WASAPICapture::CreateWAVFile()
     concurrency::task<StorageFile^>( KnownFolders::MusicLibrary->CreateFileAsync( AUDIO_FILE_NAME, CreationCollisionOption::GenerateUniqueName )).then(
         [this]( StorageFile^ file )
     {
-        if (nullptr == file)
-        {
-            ThrowIfFailed( E_INVALIDARG );
-        }
-
         return file->OpenAsync( FileAccessMode::ReadWrite );
     })
 
     // Then create a RandomAccessStream
     .then([this]( IRandomAccessStream^ stream )
     {
-        if (nullptr == stream)
-        {
-            ThrowIfFailed( E_INVALIDARG );
-        }
-
         // Get the OutputStream for the file
         m_ContentStream = stream;
         m_OutputStream = m_ContentStream->GetOutputStreamAt(0);
         
         // Create the DataWriter
         m_WAVDataWriter = ref new DataWriter( m_OutputStream );
-        if (nullptr == m_WAVDataWriter)
-        {
-            ThrowIfFailed( E_OUTOFMEMORY );
-        }
 
         // Create the WAV header
         DWORD header[] = {
@@ -381,10 +364,11 @@ HRESULT WASAPICapture::CreateWAVFile()
     })
 
     // Our file is ready to go, so we can now signal that initialization is finished
-    .then([this]( bool f )
+    .then([this]( concurrency::task<bool> previousTask )
     {
         try
         {
+            previousTask.get();
             m_DeviceStateChanged->SetState( DeviceState::DeviceStateInitialized, S_OK, true );
         }
         catch (Platform::Exception ^e)
@@ -502,8 +486,12 @@ HRESULT WASAPICapture::OnStartCapture( IMFAsyncResult* pResult )
     hr = m_AudioClient->Start();
     if (SUCCEEDED( hr ))
     {
+        hr = MFPutWaitingWorkItem( m_SampleReadyEvent, 0, m_SampleReadyAsyncResult, &m_SampleReadyKey );
+    }
+
+    if (SUCCEEDED( hr ))
+    {
         m_DeviceStateChanged->SetState( DeviceState::DeviceStateCapturing, S_OK, true );
-        MFPutWaitingWorkItem( m_SampleReadyEvent, 0, m_SampleReadyAsyncResult, &m_SampleReadyKey );
     }
     else
     {

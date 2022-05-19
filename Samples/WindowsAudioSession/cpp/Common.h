@@ -157,27 +157,38 @@ enum RenderSampleType
     SampleTypeUnknown,
     SampleTypeFloat,
     SampleType16BitPCM,
+    SampleType24in32BitPCM,
 };
 
 //
-//  CalculateMixFormatType()
+//  GetRenderSampleType()
 //
-//  Determine IEEE Float or PCM samples based on media type
+//  Determine the sample format based on media type
 //
-inline RenderSampleType CalculateMixFormatType( WAVEFORMATEX *wfx )
+inline RenderSampleType GetRenderSampleType( WAVEFORMATEX *wfx )
 {
+    WAVEFORMATEXTENSIBLE* wfext = reinterpret_cast<WAVEFORMATEXTENSIBLE*>(wfx);
+
     if ( (wfx->wFormatTag == WAVE_FORMAT_PCM) ||
          (  (wfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE) &&
-            (reinterpret_cast<WAVEFORMATEXTENSIBLE *>(wfx)->SubFormat == KSDATAFORMAT_SUBTYPE_PCM) ) )
+            (wfext->SubFormat == KSDATAFORMAT_SUBTYPE_PCM) ) )
     {
         if (wfx->wBitsPerSample == 16)
         {
             return RenderSampleType::SampleType16BitPCM;
         }
+        else if (wfx->wBitsPerSample == 32)
+        {
+            if ((wfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE) &&
+                (wfext->Samples.wValidBitsPerSample == 24))
+            {
+                return RenderSampleType::SampleType24in32BitPCM;
+            }
+        }
     }
     else if ( (wfx->wFormatTag == WAVE_FORMAT_IEEE_FLOAT) ||
               ( (wfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE) &&
-                (reinterpret_cast<WAVEFORMATEXTENSIBLE *>(wfx)->SubFormat == KSDATAFORMAT_SUBTYPE_IEEE_FLOAT) ) )
+                (wfext->SubFormat == KSDATAFORMAT_SUBTYPE_IEEE_FLOAT) ) )
     {
         return RenderSampleType::SampleTypeFloat;
     }

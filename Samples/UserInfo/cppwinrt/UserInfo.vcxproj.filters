@@ -10,6 +10,7 @@
     <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
     <Page Include="..\shared\Scenario1_FindUsers.xaml" />
     <Page Include="..\shared\Scenario2_WatchUsers.xaml" />
+    <Page Include="..\shared\Scenario3_CheckUserConsentGroup.xaml" />
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -20,6 +21,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Scenario1_FindUsers.cpp" />
     <ClCompile Include="Scenario2_WatchUsers.cpp" />
+    <ClCompile Include="Scenario3_CheckUserConsentGroup.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
     <ClCompile Include="$(SharedContentDir)\cppwinrt\App.cpp" />
@@ -30,6 +32,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Scenario1_FindUsers.h" />
     <ClInclude Include="Scenario2_WatchUsers.h" />
+    <ClInclude Include="Scenario3_CheckUserConsentGroup.h" />
     <ClInclude Include="SampleConfiguration.h" />
     <ClInclude Include="$(SharedContentDir)\cppwinrt\App.h" />
     <ClInclude Include="$(SharedContentDir)\cppwinrt\MainPage.h" />

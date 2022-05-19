@@ -17,3 +17,8 @@ namespace winrt
     hstring to_hstring(Windows::System::UserType value);
     hstring to_hstring(Windows::System::UserAuthenticationStatus value);
 }
+
+namespace winrt::SDKTemplate::Helpers
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IObservableVector<Windows::Foundation::IInspectable>> GetUserViewModelsAsync();
+}

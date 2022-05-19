@@ -133,19 +133,19 @@ HRESULT MFSampleGenerator::Initialize( IRandomAccessStream^ stream, UINT32 Frame
     }
 
     // Specify Source Reader Attributes
-    Attributes->SetUnknown( MF_SOURCE_READER_ASYNC_CALLBACK, static_cast<IMFSourceReaderCallback *>(this) );
+    hr = Attributes->SetUnknown( MF_SOURCE_READER_ASYNC_CALLBACK, static_cast<IMFSourceReaderCallback *>(this) );
     if (FAILED( hr ))
     {
         goto exit;
     }
 
-    Attributes->SetString( MF_READWRITE_MMCSS_CLASS_AUDIO, L"Audio" );
+    hr = Attributes->SetString( MF_READWRITE_MMCSS_CLASS_AUDIO, L"Audio" );
     if (FAILED( hr ))
     {
         goto exit;
     }
 
-    Attributes->SetUINT32( MF_READWRITE_MMCSS_PRIORITY_AUDIO, 0 );
+    hr = Attributes->SetUINT32( MF_READWRITE_MMCSS_PRIORITY_AUDIO, 0 );
     if (FAILED( hr ))
     {
         goto exit;
@@ -235,7 +235,11 @@ HRESULT MFSampleGenerator::ConfigureStreams()
 
     WAVEFORMATEX *pwfx = NULL;
     UINT32 cbFormat = 0;
-    MFCreateWaveFormatExFromMFMediaType( UncompressedMT, &pwfx, &cbFormat );
+    hr = MFCreateWaveFormatExFromMFMediaType( UncompressedMT, &pwfx, &cbFormat );
+    if ( FAILED( hr ) )
+    {
+        goto exit;
+    }
 
     CoTaskMemFree( pwfx );
 
@@ -273,13 +277,18 @@ HRESULT MFSampleGenerator::CreateAudioType( IMFMediaType **MediaType )
         goto exit;
     }
 
-    if (RenderSampleType::SampleType16BitPCM == CalculateMixFormatType( m_MixFormat ))
+    switch (GetRenderSampleType(m_MixFormat))
     {
+    case RenderSampleType::SampleType16BitPCM:
+    case RenderSampleType::SampleType24in32BitPCM:
         hr = MT->SetGUID( MF_MT_SUBTYPE, MFAudioFormat_PCM );
-    }
-    else
-    {
+        break;
+    case RenderSampleType::SampleTypeFloat:
         hr = MT->SetGUID( MF_MT_SUBTYPE, MFAudioFormat_Float );
+        break;
+    default:
+        hr = E_UNEXPECTED;
+        break;
     }
 
     if (FAILED( hr ))
@@ -451,6 +460,7 @@ HRESULT MFSampleGenerator::FillSampleBuffer( UINT32 BytesToRead, BYTE *Data, UIN
 
             *cbWritten = SampleBuffer->BufferSize;
             m_SampleQueue = m_SampleQueue->Next;
+            SAFE_DELETE( SampleBuffer );
             hr = S_OK;
         }
     }
@@ -568,15 +578,15 @@ exit:
 //
 Platform::Boolean MFSampleGenerator::IsPreRollFilled()
 {
-    DWORD TotalBufferSize = 0;
+    DWORD TotalBytesFilled = 0;
 
     RenderBuffer *SampleBuffer = m_SampleQueue;
     while( SampleBuffer != nullptr )
     {
-        TotalBufferSize += SampleBuffer->BufferSize;
+        TotalBytesFilled += SampleBuffer->BytesFilled;
 
         // For uncompressed formats, nAvgBytesPerSec should equal nSamplesPerSecond * nBlockAlign
-        if (TotalBufferSize >= (m_MixFormat->nAvgBytesPerSec * PREROLL_DURATION_SEC))
+        if (TotalBytesFilled >= (m_MixFormat->nAvgBytesPerSec * PREROLL_DURATION_SEC))
         {
             return true;
         }

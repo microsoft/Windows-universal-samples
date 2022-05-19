@@ -23,6 +23,7 @@ using namespace SDKSample::WASAPIAudio;
 //
 WASAPIRenderer::WASAPIRenderer() :
     m_BufferFrames( 0 ),
+    m_ChannelVolume( 1.0f ),
     m_DeviceStateChanged( nullptr ),
     m_AudioClient( nullptr ),
     m_AudioRenderClient( nullptr ),
@@ -67,6 +68,8 @@ WASAPIRenderer::~WASAPIRenderer()
     }
 
     DeleteCriticalSection( &m_CritSec );
+
+    CoTaskMemFree( m_MixFormat );
 
     m_DeviceStateChanged = nullptr;
 }
@@ -138,10 +141,10 @@ HRESULT WASAPIRenderer::ActivateCompleted( IActivateAudioInterfaceAsyncOperation
         }
 
         // Initialize the AudioClient in Shared Mode with the user specified buffer
-        if (m_DeviceProps.IsLowLatency == false)
+        if (!m_DeviceProps.IsLowLatency || m_DeviceProps.IsHWOffload)
         {
             hr = m_AudioClient->Initialize(AUDCLNT_SHAREMODE_SHARED,
-                AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_NOPERSIST,
+                AUDCLNT_STREAMFLAGS_EVENTCALLBACK,
                 m_DeviceProps.hnsBufferDuration,
                 m_DeviceProps.hnsBufferDuration,
                 m_MixFormat,
@@ -234,6 +237,11 @@ UINT32 WASAPIRenderer::GetBufferFramesPerPeriod()
         return m_BufferFrames;
     }
 
+    if (m_DeviceProps.IsLowLatency)
+    {
+        return m_MinPeriodInFrames;
+    }
+
     // Get the audio device period
     HRESULT hr = m_AudioClient->GetDevicePeriod( &defaultDevicePeriod, &minimumDevicePeriod);
     if (FAILED( hr ))
@@ -241,18 +249,7 @@ UINT32 WASAPIRenderer::GetBufferFramesPerPeriod()
         return 0;
     }
 
-    double devicePeriodInSeconds;
-    
-    if (m_DeviceProps.IsLowLatency)
-    {
-        devicePeriodInSeconds = minimumDevicePeriod / (10000.0*1000.0);
-    }
-    else
-    {
-        devicePeriodInSeconds = defaultDevicePeriod / (10000.0*1000.0);
-    }
-    
-
+    double devicePeriodInSeconds = defaultDevicePeriod / (10000.0*1000.0);
     return static_cast<UINT32>( m_MixFormat->nSamplesPerSec * devicePeriodInSeconds + 0.5 );
 }
 
@@ -287,6 +284,21 @@ HRESULT WASAPIRenderer::ConfigureDeviceInternal()
         return hr;
     }
 
+    // If application already has a preferred source format available,
+    // it can test whether the format is supported by the device:
+    //
+    // WAVEFORMATEX* applicationFormat = ...;
+    // if (S_OK == m_AudioClient->IsFormatSupported(applicationFormat))
+    // {
+    //     m_MixFormat = applicationFormat;
+    // }
+    // else
+    // {
+    //     //device does not support the application format, so ask the device what format it prefers
+    //     m_AudioClient->GetMixFormat( &m_MixFormat );
+    // }
+
+    // In this sample we do not have a format already available, so we go ahead and ask the device which format it prefers
     // This sample opens the device is shared mode so we need to find the supported WAVEFORMATEX mix format
     hr = m_AudioClient->GetMixFormat( &m_MixFormat );
     if (FAILED( hr ))
@@ -294,13 +306,16 @@ HRESULT WASAPIRenderer::ConfigureDeviceInternal()
         return hr;
     }
 
-   // The wfx parameter below is optional (Its needed only for MATCH_FORMAT clients). Otherwise, wfx will be assumed 
-   // to be the current engine format based on the processing mode for this stream
-   hr = m_AudioClient->GetSharedModeEnginePeriod(m_MixFormat, &m_DefaultPeriodInFrames, &m_FundamentalPeriodInFrames, &m_MinPeriodInFrames, &m_MaxPeriodInFrames);
-   if (FAILED( hr ))
-   {
-      return hr;
-   }
+    if (!audioProps.bIsOffload)
+    {
+        // The wfx parameter below is optional (Its needed only for MATCH_FORMAT clients). Otherwise, wfx will be assumed 
+        // to be the current engine format based on the processing mode for this stream
+        hr = m_AudioClient->GetSharedModeEnginePeriod(m_MixFormat, &m_DefaultPeriodInFrames, &m_FundamentalPeriodInFrames, &m_MinPeriodInFrames, &m_MaxPeriodInFrames);
+        if (FAILED(hr))
+        {
+            return hr;
+        }
+    }
 
     // Verify the user defined value for hardware buffer
     hr = ValidateBufferValue();
@@ -348,7 +363,7 @@ HRESULT WASAPIRenderer::ValidateBufferValue()
 //
 //  SetVolumeOnSession()
 //
-HRESULT WASAPIRenderer::SetVolumeOnSession( UINT32 volume )
+HRESULT WASAPIRenderer::SetVolumeOnSession(UINT32 volume)
 {
     if (volume > 100)
     {
@@ -356,19 +371,27 @@ HRESULT WASAPIRenderer::SetVolumeOnSession( UINT32 volume )
     }
 
     HRESULT hr = S_OK;
-    ISimpleAudioVolume *SessionAudioVolume = nullptr;
-    float ChannelVolume = 0.0;
+    m_ChannelVolume = volume / (float)100.0;
 
-    hr = m_AudioClient->GetService( __uuidof(ISimpleAudioVolume), reinterpret_cast<void**>(&SessionAudioVolume) );
-    if (FAILED( hr ))
+    // Set the session volume on the endpoint if we have one.
+    if (m_AudioClient != nullptr)
+    {
+        hr = SetAudioClientChannelVolume();
+    }
+    return hr;
+}
+
+HRESULT WASAPIRenderer::SetAudioClientChannelVolume()
+{
+    ISimpleAudioVolume* SessionAudioVolume = nullptr;
+    HRESULT hr = m_AudioClient->GetService(__uuidof(ISimpleAudioVolume), reinterpret_cast<void**>(&SessionAudioVolume));
+    if (FAILED(hr))
     {
         goto exit;
     }
 
-    ChannelVolume = volume / (float)100.0;
-
     // Set the session volume on the endpoint
-    hr = SessionAudioVolume->SetMasterVolume( ChannelVolume, nullptr );
+    hr = SessionAudioVolume->SetMasterVolume( m_ChannelVolume, nullptr );
 
 exit:
     SAFE_RELEASE( SessionAudioVolume );
@@ -473,6 +496,9 @@ HRESULT WASAPIRenderer::OnStartPlayback( IMFAsyncResult* pResult )
             goto exit;
         }
     }
+
+    // Set the initial volume.
+    SetAudioClientChannelVolume();
 
     // Actually start the playback
     hr = m_AudioClient->Start();
@@ -597,7 +623,7 @@ HRESULT WASAPIRenderer::OnSampleReady( IMFAsyncResult* pResult )
             hr = MFPutWaitingWorkItem( m_SampleReadyEvent, 0, m_SampleReadyAsyncResult, &m_SampleReadyKey );
         }
     }
-    else
+    if (FAILED( hr ))
     {
         m_DeviceStateChanged->SetState( DeviceState::DeviceStateInError, hr, true );
     }
@@ -625,19 +651,9 @@ HRESULT WASAPIRenderer::OnAudioSampleRequested( Platform::Boolean IsSilence )
         goto exit;
     }
 
-    // Audio frames available in buffer
-    if (m_DeviceProps.IsHWOffload)
-    {
-        // In HW mode, GetCurrentPadding returns the number of available frames in the 
-        // buffer, so we can just use that directly
-        FramesAvailable = PaddingFrames;
-    }
-    else
-    {
-        // In non-HW shared mode, GetCurrentPadding represents the number of queued frames
-        // so we can subtract that from the overall number of frames we have
-        FramesAvailable = m_BufferFrames - PaddingFrames;
-    }
+    // GetCurrentPadding represents the number of queued frames
+    // so we can subtract that from the overall number of frames we have
+    FramesAvailable = m_BufferFrames - PaddingFrames;
 
     // Only continue if we have buffer to write data
     if (FramesAvailable > 0)

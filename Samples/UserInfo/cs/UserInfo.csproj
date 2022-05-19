@@ -109,6 +109,9 @@
     <Compile Include="Scenario2_WatchUsers.xaml.cs">
       <DependentUpon>Scenario2_WatchUsers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Scenario3_CheckUserConsentGroup.xaml.cs">
+      <DependentUpon>Scenario3_CheckUserConsentGroup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -133,6 +136,11 @@
     </Page>
     <Page Include="..\shared\Scenario2_WatchUsers.xaml">
       <Link>Scenario2_WatchUsers.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\shared\Scenario3_CheckUserConsentGroup.xaml">
+      <Link>Scenario3_CheckUserConsentGroup.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -11,6 +11,7 @@
 
 #include "pch.h"
 #include "Scenario2_WatchUsers.h"
+#include "UserViewModel.h"
 #include "Scenario2_WatchUsers.g.cpp"
 
 using namespace winrt;
@@ -69,7 +70,7 @@ namespace winrt::SDKTemplate::implementation
 
     SDKTemplate::UserViewModel Scenario2_WatchUsers::FindModelByUserId(hstring const& userId)
     {
-        for (UserViewModel model : users)
+        for (SDKTemplate::UserViewModel&& model : users)
         {
             if (model.UserId() == userId)
             {
@@ -92,7 +93,7 @@ namespace winrt::SDKTemplate::implementation
             displayName = L"User #" + to_hstring(userNumber);
             userNumber++;
         }
-        return displayName;
+        co_return displayName;
     }
 
     fire_and_forget Scenario2_WatchUsers::OnUserAdded(UserWatcher const&, UserChangedEventArgs const& e)
@@ -107,11 +108,11 @@ namespace winrt::SDKTemplate::implementation
         // Create the user with "..." as the temporary display name.
         // Add it right away, because it might get removed while the
         // "co_await GetDisplayNameOrGenericNameAsync()" is running.
-        UserViewModel model(user.NonRoamableId(), L"\u2026");
-        users.Append(model);
+        com_ptr<UserViewModel> model = make_self<UserViewModel>(user.NonRoamableId(), L"\u2026");
+        users.Append(*model);
 
         // Try to get the display name.
-        model.DisplayName(co_await GetDisplayNameOrGenericNameAsync(user));
+        model->DisplayName(co_await GetDisplayNameOrGenericNameAsync(user));
     }
 
     fire_and_forget Scenario2_WatchUsers::OnUserUpdated(UserWatcher const&, UserChangedEventArgs const& e)
@@ -124,10 +125,10 @@ namespace winrt::SDKTemplate::implementation
         co_await resume_foreground(Dispatcher());
 
         // Look for the user in our collection and update the display name.
-        UserViewModel model = FindModelByUserId(user.NonRoamableId());
+        SDKTemplate::UserViewModel model = FindModelByUserId(user.NonRoamableId());
         if (model != nullptr)
         {
-            model.DisplayName(co_await GetDisplayNameOrGenericNameAsync(user));
+            get_self<UserViewModel>(model)->DisplayName(co_await GetDisplayNameOrGenericNameAsync(user));
         }
     }
 
@@ -141,7 +142,7 @@ namespace winrt::SDKTemplate::implementation
         co_await resume_foreground(Dispatcher());
 
         // Look for the user in our collection and remove it.
-        UserViewModel model = FindModelByUserId(user.NonRoamableId());
+        SDKTemplate::UserViewModel model = FindModelByUserId(user.NonRoamableId());
         if (model != nullptr)
         {
             uint32_t index;

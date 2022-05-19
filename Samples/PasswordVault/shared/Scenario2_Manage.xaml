@@ -46,10 +46,10 @@
                     <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}"  Text="User Name:"  Margin="0,10,0,0"/>
                     <TextBox x:Name="InputUserNameValue" PlaceholderText="abby" Width="200" HorizontalAlignment="Left" AutomationProperties.AutomationId="InputUserNameValue"/>
                     <TextBlock TextWrapping="Wrap" Style="{StaticResource BasicTextStyle}"  Text="Results:"  Margin="0,10,0,0"/>
-                    <Button x:Name="RetrieveCredButton" AutomationProperties.AutomationId="RetrieveCredButton" Content="Retrieve credentials" Click="{x:Bind RetrieveCredentials}" Margin="0,10,0,0"/>
+                    <Button x:Name="RetrieveCredButton" AutomationProperties.AutomationId="RetrieveCredButton" Content="Retrieve credentials" Click="RetrieveCredentials_Click" Margin="0,10,0,0"/>
                     <ListBox x:Name="RetrievedCredentials" Height="150" SelectionMode="Multiple" HorizontalAlignment="Left" Margin="0,10,0,0"/>
-                    <Button x:Name="RevealPasswordsButton" AutomationProperties.AutomationId="RevealPasswordsButton" Content="Reveal selected passwords" Click="{x:Bind RevealPasswords}" Margin="0,10,0,0"/>
-                    <Button x:Name="RemoveCredButton" AutomationProperties.AutomationId="RemoveCredButton" Content="Remove selected credentials" Click="{x:Bind RemoveCredentials}" Margin="0,10,0,0"/>
+                    <Button x:Name="RevealPasswordsButton" AutomationProperties.AutomationId="RevealPasswordsButton" Content="Reveal selected passwords" Click="RevealPasswords_Click" Margin="0,10,0,0"/>
+                    <Button x:Name="RemoveCredButton" AutomationProperties.AutomationId="RemoveCredButton" Content="Remove selected credentials" Click="RemoveCredentials_Click" Margin="0,10,0,0"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
