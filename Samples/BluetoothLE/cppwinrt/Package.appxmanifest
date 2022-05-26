@@ -38,5 +38,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient"/>
+    <!--BT_Code: Always declare the bluetooth capability when using Bluetooth-->
+    <DeviceCapability Name="bluetooth" />
   </Capabilities>
 </Package>
