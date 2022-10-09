@@ -10,12 +10,12 @@
     <ProjectGuid>{F3E94CCF-1167-556D-A749-E759E62D1083}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SmartcardCS</RootNamespace>
+    <RootNamespace>SDKTemplate</RootNamespace>
     <AssemblyName>SmartcardCS</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -146,35 +146,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_ProvisionTPM.xaml">
+    <Page Include="..\shared\Scenario1_ProvisionTPM.xaml">
+      <Link>Scenario1_ProvisionTPM.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_ChangePIN.xaml">
+    <Page Include="..\shared\Scenario2_ChangePIN.xaml">
+      <Link>Scenario2_ChangePIN.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario3_ResetPIN.xaml">
+    <Page Include="..\shared\Scenario3_ResetPIN.xaml">
+      <Link>Scenario3_ResetPIN.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario4_ChangeAdminKey.xaml">
+    <Page Include="..\shared\Scenario4_ChangeAdminKey.xaml">
+      <Link>Scenario4_ChangeAdminKey.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario5_VerifyResponse.xaml">
+    <Page Include="..\shared\Scenario5_VerifyResponse.xaml">
+      <Link>Scenario5_VerifyResponse.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario6_DeleteTPM.xaml">
+    <Page Include="..\shared\Scenario6_DeleteTPM.xaml">
+      <Link>Scenario6_DeleteTPM.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario7_ListAllCards.xaml">
+    <Page Include="..\shared\Scenario7_ListAllCards.xaml">
+      <Link>Scenario7_ListAllCards.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Scenario8_TransmitAPDU.xaml">
+    <Page Include="..\shared\Scenario8_TransmitAPDU.xaml">
+      <Link>Scenario8_TransmitAPDU.xaml</Link>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,7 +219,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.18362.0">
+    <SDKReference Include="WindowsDesktop, Version=$(TargetPlatformVersion)">
       <Name>Microsoft Desktop Extension SDK for Universal App Platform</Name>
     </SDKReference>
   </ItemGroup>

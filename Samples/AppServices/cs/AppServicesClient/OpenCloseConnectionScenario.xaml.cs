@@ -123,7 +123,7 @@ namespace SDKTemplate
                 switch (response.Status)
                 {
                     case AppServiceResponseStatus.Failure:
-                        rootPage.NotifyUser("The service failed to acknowledge the message we sent it. It may have been terminated or it's RequestReceived handler might not be handling incoming messages correctly.", NotifyType.ErrorMessage);
+                        rootPage.NotifyUser("The service failed to acknowledge the message we sent it. It may have been terminated or its RequestReceived handler might not be handling incoming messages correctly.", NotifyType.ErrorMessage);
                         return;
 
                     case AppServiceResponseStatus.ResourceLimitsExceeded:

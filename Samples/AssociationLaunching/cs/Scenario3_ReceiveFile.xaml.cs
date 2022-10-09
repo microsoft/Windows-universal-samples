@@ -81,17 +81,35 @@ namespace SDKTemplate
 
         private async void CreateTestFile()
         {
-            StorageFolder folder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+            StorageFolder folder = await KnownFolders.GetFolderAsync(KnownFolderId.PicturesLibrary);
             await folder.CreateFileAsync("Test " + Extension + " file." + Extension, CreationCollisionOption.ReplaceExisting);
             await Windows.System.Launcher.LaunchFolderAsync(folder);
         }
 
-        private async void RemoveTestFile()
+        private async void CreateTestFileWithNoExtension()
         {
-            StorageFolder folder = await KnownFolders.GetFolderForUserAsync(null /* current user */, KnownFolderId.PicturesLibrary);
+            StorageFolder folder = await KnownFolders.GetFolderAsync(KnownFolderId.PicturesLibrary);
+            await folder.CreateFileAsync("Test file with no extension", CreationCollisionOption.ReplaceExisting);
+            await Windows.System.Launcher.LaunchFolderAsync(folder);
+        }
+
+        private async void RemoveTestFiles()
+        {
+            StorageFolder folder = await KnownFolders.GetFolderAsync(KnownFolderId.PicturesLibrary);
             try
             {
                 StorageFile file = await folder.GetFileAsync("Test " + Extension + " file." + Extension);
+                await file.DeleteAsync();
+            }
+            catch (Exception)
+            {
+                // File I/O errors are reported as exceptions.
+                // Ignore errors here.
+            }
+
+            try
+            {
+                StorageFile file = await folder.GetFileAsync("Test file with no extension");
                 await file.DeleteAsync();
             }
             catch (Exception)

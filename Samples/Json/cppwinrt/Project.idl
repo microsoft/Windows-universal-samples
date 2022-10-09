@@ -1,0 +1,48 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_ParseAndStringify : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_ParseAndStringify();
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass School
+    {
+        School();
+        School(Windows.Data.Json.JsonObject jsonObject);
+
+        Windows.Data.Json.JsonObject ToJsonObject();
+
+        String Id;
+        String Name;
+        String Type;
+    }
+    
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass User
+    {
+        User();
+        User(String jsonString);
+
+        String Id;
+        String Phone;
+        String Name;
+        Windows.Foundation.Collections.IObservableVector<School> Education{ get; };
+        Double Timezone;
+        Boolean Verified;
+
+        String Stringify();
+    }
+}

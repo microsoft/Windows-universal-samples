@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 //
@@ -7,7 +7,7 @@
 #include "pch.h"
 #include "Scenario4_CustomExceptionWRL.xaml.h"
 #include "MainPage.xaml.h"
-#include "..\Server\Microsoft.SDKSamples.Kitchen.h"
+#include "Microsoft.SDKSamples.Kitchen.h"
 
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Wrappers;

@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -34,6 +34,12 @@ toggle radio state changes, and register for state changes on individual radios.
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
 > the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
 > For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+
+## Related topics
+
+### Related samples
+
+[RadioManager](/archived/RadioManager) for C++/CX (archived)
 
 ## System requirements
 

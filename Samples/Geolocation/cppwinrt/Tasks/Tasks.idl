@@ -1,0 +1,20 @@
+namespace BackgroundTask
+{
+    [default_interface]
+    runtimeclass GeofenceBackgroundTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        GeofenceBackgroundTask();
+    }
+
+    [default_interface]
+    runtimeclass LocationBackgroundTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        LocationBackgroundTask();
+    }
+
+    [default_interface]
+    runtimeclass VisitBackgroundTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        VisitBackgroundTask();
+    }
+}

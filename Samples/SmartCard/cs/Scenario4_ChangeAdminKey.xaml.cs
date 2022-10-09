@@ -1,12 +1,11 @@
-﻿using SDKTemplate;
-using System;
+﻿using System;
 using Windows.Devices.SmartCards;
 using Windows.Security.Cryptography;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Smartcard
+namespace SDKTemplate
 {
     public sealed partial class Scenario4_ChangeAdminKey : Page
     {

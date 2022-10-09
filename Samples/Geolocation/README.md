@@ -3,7 +3,6 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
 products:
 - windows
 - windows-uwp
@@ -81,7 +80,7 @@ This sample requires that location capability be set in the *Package.appxmanifes
 
 * [Traffic App sample](https://github.com/microsoft/windows-appsample-trafficapp/)
 * [Lunch Scheduler app sample](https://github.com/Microsoft/Windows-appsample-lunch-scheduler)
-* [Geolocation sample](/archived/Geolocation/) for JavaScript (archived)
+* [Geolocation sample](/archived/Geolocation/) for C++/CX and JavaScript (archived)
 
 ## System requirements
 

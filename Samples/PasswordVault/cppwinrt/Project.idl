@@ -1,0 +1,14 @@
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_Save : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_Save();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_Manage : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Manage();
+    }
+}

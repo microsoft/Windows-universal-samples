@@ -1,0 +1,62 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_TrackPosition : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_TrackPosition();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_GetPosition : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_GetPosition();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_BackgroundTask : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_BackgroundTask();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_ForegroundGeofence : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_ForegroundGeofence();
+        Windows.UI.Xaml.Controls.RadioButton StartAtSpecificTime{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Scenario5_GeofenceBackgroundTask : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_GeofenceBackgroundTask();
+    }
+
+    [default_interface]
+    runtimeclass Scenario6_GetLastVisit : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario6_GetLastVisit();
+    }
+
+    [default_interface]
+    runtimeclass Scenario7_ForegroundVisits : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario7_ForegroundVisits();
+    }
+
+    [default_interface]
+    runtimeclass Scenario8_VisitsBackgroundTask : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario8_VisitsBackgroundTask();
+    }
+}

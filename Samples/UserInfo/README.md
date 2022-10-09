@@ -3,7 +3,7 @@ page_type: sample
 languages:
 - csharp
 - cpp
-- cppcx
+- cppwinrt
 products:
 - windows
 - windows-uwp
@@ -41,6 +41,7 @@ Specifically, this sample demonstrates the following scenarios:
 - How to retrieve multiple user properties with the [GetPropertiesAsync method](https://msdn.microsoft.com/library/windows/apps/dn996552.aspx).
 - How to obtain the profile picture for a user with the [GetPictureAsync method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpictureasync.aspx).
 - How to monitor users dynamically with the [CreateWatcher method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.createwatcher.aspx).
+- How to check which age consent group a user belongs to with the [CheckUserAgeConsentGroupAsync method]()
 
 **Note** The Universal Windows app samples require Visual Studio to build and Windows 10 to execute.
  
@@ -57,7 +58,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 ### Related samples
 
 * [Customers Orders Database sample](https://github.com/Microsoft/Windows-appsample-customers-orders-database)
-* [UserInfo sample](/archived/UserInfo/) for JavaScript (archived)
+* [UserInfo sample](/archived/UserInfo/) for JavaScript and C++/CX (archived)
 
 ## System requirements
 

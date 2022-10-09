@@ -46,6 +46,9 @@ For more information on network capabilities, see [How to set network capabiliti
 enforced by network isolation policy, these apps must run on separate machines for them to be able to communicate with each other. The sample scenario will not work 
 if both apps are running on the same machine.
 
+Alternatively, you can [use the `CheckNetIsolation.exe` tool](http://msdn.microsoft.com/library/windows/apps/hh780593)
+to remove the loopback restrictions for testing and debugging purposes.
+
 ## Related topics
 
 ### Other resources

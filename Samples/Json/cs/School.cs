@@ -9,14 +9,9 @@
 //
 //*********************************************************
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Data.Json;
 
-namespace Json
+namespace SDKTemplate
 {
     class School
     {
@@ -25,15 +20,8 @@ namespace Json
         private const string nameKey = "name";
         private const string typeKey = "type";
 
-        private string id;
-        private string name;
-        private string type;
-
         public School()
         {
-            Id = "";
-            Name = "";
-            Type = "";
         }
 
         public School(JsonObject jsonObject)
@@ -49,63 +37,28 @@ namespace Json
 
         public JsonObject ToJsonObject()
         {
-            JsonObject schoolObject = new JsonObject();
-            schoolObject.SetNamedValue(idKey, JsonValue.CreateStringValue(Id));
-            schoolObject.SetNamedValue(nameKey, JsonValue.CreateStringValue(Name));
+            // C# provides multiple ways to initialize a JsonObject.
+            // Here, we use indexed collection initializer syntax.
+            JsonObject schoolObject = new JsonObject()
+            {
+                [idKey] = JsonValue.CreateStringValue(Id),
+                [nameKey] = JsonValue.CreateStringValue(Name),
+            };
 
             JsonObject jsonObject = new JsonObject();
-            jsonObject.SetNamedValue(schoolKey, schoolObject);
+            // Here we use indexer syntax.
+            jsonObject[schoolKey] = schoolObject;
+
+            // Here we use an explicit call to SetNamedValue.
             jsonObject.SetNamedValue(typeKey, JsonValue.CreateStringValue(Type));
 
             return jsonObject;
         }
 
-        public string Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                id = value;
-            }
-        }
+        public string Id { get; set; } = "";
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                name = value;
-            }
-        }
+        public string Name { get; set; } = "";
 
-        public string Type
-        {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-                type = value;
-            }
-        }
+        public string Type { get; set; } = "";
     }
 }

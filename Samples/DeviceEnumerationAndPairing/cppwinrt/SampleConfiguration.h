@@ -29,20 +29,6 @@ namespace winrt::SDKTemplate
         return insp ? get_self<T>(insp.as<typename T::class_type>()) : nullptr;
     }
 
-    // RAII type for ensuring a deferral is completed.
-    template<typename T>
-    struct ensure_complete
-    {
-        ensure_complete(T t) : deferral(std::move(t)) { }
-        ~ensure_complete() { if (deferral) deferral.Complete(); }
-
-        ensure_complete(const ensure_complete&) = delete;
-        ensure_complete& operator=(const ensure_complete&) = delete;
-
-        ensure_complete(ensure_complete&& other) = default;
-        ensure_complete& operator=(ensure_complete&& other) = default;
-    };
-
     template<typename T>
     struct SimpleTaskCompletionSource : SimpleTaskCompletionSource<void>
     {       

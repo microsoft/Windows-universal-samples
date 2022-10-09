@@ -46,7 +46,7 @@ void Scenario2_oAuthFacebook::Launch_Click(Object^ sender, Windows::UI::Xaml::Ro
         return;
     }
 
-    facebookURL += clientID + "&redirect_uri=" + Uri::EscapeComponent(FacebookCallbackUrl->Text) + "&scope=read_stream&display=popup&response_type=token";
+    facebookURL += clientID + "&redirect_uri=" + Uri::EscapeComponent(FacebookCallbackUrl->Text) + "&scope=email&display=popup&response_type=token";
 
     try
     {

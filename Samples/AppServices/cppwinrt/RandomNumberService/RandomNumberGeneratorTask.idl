@@ -1,0 +1,7 @@
+namespace RandomNumberService
+{
+    [default_interface]
+    runtimeclass RandomNumberGeneratorTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        RandomNumberGeneratorTask();
+    } }

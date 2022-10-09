@@ -27,7 +27,7 @@ Scenario2_Manage::Scenario2_Manage()
     InitializeComponent();
 }
 
-void Scenario2_Manage::RetrieveCredentials()
+void Scenario2_Manage::RetrieveCredentials_Click(Object^, Object^)
 {
     auto resource = InputResourceValue->Text;
     auto userName = InputUserNameValue->Text;
@@ -101,7 +101,7 @@ void Scenario2_Manage::RetrieveCredentials()
     }
 }
 
-void Scenario2_Manage::RevealPasswords()
+void Scenario2_Manage::RevealPasswords_Click(Object^, Object^)
 {
     IVector<Object^>^ selectedItems = RetrievedCredentials->SelectedItems;
     if (selectedItems->Size > 0)
@@ -134,7 +134,7 @@ void Scenario2_Manage::RevealPasswords()
     }
 }
 
-void Scenario2_Manage::RemoveCredentials()
+void Scenario2_Manage::RemoveCredentials_Click(Object^, Object^)
 {
     IVector<Object^>^ selectedItems = RetrievedCredentials->SelectedItems;
     if (selectedItems->Size > 0)

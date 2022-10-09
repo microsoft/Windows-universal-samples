@@ -12,25 +12,24 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Windows.ApplicationModel.Core;
 using Windows.Devices.Radios;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
-namespace RadioManagerSample
+namespace SDKTemplate
 {
     public class RadioModel : INotifyPropertyChanged
     {
         private Radio radio;
         private bool isEnabled;
-        private UIElement parent;
+        private CoreDispatcher dispatcher;
 
-        public RadioModel(Radio radio, UIElement parent)
+        public RadioModel(Radio radio, CoreDispatcher dispatcher)
         {
             this.radio = radio;
             // Controlling the mobile broadband radio requires the cellularDeviceControl restricted capability, which we do not have.
             this.isEnabled = (radio.Kind != RadioKind.MobileBroadband);
-            this.parent = parent;
+            this.dispatcher = dispatcher;
             this.radio.StateChanged += Radio_StateChanged;
         }
 
@@ -38,7 +37,7 @@ namespace RadioManagerSample
         {
             // The Radio StateChanged event doesn't run from the UI thread, so we must use the dispatcher
             // to run NotifyPropertyChanged
-            await this.parent.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            await this.dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 NotifyPropertyChanged("IsRadioOn");
             });
@@ -89,21 +88,14 @@ namespace RadioManagerSample
 
         private async void SetRadioState(bool isRadioOn)
         {
-            var radioState = isRadioOn ? RadioState.On : RadioState.Off;
-            Disable();
-            await this.radio.SetStateAsync(radioState);
-            NotifyPropertyChanged("IsRadioOn");
-            Enable();
-        }
-
-        private void Enable()
-        {
-            IsEnabled = true;
-        }
-
-        private void Disable()
-        {
-            IsEnabled = false;
+            if (isRadioOn != IsRadioOn)
+            {
+                var radioState = isRadioOn ? RadioState.On : RadioState.Off;
+                IsEnabled = false;
+                await this.radio.SetStateAsync(radioState);
+                NotifyPropertyChanged("IsRadioOn");
+                IsEnabled = true;
+            }
         }
     }
 }

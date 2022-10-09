@@ -1,0 +1,45 @@
+namespace SDKTemplate
+{
+
+    [default_interface]
+    runtimeclass Scenario1_Files : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_Files();
+    }
+
+    [default_interface]
+    runtimeclass Scenario2_Settings : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_Settings();
+    }
+
+    [default_interface]
+    runtimeclass Scenario3_SettingContainer : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_SettingContainer();
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_CompositeSettings : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_CompositeSettings();
+    }
+
+    [default_interface]
+    runtimeclass Scenario5_Msappdata : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_Msappdata();
+    }
+
+    [default_interface]
+    runtimeclass Scenario6_ClearScenario : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario6_ClearScenario();
+    }
+
+    [default_interface]
+    runtimeclass Scenario7_SetVersion : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario7_SetVersion();
+    }
+}

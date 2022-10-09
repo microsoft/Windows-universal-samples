@@ -7,11 +7,10 @@
     <ClCompile Include="OvenServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Microsoft.SDKSamples.Kitchen.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

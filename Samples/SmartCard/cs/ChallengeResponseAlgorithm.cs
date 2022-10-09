@@ -2,7 +2,7 @@
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
 
-namespace Smartcard
+namespace SDKTemplate
 {
     static class ChallengeResponseAlgorithm
     {

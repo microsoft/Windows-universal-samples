@@ -23,7 +23,7 @@ Scenario1_Save::Scenario1_Save()
     InitializeComponent();
 }
 
-void Scenario1_Save::SaveCredential()
+void Scenario1_Save::SaveCredential_Click(Object^, Object^)
 {
     auto resource = InputResourceValue->Text;
     auto username = InputUserNameValue->Text;

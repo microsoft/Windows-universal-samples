@@ -1,0 +1,105 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    runtimeclass Scenario1_SimpleListView : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_SimpleListView();
+        Windows.UI.Xaml.Data.CollectionViewSource ContactsCVS { get; };
+    }
+
+    runtimeclass Scenario2_SimpleGridView : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario2_SimpleGridView();
+        Windows.UI.Xaml.Data.CollectionViewSource ContactsCVS { get; };
+    }
+
+    runtimeclass Scenario3_MasterDetail : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario3_MasterDetail();
+        Windows.UI.Xaml.Controls.AppBarButton SelectItemsBtn { get; };
+        Windows.UI.Xaml.Controls.AppBarButton AddItemBtn { get; };
+        Windows.UI.Xaml.Controls.AppBarButton DeleteItemBtn { get; };
+        Windows.UI.Xaml.Controls.AppBarButton DeleteItemsBtn { get; };
+        Windows.UI.Xaml.Controls.AppBarButton CancelSelectionBtn { get; };
+        Windows.UI.Xaml.Controls.ColumnDefinition MasterColumn { get; };
+        Windows.UI.Xaml.Controls.ColumnDefinition DetailColumn { get; };
+        Windows.UI.Xaml.Controls.ListView MasterListView{ get; };
+    }
+
+    [default_interface]
+    runtimeclass Scenario4_EdgeTappedListView : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario4_EdgeTappedListView();
+    }
+
+    runtimeclass Scenario5_RestoreScrollPosition : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario5_RestoreScrollPosition();
+        Windows.Foundation.Collections.IObservableVector<Item> _items { get; };
+    }
+
+    runtimeclass Scenario6_ScrollIntoView : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario6_ScrollIntoView();
+        Windows.Foundation.Collections.IObservableVector<Item> _items { get; };
+    }
+
+    runtimeclass Contact
+    {
+        String Id{ get; };
+        String Initials { get; };
+        String Name { get; };
+        String LastName { get; };
+        String FirstName { get; };
+        String Position { get; };
+        String PhoneNumber { get; };
+        String Biography { get; };
+    }
+
+    runtimeclass GroupInfoList : [default]IVector<Object>
+    {
+        GroupInfoList();
+        String Key;
+    }
+
+    runtimeclass DetailsPage : Windows.UI.Xaml.Controls.Page
+    {
+        DetailsPage();
+        Contact SelectedContact { get; };
+    }
+
+    [default_interface]
+    runtimeclass ImagePage : Windows.UI.Xaml.Controls.Page
+    {
+        ImagePage();
+    }
+
+    runtimeclass Item
+    {
+        String Id { get; };
+        Windows.UI.Xaml.Media.ImageSource ImageSource { get; };        
+    }
+
+    runtimeclass ListViewEdgeTappedEventArgs
+    {
+        Windows.UI.Xaml.Controls.ListViewItem Item { get; };
+    }
+
+    runtimeclass EdgeTappedListView : Windows.UI.Xaml.Controls.ListView
+    {
+        EdgeTappedListView();
+        Boolean IsItemLeftEdgeTapEnabled;
+        Windows.UI.Xaml.Media.Brush LeftEdgeBrush;
+        event Windows.Foundation.TypedEventHandler<EdgeTappedListView, ListViewEdgeTappedEventArgs> ItemLeftEdgeTapped;
+    }
+}

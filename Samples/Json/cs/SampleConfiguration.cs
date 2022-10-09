@@ -12,7 +12,6 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using Json;
 
 namespace SDKTemplate
 {
@@ -22,7 +21,7 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Parse and Stringify", ClassType=typeof(S1_ParseAndStringify)}
+            new Scenario() { Title="Parse and Stringify", ClassType=typeof(Scenario1_ParseAndStringify)}
         };
     }
 

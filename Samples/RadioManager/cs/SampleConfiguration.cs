@@ -12,7 +12,7 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using RadioManagerSample;
+using SDKTemplate;
 
 namespace SDKTemplate
 {
@@ -22,7 +22,7 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Toggle Radios", ClassType=typeof(Scenario1)}
+            new Scenario() { Title="Toggle Radios", ClassType=typeof(Scenario1_Toggle)}
         };
     }
 
