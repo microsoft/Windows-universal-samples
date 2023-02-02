@@ -11,13 +11,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
+using System.Threading.Tasks;
 using Windows.System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace SDKTemplate
 {
@@ -29,7 +27,29 @@ namespace SDKTemplate
         {
             new Scenario() { Title = "Find users", ClassType = typeof(Scenario1_FindUsers) },
             new Scenario() { Title = "Watch users", ClassType = typeof(Scenario2_WatchUsers) },
+            new Scenario() { Title = "Check user consent group", ClassType = typeof(Scenario3_CheckUserConsentGroup) },
         };
+
+        public static async Task<ObservableCollection<UserViewModel>> GetUserViewModelsAsync()
+        {
+            // Populate the list of users.
+            IReadOnlyList<User> users = await User.FindAllAsync();
+            var observableUsers = new ObservableCollection<UserViewModel>();
+            int userNumber = 1;
+            foreach (User user in users)
+            {
+                string displayName = (string)await user.GetPropertyAsync(KnownUserProperties.DisplayName);
+
+                // Choose a generic name if we do not have access to the actual name.
+                if (String.IsNullOrEmpty(displayName))
+                {
+                    displayName = "User #" + userNumber.ToString();
+                    userNumber++;
+                }
+                observableUsers.Add(new UserViewModel(user.NonRoamableId, displayName));
+            }
+            return observableUsers;
+        }
     }
 
     public class Scenario

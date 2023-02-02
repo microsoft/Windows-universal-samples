@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>4416d50a-7676-4d0a-9b2c-91ff70c6047f</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
+    <Page Include="..\shared\Scenario1_SimpleListView.xaml" />
+    <Page Include="..\shared\Scenario2_SimpleGridView.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
+    <Page Include="..\shared\Scenario3_MasterDetail.xaml" />
+    <Page Include="..\shared\DetailsPage.xaml" />
+    <Page Include="..\shared\Scenario4_EdgeTappedListView.xaml" />
+    <Page Include="..\shared\Scenario5_RestoreScrollPosition.xaml" />
+    <Page Include="..\shared\Scenario6_ScrollIntoView.xaml" />
+    <Page Include="..\shared\ImagePage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="GroupInfoList.cpp" />
+    <ClCompile Include="EdgeTappedListView.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ImagePage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="GroupInfoList.h" />
+    <ClInclude Include="EdgeTappedListView.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ImagePage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\cliff.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\grapes_background.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\LandscapeImage13.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\LandscapeImage2.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\LandscapeImage24.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\LandscapeImage3.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\LandscapeImage6.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\LandscapeImage7.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\Ring01.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\Ring03Part1.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\Ring03Part3.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\Samples\sunset.jpg">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
+  </ItemGroup>
+</Project>

@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
@@ -11,56 +11,47 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using SDKTemplate;
 using System;
 using Windows.Storage;
 
-namespace ApplicationDataSample
+namespace SDKTemplate
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class CompositeSettings : Page
+    public sealed partial class Scenario4_CompositeSettings : Page
     {
-        // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
-        // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
-        ApplicationDataContainer roamingSettings = null;
+        ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
         const string settingName = "exampleCompositeSetting";
         const string settingName1 = "one";
         const string settingName2 = "hello";
 
-        public CompositeSettings()
+        public Scenario4_CompositeSettings()
         {
-            this.InitializeComponent();
-
-            roamingSettings = ApplicationData.Current.RoamingSettings;
-
-            DisplayOutput();
+            InitializeComponent();
         }
 
         void WriteCompositeSetting_Click(Object sender, RoutedEventArgs e)
         {
+            // Composite settings are used to group multiple settings.
+            // Note that Composite settings may not be nested.
             ApplicationDataCompositeValue composite = new ApplicationDataCompositeValue();
             composite[settingName1] = 1; // example value
             composite[settingName2] = "world"; // example value
 
-            roamingSettings.Values[settingName] = composite;
+            localSettings.Values[settingName] = composite;
 
             DisplayOutput();
         }
 
         void DeleteCompositeSetting_Click(Object sender, RoutedEventArgs e)
         {
-            roamingSettings.Values.Remove(settingName);
+            localSettings.Values.Remove(settingName);
 
             DisplayOutput();
         }
 
         void DisplayOutput()
         {
-            ApplicationDataCompositeValue composite = (ApplicationDataCompositeValue)roamingSettings.Values[settingName];
+            ApplicationDataCompositeValue composite = (ApplicationDataCompositeValue)localSettings.Values[settingName];
 
             String output;
             if (composite == null)
@@ -75,13 +66,9 @@ namespace ApplicationDataSample
             OutputTextBlock.Text = output;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            DisplayOutput();
         }
     }
 }

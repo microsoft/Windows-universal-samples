@@ -16,9 +16,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WRLOutOfProcessWinRTCompone
 	ProjectSection(ProjectDependencies) = postProject
 		{90863F14-2E68-5464-BFE6-72ED72D369F8} = {90863F14-2E68-5464-BFE6-72ED72D369F8}
 	EndProjectSection
-EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "WRLOutOfProcessWinRTComponent_client_js", "JS\WRLOutOfProcessWinRTComponent_client_js.jsproj", "{C0E09EEF-28AD-5F5F-AE11-59CB55456B8C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM

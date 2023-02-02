@@ -19,22 +19,15 @@ namespace SDKTemplate
     {
         public const string FEATURE_NAME = "ApplicationData";
 
-        // Change the array below to reflect the name of your scenarios.
-        // This will be used to populate the list of scenarios on the main page with
-        // which the user will choose the specific scenario that they are interested in.
-        // These should be in the form: "Navigating to a web page".
-        // The code in MainPage will take care of turning this into: "1) Navigating to a web page"
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Files", ClassType = typeof(ApplicationDataSample.Files) },
-            new Scenario() { Title = "Settings", ClassType = typeof(ApplicationDataSample.Settings) },
-            new Scenario() { Title = "Setting Containers", ClassType = typeof(ApplicationDataSample.SettingContainer) },
-            new Scenario() { Title = "Composite Settings", ClassType = typeof(ApplicationDataSample.CompositeSettings) },
-            new Scenario() { Title = "DataChanged Event", ClassType = typeof(ApplicationDataSample.DataChangedEvent) },
-            new Scenario() { Title = "Roaming: HighPriority", ClassType = typeof(ApplicationDataSample.HighPriority) },
-            new Scenario() { Title = "ms-appdata:// Protocol", ClassType = typeof(ApplicationDataSample.Msappdata) },
-            new Scenario() { Title = "Clear", ClassType = typeof(ApplicationDataSample.ClearScenario) },
-            new Scenario() { Title = "SetVersion", ClassType = typeof(ApplicationDataSample.SetVersion) },
+            new Scenario() { Title = "Files", ClassType = typeof(Scenario1_Files) },
+            new Scenario() { Title = "Settings", ClassType = typeof(Scenario2_Settings) },
+            new Scenario() { Title = "Setting Containers", ClassType = typeof(Scenario3_SettingContainer) },
+            new Scenario() { Title = "Composite Settings", ClassType = typeof(Scenario4_CompositeSettings) },
+            new Scenario() { Title = "ms-appdata:// Protocol", ClassType = typeof(Scenario5_Msappdata) },
+            new Scenario() { Title = "Clear", ClassType = typeof(Scenario6_ClearScenario) },
+            new Scenario() { Title = "SetVersion", ClassType = typeof(Scenario7_SetVersion) },
         };
     }
 

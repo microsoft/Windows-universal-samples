@@ -1,0 +1,73 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario5_InkingAndInteractionFeedback"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Name="MovableRectangle" x:Key="MovableRectangle" TargetType="Rectangle">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Fill" Value="DarkBlue"/>
+        </Style>
+        <Style x:Name="MovableRectangleDragged" TargetType="Rectangle" BasedOn="{StaticResource MovableRectangle}">
+            <Setter Property="Fill" Value="Aqua"/>
+        </Style>
+        <Style x:Name="PreviewRectangle" x:Key="PreviewRectangle" TargetType="Rectangle">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Fill" Value="LightGray"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12" Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,12">
+                This scenario shows how to use both inking and interaction feedback together.
+                Use your pen to drag the square around to feel the different types of feedback being sent together.
+            </TextBlock>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="12">
+                <TextBlock Name="statusText"/>
+                <Canvas Name="hapticCanvas" Height="600" Width="600" Background="White" HorizontalAlignment="Left">
+                    <!-- The previewRect shows a preview of where the movableRect willb e snapped to when the user releases it. -->
+                    <Rectangle x:Name="previewRect"
+                               Style="{StaticResource PreviewRectangle}" />
+                    <!-- The movableRect is the rectangle which the user can drag around on the canvas. -->
+                    <Rectangle x:Name="movableRect"
+                               Style="{StaticResource MovableRectangle}"
+                               ManipulationMode="TranslateX, TranslateY"
+                               ManipulationStarted="MovableRect_ManipulationStarted"
+                               ManipulationDelta="MovableRect_ManipulationDelta"
+                               ManipulationCompleted="MovableRect_ManipulationCompleted"
+                               PointerEntered="MovableRect_Entered"
+                               PointerExited="MovableRect_Exited" />
+                </Canvas>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

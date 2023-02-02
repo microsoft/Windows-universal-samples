@@ -118,6 +118,7 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Longitude().Text(L"No data");
             ScenarioOutput_Accuracy().Text(L"No data");
             ScenarioOutput_Source().Text(L"No data");
+            ScenarioOutput_IsRemoteSource().Text(L"No data");
             ShowSatelliteData(false);
         }
         else
@@ -126,6 +127,7 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Longitude().Text(to_hstring(position.Coordinate().Point().Position().Longitude));
             ScenarioOutput_Accuracy().Text(to_hstring(position.Coordinate().Accuracy()));
             ScenarioOutput_Source().Text(to_hstring(position.Coordinate().PositionSource()));
+            ScenarioOutput_IsRemoteSource().Text(to_hstring(position.Coordinate().IsRemoteSource()));
 
             if (position.Coordinate().PositionSource() == PositionSource::Satellite)
             {
@@ -134,6 +136,8 @@ namespace winrt::SDKTemplate::implementation
                 ScenarioOutput_PosPrecision().Text(to_hstring(satelliteData.PositionDilutionOfPrecision()));
                 ScenarioOutput_HorzPrecision().Text(to_hstring(satelliteData.HorizontalDilutionOfPrecision()));
                 ScenarioOutput_VertPrecision().Text(to_hstring(satelliteData.VerticalDilutionOfPrecision()));;
+                ScenarioOutput_GeomPrecision().Text(to_hstring(satelliteData.GeometricDilutionOfPrecision()));;
+                ScenarioOutput_TimePrecision().Text(to_hstring(satelliteData.TimeDilutionOfPrecision()));;
                 ShowSatelliteData(true);
             }
             else
@@ -150,6 +154,8 @@ namespace winrt::SDKTemplate::implementation
         ScenarioOutput_PosPrecision().Visibility(visibility);
         ScenarioOutput_HorzPrecision().Visibility(visibility);
         ScenarioOutput_VertPrecision().Visibility(visibility);
+        ScenarioOutput_GeomPrecision().Visibility(visibility);
+        ScenarioOutput_TimePrecision().Visibility(visibility);
     }
 
 }

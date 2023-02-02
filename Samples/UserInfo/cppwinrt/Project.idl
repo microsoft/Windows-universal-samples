@@ -29,12 +29,16 @@ namespace SDKTemplate
         void StopWatching();
     }
 
+	[default_interface]
+	runtimeclass Scenario3_CheckUserConsentGroup : Windows.UI.Xaml.Controls.Page
+	{
+		Scenario3_CheckUserConsentGroup();
+	}
+
     [Windows.UI.Xaml.Data.Bindable]
     runtimeclass UserViewModel : Windows.UI.Xaml.Data.INotifyPropertyChanged
     {
-        UserViewModel(String userId, String displayName);
-
-        String UserId;
-        String DisplayName;
+        String UserId { get; };
+        String DisplayName { get; };
     }
 }

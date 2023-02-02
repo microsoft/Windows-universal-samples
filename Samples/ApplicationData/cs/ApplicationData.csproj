@@ -6,7 +6,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{E3631F30-6FD8-5AE6-88E0-CA94395F48CA}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -14,31 +14,12 @@
     <AssemblyName>ApplicationDataSample</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.22000.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>$(TargetPlatformVersion)</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -110,10 +91,12 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\App.xaml.cs">
+      <Link>App.xaml.cs</Link>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="$(SharedContentDir)\cs\MainPage.xaml.cs">
+      <Link>MainPage.xaml.cs</Link>
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(SharedContentDir)\cs\AssemblyInfo.cs">
@@ -132,22 +115,13 @@
     <Compile Include="Scenario4_CompositeSettings.xaml.cs">
       <DependentUpon>Scenario4_CompositeSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario5_DataChangedEvent.xaml.cs">
-      <DependentUpon>Scenario5_DataChangedEvent.xaml</DependentUpon>
+    <Compile Include="Scenario5_Msappdata.xaml.cs" />
+    <Compile Include="Scenario6_ClearScenario.xaml.cs">
+      <DependentUpon>Scenario6_ClearScenario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario6_HighPriority.xaml.cs">
-      <DependentUpon>Scenario6_HighPriority.xaml</DependentUpon>
+    <Compile Include="Scenario7_SetVersion.xaml.cs">
+      <DependentUpon>Scenario7_SetVersion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scenario7_Msappdata.xaml.cs">
-      <DependentUpon>Scenario7_Msappdata.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario8_ClearScenario.xaml.cs">
-      <DependentUpon>Scenario8_ClearScenario.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario9_SetVersion.xaml.cs">
-      <DependentUpon>Scenario9_SetVersion.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SuspensionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -155,12 +129,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="..\shared\App.xaml">
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml">
       <Link>App.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="..\shared\MainPage.xaml">
+    <Page Include="$(SharedContentDir)\cs\MainPage.xaml">
       <Link>MainPage.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -185,28 +159,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario5_DataChangedEvent.xaml">
-      <Link>Scenario5_DataChangedEvent.xaml</Link>
+    <Page Include="..\shared\Scenario5_Msappdata.xaml">
+      <Link>Scenario5_Msappdata.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario6_HighPriority.xaml">
-      <Link>Scenario6_HighPriority.xaml</Link>
+    <Page Include="..\shared\Scenario6_ClearScenario.xaml">
+      <Link>Scenario6_ClearScenario.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="..\shared\Scenario7_Msappdata.xaml">
-      <Link>Scenario7_Msappdata.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario8_ClearScenario.xaml">
-      <Link>Scenario8_ClearScenario.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="..\shared\Scenario9_SetVersion.xaml">
-      <Link>Scenario9_SetVersion.xaml</Link>
+    <Page Include="..\shared\Scenario7_SetVersion.xaml">
+      <Link>Scenario7_SetVersion.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -220,9 +184,15 @@
     <Content Include="$(SharedContentDir)\cs\Default.rd.xml">
       <Link>Properties\Default.rd.xml</Link>
     </Content>
-    <Content Include="Assets\appDataLocal.png" />
-    <Content Include="Assets\appDataRoaming.png" />
-    <Content Include="Assets\appDataTemp.png" />
+    <Content Include="..\shared\Assets\appDataLocal.png">
+      <Link>Assets\appDataLocal.png</Link>
+    </Content>
+    <Content Include="..\shared\Assets\appDataRoaming.png">
+      <Link>Assets\appDataRoaming.png</Link>
+    </Content>
+    <Content Include="..\shared\Assets\appDataTemp.png">
+      <Link>Assets\appDataTemp.png</Link>
+    </Content>
     <Content Include="$(SharedContentDir)\media\microsoft-sdk.png">
       <Link>Assets\microsoft-sdk.png</Link>
     </Content>

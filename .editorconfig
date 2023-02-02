@@ -1,0 +1,207 @@
+# editorconfig: http://editorconfig.org/
+# Help developers standardize spaces, tabs, encoding, end-line characters across editors
+
+# top-most .editorconfig file
+root = true
+
+# defaults for all files
+[*]
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# markdown, diff overrides
+# two trailing spaces are required for <br/> and hard line-breaks in markdown files
+# see: (https://daringfireball.net/projects/markdown/syntax#p) and (http://spec.commonmark.org/0.27/#hard-line-break)
+[*.{md,diff}]
+trim_trailing_whitespace = false
+
+[*.{md,xml,gprops,man,natvis}]
+indent_size = 2
+
+# manifest validation tool requires BOM
+[*.man]
+charset = utf-8-bom
+
+# XML-based MSBuild and Visual Studio files
+[*.{props,targets,settings,*proj,vcxitems,filters}]
+indent_size = 2
+
+# Exceptions to the above *proj wildcard
+[*.vdproj]
+indent_size = 4
+
+# Visual Studio uses hard tabs for SLN files, so don't fight it
+[*.sln]
+indent_style = tab
+
+# YAML overrides
+[*.{yml,yaml}]
+indent_size = 2
+
+# package.json overrides
+# Updating package.json with NPM will revert indentation to 2 spaces so to
+# reduce churn, let's align to NPM and specify indent size 2
+[package.json]
+indent_size = 2
+
+# JSON formats
+[{*.json,*.testlist,testmd.definition}]
+indent_size = 2
+
+[*.{rc}]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{c,w}]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{c++,cc,cpp,cppm,cxx,h,h++,hh,hpp,hxx,inl,ipp,ixx,tlh,tli,idl}]
+trim_trailing_whitespace = true
+insert_final_newline = true
+cpp_indent_braces = false
+cpp_indent_multi_line_relative_to = innermost_parenthesis
+cpp_indent_within_parentheses = indent
+cpp_indent_preserve_within_parentheses = true
+cpp_indent_case_contents = true
+cpp_indent_case_labels = false
+cpp_indent_case_contents_when_block = false
+cpp_indent_lambda_braces_when_parameter = false
+cpp_indent_goto_labels = one_left
+cpp_indent_preprocessor = leftmost_column
+cpp_indent_access_specifiers = false
+cpp_indent_namespace_contents = true
+cpp_indent_preserve_comments = false
+cpp_new_line_before_open_brace_namespace = ignore
+cpp_new_line_before_open_brace_type = ignore
+cpp_new_line_before_open_brace_function = new_line
+cpp_new_line_before_open_brace_block = new_line
+cpp_new_line_before_open_brace_lambda = new_line
+cpp_new_line_scope_braces_on_separate_lines = true
+cpp_new_line_close_brace_same_line_empty_type = false
+cpp_new_line_close_brace_same_line_empty_function = ignore
+cpp_new_line_before_catch = true
+cpp_new_line_before_else = true
+cpp_new_line_before_while_in_do_while = true
+cpp_space_before_function_open_parenthesis = remove
+cpp_space_within_parameter_list_parentheses = false
+cpp_space_between_empty_parameter_list_parentheses = false
+cpp_space_after_keywords_in_control_flow_statements = true
+cpp_space_within_control_flow_statement_parentheses = false
+cpp_space_before_lambda_open_parenthesis = false
+cpp_space_within_cast_parentheses = false
+cpp_space_after_cast_close_parenthesis = false
+cpp_space_within_expression_parentheses = false
+cpp_space_before_block_open_brace = true
+cpp_space_between_empty_braces = false
+cpp_space_before_initializer_list_open_brace = false
+cpp_space_within_initializer_list_braces = true
+cpp_space_preserve_in_initializer_list = true
+cpp_space_before_open_square_bracket = false
+cpp_space_within_square_brackets = false
+cpp_space_before_empty_square_brackets = false
+cpp_space_between_empty_square_brackets = false
+cpp_space_group_square_brackets = true
+cpp_space_within_lambda_brackets = false
+cpp_space_between_empty_lambda_brackets = false
+cpp_space_before_comma = false
+cpp_space_after_comma = true
+cpp_space_remove_around_member_operators = true
+cpp_space_before_inheritance_colon = true
+cpp_space_before_constructor_colon = true
+cpp_space_remove_before_semicolon = true
+cpp_space_after_semicolon = true
+cpp_space_remove_around_unary_operator = true
+cpp_space_around_binary_operator = insert
+cpp_space_around_assignment_operator = insert
+cpp_space_pointer_reference_alignment = left
+cpp_space_around_ternary_operator = insert
+cpp_wrap_preserve_blocks = one_liners
+
+# C# overrides
+# Rules explanation: https://kent-boogaart.com/blog/editorconfig-reference-for-c-developers
+[*.cs]
+# Indent settings
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+
+# Newline settings
+csharp_new_line_before_catch = true
+csharp_new_line_before_else = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_open_brace = all
+csharp_new_line_between_query_expression_clauses = true
+
+# Braces settings
+csharp_prefer_braces = true:error
+csharp_prefer_simple_default_expression = false:error
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = false
+
+# Space settings
+csharp_space_after_cast = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = do_not_ignore
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_open_square_brackets = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_between_square_brackets = false
+
+# Suggest more modern language features when available
+csharp_style_conditional_delegate_call = false:suggestion
+csharp_style_inlined_variable_declaration = true:suggestion
+csharp_style_pattern_matching_over_as_with_null_check = false:suggestion
+csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
+csharp_style_throw_expression = true:suggestion
+
+# Prefer property-like constructs to have an expression-body
+csharp_style_expression_bodied_accessors = true:suggestion
+csharp_style_expression_bodied_indexers = true:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+
+# Suggest "var" when type is apparent
+csharp_style_var_when_type_is_apparent = true:suggestion
+
+# Sort using directives with System.* appearing first
+dotnet_sort_system_directives_first = true
+
+# Suggest more modern language features when available
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_object_initializer = true:suggestion
+
+# Use language keywords instead of framework type names for type references
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+dotnet_style_predefined_type_for_member_access = true:suggestion
+
+# Avoid "this."
+dotnet_style_qualification_for_event = false:error
+dotnet_style_qualification_for_field = false:error
+dotnet_style_qualification_for_method = false:error
+dotnet_style_qualification_for_property = false:error
+

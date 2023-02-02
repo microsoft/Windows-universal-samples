@@ -41,6 +41,7 @@ Specifically, this sample demonstrates the following scenarios:
 - How to retrieve multiple user properties with the [GetPropertiesAsync method](https://msdn.microsoft.com/library/windows/apps/dn996552.aspx).
 - How to obtain the profile picture for a user with the [GetPictureAsync method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.getpictureasync.aspx).
 - How to monitor users dynamically with the [CreateWatcher method](https://msdn.microsoft.com/library/windows/apps/windows.system.user.createwatcher.aspx).
+- How to check which age consent group a user belongs to with the [CheckUserAgeConsentGroupAsync method]()
 
 **Note** The Universal Windows app samples require Visual Studio to build and Windows 10 to execute.
  

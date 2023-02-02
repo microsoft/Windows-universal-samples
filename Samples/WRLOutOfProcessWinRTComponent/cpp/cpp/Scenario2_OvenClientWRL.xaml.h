@@ -1,4 +1,4 @@
-﻿//*********************************************************
+//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 //
@@ -6,7 +6,7 @@
 
 #pragma once
 #include "Scenario2_OvenClientWRL.g.h"
-#include "..\Server\Microsoft.SDKSamples.Kitchen.h"
+#include "Microsoft.SDKSamples.Kitchen.h"
 
 namespace SDKTemplate
 {

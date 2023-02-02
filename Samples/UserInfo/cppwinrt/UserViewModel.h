@@ -68,9 +68,11 @@ namespace winrt::SDKTemplate::implementation
     };
 }
 
+#if 0
 namespace winrt::SDKTemplate::factory_implementation
 {
     struct UserViewModel : UserViewModelT<UserViewModel, implementation::UserViewModel>
     {
     };
 }
+#endif

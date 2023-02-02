@@ -14,7 +14,7 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>$(WindowsTargetPlatformVersion)</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -100,6 +100,9 @@
     <ClInclude Include="Scenario2_WatchUsers.h">
       <DependentUpon>..\shared\Scenario2_WatchUsers.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Scenario3_CheckUserConsentGroup.h">
+      <DependentUpon>..\shared\Scenario3_CheckUserConsentGroup.xaml</DependentUpon>
+    </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="UserViewModel.h" />
   </ItemGroup>
@@ -112,6 +115,7 @@
     </Page>
     <Page Include="..\shared\Scenario1_FindUsers.xaml" />
     <Page Include="..\shared\Scenario2_WatchUsers.xaml" />
+    <Page Include="..\shared\Scenario3_CheckUserConsentGroup.xaml" />
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
     </Page>
@@ -131,6 +135,9 @@
     </ClCompile>
     <ClCompile Include="Scenario2_WatchUsers.cpp">
       <DependentUpon>..\shared\Scenario2_WatchUsers.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="Scenario3_CheckUserConsentGroup.cpp">
+      <DependentUpon>..\shared\Scenario3_CheckUserConsentGroup.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -1,0 +1,56 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario3_InkingFeedback"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12" Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,0,0,12">
+                This scenario shows how to start and stop the different inking haptic signals, as well as how to apply fallback logic in the event that a desired signal is not supported by the current pen. In addition, this shows how to alter the intensity of the haptic signal.
+            </TextBlock>
+        </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="12">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="Desired waveform: "/>
+                    <ComboBox Name="waveformComboBox" SelectedIndex="0">
+                        <ComboBoxItem Content="InkContinuous"/>
+                        <ComboBoxItem Content="BrushContinuous"/>
+                        <ComboBoxItem Content="ChiselMarkerContinuous"/>
+                        <ComboBoxItem Content="EraserContinuous"/>
+                        <ComboBoxItem Content="GalaxyPenContinuous"/>
+                        <ComboBoxItem Content="MarkerContinuous"/>
+                        <ComboBoxItem Content="PencilContinuous"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="Intensity: "/>
+                    <Slider Name="intensitySlider" Minimum="1" Maximum="100" Value="100" Width="300" />
+                </StackPanel>
+                <Canvas Name="hapticCanvas" Height="400" Width="600" Background="LightGray" HorizontalAlignment="Left"
+                        PointerEntered="HapticCanvas_Entered" PointerExited="HapticCanvas_Exited"/>
+                <TextBlock Name="statusText"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

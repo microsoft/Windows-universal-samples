@@ -54,8 +54,23 @@ Scenario3::Scenario3() :
 
     m_CoreDispatcher = CoreWindow::GetForCurrentThread()->Dispatcher;
 
+    // Register for Media Transport controls.  This is required to support background
+    // audio scenarios.
+    m_SystemMediaControls = SystemMediaTransportControls::GetForCurrentView();
+    m_SystemMediaControlsButtonToken = m_SystemMediaControls->ButtonPressed += ref new TypedEventHandler<SystemMediaTransportControls^, SystemMediaTransportControlsButtonPressedEventArgs^>(this, &Scenario3::MediaButtonPressed);
+    m_SystemMediaControls->IsPlayEnabled = true;
+    m_SystemMediaControls->IsPauseEnabled = true;
+    m_SystemMediaControls->IsStopEnabled = true;
+
     // Get a string representing the Default Audio Render Device
     String^ deviceId = Windows::Media::Devices::MediaDevice::GetDefaultAudioRenderId(Windows::Media::Devices::AudioDeviceRole::Default);
+
+    // The string is empty if there is no such device.
+    if (deviceId->IsEmpty())
+    {
+        ShowStatusMessage(L"No audio devices available", NotifyType::StatusMessage);
+        return;
+    }
 
     auto PropertiesToRetrieve = ref new Platform::Collections::Vector<String^>();
     PropertiesToRetrieve->Append("System.Devices.AudioDevice.RawProcessingSupported");
@@ -81,14 +96,6 @@ Scenario3::Scenario3() :
             ShowStatusMessage("Raw Not Supported", NotifyType::StatusMessage);
         }
     });
-
-    // Register for Media Transport controls.  This is required to support background
-    // audio scenarios.
-    m_SystemMediaControls = SystemMediaTransportControls::GetForCurrentView();
-    m_SystemMediaControlsButtonToken = m_SystemMediaControls->ButtonPressed += ref new TypedEventHandler<SystemMediaTransportControls^, SystemMediaTransportControlsButtonPressedEventArgs^>(this, &Scenario3::MediaButtonPressed);
-    m_SystemMediaControls->IsPlayEnabled = true;
-    m_SystemMediaControls->IsPauseEnabled = true;
-    m_SystemMediaControls->IsStopEnabled = true;
 }
 
 Scenario3::~Scenario3()
@@ -527,6 +534,9 @@ void Scenario3::InitializeDevice()
 
         // Selects the Default Audio Device
         m_spRenderer->InitializeAudioDeviceAsync();
+
+        // Set the initial volume
+        OnSetVolume(static_cast<UINT32>(sliderVolume->Value));
     }
 }
 
