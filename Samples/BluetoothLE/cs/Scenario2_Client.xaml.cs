@@ -423,7 +423,6 @@ namespace SDKTemplate
                                 GattClientCharacteristicConfigurationDescriptorValue.None);
                     if (result == GattCommunicationStatus.Success)
                     {
-                        subscribedForNotifications = false;
                         RemoveValueChangedHandler();
                         rootPage.NotifyUser("Successfully un-registered for notifications", NotifyType.StatusMessage);
                     }
