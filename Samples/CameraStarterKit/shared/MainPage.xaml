@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -27,7 +27,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <!--Camera preview-->
-        <CaptureElement Name="PreviewControl" Stretch="Uniform"/>
+        <!--CaptureElement Name="PreviewControl" Stretch="Uniform"/-->
+        <Grid x:Name="CameraGrid"></Grid>
      
         <!-- Capture + Record buttons -->       
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">

@@ -1,4 +1,4 @@
-//*********************************************************
+﻿//*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
 // This code is licensed under the MIT License (MIT).
@@ -10,14 +10,11 @@
 //*********************************************************
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Devices.Enumeration;
-using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.Graphics.Display;
@@ -53,10 +50,7 @@ namespace CameraStarterKit
         private readonly SystemMediaTransportControls _systemMediaControls = SystemMediaTransportControls.GetForCurrentView();
 
         // MediaCapture and its state variables
-        //private MediaCapture _mediaCapture;
-        private List<MediaCapture> _mediaCaptures;
-        private List<CaptureElement> _previewElements;
-        private DeviceInformationCollection _cameras;
+        private MediaCapture _mediaCapture;
         private bool _isInitialized;
         private bool _isPreviewing;
         private bool _isRecording;
@@ -72,12 +66,9 @@ namespace CameraStarterKit
         private bool _externalCamera;
 
         // Rotation Helper to simplify handling rotation compensation for the camera streams
-     
-
         private CameraRotationHelper _rotationHelper;
 
-
-#region Constructor, lifecycle and navigation
+        #region Constructor, lifecycle and navigation
 
         public MainPage()
         {
@@ -131,10 +122,10 @@ namespace CameraStarterKit
             await SetUpBasedOnStateAsync();
         }
 
-#endregion Constructor, lifecycle and navigation
+        #endregion Constructor, lifecycle and navigation
 
 
-#region Event handlers
+        #region Event handlers
         private async void Window_VisibilityChanged(object sender, VisibilityChangedEventArgs args)
         {
             await SetUpBasedOnStateAsync();
@@ -210,10 +201,10 @@ namespace CameraStarterKit
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateCaptureControls());
         }
 
-#endregion Event handlers
+        #endregion Event handlers
 
 
-#region MediaCapture methods
+        #region MediaCapture methods
 
         /// <summary>
         /// Initializes the MediaCapture, registers events, gets camera device information for mirroring and rotating, starts preview and unlocks the UI
@@ -222,79 +213,21 @@ namespace CameraStarterKit
         private async Task InitializeCameraAsync()
         {
             Debug.WriteLine("InitializeCameraAsync");
-            // get all available cameras
-            //DeviceInformationCollection cameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-            int cameraCount = await GetNumberOfCamerasAsync();
-            if (_cameras == null)
-            {
-                Debug.WriteLine("No camera device found!");
-                return;
-            } else
-            {
-                Debug.WriteLine($"{_cameras.Count} cameras");
-            }
 
-            // calculate the number of rows and columns based on the number of cameras
-            int numColumns = 3;
-            int numRows = (int)(cameraCount / numColumns);
+            if (_mediaCapture == null)
+            {
+                // Attempt to get the back camera if one is available, but use any camera device if not
+                var cameraDevice = await FindCameraDeviceByPanelAsync(Windows.Devices.Enumeration.Panel.Back);
 
-            // create rows and columns in the CameraGrid
-            for (int i = 0; i < numRows; i++)
-            {
-                CameraGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            }
-            for (int i = 0; i < numColumns; i++)
-            {
-                CameraGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            }
-            _mediaCaptures = new List<MediaCapture>();
-            // add CaptureElements to the CameraGrid
-            for (int i = 0; i < cameraCount; i++)
-            {
-                CaptureElement captureElement = new CaptureElement();
-                CameraGrid.Children.Add(captureElement);
-                
-                // set the row and column of the CaptureElement based on the camera index
-                int row = i / numColumns;
-                int col = i % numColumns;
-                Grid.SetRow(captureElement, row);
-                Grid.SetColumn(captureElement, col);
-
-                // initialize the MediaCapture object with the current camera
-                MediaCaptureInitializationSettings settings = new MediaCaptureInitializationSettings {
-                    VideoDeviceId = _cameras[i].Id,
-                    AudioDeviceId = "",
-                    StreamingCaptureMode = StreamingCaptureMode.Video,
-                    PhotoCaptureSource = PhotoCaptureSource.VideoPreview,
-                    //MediaCaptureInitializationSettings.VideoProfile = KnownVideoProfile.HD1080p30;
-                };
-                var initialized = false;
-                MediaCapture mediaCapture = new MediaCapture();
-                try
+                if (cameraDevice == null)
                 {
-                    await mediaCapture.InitializeAsync(settings);
-                    _mediaCaptures.Add(mediaCapture);
-                    initialized= true;
+                    Debug.WriteLine("No camera device found!");
+                    return;
                 }
-                catch (UnauthorizedAccessException)
-                {
-                    Debug.WriteLine("The app was denied access to he camera");
-                }
-                
 
-                // start the preview and set the CaptureElement's source to the MediaCapture object
-                if (initialized)
-                {
-                    
-                    captureElement.Source = mediaCapture;
-                    await mediaCapture.StartPreviewAsync();
-                    
-                }
-            }
-            Debug.WriteLine($"there are {_mediaCaptures.Count()} medias");
-            _isPreviewing = true;
-#if _useVect
-            
+                // Create MediaCapture and its settings
+                _mediaCapture = new MediaCapture();
+
                 // Register for a notification when video recording has reached the maximum time and when something goes wrong
                 _mediaCapture.RecordLimitationExceeded += MediaCapture_RecordLimitationExceeded;
                 _mediaCapture.Failed += MediaCapture_Failed;
@@ -333,39 +266,22 @@ namespace CameraStarterKit
                     // Initialize rotationHelper
                     _rotationHelper = new CameraRotationHelper(cameraDevice.EnclosureLocation);
                     _rotationHelper.OrientationChanged += RotationHelper_OrientationChanged;
-                */
 
-                await StartPreviewAsync();
+                    await StartPreviewAsync();
 
-                UpdateCaptureControls();
-                
-            }
-#endif
-        }
-        private async Task<int> GetNumberOfCamerasAsync()
-        {
-            _cameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
-
-            try
-            {
-                return _cameras.Count;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error getting number of cameras: {ex.Message}");
-                return 0;
+                    UpdateCaptureControls();
+                }
             }
         }
-
 
         /// <summary>
         /// Handles an orientation changed event
         /// </summary>
-        private async void RotationHelper_OrientationChanged(object sender, bool updatePreview, MediaCapture mediaCapture)
+        private async void RotationHelper_OrientationChanged(object sender, bool updatePreview)
         {
             if (updatePreview)
             {
-                await SetPreviewRotationAsync(mediaCapture);
+                await SetPreviewRotationAsync();
             }
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => UpdateButtonOrientation());
         }
@@ -393,12 +309,8 @@ namespace CameraStarterKit
         {
             // Prevent the device from sleeping while the preview is running
             _displayRequest.RequestActive();
-            foreach (var mediaCapture in _mediaCaptures)
-            {
-                await mediaCapture.StartPreviewAsync();
-            };
-            _isPreviewing = true;
-            /*// Set the preview source in the UI and mirror it if necessary
+
+            // Set the preview source in the UI and mirror it if necessary
             PreviewControl.Source = _mediaCapture;
             PreviewControl.FlowDirection = _mirroringPreview ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
 
@@ -410,23 +322,22 @@ namespace CameraStarterKit
             if (_isPreviewing)
             {
                 await SetPreviewRotationAsync();
-            }*/
+            }
         }
 
         /// <summary>
         /// Gets the current orientation of the UI in relation to the device (when AutoRotationPreferences cannot be honored) and applies a corrective rotation to the preview
         /// </summary>
-        private async Task SetPreviewRotationAsync(MediaCapture mediaCapture)
+        private async Task SetPreviewRotationAsync()
         {
             // Only need to update the orientation if the camera is mounted on the device
-            if (_externalCamera)
-                { return; }
+            if (_externalCamera) return;
 
             // Add rotation metadata to the preview stream to make sure the aspect ratio / dimensions match when rendering and getting preview frames
             var rotation = _rotationHelper.GetCameraPreviewOrientation();
-            var props = mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
+            var props = _mediaCapture.VideoDeviceController.GetMediaStreamProperties(MediaStreamType.VideoPreview);
             props.Properties.Add(RotationKey, CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(rotation));
-            await mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
+            await _mediaCapture.SetEncodingPropertiesAsync(MediaStreamType.VideoPreview, props, null);
         }
 
         /// <summary>
@@ -437,17 +348,13 @@ namespace CameraStarterKit
         {
             // Stop the preview
             _isPreviewing = false;
-            //await _mediaCapture.StopPreviewAsync();
-            foreach (var mediaCapture in _mediaCaptures)
-            {
-                await mediaCapture.StopPreviewAsync();
-            }
-            Debug.WriteLine($"there are {_mediaCaptures.Count()}");
+            await _mediaCapture.StopPreviewAsync();
+
             // Use the dispatcher because this method is sometimes called from non-UI threads
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 // Cleanup the UI
-                //PreviewControl.Source = null;
+                PreviewControl.Source = null;
 
                 // Allow the device screen to sleep now that the preview is stopped
                 _displayRequest.RequestRelease();
@@ -461,40 +368,32 @@ namespace CameraStarterKit
         private async Task TakePhotoAsync()
         {
             // While taking a photo, keep the video button enabled only if the camera supports simultaneously taking pictures and recording video
-            VideoButton.IsEnabled = true;
-            foreach (var mediaCapture in _mediaCaptures)
-            {
-                VideoButton.IsEnabled &= mediaCapture.MediaCaptureSettings.ConcurrentRecordAndPhotoSupported;
-            }
-            Debug.WriteLine($"there are {_mediaCaptures.Count()}");
+            VideoButton.IsEnabled = _mediaCapture.MediaCaptureSettings.ConcurrentRecordAndPhotoSupported;
+
             // Make the button invisible if it's disabled, so it's obvious it cannot be interacted with
             VideoButton.Opacity = VideoButton.IsEnabled ? 1 : 0;
 
-            
+            var stream = new InMemoryRandomAccessStream();
 
-            
-            foreach (var mediaCapture in _mediaCaptures)
+            Debug.WriteLine("Taking photo...");
+            await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
+
+            try
             {
-                Debug.WriteLine("Taking photo...");
-                var stream = new InMemoryRandomAccessStream();
-                await mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
+                var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
+                Debug.WriteLine("Photo taken! Saving to " + file.Path);
 
-                try
-                {
-                    var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
-                    Debug.WriteLine("Photo taken! Saving to " + file.Path);
+                var photoOrientation = CameraRotationHelper.ConvertSimpleOrientationToPhotoOrientation(_rotationHelper.GetCameraCaptureOrientation());
 
-                    var photoOrientation = CameraRotationHelper.ConvertSimpleOrientationToPhotoOrientation(SimpleOrientation.NotRotated);
-
-                    await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
-                    Debug.WriteLine("Photo saved!");
-                }
-                catch (Exception ex)
-                {
-                    // File I/O errors are reported as exceptions
-                    Debug.WriteLine("Exception when taking a photo: " + ex.ToString());
-                }
+                await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
+                Debug.WriteLine("Photo saved!");
             }
+            catch (Exception ex)
+            {
+                // File I/O errors are reported as exceptions
+                Debug.WriteLine("Exception when taking a photo: " + ex.ToString());
+            }
+
             // Done taking a photo, so re-enable the button
             VideoButton.IsEnabled = true;
             VideoButton.Opacity = 1;
@@ -506,31 +405,28 @@ namespace CameraStarterKit
         /// <returns></returns>
         private async Task StartRecordingAsync()
         {
-            foreach (var mediaCapture in _mediaCaptures)
+            try
             {
-                try
-                {
-                    // Create storage file for the capture
-                    var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
+                // Create storage file for the capture
+                var videoFile = await _captureFolder.CreateFileAsync("SimpleVideo.mp4", CreationCollisionOption.GenerateUniqueName);
 
-                    var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
+                var encodingProfile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
 
-                    // Calculate rotation angle, taking mirroring into account if necessary
-                    var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(SimpleOrientation.NotRotated);
-                    encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
+                // Calculate rotation angle, taking mirroring into account if necessary
+                var rotationAngle = CameraRotationHelper.ConvertSimpleOrientationToClockwiseDegrees(_rotationHelper.GetCameraCaptureOrientation());
+                encodingProfile.Video.Properties.Add(RotationKey, PropertyValue.CreateInt32(rotationAngle));
 
-                    Debug.WriteLine("Starting recording to " + videoFile.Path);
+                Debug.WriteLine("Starting recording to " + videoFile.Path);
 
-                    await mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
-                    _isRecording = true;
+                await _mediaCapture.StartRecordToStorageFileAsync(encodingProfile, videoFile);
+                _isRecording = true;
 
-                    Debug.WriteLine("Started recording!");
-                }
-                catch (Exception ex)
-                {
-                    // File I/O errors are reported as exceptions
-                    Debug.WriteLine("Exception when starting video recording: " + ex.ToString());
-                }
+                Debug.WriteLine("Started recording!");
+            }
+            catch (Exception ex)
+            {
+                // File I/O errors are reported as exceptions
+                Debug.WriteLine("Exception when starting video recording: " + ex.ToString());
             }
         }
 
@@ -543,10 +439,8 @@ namespace CameraStarterKit
             Debug.WriteLine("Stopping recording...");
 
             _isRecording = false;
-            foreach (var mediaCapture in _mediaCaptures)
-            {
-                await mediaCapture.StopRecordAsync();
-            }
+            await _mediaCapture.StopRecordAsync();
+
             Debug.WriteLine("Stopped recording!");
         }
 
@@ -577,29 +471,25 @@ namespace CameraStarterKit
                 _isInitialized = false;
             }
 
-            if (_mediaCaptures != null)
+            if (_mediaCapture != null)
             {
-                //_mediaCapture.RecordLimitationExceeded -= MediaCapture_RecordLimitationExceeded;
-                foreach (var mediaCapture in _mediaCaptures)
-                {
-                    mediaCapture.Failed -= MediaCapture_Failed;
-                    mediaCapture.Dispose();
-                    //mediaCapture = null;
-                }
+                _mediaCapture.RecordLimitationExceeded -= MediaCapture_RecordLimitationExceeded;
+                _mediaCapture.Failed -= MediaCapture_Failed;
+                _mediaCapture.Dispose();
+                _mediaCapture = null;
             }
-#if _removeOrientation
+
             if (_rotationHelper != null)
             {
                 _rotationHelper.OrientationChanged -= RotationHelper_OrientationChanged;
                 _rotationHelper = null;
             }
-#endif
         }
 
-#endregion MediaCapture methods
+        #endregion MediaCapture methods
 
 
-#region Helper functions
+        #region Helper functions
 
         /// <summary>
         /// Initialize or clean up the camera and our UI,
@@ -687,8 +577,6 @@ namespace CameraStarterKit
         /// </summary>
         private void UpdateCaptureControls()
         {
-            PhotoButton.IsEnabled = true;
-            VideoButton.IsEnabled = true;
             // The buttons should only be enabled if the preview started sucessfully
             PhotoButton.IsEnabled = _isPreviewing;
             VideoButton.IsEnabled = _isPreviewing;
@@ -696,13 +584,9 @@ namespace CameraStarterKit
             // Update recording button to show "Stop" icon instead of red "Record" icon
             StartRecordingIcon.Visibility = _isRecording ? Visibility.Collapsed : Visibility.Visible;
             StopRecordingIcon.Visibility = _isRecording ? Visibility.Visible : Visibility.Collapsed;
-            var conCurrent = true;
-            foreach(MediaCapture mediaCapture in _mediaCaptures)
-            {
-                conCurrent &= mediaCapture.MediaCaptureSettings.ConcurrentRecordAndPhotoSequenceSupported;
-            }
+
             // If the camera doesn't support simultaneosly taking pictures and recording video, disable the photo button on record
-            if (_isInitialized && !conCurrent)
+            if (_isInitialized && !_mediaCapture.MediaCaptureSettings.ConcurrentRecordAndPhotoSupported)
             {
                 PhotoButton.IsEnabled = !_isRecording;
 
@@ -777,7 +661,7 @@ namespace CameraStarterKit
             }
         }
 
-#endregion Helper functions
+        #endregion Helper functions
 
     }
 }
