@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Windows.Devices.Enumeration;
 using Windows.Devices.SmartCards;
@@ -15,7 +15,7 @@ namespace SDKTemplate
             set;
         }
 
-        public string CardName
+        public List<string> CardNames
         {
             get;
             set;
@@ -76,18 +76,19 @@ namespace SDKTemplate
                     // each (reader, card) pair.
                     IReadOnlyList<SmartCard> cards = await reader.FindAllCardsAsync();
 
+                    var item = new SmartCardListItem()
+                    {
+                        ReaderName = reader.Name,
+                        CardNames = new List<string>(cards.Count),
+                    };
+
                     foreach (SmartCard card in cards)
                     {
                         SmartCardProvisioning provisioning = await SmartCardProvisioning.FromSmartCardAsync(card);
-
-                        SmartCardListItem item = new SmartCardListItem()
-                        {
-                            ReaderName = card.Reader.Name,
-                            CardName = await provisioning.GetNameAsync()
-                        };
-
-                        cardItems.Add(item);
+                        item.CardNames.Add(await provisioning.GetNameAsync());
                     }
+
+                    cardItems.Add(item);
                 }
 
                 // Bind the source of ItemListView to our SmartCardListItem list.

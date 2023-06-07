@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -48,7 +48,7 @@
                                     <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
                                         <StackPanel Margin="0,0,0,0" Orientation="Vertical">
                                             <TextBlock TextWrapping="Wrap" Width="300" VerticalAlignment="Center" Text="{Binding ReaderName}" HorizontalAlignment="Left" FontFamily="Segoe UI" />
-                                            <TextBlock TextWrapping="Wrap" Width="300" MaxHeight="20" VerticalAlignment="Center" Text="{Binding CardName}" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="12"/>
+                                            <ListBox ItemsSource="{Binding CardNames}" Width="300" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="12" IsHitTestVisible="False" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
