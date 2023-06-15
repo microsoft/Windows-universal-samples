@@ -21,6 +21,8 @@ namespace winrt::SDKTemplate::implementation
 
         fire_and_forget ScenarioStartScanButton_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
         void ScenarioEndScanButton_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
+        fire_and_forget ScenarioStartTriggerButton_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
+        fire_and_forget ScenarioStopTriggerButton_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
 
         void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);
         void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const& e);

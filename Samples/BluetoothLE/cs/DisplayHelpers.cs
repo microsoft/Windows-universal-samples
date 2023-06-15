@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
@@ -115,9 +115,16 @@ namespace SDKTemplate
 
         private async void UpdateGlyphBitmapImage()
         {
-            DeviceThumbnail deviceThumbnail = await DeviceInformation.GetGlyphThumbnailAsync();
             var glyphBitmapImage = new BitmapImage();
-            await glyphBitmapImage.SetSourceAsync(deviceThumbnail);
+            try
+            {
+                DeviceThumbnail deviceThumbnail = await DeviceInformation.GetGlyphThumbnailAsync();
+                await glyphBitmapImage.SetSourceAsync(deviceThumbnail);
+            }
+            catch (Exception)
+            {
+                // Something went wrong getting or decoding the device glyph.
+            }
             GlyphBitmapImage = glyphBitmapImage;
             OnPropertyChanged("GlyphBitmapImage");
         }

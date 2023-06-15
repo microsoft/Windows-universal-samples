@@ -11,7 +11,7 @@
 //*********************************************************
 -->
 <Page
-    x:Class="SDKTemplate.Scenario1_BasicFunctionality"
+    x:Class="SDKTemplate.Scenario3_ActiveSymbologies"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SDKTemplate"
@@ -19,10 +19,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <CollectionViewSource x:Name="SymbologyListSource"/>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid x:Name="RootGrid" Margin="12,20,12,12">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -32,22 +35,37 @@
                     <StackPanel Margin="0,0,0,20">
                         <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                         <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                            Registers an event listener for barcode scanner data and displays the data values as they are reported.
+                            Lists supported symbologies for the device to illustrate the use of setting active symbologiges functionality. Check or uncheck symbologies and tap "Set Active Symbologies" button to set active symbologies.
                         </TextBlock>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="5,5,5,20" Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" Margin="5,5,5,20">
                         <Button x:Name="ScenarioStartScanButton" Content="Start Scanning" Margin="0,0,10,0" Click="ScenarioStartScanButton_Click"/>
                         <Button x:Name="ScenarioEndScanButton" Content="End Scanning" Margin="0,0,10,0" Click="ScenarioEndScanButton_Click"/>
                     </StackPanel>
 
-                    <StackPanel x:Name="ScenarioSoftwareTriggerPanel" Orientation="Horizontal" Margin="5,5,5,20" Visibility="Collapsed" Grid.Row="2">
-                        <Button x:Name="ScenarioStartTriggerButton" Content="Start Software Trigger" Margin="0,0,10,0" Click="ScenarioStartTriggerButton_Click"/>
-                        <Button x:Name="ScenarioStopTriggerButton" Content="Stop Software Trigger" Margin="0,0,10,0" Click="ScenarioStopTriggerButton_Click"/>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                        <TextBlock x:Name="Display1" Margin="5,5,5,5" TextAlignment="Left"  Style="{StaticResource BasicTextStyle}">
+                            <Run Text="Symbologies"/>
+                        </TextBlock>
+                        <ListBox ItemsSource="{Binding Source={StaticResource SymbologyListSource}}" Margin="5,0,10,0" Width="180" Height="240" BorderThickness="1" HorizontalAlignment="Left">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="32"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0" IsChecked="{Binding Path=IsEnabled, Mode=TwoWay}"/>
+                                        <TextBlock Text="{Binding Path=Name}" Grid.Column="1" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button x:Name="SetActiveSymbologiesButton" Margin="0,8" Content="Set Active Symbologies" Click="SetActiveSymbologies_Click" />
                     </StackPanel>
 
-
-                    <Grid Grid.Row="3" Margin="0,0,0,20">
+                    <Grid Grid.Row="2" Margin="0,0,0,20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="200"/>
@@ -66,6 +84,12 @@
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="1"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="1" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+
         </Grid>
     </Grid>
 </Page>

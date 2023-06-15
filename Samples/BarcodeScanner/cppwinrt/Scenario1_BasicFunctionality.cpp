@@ -66,6 +66,7 @@ namespace winrt::SDKTemplate::implementation
             // reset the button state
             ScenarioEndScanButton().IsEnabled(false);
             ScenarioStartScanButton().IsEnabled(true);
+            ScenarioSoftwareTriggerPanel().Visibility(Visibility::Collapsed);
         }
     }
 
@@ -102,6 +103,14 @@ namespace winrt::SDKTemplate::implementation
 
                 m_rootPage.NotifyUser(L"Ready to scan. Device ID: " + m_scanner.DeviceId(), NotifyType::StatusMessage);
                 ScenarioEndScanButton().IsEnabled(true);
+
+                // If the scanner is a software scanner, show the software trigger buttons.
+                if (!m_scanner.VideoDeviceId().empty())
+                {
+                    ScenarioSoftwareTriggerPanel().Visibility(Visibility::Visible);
+                    ScenarioStartTriggerButton().IsEnabled(true);
+                    ScenarioStopTriggerButton().IsEnabled(false);
+                }
             }
             else
             {
@@ -148,5 +157,19 @@ namespace winrt::SDKTemplate::implementation
     void Scenario1_BasicFunctionality::ScenarioEndScanButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         ResetTheScenarioState();
+    }
+
+    fire_and_forget Scenario1_BasicFunctionality::ScenarioStartTriggerButton_Click(IInspectable const&, RoutedEventArgs const&)
+    {
+        ScenarioStartTriggerButton().IsEnabled(false);
+        co_await m_claimedScanner.StartSoftwareTriggerAsync();
+        ScenarioStopTriggerButton().IsEnabled(true);
+    }
+
+    fire_and_forget Scenario1_BasicFunctionality::ScenarioStopTriggerButton_Click(IInspectable const&, RoutedEventArgs const&)
+    {
+        ScenarioStopTriggerButton().IsEnabled(false);
+        co_await m_claimedScanner.StopSoftwareTriggerAsync();
+        ScenarioStartTriggerButton().IsEnabled(true);
     }
 }

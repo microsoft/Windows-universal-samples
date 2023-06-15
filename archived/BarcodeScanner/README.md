@@ -1,7 +1,9 @@
 ---
 topic: sample
 languages:
+- cppcx
 - js
+- vb
 products:
 - windows
 - windows-uwp

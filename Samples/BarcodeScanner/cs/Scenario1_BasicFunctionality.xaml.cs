@@ -95,6 +95,14 @@ namespace SDKTemplate
 
                     rootPage.NotifyUser("Ready to scan. Device ID: " + claimedScanner.DeviceId, NotifyType.StatusMessage);
                     ScenarioEndScanButton.IsEnabled = true;
+
+                    // If the scanner is a software scanner, show the software trigger buttons.
+                    if (!string.IsNullOrEmpty(scanner.VideoDeviceId))
+                    {
+                        ScenarioSoftwareTriggerPanel.Visibility = Visibility.Visible;
+                        ScenarioStartTriggerButton.IsEnabled = true;
+                        ScenarioStopTriggerButton.IsEnabled = false;
+                    }
                 }
                 else
                 {
@@ -172,6 +180,7 @@ namespace SDKTemplate
                 // reset the button state
                 ScenarioEndScanButton.IsEnabled = false;
                 ScenarioStartScanButton.IsEnabled = true;
+                ScenarioSoftwareTriggerPanel.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -187,5 +196,26 @@ namespace SDKTemplate
             this.ResetTheScenarioState();
         }
 
+        /// <summary>
+        /// Event handler for Start Software Trigger button click.
+        /// Presses the software trigger button.
+        /// </summary>
+        private async void ScenarioStartTriggerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ScenarioStartTriggerButton.IsEnabled = false;
+            await claimedScanner.StartSoftwareTriggerAsync();
+            ScenarioStopTriggerButton.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Event handler for Stop Software Trigger button click.
+        /// Releases the software trigger button.
+        /// </summary>
+        private async void ScenarioStopTriggerButton_Click(object sender, RoutedEventArgs e)
+        {
+            ScenarioStopTriggerButton.IsEnabled = false;
+            await claimedScanner.StopSoftwareTriggerAsync();
+            ScenarioStartTriggerButton.IsEnabled = true;
+        }
     }
 }

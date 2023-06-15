@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>4416d50a-7676-4d0a-9b2c-91ff70c6047f</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
+    <Page Include="..\shared\Scenario1_NetworkConnectivity.xaml" />
+    <Page Include="..\shared\Scenario2_NetworkCost.xaml" />
+    <Page Include="..\shared\Scenario3_NetworkConnectivityChanges.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
+  </ItemGroup>
+</Project>

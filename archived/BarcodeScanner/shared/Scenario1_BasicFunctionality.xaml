@@ -23,7 +23,6 @@
         <Grid x:Name="RootGrid" Margin="12,20,12,12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -41,13 +40,7 @@
                         <Button x:Name="ScenarioEndScanButton" Content="End Scanning" Margin="0,0,10,0" Click="ScenarioEndScanButton_Click"/>
                     </StackPanel>
 
-                    <StackPanel x:Name="ScenarioSoftwareTriggerPanel" Orientation="Horizontal" Margin="5,5,5,20" Visibility="Collapsed" Grid.Row="2">
-                        <Button x:Name="ScenarioStartTriggerButton" Content="Start Software Trigger" Margin="0,0,10,0" Click="ScenarioStartTriggerButton_Click"/>
-                        <Button x:Name="ScenarioStopTriggerButton" Content="Stop Software Trigger" Margin="0,0,10,0" Click="ScenarioStopTriggerButton_Click"/>
-                    </StackPanel>
-
-
-                    <Grid Grid.Row="3" Margin="0,0,0,20">
+                    <Grid Grid.Row="2" Margin="0,0,0,20">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="200"/>
@@ -66,6 +59,12 @@
                     </Grid>
                 </StackPanel>
             </ScrollViewer>
+
+            <!-- Status Block for providing messages to the user.  Use the
+             NotifyUser() method to populate the message -->
+            <Border x:Name="ErrorBorder" Background="Red" Grid.Row="1"/>
+            <TextBlock x:Name="StatusBlock" Grid.Row="1" Margin="12, 10, 12, 10" Visibility="Collapsed"/>
+
         </Grid>
     </Grid>
 </Page>

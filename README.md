@@ -509,21 +509,24 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Json">JSON</a></td>
   <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
-  <td><a href="Samples/RadioManager">Radios</a></td>
+  <td><a href="Samples/NetworkConnectivity">Network connectivity</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/RadioManager">Radios</a></td>
   <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
   <td><a href="Samples/StreamSocket">StreamSocket</a></td>
-  <td><a href="Samples/Syndication">Syndication</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Syndication">Syndication</a></td>
   <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
   <td><a href="Samples/WebSocket">WebSocket</a></td>
-  <td><a href="Samples/WiFiDirect">Wi-Fi Direct</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WiFiDirect">Wi-Fi Direct</a></td>
   <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
   <td><a href="Samples/HotspotAuthentication">Wi-Fi hotspot authentication</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/WiFiScan">Wi-Fi scanning</a></td>
  </tr>
 </table>

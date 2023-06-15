@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "BluetoothLEDeviceDisplay.h"
 #include "BluetoothLEDeviceDisplay.g.cpp"
 
@@ -55,9 +55,16 @@ namespace winrt::SDKTemplate::implementation
     fire_and_forget BluetoothLEDeviceDisplay::UpdateGlyphBitmapImage()
     {
         auto lifetime = get_strong();
-        DeviceThumbnail deviceThumbnail = co_await m_deviceInformation.GetGlyphThumbnailAsync();
         BitmapImage glyphBitmapImage;
-        co_await glyphBitmapImage.SetSourceAsync(deviceThumbnail);
+        try
+        {
+            DeviceThumbnail deviceThumbnail = co_await m_deviceInformation.GetGlyphThumbnailAsync();
+            co_await glyphBitmapImage.SetSourceAsync(deviceThumbnail);
+        }
+        catch (...)
+        {
+            // Something went wrong getting or decoding the device glyph.
+        }
         m_glyphBitmapImage = glyphBitmapImage;
         OnPropertyChanged(L"GlyphBitmapImage");
     }
