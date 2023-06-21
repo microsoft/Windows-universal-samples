@@ -1,5 +1,5 @@
 ---
-page_type: sample
+topic: sample
 languages:
 - csharp
 - cpp

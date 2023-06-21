@@ -1,0 +1,14 @@
+namespace BackgroundTask
+{
+    [default_interface]
+    runtimeclass UpdateMetadataTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        UpdateMetadataTask();
+    }
+
+    [default_interface]
+    runtimeclass ConnectTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        ConnectTask();
+    }
+}

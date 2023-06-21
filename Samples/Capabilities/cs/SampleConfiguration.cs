@@ -21,7 +21,7 @@ namespace SDKTemplate
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title="Check capability", ClassType=typeof(Scenario1_Check)},
+            new Scenario() { Title="Check capability and set display message", ClassType=typeof(Scenario1_Check)},
             new Scenario() { Title="Request multiple capabilities", ClassType=typeof(Scenario2_RequestMany)},
         };
     }

@@ -1,0 +1,10 @@
+﻿#pragma once
+#include <unknwn.h>
+#include <winrt/Windows.Foundation.h>
+#include <winrt/Windows.Foundation.Collections.h>
+#include "winrt/Windows.ApplicationModel.Background.h"
+#include "winrt/Windows.Data.Xml.Dom.h"
+#include "winrt/Windows.Devices.WiFi.h"
+#include "winrt/Windows.Security.Credentials.h"
+#include "winrt/Windows.Storage.h"
+#include "winrt/Windows.UI.Notifications.h"

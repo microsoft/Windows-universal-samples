@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>4416d50a-7676-4d0a-9b2c-91ff70c6047f</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\shared\Scenario1_DataEvents.xaml" />
+    <Page Include="..\shared\Scenario2_Polling.xaml" />
+    <Page Include="..\shared\Scenario3_Choosing.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Project.idl" />
+    <Midl Include="$(SharedContentDir)\cppwinrt\MainPage.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Scenario1_DataEvents.cpp" />
+    <ClCompile Include="Scenario2_Polling.cpp" />
+    <ClCompile Include="Scenario3_Choosing.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="SampleConfiguration.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\App.cpp" />
+    <ClCompile Include="$(SharedContentDir)\cppwinrt\MainPage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Scenario1_DataEvents.h" />
+    <ClInclude Include="Scenario2_Polling.h" />
+    <ClInclude Include="Scenario3_Choosing.h" />
+    <ClInclude Include="SampleConfiguration.h" />
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\App.h" />
+    <ClInclude Include="$(SharedContentDir)\cppwinrt\MainPage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\smalltile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\splash-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\squaretile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\storelogo-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\tile-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="$(SharedContentDir)\media\windows-sdk.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

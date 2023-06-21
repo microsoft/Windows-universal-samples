@@ -1,0 +1,40 @@
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+
+namespace SDKTemplate
+{
+    [default_interface]
+    runtimeclass Scenario1_ManageHotspot : Windows.UI.Xaml.Controls.Page
+    {
+        Scenario1_ManageHotspot();
+
+        Windows.UI.Xaml.Controls.ToggleSwitch CellularBarsToggle{ get; };
+        Windows.UI.Xaml.Controls.ToggleSwitch BatteryPercentageToggle{ get; };
+    }
+
+    [Windows.UI.Xaml.Data.Bindable]
+    runtimeclass ODHModel : Windows.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        String Id { get; };
+        String DisplayName;
+        Boolean IsAvailable;
+        Boolean BarsVisible;
+        Int32 Bars;
+        Boolean BatteryVisible;
+        Int32 BatteryPercent;
+        String Ssid;
+        String Password;
+
+        Boolean SaveButtonEnabled { get; };
+        void Button_Click_Save();
+        void Button_Click_ApplyNow();
+    }
+}

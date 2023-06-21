@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomCapabilityDescriptor xmlns="http://schemas.microsoft.com/appx/2016/sccd" xmlns:s="http://schemas.microsoft.com/appx/2016/sccd">
+    <CustomCapabilities>
+        <CustomCapability Name="microsoft.onDemandHotspotControl_8wekyb3d8bbwe"></CustomCapability>
+    </CustomCapabilities>
+    <AuthorizedEntities>
+        <AuthorizedEntity AppPackageFamilyName="Microsoft.SDKSamples.OnDemandHotspot.CS_8wekyb3d8bbwe" CertificateSignatureHash="ca9fc964db7e0c2938778f4559946833e7a8cfde0f3eaa07650766d4764e86c4"></AuthorizedEntity>
+        <AuthorizedEntity AppPackageFamilyName="Microsoft.SDKSamples.OnDemandHotspot.CPP_8wekyb3d8bbwe" CertificateSignatureHash="c39c58eff76e19113531f0776e2f5b7c34e5172f5d62aa31482f9e37b32ec242"></AuthorizedEntity>
+    </AuthorizedEntities>
+    <DeveloperModeOnly Value="true"/>
+    <Catalog>xxxx</Catalog>
+</CustomCapabilityDescriptor>

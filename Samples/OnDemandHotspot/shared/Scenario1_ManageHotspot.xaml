@@ -1,0 +1,117 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_ManageHotspot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                To create an on-demand hotspot, register a background task to provide
+                information about the hotspot when the system shows a list of Wi-Fi networks,
+                and another to turn on the hotspot when the user selects it. You probably also
+                want to register a background task to detect when the hotspot is in range
+                so you can update its availability and other properties.
+            </TextBlock>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap" Margin="0,10,0,0">
+                This sample does not control a physical hotspot device,
+                so we will simulate it by displaying a toast message instructing you
+                to turn on your mobile phone's hotspot.
+            </TextBlock>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button Content="Register tasks" Click="RegisterTasks_Click" Name="RegisterButton" Margin="0,0,10,0" />
+                <Button Content="Unregister tasks" Click="UnregisterTasks_Click" Name="UnregisterButton" />
+            </StackPanel>
+
+            <StackPanel x:Name="HotspotPropertiesPanel">
+                <Grid HorizontalAlignment="Left" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="DisplayName:" Margin="0,0,10,0" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" />
+                    <TextBox x:Name="DisplayNameText"
+                         PlaceholderText="Provide a name for the on-demand hotspot" Grid.Column="1" Grid.Row="0" />
+
+                    <TextBlock Text="Available:" Grid.Row="1" Grid.Column="0" />
+                    <ToggleSwitch x:Name="AvailableToggle" Grid.Column="1" Grid.Row="1" />
+
+                    <TextBlock Text="Cellular bars:" Grid.Column="0" Grid.Row="2"/>
+                    <ToggleSwitch x:Name="CellularBarsToggle" Grid.Column="1" Grid.Row="2" />
+
+                    <Slider x:Name="CellularBarsSlider" IsEnabled="{x:Bind CellularBarsToggle.IsOn, Mode=OneWay}"
+                        Minimum="0" Maximum="5" TickFrequency="1" StepFrequency="1" TickPlacement="Inline" SnapsTo="StepValues" Margin="10,0,0,0"
+                        Grid.ColumnSpan="2" Grid.Row="3" />
+
+                    <TextBlock Text="Battery percentage: " Grid.Column="0" Grid.Row="4"/>
+                    <ToggleSwitch x:Name="BatteryPercentageToggle" Grid.Column="1" Grid.Row="4" />
+                    <Slider x:Name="BatteryPercentageSlider" IsEnabled="{x:Bind BatteryPercentageToggle.IsOn, Mode=OneWay}"
+                        Minimum="0" Maximum="100" TickFrequency="10" StepFrequency="1" TickPlacement="Inline" SnapsTo="StepValues" Margin="10,0,0,0"
+                        Grid.ColumnSpan="2" Grid.Row="5" />
+
+                    <TextBlock Grid.ColumnSpan="2" MaxWidth="500" TextWrapping="Wrap" Grid.Row="6">
+                        Enter the SSID and password of your mobile phone hotspot (or any other Wi-Fi network).
+                        In a real program, you would use the SSID and password of the on-demand hotspot.
+                        Set the SSID to "error" to simulate an error turning on the hotspot.
+                    </TextBlock>
+
+                    <TextBlock Text="SSID:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" />
+                    <TextBox x:Name="SsidText" PlaceholderText="Required" MinWidth="50" Grid.Column="1" Grid.Row="7" />
+
+                    <TextBlock Text="Password:" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" />
+                    <PasswordBox x:Name="PasswordText" MinWidth="50" PlaceholderText="Required" Grid.Column="1" Grid.Row="8" />
+
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Update now" Click="UpdateNowButton_Click" Name="ApplyNowButton" Margin="10" />
+                    <Button Content="Update when user opens Wi-Fi network list" Click="UpdateOnDemandButton_Click" Margin="10" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Registered">
+                    <VisualState.Setters>
+                        <Setter Target="RegisterButton.IsEnabled" Value="False"/>
+                        <Setter Target="UnregisterButton.IsEnabled" Value="True"/>
+                        <Setter Target="HotspotPropertiesPanel.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NotRegistered">
+                    <VisualState.Setters>
+                        <Setter Target="RegisterButton.IsEnabled" Value="True"/>
+                        <Setter Target="UnregisterButton.IsEnabled" Value="False"/>
+                        <Setter Target="HotspotPropertiesPanel.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </ScrollViewer>
+</Page>

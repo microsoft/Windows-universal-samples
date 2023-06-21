@@ -23,7 +23,7 @@ description: "Shows how to use the Windows.Devices.WiFi APIs."
 
 # Wi-Fi scanning sample
 
-Shows how to use the [Windows.Devices.WiFi](https://msdn.microsoft.com/library/windows/apps/windows.devices.wifi.aspx) APIs. 
+Shows how to use the [Windows.Devices.WiFi](https://docs.microsoft.com/en-us/uwp/api/Windows.Devices.WiFi) APIs.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > You can download this sample as a standalone ZIP file
@@ -48,6 +48,11 @@ Specifically, this sample demonstrates:
 **Server:** Windows Server 2016 Technical Preview
 
 **Phone:**  Windows 10
+
+# Related topics
+
+## Related samples
+* [On-Demand Hotspot](/Samples/OnDemandHotspot/)
 
 ## Build the sample
 

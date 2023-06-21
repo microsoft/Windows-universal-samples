@@ -25,6 +25,6 @@ hstring implementation::MainPage::FEATURE_NAME()
 
 IVector<Scenario> implementation::MainPage::scenariosInner = winrt::single_threaded_observable_vector<Scenario>(
 {
-    Scenario{ L"Check capability", xaml_typename<SDKTemplate::Scenario1_Check>() },
+    Scenario{ L"Check capability and set display message", xaml_typename<SDKTemplate::Scenario1_Check>() },
     Scenario{ L"Request multiple capabilities", xaml_typename<SDKTemplate::Scenario2_RequestMany>() },
 });

@@ -22,7 +22,7 @@ namespace winrt::SDKTemplate::implementation
         void OnNavigatedTo(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
         void OnNavigatedFrom(Windows::UI::Xaml::Navigation::NavigationEventArgs const&);
 
-        fire_and_forget RequestAccessButton_Click(Windows::Foundation::IInspectable const& sender, Windows::UI::Xaml::RoutedEventArgs const& e);
+        fire_and_forget StreamLocationButton_Click(Windows::Foundation::IInspectable const&, Windows::UI::Xaml::RoutedEventArgs const&);
 
     private:
         SDKTemplate::MainPage rootPage{ MainPage::Current() };
@@ -30,8 +30,8 @@ namespace winrt::SDKTemplate::implementation
         event_token accessChangedToken;
 
         fire_and_forget OnCapabilityAccessChanged(Windows::Security::Authorization::AppCapabilityAccess::AppCapability const&, Windows::Foundation::IInspectable const&);
-        Windows::Foundation::IAsyncAction ShowLocationAsync();
-        fire_and_forget UpdateCapabilityStatus();
+        Windows::Foundation::IAsyncAction StreamLocationAsync();
+        void UpdateCapabilityStatus();
     };
 }
 

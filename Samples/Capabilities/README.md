@@ -38,6 +38,7 @@ The sample shows the following techniques:
 - Checking whether a declared capability has been granted.
 - Responding when a capability is granted or denied.
 - Requesting multiple capabilities.
+- Setting display messages to specify usage purpose
 
 **Note** The Windows universal samples require Visual Studio to build and Windows 10 to execute.
  
@@ -53,7 +54,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ## System requirements
 
-* Windows 10 version 18362 or higher
+* Windows 10 version 22621 or higher
 
 ## Build the sample
 

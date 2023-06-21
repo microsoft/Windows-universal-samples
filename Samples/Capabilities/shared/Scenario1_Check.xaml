@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 //*********************************************************
 //
 // Copyright (c) Microsoft. All rights reserved.
@@ -21,17 +21,15 @@
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,10,12,12">
         <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
         <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                    Checking capabilities
+                    Access private resource and specify display message.
         </TextBlock>
         <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
             An app can check whether a capability has already been granted.
-            This permits it to take advantage of granted capabilities
-            without triggering a prompt
-            if the capability has not yet been granted.
+            When an app accesses private resource, display message will light up 
+            in the settings app and the system tray to explain usage purpose.
         </TextBlock>
-        <StackPanel Margin="0,10,0,0">
-            <TextBlock x:Name="LocationTextBlock"></TextBlock>
-            <Button x:Name="RequestAccessButton" Visibility="Collapsed" Click="RequestAccessButton_Click">Click to enable location tracking</Button>
-        </StackPanel>
+        <TextBlock x:Name="LocationAccessBlock" Margin="0,10,0,0"></TextBlock>
+        <TextBlock x:Name="LocationTextBlock" Margin="0,10,0,0"></TextBlock>
+        <Button Margin="0,10,0,0" Click="StreamLocationButton_Click">Stream location for 2 seconds</Button>
     </StackPanel>
 </Page>
