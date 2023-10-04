@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "SpatialStageManager.h"
+#include <functional>
 
 using namespace HolographicSpatialStage;
 
@@ -143,9 +144,9 @@ std::vector<float3> SpatialStageManager::CreateCircle(float3 center, float radiu
         float radiansThisIteration = radians * float(i) / float(divisions);
         vertices[i] =
             {
-                center.x + (radius * -cos(radiansThisIteration)), 
+                static_cast<float>(center.x + (radius * -cos(radiansThisIteration))), 
                 center.y,
-                center.z + (radius * -sin(radiansThisIteration))
+                static_cast<float>(center.z + (radius * -sin(radiansThisIteration)))
             };
     }
 
