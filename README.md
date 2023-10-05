@@ -304,11 +304,11 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/IoT-GPIO">General Purpose Input/Output (GPIO)</a></td>
   <td><a href="Samples/Gyrometer">Gyrometer</a></td>
-  <td><a href="Samples/PresenceSensor">Presence sensor</a></td>
+  <td><a href="Samples/Inclinometer">Inclinometer</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/Inclinometer">Inclinometer</a></td>
   <td><a href="Samples/IoT-I2C">Inter-Integrated Circuit (I2C)</a></td>
+  <td><a href="Samples/LampArray">Lamp array</a></td>
   <td><a href="Samples/LampDevice">Lamp device</a></td>
  </tr>
  <tr>
@@ -327,13 +327,16 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
   <td><a href="Samples/PosPrinter">POS printer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/PresenceSensor">Presence sensor</a></td>
   <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
   <td><a href="Samples/RadialController">Radial controller</a></td>
-  <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
   <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
   <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
  </tr>
 </table>
@@ -509,24 +512,25 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Json">JSON</a></td>
   <td><a href="Samples/MobileBroadband">Mobile broadband</a></td>
-  <td><a href="Samples/NetworkConnectivity">Network connectivity</a></td>
+  <td><a href="Samples/MobileHotspot">Mobile hotspot</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/NetworkConnectivity">Network connectivity</a></td>
   <td><a href="Samples/OnDemandHotspot">On-Demand Wi-Fi hotspot</a></td>
   <td><a href="Samples/RadioManager">Radios</a></td>
-  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SocketActivityStreamSocket">Socket activity trigger stream socket</a></td>
   <td><a href="Samples/StreamSocket">StreamSocket</a></td>
   <td><a href="Samples/Syndication">Syndication</a></td>
-  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UssdProtcol">USSD protocol</a></td>
   <td><a href="Samples/WebSocket">WebSocket</a></td>
   <td><a href="Samples/WiFiDirect">Wi-Fi Direct</a></td>
-  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/WiFiDirectServices">Wi-Fi Direct services</a></td>
   <td><a href="Samples/HotspotAuthentication">Wi-Fi hotspot authentication</a></td>
   <td><a href="Samples/WiFiScan">Wi-Fi scanning</a></td>
  </tr>

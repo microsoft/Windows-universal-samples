@@ -7,20 +7,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{A0B6B970-3640-5D89-B7FB-15455809DEBE}</ProjectGuid>
+    <ProjectGuid>{3801D410-A89D-5519-882E-E97B830400DC}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WabCS</RootNamespace>
-    <AssemblyName>WabCS</AssemblyName>
+    <RootNamespace>MobileHotspot</RootNamespace>
+    <AssemblyName>MobileHotspot</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.22621.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.22621.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>$(TargetPlatformVersion)</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -104,15 +103,8 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="SampleConfiguration.cs" />
-    <Compile Include="Scenario1_Facebook.xaml.cs">
-      <DependentUpon>Scenario1_Facebook.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario2_Twitter.xaml.cs">
-      <DependentUpon>Scenario2_Twitter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Scenario3_Flickr.xaml.cs">
-      <DependentUpon>Scenario3_Flickr.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Scenario1_ConfigureMobileHotspot.xaml.cs" />
+    <Compile Include="Scenario2_ToggleMobileHotspot.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -130,15 +122,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_Facebook.xaml">
+    <Page Include="..\shared\Scenario1_ConfigureMobileHotspot.xaml">
+      <Link>Scenario1_ConfigureMobileHotspot.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario2_Twitter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Scenario3_Flickr.xaml">
+    <Page Include="..\shared\Scenario2_ToggleMobileHotspot.xaml">
+      <Link>Scenario2_ToggleMobileHotspot.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -175,13 +165,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=$(TargetPlatformVersion)">
-      <Name>Microsoft Desktop Extension SDK for Universal App Platform</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.0.0</Version>
+      <Version>6.2.14</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

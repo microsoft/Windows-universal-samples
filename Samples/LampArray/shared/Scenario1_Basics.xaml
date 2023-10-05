@@ -1,0 +1,60 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Basics"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="10">
+            <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Demonstrates basic device properties and RGB lighting operations of Windows.Devices.Lights.LampArray.
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Margin="0,0,0,10">
+                <RadioButton x:Name="OffButton" GroupName="Pattern" IsChecked="True">Off</RadioButton>
+                <RadioButton x:Name="SetColorButton" GroupName="Pattern">All green</RadioButton>
+                <RadioButton x:Name="GradientButton" GroupName="Pattern">Gradient</RadioButton>
+                <RadioButton x:Name="WasdButton" GroupName="Pattern">Highlight WASD</RadioButton>
+            </StackPanel>
+            <Grid Margin="0,0,0,10" HorizontalAlignment="Left" Width="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Slider x:Name="BrightnessSlider"
+                        Header="Brightness"
+                        Minimum="0"
+                        Maximum="100"
+                        Value="100"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="0"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="100" HorizontalAlignment="Right"/>
+            </Grid>
+            <StackPanel>
+                <Button Click="Apply_Clicked" Content="Apply" Margin="0,0,0,10"/>
+                <TextBlock x:Name="LampArraysSummary">Attached LampArrays</TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

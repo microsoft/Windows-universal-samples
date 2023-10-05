@@ -145,9 +145,6 @@
       <DependentUpon>$(SharedContentDir)\cpp\MainPage.xaml</DependentUpon>
     </ClInclude>
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_oAuthGoogle.xaml.h">
-      <DependentUpon>Scenario1_oAuthGoogle.xaml</DependentUpon>
-    </ClInclude>
     <ClInclude Include="Scenario2_oAuthFacebook.xaml.h">
       <DependentUpon>Scenario2_oAuthFacebook.xaml</DependentUpon>
     </ClInclude>
@@ -159,7 +156,6 @@
     <Page Include="$(SharedContentDir)\cpp\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Scenario1_oAuthGoogle.xaml" />
     <Page Include="Scenario2_oAuthFacebook.xaml" />
     <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
       <Link>Styles\Styles.xaml</Link>
@@ -186,9 +182,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1_oAuthGoogle.xaml.cpp">
-      <DependentUpon>Scenario1_oAuthGoogle.xaml</DependentUpon>
-    </ClCompile>
     <ClCompile Include="Scenario2_oAuthFacebook.xaml.cpp">
       <DependentUpon>Scenario2_oAuthFacebook.xaml</DependentUpon>
     </ClCompile>
