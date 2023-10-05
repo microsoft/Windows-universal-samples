@@ -1,0 +1,55 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_ConfigureMobileHotspot"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SDKTemplate"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+    </Page.Resources>
+
+        <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+        <StackPanel>
+            <StackPanel Margin="0,0,0,12">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
+                    Text="View and edit Mobile Hotspot settings." />
+            </StackPanel>
+
+            <StackPanel x:Name="HotspotPanel" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock x:Name="SsidLabel" Text="SSID:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox x:Name="SsidTextBox" MinWidth="128"
+                             AutomationProperties.LabeledBy="{Binding ElementName=SsidLabel}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock x:Name="PassphraseLabel" Text="Passphrase:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBox x:Name="PassphraseTextBox" MinWidth="128"
+                             AutomationProperties.LabeledBy="{Binding ElementName=PassphraseLabel}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock x:Name="BandLabel" Text="Band:" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <ComboBox x:Name="BandComboBox"
+                              AutomationProperties.LabeledBy="{Binding ElementName=BandLabel}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Content="Apply changes" Click="ApplyChanges_Click" Margin="0,0,10,0" />
+                    <Button Content="Discard changes" Click="DiscardChanges_Click" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

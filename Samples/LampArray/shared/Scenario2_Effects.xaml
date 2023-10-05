@@ -1,0 +1,50 @@
+<!-- 
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+
+<Page
+    x:Class="SDKTemplate.Scenario2_Effects"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="10">
+            <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+                <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                    Demonstrates RGB lighting effects using Windows.Devices.Lights.Effects APIs.
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Margin="0,0,0,10">
+                <Button Click="StaticBitmapButton_Click" Margin="0,0,0,5">Display Static Bitmap</Button>
+                <Button Click="FadeButton_Click" Margin="0,0,0,5">Display Fade In/Out</Button>
+                <Button Click="CustomEffectButton_Click" Margin="0,0,0,5">Display Wave</Button>
+                <Button Click="GeneratedBitmapButton_Click" Margin="0,0,0,5">Display Generated Bitmap</Button>
+                <Button Click="CycleButton_Click" Margin="0,0,0,5">Cycle Primary Colors</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <Button x:Name="PauseButton" Click="PauseButton_Click" Margin="0,0,10,0">Pause</Button>
+                <Button x:Name="PlayButton" Click="PlayButton_Click" Margin="0,0,10,0">Play</Button>
+                <Button x:Name="StopButton" Click="StopButton_Click" Margin="0,0,10,0">Stop</Button>
+            </StackPanel>
+            <StackPanel Margin="0,0,0,20">
+                <TextBlock x:Name="LampArraysSummary">Attached LampArrays</TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <Image x:Name="ImageBitmap" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

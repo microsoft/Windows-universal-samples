@@ -9,7 +9,9 @@
 //
 //*********************************************************
 
+using System;
 using Windows.Foundation;
+using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -41,19 +43,31 @@ namespace SDKTemplate
             Window.Current.SizeChanged -= OnWindowSizeChanged;
         }
 
+
+        IMemoryBufferReference mbrr = null;
+        bool done = false;
+        private void AttachRef()
+        {
+            var buffer = new Windows.Storage.Streams.Buffer(10);
+            var memorybuffer = Windows.Storage.Streams.Buffer.CreateMemoryBufferOverIBuffer(buffer);
+            memorybuffer.CreateReference().Closed += (s, _) => {
+                //mbrr = s;
+                var x = 42;
+                done = true;
+            };
+        }
         private void ResizeView_Click(object sender, RoutedEventArgs e)
         {
             var view = ApplicationView.GetForCurrentView();
-            if (view.TryResizeView(new Size { Width = 600, Height = 500 }))
-            {
-                rootPage.NotifyUser("Resizing to 600 \u00D7 500", NotifyType.StatusMessage);
-                // The SizeChanged event will be raised when the resize is complete.
-            }
-            else
-            {
-                // The system does not support resizing, or the provided size is out of range.
-                rootPage.NotifyUser("Failed to resize view", NotifyType.ErrorMessage);
-            }
+            _ = Windows.System.Threading.ThreadPool.RunAsync((o) => {
+                AttachRef();
+                while (!done)
+                {
+                    GC.Collect();
+                }
+                mbrr = null;
+                GC.Collect();
+            });
         }
 
         private void SetMinimumSize_Click(object sender, RoutedEventArgs e)

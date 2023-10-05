@@ -8,6 +8,5 @@ using namespace SDKTemplate;
 
 Platform::Array<Scenario>^ MainPage::scenariosInner = ref new Platform::Array<Scenario>
 {
-    { "Connect to Google Services", "SDKTemplate.Scenario1_oAuthGoogle" },
     { "Connect to Facebook Services", "SDKTemplate.Scenario2_oAuthFacebook" }
 };

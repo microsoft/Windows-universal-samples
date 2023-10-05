@@ -13,7 +13,7 @@ extendedZipContent:
   target: SharedContent
 - path: LICENSE
   target: LICENSE
-description: "Shows how to use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter."
+description: "Shows how to use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, and Twitter."
 ---
 
 <!---
@@ -23,7 +23,7 @@ description: "Shows how to use the WebAuthenticationBroker class to connect to O
 
 # WebAuthenticationBroker sample
 
-Shows how to use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, Google, and Twitter.
+Shows how to use the WebAuthenticationBroker class to connect to OAuth providers such as Facebook, Flickr, and Twitter.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
 > You can download this sample as a standalone ZIP file
@@ -39,17 +39,8 @@ Specifically, this sample shows you how to use the OAuth protocol for authentica
 - Facebook [C++, C#]
 - Twitter [C#]
 - Flickr [C#]
-- Google [C++, C#]
 
 ## Obtaining Client Ids For Use with OAuth APIs
-
-To configure Google OAuth connections (Google Apps and Google) you will need to register Auth0 with Google on the API Console.
-- Log in to [API Console](https://console.developers.google.com/)
-- Complete information about your instance of Auth0. 
-- Enable the Google+ API. 
-- Set up Consent Screen. 
-- Get your ClientId and ClientSecret. 
-- Enable Admin SDK Service.
 
 To configure Facebook OAuth connections you will have to register as a Facebook Developer
 - [Becoming a Facebook Developer](https://developers.facebook.com/apps)

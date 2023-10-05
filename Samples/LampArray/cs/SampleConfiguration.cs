@@ -11,20 +11,19 @@
 
 using System;
 using System.Collections.Generic;
+using Windows.Devices.Lights;
 using Windows.UI.Xaml.Controls;
-using WebAuthentication;
 
 namespace SDKTemplate
 {
     public partial class MainPage : Page
     {
-        public const string FEATURE_NAME = "Web authentication broker sample";
+        public const string FEATURE_NAME = "LampArray C# Sample";
 
         List<Scenario> scenarios = new List<Scenario>
         {
-            new Scenario() { Title = "Connect to Facebook Services", ClassType = typeof(Scenario1_Facebook) },
-            new Scenario() { Title = "Connect to Twitter Services", ClassType = typeof(Scenario2_Twitter) },
-            new Scenario() { Title = "Connect to Flickr Services", ClassType = typeof(Scenario3_Flickr) },
+            new Scenario() { Title="LampArray Basics", ClassType=typeof(Scenario1_Basics)},
+            new Scenario() { Title="LampArray Effects", ClassType=typeof(Scenario2_Effects)},
         };
     }
 
@@ -34,19 +33,17 @@ namespace SDKTemplate
         public Type ClassType { get; set; }
     }
 
-    public static class FormDecoderExtensions
+    internal class LampArrayInfo
     {
-        public static string TryGetValue(this Windows.Foundation.WwwFormUrlDecoder decoder, string name)
+        public LampArrayInfo(string id, string displayName, LampArray lampArray)
         {
-            try
-            {
-                return decoder.GetFirstValueByName(name);
-            }
-            catch (ArgumentException)
-            {
-                return null;
-            }
+            this.id = id;
+            this.displayName = displayName;
+            this.lampArray = lampArray;
         }
+
+        public readonly string id;
+        public readonly string displayName;
+        public readonly LampArray lampArray;
     }
 }
-

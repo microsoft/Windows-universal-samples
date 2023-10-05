@@ -1,23 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
+    <Filter Include="Assets">
+      <UniqueIdentifier>4416d50a-7676-4d0a-9b2c-91ff70c6047f</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SharedContentDir)\cpp\App.xaml.cpp" />
-    <ClCompile Include="$(SharedContentDir)\cpp\MainPage.xaml.cpp" />
+    <Page Include="..\shared\Scenario1_ConfigureMobileHotspot.xaml" />
+    <Page Include="..\shared\Scenario2_ToggleMobileHotspot.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\MainPage.xaml" />
+    <Page Include="$(SharedContentDir)\xaml\Styles.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="Project.idl" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="SampleConfiguration.cpp" />
-    <ClCompile Include="Scenario1_oAuthGoogle.xaml.cpp" />
-    <ClCompile Include="Scenario2_oAuthFacebook.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="$(SharedContentDir)\cpp\App.xaml.h" />
-    <ClInclude Include="$(SharedContentDir)\cpp\MainPage.xaml.h" />
     <ClInclude Include="SampleConfiguration.h" />
-    <ClInclude Include="Scenario1_oAuthGoogle.xaml.h" />
-    <ClInclude Include="Scenario2_oAuthFacebook.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="$(SharedContentDir)\media\microsoft-sdk.png">
@@ -43,21 +51,9 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest" />
+    <ApplicationDefinition Include="$(SharedContentDir)\xaml\App.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(SharedContentDir)\cpp\MainPage.xaml" />
-    <Page Include="Scenario2_oAuthFacebook.xaml" />
-    <Page Include="$(SharedContentDir)\xaml\Styles.xaml">
-      <Filter>Styles</Filter>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Styles">
-      <UniqueIdentifier>{0a0c1480-c47f-4192-ad8f-040a0326169a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets">
-      <UniqueIdentifier>{f3a47825-e753-4d28-a6da-55c824151569}</UniqueIdentifier>
-    </Filter>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
