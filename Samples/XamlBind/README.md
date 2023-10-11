@@ -58,7 +58,7 @@ To obtain information about Microsoft Visual Studio and the tools for developing
 
 ### Reference
 
-[{x:Bind} markup extension](https://msdn.microsoft.com/windows/uwp/xaml-platform/x-bind-markup-extension)  
+[{x:Bind} markup extension](https://docs.microsoft.com/en-us/windows/uwp/xaml-platform/x-bind-markup-extension)  
 
 ### Other samples
 
