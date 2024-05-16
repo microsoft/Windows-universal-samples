@@ -62,7 +62,7 @@ namespace winrt::SDKTemplate::implementation
         // Fill the Band combo box with supported bands, and select the current one.
         TetheringWiFiBand currentBand = configuration.Band();
         BandComboBox().Items().Clear();
-        for (TetheringWiFiBand band = TetheringWiFiBand::Auto; band <= TetheringWiFiBand::FiveGigahertz; band = (TetheringWiFiBand)((int)band + 1))
+        for (TetheringWiFiBand band = TetheringWiFiBand::Auto; band <= TetheringWiFiBand::SixGigahertz; band = (TetheringWiFiBand)((int)band + 1))
         {
             if (SDKTemplate::IsBandSupported(configuration, band))
             {
@@ -72,6 +72,21 @@ namespace winrt::SDKTemplate::implementation
         if (BandComboBox().SelectedIndex() == -1)
         {
             AddComboBoxItem(BandComboBox(), currentBand, true);
+        }
+
+        // Fill the Authentication combo box with supported bands, and select the current one.
+        TetheringWiFiAuthenticationKind currentAuthenticationKind = configuration.AuthenticationKind();
+        AuthenticationComboBox().Items().Clear();
+        for (TetheringWiFiAuthenticationKind authenticationKind = TetheringWiFiAuthenticationKind::Wpa2; authenticationKind <= TetheringWiFiAuthenticationKind::Wpa3; authenticationKind = (TetheringWiFiAuthenticationKind)((int)authenticationKind + 1))
+        {
+            if (SDKTemplate::IsAuthenticationKindSupported(configuration, authenticationKind))
+            {
+                AddComboBoxItem(AuthenticationComboBox(), authenticationKind, authenticationKind == currentAuthenticationKind);
+            }
+        }
+        if (AuthenticationComboBox().SelectedIndex() == -1)
+        {
+            AddComboBoxItem(AuthenticationComboBox(), currentAuthenticationKind, true);
         }
     }
 
@@ -89,6 +104,7 @@ namespace winrt::SDKTemplate::implementation
         configuration.Ssid(SsidTextBox().Text());
         configuration.Passphrase(PassphraseTextBox().Text());
         configuration.Band(BandComboBox().SelectedItem().as<ComboBoxItem>().Tag().as<TetheringWiFiBand>());
+        configuration.AuthenticationKind(AuthenticationComboBox().SelectedItem().as<ComboBoxItem>().Tag().as<TetheringWiFiAuthenticationKind>());
 
         co_await m_tetheringManager.ConfigureAccessPointAsync(configuration);
         m_applying = false;

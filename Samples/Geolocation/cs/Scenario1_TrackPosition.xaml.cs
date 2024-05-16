@@ -197,6 +197,7 @@ namespace SDKTemplate
                 ScenarioOutput_Latitude.Text = "No data";
                 ScenarioOutput_Longitude.Text = "No data";
                 ScenarioOutput_Accuracy.Text = "No data";
+                ScenarioOutput_Source.Text = "No data";
                 ScenarioOutput_IsRemoteSource.Text = "No data";
             }
             else
@@ -204,6 +205,7 @@ namespace SDKTemplate
                 ScenarioOutput_Latitude.Text = position.Coordinate.Point.Position.Latitude.ToString();
                 ScenarioOutput_Longitude.Text = position.Coordinate.Point.Position.Longitude.ToString();
                 ScenarioOutput_Accuracy.Text = position.Coordinate.Accuracy.ToString();
+                ScenarioOutput_Source.Text = position.Coordinate.PositionSource.ToString();
                 ScenarioOutput_IsRemoteSource.Text = position.Coordinate.IsRemoteSource.ToString();
             }
         }

@@ -16,5 +16,7 @@ namespace winrt::SDKTemplate
 {
     Windows::Networking::NetworkOperators::NetworkOperatorTetheringManager TryGetCurrentNetworkOperatorTetheringManager();
     hstring GetFriendlyName(Windows::Networking::NetworkOperators::TetheringWiFiBand value);
+    hstring GetFriendlyName(Windows::Networking::NetworkOperators::TetheringWiFiAuthenticationKind value);
     bool IsBandSupported(Windows::Networking::NetworkOperators::NetworkOperatorTetheringAccessPointConfiguration const& configuration, Windows::Networking::NetworkOperators::TetheringWiFiBand band);
+    bool IsAuthenticationKindSupported(Windows::Networking::NetworkOperators::NetworkOperatorTetheringAccessPointConfiguration const& configuration, Windows::Networking::NetworkOperators::TetheringWiFiAuthenticationKind kind);
 }

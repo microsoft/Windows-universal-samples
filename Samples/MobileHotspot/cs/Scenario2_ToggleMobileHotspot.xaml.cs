@@ -26,7 +26,6 @@ namespace SDKTemplate
         {
             this.InitializeComponent();
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             MainPage.Current.NotifyUser("", NotifyType.StatusMessage);
@@ -39,6 +38,7 @@ namespace SDKTemplate
                 SsidRun.Text = configuration.Ssid;
                 PasswordRun.Text = configuration.Passphrase;
                 BandRun.Text = Helpers.GetFriendlyName(configuration.Band);
+                AuthenticationRun.Text = Helpers.GetFriendlyName(configuration.AuthenticationKind);
 
                 m_toggling = true;
                 bool isTethered = m_tetheringManager.TetheringOperationalState == TetheringOperationalState.On;

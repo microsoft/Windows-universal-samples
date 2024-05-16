@@ -105,6 +105,17 @@ namespace winrt::SDKTemplate
         }
     }
 
+    hstring GetFriendlyName(TetheringWiFiAuthenticationKind value)
+    {
+        switch (value)
+        {
+        case TetheringWiFiAuthenticationKind::Wpa2: return L"WPA2";
+        case TetheringWiFiAuthenticationKind::Wpa3TransitionMode: return L"WPA2/WPA3";
+        case TetheringWiFiAuthenticationKind::Wpa3: return L"WPA3";
+        default: return L"Unknown (" + to_hstring(static_cast<uint32_t>(value)) + L")";
+        }
+    }
+
     // Calls NetworkOperatorTetheringAccessPointConfiguration.IsBandSupported but handles
     // certain boundary cases.
 
@@ -119,6 +130,26 @@ namespace winrt::SDKTemplate
         try
         {
             return configuration.IsBandSupported(band);
+        }
+        catch (hresult_error const& ex)
+        {
+            if (ex.code() == HRESULT_FROM_WIN32(ERROR_INVALID_STATE))
+            {
+                // The WiFi device has been disconnected. Report that we support nothing.
+                return false;
+            }
+            throw;
+        }
+    }
+
+    // Calls NetworkOperatorTetheringAccessPointConfiguration.IsAuthenticationKindSupported but handles
+    // certain boundary cases.
+
+    bool IsAuthenticationKindSupported(NetworkOperatorTetheringAccessPointConfiguration const& configuration, TetheringWiFiAuthenticationKind kind)
+    {
+        try
+        {
+            return configuration.IsAuthenticationKindSupported(kind);
         }
         catch (hresult_error const& ex)
         {

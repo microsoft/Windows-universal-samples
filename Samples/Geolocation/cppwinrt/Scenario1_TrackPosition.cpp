@@ -12,6 +12,7 @@
 #include "pch.h"
 #include "Scenario1_TrackPosition.h"
 #include "Scenario1_TrackPosition.g.cpp"
+#include "SampleConfiguration.h"
 
 using namespace winrt;
 using namespace winrt::Windows::Devices::Geolocation;
@@ -173,6 +174,7 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Latitude().Text(L"No data");
             ScenarioOutput_Longitude().Text(L"No data");
             ScenarioOutput_Accuracy().Text(L"No data");
+            ScenarioOutput_Source().Text(L"No data");
             ScenarioOutput_IsRemoteSource().Text(L"No data");
         }
         else
@@ -180,6 +182,7 @@ namespace winrt::SDKTemplate::implementation
             ScenarioOutput_Latitude().Text(to_hstring(position.Coordinate().Point().Position().Latitude));
             ScenarioOutput_Longitude().Text(to_hstring(position.Coordinate().Point().Position().Longitude));
             ScenarioOutput_Accuracy().Text(to_hstring(position.Coordinate().Accuracy()));
+            ScenarioOutput_Source().Text(to_hstring(position.Coordinate().PositionSource()));
             ScenarioOutput_IsRemoteSource().Text(to_hstring(position.Coordinate().IsRemoteSource()));
         }
     }

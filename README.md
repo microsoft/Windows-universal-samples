@@ -268,75 +268,72 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  </tr>
 </table>
 
-### Devices and sensors
+### Devices, sensors, and power
 
 <table>
  <tr>
   <td><a href="Samples/Accelerometer">Accelerometer</a></td>
   <td><a href="Samples/ActivitySensor">Activity detection sensor</a></td>
-  <td><a href="Samples/AllJoyn/ConsumerExperiences">AllJoyn consumer experiences</a></td>
- </tr>
- <tr>
-  <td><a href="Samples/AllJoyn/ProducerExperiences">AllJoyn producer experiences</a></td>
   <td><a href="Samples/Altimeter">Altimeter</a></td>
-  <td><a href="Samples/BackgroundSensors">Background sensors</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/BackgroundSensors">Background sensors</a></td>
   <td><a href="Samples/BarcodeScanner">Barcode scanner</a></td>
   <td><a href="Samples/BarcodeScannerProvider">Barcode scanner provider</a></td>
-  <td><a href="Samples/Barometer">Barometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Barometer">Barometer</a></td>
   <td><a href="Samples/BluetoothAdvertisement">Bluetooth advertisement</a></td>
   <td><a href="Samples/BluetoothLE">Bluetooth Low Energy</a></td>
-  <td><a href="Samples/CashDrawer">Cash drawer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CashDrawer">Cash drawer</a></td>
   <td><a href="Samples/Compass">Compass</a></td>
   <td><a href="Samples/CustomHidDeviceAccess">Custom HID device</a></td>
-  <td><a href="Samples/CustomSensors">Custom sensors</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/CustomSensors">Custom sensors</a></td>
   <td><a href="Samples/CustomSerialDeviceAccess">Custom serial device</a></td>
   <td><a href="Samples/CustomUsbDeviceAccess">Custom USB device</a></td>
-  <td><a href="Samples/DeviceEnumerationAndPairing">Device enumeration and pairing</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/DeviceEnumerationAndPairing">Device enumeration and pairing</a></td>
   <td><a href="Samples/IoT-GPIO">General Purpose Input/Output (GPIO)</a></td>
   <td><a href="Samples/Gyrometer">Gyrometer</a></td>
-  <td><a href="Samples/Inclinometer">Inclinometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Inclinometer">Inclinometer</a></td>
   <td><a href="Samples/IoT-I2C">Inter-Integrated Circuit (I2C)</a></td>
   <td><a href="Samples/LampArray">Lamp array</a></td>
-  <td><a href="Samples/LampDevice">Lamp device</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/LampDevice">Lamp device</a></td>
   <td><a href="Samples/LightSensor">Light sensor</a></td>
   <td><a href="Samples/LineDisplay">Line display</a></td>
-  <td><a href="Samples/Magnetometer">Magnetometer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/Magnetometer">Magnetometer</a></td>
   <td><a href="Samples/MagneticStripeReader">Magnetic stripe reader</a></td>
   <td><a href="Samples/Nfc">Near field communication (NFC)</a></td>
-  <td><a href="Samples/NfcProvisioner">NFC enterprise provisioner</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/NfcProvisioner">NFC enterprise provisioner</a></td>
   <td><a href="Samples/OrientationSensor">Orientation sensor</a></td>
   <td><a href="Samples/Pedometer">Pedometer</a></td>
-  <td><a href="Samples/PosPrinter">POS printer</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/PosPrinter">POS printer</a></td>
+  <td><a href="Samples/PowerGrid">Power grid forecast</a></td>
   <td><a href="Samples/PresenceSensor">Presence sensor</a></td>
+ </tr>
+ <tr>
   <td><a href="Samples/ProximitySensor">Proximity sensor</a></td>
   <td><a href="Samples/RadialController">Radial controller</a></td>
+  <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
  </tr>
  <tr>
-  <td><a href="Samples/RelativeInclinometer">Relative inclinometer</a></td>
   <td><a href="Samples/SerialArduino">Serial Arduino</a></td>
   <td><a href="Samples/IoT-SPI">Serial Peripheral Interface (SPI)</a></td>
- </tr>
- <tr>
   <td><a href="Samples/SimpleOrientationSensor">Simple orientation sensor</a></td>
  </tr>
 </table>
@@ -450,14 +447,15 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Personalization">Lock screen personalization</a></td>
   <td><a href="Samples/MicrosoftPassport">Microsoft Passport and Windows Hello</a></td>
-  <td><a href="Samples/SmartCard">Smart cards</a></td>
+  <td><a href="Samples/PersonalDataEncryption">Personal Data Encryption</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SmartCard">Smart cards</a></td>
   <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/UserCertificateStore">UserCertificateStore</a></td>
-  <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
   <td><a href="Samples/WebAccountManagement">Web account management</a></td>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
  </tr>

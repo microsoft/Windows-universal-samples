@@ -146,5 +146,21 @@ namespace SDKTemplate
                 return false;
             }
         }
+
+        // Calls NetworkOperatorTetheringAccessPointConfiguration.IsAuthenticationKindSupported but handles
+        // certain boundary cases.
+
+        public static bool IsAuthenticationKindSupported(NetworkOperatorTetheringAccessPointConfiguration configuration, TetheringWiFiAuthenticationKind kind)
+        {
+            try
+            {
+                return configuration.IsAuthenticationKindSupported(kind);
+            }
+            catch (Exception ex) when (ex.HResult == E_INVALID_STATE)
+            {
+                // The WiFi device has been disconnected. Report that we support nothing.
+                return false;
+            }
+        }
     }
 }

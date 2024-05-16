@@ -42,6 +42,7 @@ namespace winrt::SDKTemplate::implementation
             SsidRun().Text(configuration.Ssid());
             PasswordRun().Text(configuration.Passphrase());
             BandRun().Text(SDKTemplate::GetFriendlyName(configuration.Band()));
+            AuthenticationRun().Text(SDKTemplate::GetFriendlyName(configuration.AuthenticationKind()));
 
             m_toggling = true;
             bool isTethered = m_tetheringManager.TetheringOperationalState() == TetheringOperationalState::On;

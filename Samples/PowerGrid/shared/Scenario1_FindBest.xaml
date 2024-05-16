@@ -1,0 +1,35 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page x:Class="SDKTemplate.Scenario1_FindBest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,21">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap"
+                       Text="Find the best Power Grid severity"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock TextWrapping="NoWrap" VerticalAlignment="Center" Text="Hours to look ahead"/>
+                <TextBox x:Name="HoursAheadTextBox" Text="12"/>
+            </StackPanel>
+            <CheckBox x:Name="LowUXImpactCheckBox" IsChecked="True" Content="Restrict to low user experience impact"/>
+            <Button x:Name="FindBest" Content="Find best time" Click="FindBest_Click" Margin="0,10,0,0"/>
+
+            <TextBlock Margin="0,10,0,0">Best time: <Run x:Name="BestTimeRun"/></TextBlock>
+            <TextBlock>Lowest severity: <Run x:Name="LowestSeverityRun"/></TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

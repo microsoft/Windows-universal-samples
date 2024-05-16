@@ -39,6 +39,7 @@
                 <TextBlock>SSID: <Run x:Name="SsidRun"/></TextBlock>
                 <TextBlock>Password: <Run x:Name="PasswordRun"/></TextBlock>
                 <TextBlock>Band: <Run x:Name="BandRun"/></TextBlock>
+                <TextBlock>Authentication: <Run x:Name="AuthenticationRun"/></TextBlock>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
