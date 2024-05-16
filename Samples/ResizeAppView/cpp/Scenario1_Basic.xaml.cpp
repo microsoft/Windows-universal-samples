@@ -22,8 +22,28 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Input;
 
+using namespace Windows::UI;
+
+// This is a clone of IUIContentRoot but is not exclusiveto
+[uuid(1DFCBAC6-B36B-5CB9-9BC5-2B7A0EDDC378)]
+public interface class IUIContentRootClone
+{
+    property Windows::UI::UIContext^ UIContext
+    {
+        Windows::UI::UIContext^ get();
+    }
+};
+ref class MockUIContentRoot : public IUIContentRootClone {
+public:
+    property Windows::UI::UIContext^ UIContext
+    { virtual Windows::UI::UIContext^ get() { return nullptr; }}
+
+};
 Scenario1_Basic::Scenario1_Basic() : rootPage(MainPage::Current)
 {
+    UIContentRoot^ root = safe_cast<UIContentRoot^>(reinterpret_cast<Object^>(ref new MockUIContentRoot()));
+    __debugbreak();
+    Windows::UI::UIContext^ c = root->UIContext;
     InitializeComponent();
 }
 

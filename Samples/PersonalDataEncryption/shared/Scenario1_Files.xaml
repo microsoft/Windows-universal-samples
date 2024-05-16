@@ -1,0 +1,52 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario1_Files"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Protecting and unprotecting files and folders
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                Protecting and unprotecting a folder controls the protection of new files
+                created in the folder. It does not affect the protection of files which are already
+                present in the folder.
+            </TextBlock>
+            <StackPanel x:Name="AvailablePanel">
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="0,10,10,0" Content="Choose a file" Click="ChooseFile_Click" />
+                    <Button Margin="0,10,0,0" Content="Choose a folder" Click="ChooseFolder_Click" />
+                </StackPanel>
+                <StackPanel x:Name="ItemOperationsPanel" Visibility="Collapsed">
+                    <TextBlock Margin="0,10,0,0" Text="Item to protect/unprotect:"/>
+                    <TextBlock x:Name="ItemNameBlock" Margin="0,10,0,0"/>
+                    <Button Margin="0,10,0,0" Content="Protect L1 (available after first unlock)" Click="ProtectL1_Click"/>
+                    <Button Margin="0,10,0,0" Content="Protect L2 (while unlocked)" Click="ProtectL2_Click"/>
+                    <Button Margin="0,10,0,0" Content="Unprotect" Click="Unprotect_Click"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="UnavailablePanel" Margin="0,10,0,0">
+                <TextBlock TextWrapping="Wrap">
+                    Personal Data Encryption is not enabled.
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

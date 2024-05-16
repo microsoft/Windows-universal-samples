@@ -1,0 +1,46 @@
+<!--
+//*********************************************************
+//
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+// IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+// PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+//
+//*********************************************************
+-->
+<Page
+    x:Class="SDKTemplate.Scenario2_Memory"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="12,20,12,12">
+        <StackPanel>
+            <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
+            <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
+                Protecting and unprotecting memory
+            </TextBlock>
+            <StackPanel x:Name="AvailablePanel">
+                <TextBox x:Name="DataTextBox" Margin="0,10,0,0" PlaceholderText="Enter some text to protect" />
+                <Button Margin="0,10,0,0" Content="Protect L1 (available after first unlock)" Click="ProtectL1_Click" />
+                <Button Margin="0,10,0,0" Content="Protect L2 (while unlocked)" Click="ProtectL2_Click" />
+                <TextBlock Margin="0,10,0,0" Text="Protected data:"/>
+                <StackPanel x:Name="UnprotectPanel" Visibility="Collapsed">
+                    <TextBlock x:Name="ProtectedDataTextBlock" Margin="0,10,0,0" />
+                    <Button Margin="0,10,0,0" Content="Unprotect" Click="Unprotect_Click" />
+                    <TextBlock Margin="0,10,0,0" Text="Unprotected data:"/>
+                    <TextBlock x:Name="UnprotectedDataTextBlock" Margin="0,10,0,0" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="UnavailablePanel">
+                <TextBlock TextWrapping="Wrap">
+                    Personal Data Encryption is not enabled.
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

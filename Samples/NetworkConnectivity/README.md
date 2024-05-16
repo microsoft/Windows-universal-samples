@@ -2,7 +2,6 @@
 page_type: sample
 languages:
 - csharp
-- cpp
 - cppwinrt
 products:
 - windows
@@ -33,28 +32,27 @@ This sample also demonstrates how to register for network connectivity change ev
 Apps can subscribe to the events instead of building their
 own logic to track network connectivity changes.
 
-> **Note:** This sample is part of a large collection of UWP feature samples. 
+> **Note:** This sample is part of a large collection of UWP feature samples.
 > You can download this sample as a standalone ZIP file
 > [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/networkingconnectivity/),
 > or you can download the entire collection as a single
-> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/main.zip), but be 
-> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
-> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
-> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/main.zip), but be
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq).
+> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center.
 
-
-### Declaring the internetClient capability
+## Declaring the internetClient capability
 
 This sample requires that internetClient capability be set in the *Package.appxmanifest* file to allow the app to access the Internet connection at runtime.
 The capability can be set in the app manifest using Microsoft Visual Studio.
 
 ## System requirements
 
-* Windows 10
+- Requires Windows SDK 10.0.22621.0 to build and Windows 10 to run.
 
 ## Build the sample
 
-1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build.
 2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B or select **Build** \> **Build Solution**.
@@ -65,8 +63,8 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 ### Deploying the sample
 
-- Select Build > Deploy Solution. 
+- Select Build > Deploy Solution.
 
 ### Debugging and running the sample
 
-- To debug the sample and then run it, press F5 or select Debug > Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging. 
+- To debug the sample and then run it, press F5 or select Debug > Start Debugging. To run the sample without debugging, press Ctrl+F5 or select Debug > Start Without Debugging.

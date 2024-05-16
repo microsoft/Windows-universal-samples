@@ -450,16 +450,17 @@ For additional Windows samples, see [Windows on GitHub](http://microsoft.github.
  <tr>
   <td><a href="Samples/Personalization">Lock screen personalization</a></td>
   <td><a href="Samples/MicrosoftPassport">Microsoft Passport and Windows Hello</a></td>
-  <td><a href="Samples/SmartCard">Smart cards</a></td>
+  <td><a href="Samples/PersonalDataEncryption">Personal Data Encryption</a></td>
  </tr>
  <tr>
+  <td><a href="Samples/SmartCard">Smart cards</a></td>
   <td><a href="Samples/UserInfo">User information</a></td>
   <td><a href="Samples/UserCertificateStore">UserCertificateStore</a></td>
-  <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
  </tr>
  <tr>
   <td><a href="Samples/WebAccountManagement">Web account management</a></td>
   <td><a href="Samples/WebAuthenticationBroker">WebAuthenticationBroker</a></td>
+  <td><a href="Samples/UserConsentVerifier">UserConsentVerifier</a></td>
  </tr>
 </table>
 
