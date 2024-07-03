@@ -165,6 +165,9 @@ namespace SDKTemplate
                 case "WMV":
                     _Profile = MediaEncodingProfile.CreateWmv(videoEncodingProfile);
                     break;
+                case "VP9":
+                    _Profile = MediaEncodingProfile.CreateVp9(videoEncodingProfile);
+                    break;
                 default:
                     _Profile = MediaEncodingProfile.CreateMp4(videoEncodingProfile);
                     break;
@@ -301,6 +304,11 @@ namespace SDKTemplate
 
                     // Disable NTSC and PAL profiles as non-square pixel aspect ratios are not supported by AVI
                     DisableNonSquarePARProfiles();
+                    break;
+                case 3:
+                    _OutputType = "VP9";
+                    _OutputFileExtension = ".mp4";
+                    EnableNonSquarePARProfiles();
                     break;
                 default:
                     _OutputType = "MP4";
