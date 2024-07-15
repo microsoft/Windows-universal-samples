@@ -118,6 +118,10 @@ void Scenario1_Default::GetPresetProfile(ComboBox^ comboBox)
     {
         _Profile = MediaEncodingProfile::CreateVp9(videoEncodingProfile);
     }
+    else if (_OutputType == "AV1")
+    {
+        _Profile = MediaEncodingProfile::CreateAv1(videoEncodingProfile);
+    }
     else
     {
         _Profile = MediaEncodingProfile::CreateMp4(videoEncodingProfile);
@@ -440,6 +444,11 @@ void Scenario1_Default::OnTargetFormatChanged(Object^ sender, SelectionChangedEv
     case 3:
         _OutputFileExtension = ".mp4";
         _OutputType = "VP9";
+        EnableNonSquarePARProfiles();
+        break;
+    case 4:
+        _OutputFileExtension = ".mp4";
+        _OutputType = "AV1";
         EnableNonSquarePARProfiles();
         break;
     default:

@@ -52,6 +52,7 @@
                     <ComboBoxItem Content="VC-1/WMV"/>
                     <ComboBoxItem Content="Uncompressed/AVI"/>
                     <ComboBoxItem Content="VP9/MP4"/>
+                    <ComboBoxItem Content="AV1/MP4"/>
                 </ComboBox>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Transcode Profile: "></TextBlock>
                 <ComboBox Grid.Row="5" Grid.Column="1" Margin="4,2" x:Name="ProfileSelect" HorizontalAlignment="Left" Width="180" Height="Auto" SelectedIndex="2" >

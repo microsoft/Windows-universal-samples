@@ -168,6 +168,9 @@ namespace SDKTemplate
                 case "VP9":
                     _Profile = MediaEncodingProfile.CreateVp9(videoEncodingProfile);
                     break;
+                case "AV1":
+                    _Profile = MediaEncodingProfile.CreateAv1(videoEncodingProfile);
+                    break;
                 default:
                     _Profile = MediaEncodingProfile.CreateMp4(videoEncodingProfile);
                     break;
@@ -307,6 +310,11 @@ namespace SDKTemplate
                     break;
                 case 3:
                     _OutputType = "VP9";
+                    _OutputFileExtension = ".mp4";
+                    EnableNonSquarePARProfiles();
+                    break;
+                case 4:
+                    _OutputType = "AV1";
                     _OutputFileExtension = ".mp4";
                     EnableNonSquarePARProfiles();
                     break;
