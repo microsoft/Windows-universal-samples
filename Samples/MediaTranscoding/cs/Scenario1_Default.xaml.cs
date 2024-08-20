@@ -93,7 +93,15 @@ namespace SDKTemplate
             {
                 if ((_InputFile != null) && (_OutputFile != null))
                 {
+
+                    // TBD - Test with hardware acceleration disabled
+                    _Transcoder.HardwareAccelerationEnabled = false;
+
                     var preparedTranscodeResult = await _Transcoder.PrepareFileTranscodeAsync(_InputFile, _OutputFile, _Profile);
+
+                    // TBD - Test with hardware acceleration disabled
+                    _Transcoder.HardwareAccelerationEnabled = false;
+
 
                     if (EnableMrfCrf444.IsChecked.HasValue && (bool)EnableMrfCrf444.IsChecked)
                     {
