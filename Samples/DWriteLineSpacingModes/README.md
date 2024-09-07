@@ -51,8 +51,8 @@ Within the DWriteTextLayoutImplementation project, the following files are signi
 * The TextLayout.h/.cpp files wrap the DirectWrite text layout and related line spacing APIs. 
 * The TextLayoutImageSource.h/.cpp files implement a XAML SurfaceImageSource using DirectX APIs for rendering the text layout.
 
-### DWriteTextLayoutCloudFont project
-Within the DWriteTextLayoutCloudFont project, the following files are significant:
+### DWriteLineSpacingModes project
+Within the DWriteLineSpacingModes project, the following files are significant:
 
 * The Scenario1\_DefaultSpacing.\*, Scenario2\_UniformSpacing.\* and Scenario3\_ProportionalSpacing.\* files each demonstrate a different line spacing method.
 
