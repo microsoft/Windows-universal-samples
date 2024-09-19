@@ -45,6 +45,10 @@ namespace winrt::SDKTemplate::implementation
             winrt::Windows::Devices::Enumeration::DeviceWatcher const&,
             winrt::Windows::Devices::Enumeration::DeviceInformationUpdate deviceInformationUpdate);
 
+        winrt::fire_and_forget LampArray_AvailabilityChanged(
+            winrt::Windows::Devices::Lights::LampArray const& sender,
+            winrt::Windows::Foundation::IInspectable const&);
+
         void UpdateLampArrayList();
 
         void ApplySettingsToLampArray(winrt::Windows::Devices::Lights::LampArray const& lampArray);

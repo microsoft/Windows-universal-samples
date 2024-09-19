@@ -54,6 +54,13 @@ namespace winrt::SDKTemplate::implementation
     int Scenario1_FindBest::GetForecastIndexContainingTime(PowerGridForecast const& gridForecast, DateTime time)
     {
         TimeSpan blockDuration = gridForecast.BlockDuration();
+
+        // Avoid division by zero.
+        if (blockDuration.count() == 0)
+        {
+            return 0;
+        }
+
         auto startBlock = static_cast<int>((time - gridForecast.StartTime()) / blockDuration);
         return std::clamp(startBlock, 0, static_cast<int>(gridForecast.Forecast().Size()));
     }

@@ -125,6 +125,10 @@ namespace SDKTemplate
                 // Initial condition for the new LampArray is all lights off.
                 info.lampArray.SetColor(Colors.Black);
 
+                // Set up the AvailabilityChanged event callback for being notified whether this process can control
+                // RGB lighting for the newly attached LampArray.
+                info.lampArray.AvailabilityChanged += LampArray_AvailabilityChanged;
+
                 m_attachedLampArrays.Add(info);
 
                 UpdateLampArrayList();
@@ -143,12 +147,23 @@ namespace SDKTemplate
             });
         }
 
+        // The AvailabilityChanged event will fire when this calling process gains or loses control of RGB lighting
+        // for the specified LampArray.
+        private async void LampArray_AvailabilityChanged(LampArray sender, object args)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                UpdateLampArrayList();
+            });
+        }
+
         private void UpdateLampArrayList()
         {
             string message = $"Attached LampArrays: {m_attachedLampArrays.Count}\n";
             foreach (LampArrayInfo info in m_attachedLampArrays)
             {
-                message += $"\t{info.displayName} ({info.lampArray.LampArrayKind.ToString()}, {info.lampArray.LampCount} lamps)\n";
+                message += $"\t{info.displayName} ({info.lampArray.LampArrayKind.ToString()}, {info.lampArray.LampCount} lamps, " +
+                           $"{(info.lampArray.IsAvailable ? "Available" : "Unavailable")})\n";
             }
             LampArraysSummary.Text = message;
         }

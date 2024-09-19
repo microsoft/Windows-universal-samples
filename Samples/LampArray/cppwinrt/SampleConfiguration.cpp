@@ -18,7 +18,7 @@ using namespace winrt::SDKTemplate;
 using namespace winrt::Windows::Devices::Lights;
 using namespace winrt::Windows::Foundation::Collections;
 
-hstring winrt::to_hstring(LampArrayKind lampArrayKind)
+std::wstring std::to_wstring(LampArrayKind lampArrayKind)
 {
     switch (lampArrayKind)
     {
@@ -44,7 +44,8 @@ hstring winrt::to_hstring(LampArrayKind lampArrayKind)
         return L"Art";
     case LampArrayKind::Undefined:
     default:
-        return L"Unknown LampArrayKind";
+        // Additional lamp array kinds can be looked up in the USB HID specification.
+        return std::to_wstring(static_cast<uint32_t>(lampArrayKind));
     }
 }
 

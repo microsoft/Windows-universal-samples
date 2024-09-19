@@ -54,6 +54,12 @@ namespace SDKTemplate
         {
             TimeSpan blockDuration = gridForecast.BlockDuration;
 
+            // Avoid division by zero.
+            if (blockDuration == TimeSpan.Zero)
+            {
+                return 0;
+            }
+
             long startBlock = (time - gridForecast.StartTime).Ticks / blockDuration.Ticks;
             return (int)Math.Max(0, Math.Min(startBlock, gridForecast.Forecast.Count));
         }
