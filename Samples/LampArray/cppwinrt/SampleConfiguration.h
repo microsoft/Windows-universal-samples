@@ -12,9 +12,9 @@
 #pragma once
 #include "pch.h"
 
-namespace winrt
+namespace std
 {
-    hstring to_hstring(winrt::Windows::Devices::Lights::LampArrayKind lampArrayKind);
+    std::wstring to_wstring(winrt::Windows::Devices::Lights::LampArrayKind lampArrayKind);
 }
 
 namespace winrt::SDKTemplate
@@ -29,5 +29,7 @@ namespace winrt::SDKTemplate
         winrt::hstring const id;
         winrt::hstring const displayName;
         winrt::Windows::Devices::Lights::LampArray const lampArray;
+
+        winrt::Windows::Devices::Lights::LampArray::AvailabilityChanged_revoker availabilityChangedRevoker;
     };
 }

@@ -91,6 +91,10 @@ namespace winrt::SDKTemplate::implementation
         // Initial condition for the new LampArray is all lights off.
         info->lampArray.SetColor(Colors::Black());
 
+        // Set up the AvailabilityChanged event callback for being notified whether this process can control
+        // RGB lighting for the newly attached LampArray.
+        info->availabilityChangedRevoker = info->lampArray.AvailabilityChanged(winrt::auto_revoke, { this, &Scenario2_Effects::LampArray_AvailabilityChanged });
+
         m_attachedLampArrays.push_back(std::move(info));
 
         UpdateLampArrayList();
@@ -112,6 +116,15 @@ namespace winrt::SDKTemplate::implementation
         UpdateLampArrayList();
     }
 
+    // The AvailabilityChanged event will fire when this calling process gains or loses control of RGB lighting
+    // for the specified LampArray.
+    winrt::fire_and_forget Scenario2_Effects::LampArray_AvailabilityChanged(const LampArray& sender, const IInspectable&)
+    {
+        co_await winrt::resume_foreground(Dispatcher());
+
+        UpdateLampArrayList();
+    }
+
     void Scenario2_Effects::UpdateLampArrayList()
     {
         std::wstring message = std::wstring(L"Attached LampArrays: ") + std::to_wstring(m_attachedLampArrays.size()) + L"\n";
@@ -119,7 +132,8 @@ namespace winrt::SDKTemplate::implementation
         for (auto&& info : m_attachedLampArrays)
         {
             message += L"\t" + info->displayName + L" ("
-                + winrt::to_hstring(info->lampArray.LampArrayKind()) + L", " + std::to_wstring(info->lampArray.LampCount()) + L" lamps)\n";
+                + std::to_wstring(info->lampArray.LampArrayKind()) + L", " + std::to_wstring(info->lampArray.LampCount()) + L" lamps, "
+                + std::wstring(info->lampArray.IsAvailable() ? L"Available" : L"Unavailable") + L")\n";
         }
 
         LampArraysSummary().Text(message);

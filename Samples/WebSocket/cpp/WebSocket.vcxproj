@@ -236,4 +236,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <Target Name="CheckCertificates" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('$(MSBuildThisFileDirectory)\..\shared\clientCert.pfx')" Text="Before building this project, run the clientCertGenerator.ps1 script elevated as described in the README.md."/>
+  </Target>
 </Project>

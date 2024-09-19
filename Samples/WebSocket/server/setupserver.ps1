@@ -19,6 +19,7 @@ $wssFirewallRuleName = "WebSocketSample - HTTPS 443"
 $requiredFeatures = "IIS-WebServer", "IIS-WebServerRole", "NetFx4Extended-ASPNET45", "IIS-ApplicationDevelopment", "IIS-ASPNET45", "IIS-ISAPIExtensions", "IIS-ISAPIFilter", "IIS-NetFxExtensibility45", "IIS-WebSockets"
 $settings = @{"featuresToEnable"=@(); "serverCertificateThumbprint"=""; "clientRootCertThumbprint" = ""; "webBindingAdded"=$false; "oldDefaultCert"=""}
 $settingsFile = "$scriptPath\WebSocketSampleScriptSettings"
+$rootCertFile = "$scriptPath\Rootcert.cer"
 
 # Check if running as Administrator.
 $windowsIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent()
@@ -34,6 +35,13 @@ if ($principal.IsInRole($administratorRole) -eq $false)
 if (Test-Path $settingsFile)
 {
     "The script has already been run. Please run RemoveServer.ps1 before running it again."
+    return;
+}
+
+# Check if the necessary certificates have been created. If not, then user should run the certificate scripts first.
+if (Test-Path $rootCertFile)
+{
+    "You need to run the ..\shared\clientCertGenerator.ps1 script to create the certificates before running this script."
     return;
 }
 
