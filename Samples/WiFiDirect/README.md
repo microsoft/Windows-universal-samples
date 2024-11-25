@@ -26,14 +26,15 @@ description: "Shows how to use the Wi-Fi Direct API to discover devices and conn
 
 Shows how to use the Wi-Fi Direct API to discover devices and connect to the them over Wi-Fi Direct.
 
-> **Note:** This sample is part of a large collection of UWP feature samples. 
+> **Note:** This sample is part of a large collection of UWP feature samples.
 > You can download this sample as a standalone ZIP file
 > [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/wifidirect/),
 > or you can download the entire collection as a single
-> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be 
-> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file, 
-> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq). 
-> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center. 
+> [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be
+> sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,
+> the samples collection, and GitHub, see [Get the UWP samples from GitHub](https://aka.ms/ovu2uq).```**python**
+
+```> For more samples, see the [Samples portal](https://aka.ms/winsamples) on the Windows Dev Center.
 
 Specifically, this sample demonstrates the following:
 
@@ -59,7 +60,7 @@ The C++ and JS samples do not demonstrate advanced optional settings yet.
 Support for those will come in a future sample.
 
 **Note** This sample requires two or more devices with Wi-Fi chipsets and drivers that support Wi-Fi Direct.
- 
+
 **Note** This sample was created using one of the universal app templates available in Visual Studio. It shows how its solution is structured so it can run on Windows 10. For more info about how to build apps that target Windows and Windows Phone with Visual Studio, see [Build apps that target Windows 10 by using Visual Studio](http://msdn.microsoft.com/library/windows/apps/dn609832).
 
 ## Related topics
@@ -71,15 +72,15 @@ Support for those will come in a future sample.
 
 ### Related samples
 
-* [WiFiDirect sample](/archived/WiFiDirect/) for JavaScript (archived)
+- [WiFiDirect sample](/archived/WiFiDirect/) for JavaScript (archived)
 
 ## System requirements
 
-* Windows 10
+- Windows 10
 
 ## Build the sample
 
-1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build. 
+1. If you download the samples ZIP, be sure to unzip the entire archive, not just the folder with the sample you want to build.
 2. Start Microsoft Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 3. Starting in the folder where you unzipped the samples, go to the Samples subfolder, then the subfolder for this specific sample, then the subfolder for your preferred language (C++, C#, or JavaScript). Double-click the Visual Studio Solution (.sln) file.
 4. Press Ctrl+Shift+B, or select **Build** \> **Build Solution**.
@@ -90,10 +91,10 @@ The next steps depend on whether you just want to deploy the sample or you want 
 
 ### Deploying the sample
 
-- Select **Build** \> **Deploy Solution**. 
+- Select **Build** \> **Deploy Solution**.
 
 ### Deploying and running the sample
 
-- To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select **Debug** \> **Start Without Debugging**. 
+- To debug the sample and then run it, press F5 or select **Debug** \> **Start Debugging**. To run the sample without debugging, press Ctrl+F5 or select **Debug** \> **Start Without Debugging**.
 
 **Note** You will need to deploy the sample to at least two devices in order to actually discover and connect to devices, unless you are using the sample to interact with other devices that support Wi-Fi Direct.
