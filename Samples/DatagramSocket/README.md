@@ -23,7 +23,7 @@ description: "Shows how to a use datagram (UDP) socket to send and receive data.
 
 # DatagramSocket sample
 
-Shows how to a use datagram (UDP) socket to send and receive data using the [DatagramSocket](http://msdn.microsoft.com/library/windows/apps/br241319) 
+Shows how to use a datagram (UDP) socket to send and receive data using the [DatagramSocket](http://msdn.microsoft.com/library/windows/apps/br241319) 
 and related classes in the [Windows.Networking.Sockets](http://msdn.microsoft.com/library/windows/apps/br226960) namespace in your Universal Windows Platform (UWP) app.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
