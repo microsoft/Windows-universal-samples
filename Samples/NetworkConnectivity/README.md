@@ -34,7 +34,7 @@ own logic to track network connectivity changes.
 
 > **Note:** This sample is part of a large collection of UWP feature samples.
 > You can download this sample as a standalone ZIP file
-> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/networkingconnectivity/),
+> [from learn.microsoft.com](https://learn.microsoft.com/samples/microsoft/windows-universal-samples/networkingconnectivity/),
 > or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/main.zip), but be
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,

@@ -17,7 +17,7 @@ description: "Shows how to get the geographic location of the user's device and 
 
 <!---
   category: MapsAndLocation 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=533278
+  samplefwlink: https://go.microsoft.com/fwlink/p/?LinkId=533278
 --->
 
 # Geolocation sample
@@ -34,7 +34,7 @@ After obtaining access to the user's location, an app can
 
 > **Note:** This sample is part of a large collection of UWP feature samples.
 > You can download this sample as a standalone ZIP file
-> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/geolocation/),
+> [from learn.microsoft.com](https://learn.microsoft.com/samples/microsoft/windows-universal-samples/geolocation/),
 > or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,
@@ -43,12 +43,12 @@ After obtaining access to the user's location, an app can
 
 This sample also shows how to:
 
-- **Use a [geofence](http://msdn.microsoft.com/library/windows/apps/dn263744):** Receive notifications when the user's device has entered or left an area of interest.
-- **Handle changes in location permissions**:  Register for the Geolocator's StatusChanged event and use the [StatusChangedEventArgs](http://msdn.microsoft.com/library/windows/apps/br225600) to determine the current position status.
+- **Use a [geofence](https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geofencing):** Receive notifications when the user's device has entered or left an area of interest.
+- **Handle changes in location permissions**:  Register for the Geolocator's StatusChanged event and use the [StatusChangedEventArgs](https://learn.microsoft.com/uwp/api/windows.devices.geolocation.statuschangedeventargs) to determine the current position status.
 - **Get location from a background task**
 - **Handle geofencing events from a background task**
 - **Handle geovisit events from a background task**
-- **Obtain satellite data:** When available, use the [GeocoordinateSatelliteData](http://msdn.microsoft.com/library/windows/apps/jj635260) class to obtain additional information on the quality of the satellite based location data.
+- **Obtain satellite data:** When available, use the [GeocoordinateSatelliteData](https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geocoordinatesatellitedata) class to obtain additional information on the quality of the satellite based location data.
 - **Display a toast:** Notify the user when a geofencing event has occurred in the background.
 - **Refresh geofence binding:** Refresh the binding on resume and after removal of a geofence. Note that removal requires subscribing to removal events if a geofence is set as single use or a duration is set.
 - **Request access to the user's location:** Request access to the user's location using the RequestAccessAsync method. Important: call the RequestAccessAsync before accessing the user's location. At that time, your app must be in the foreground and RequestAccessAsync must be called from the UI thread. Until the user grants your app permission to their location, your app can't access location data.  
@@ -67,13 +67,13 @@ This sample requires that location capability be set in the *Package.appxmanifes
 
 ### Conceptual
 
-- [Get current location](https://msdn.microsoft.com/library/windows/apps/mt219698)
-- [Guidelines for location-aware apps](https://msdn.microsoft.com/library/windows/apps/hh465148)
+- [Get current location](https://learn.microsoft.com/windows/uwp/maps-and-location/get-location)
+- [Guidelines for location-aware apps](https://learn.microsoft.com/windows/uwp/maps-and-location/guidelines-and-checklist-for-detecting-location)
 
 ### Reference
 
-- [Windows.Devices.Geolocation](http://msdn.microsoft.com/library/windows/apps/br225603)
-- [Windows.Devices.Geolocation.Geofencing](https://msdn.microsoft.com/library/windows/apps/dn263744)
+- [Windows.Devices.Geolocation](https://learn.microsoft.com/uwp/api/windows.devices.geolocation)
+- [Windows.Devices.Geolocation.Geofencing](https://learn.microsoft.com/uwp/api/windows.devices.geolocation.geofencing)
 
 ### Related samples
 

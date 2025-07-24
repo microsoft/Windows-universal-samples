@@ -17,17 +17,17 @@ description: "Shows how to enumerate radios on a device, toggle radio state chan
 
 <!---
   category: NetworkingAndWebServices 
-  samplefwlink: http://go.microsoft.com/fwlink/p/?LinkId=620590
+  samplefwlink: https://go.microsoft.com/fwlink/p/?LinkId=620590
 --->
 
 # Radios sample
 
-Shows how to use the [Windows.Devices.Radios](https://msdn.microsoft.com/library/windows/apps/windows.devices.radios.aspx) API to enumerate radios on a device,
+Shows how to use the [Windows.Devices.Radios](https://learn.microsoft.com/uwp/api/windows.devices.radios) API to enumerate radios on a device,
 toggle radio state changes, and register for state changes on individual radios.
 
 > **Note:** This sample is part of a large collection of UWP feature samples.
 > You can download this sample as a standalone ZIP file
-> [from docs.microsoft.com](https://docs.microsoft.com/samples/microsoft/windows-universal-samples/radiomanager/),
+> [from learn.microsoft.com](https://learn.microsoft.com/samples/microsoft/windows-universal-samples/radiomanager/),
 > or you can download the entire collection as a single
 > [ZIP file](https://github.com/Microsoft/Windows-universal-samples/archive/master.zip), but be
 > sure to unzip everything to access shared dependencies. For more info on working with the ZIP file,
