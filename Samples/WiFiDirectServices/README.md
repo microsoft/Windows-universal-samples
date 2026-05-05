@@ -23,6 +23,9 @@ description: "Shows how to use the Wi-Fi Direct services API to publish and disc
 
 # Wi-Fi Direct services sample
 
+> [!Important]
+> The Windows.Devices.WiFiDirect.Services Namespace is deprecated.
+
 Shows how to use the Wi-Fi Direct services API to publish and discover services over Wi-Fi Direct.
 
 > **Note:** This sample is part of a large collection of UWP feature samples. 
